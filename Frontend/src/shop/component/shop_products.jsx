@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ShopProducts = ({ data }) => {
   return (
     <section className="mt-5">
-        <div className="flex flex-wrap gap-10">
+        <div className="flex flex-wrap justify-center gap-10">
           {/* Map through each product in data */}
           {data.products?.map((product) => (
             <div key={product._id}>

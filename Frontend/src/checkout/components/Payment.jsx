@@ -119,13 +119,15 @@ const Payment = ({ setActiveStep }) => {
         backgroundColor: "transparent",
       },
       ".Tab:hover": {
-        border: "none",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: "#0B0B0B",
         boxShadow:
           "0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
       },
       ".Tab--selected, .Tab--selected:focus, .Tab--selected:hover": {
         border: "none",
-        backgroundColor: "#fff",
+        backgroundColor: "transparent",
         boxShadow:
           "0 0 0 1.5px var(--colorPrimaryText), 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
       },

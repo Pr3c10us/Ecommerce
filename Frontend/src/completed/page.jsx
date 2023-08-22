@@ -54,105 +54,130 @@ const OrderComplete = () => {
       <main className="my-10 grid w-full flex-col-reverse border-y border-t-asisDark md:grid-cols-2 md:flex-row">
         <section className="flex border-r-asisDark px-10 py-5 md:border-r">
           <div className="h-[50rem] w-[36rem] border border-asisDark object-cover object-center">
-            <img className="object-cover h-full" src={thankyouImg} alt="thankyouImg" />
+            <img
+              className="h-full object-cover"
+              src={thankyouImg}
+              alt="thankyouImg"
+            />
           </div>
         </section>
-        <section className="flex overflow-auto flex-col md:px-10">
+        <section className="flex flex-col overflow-auto md:px-10">
           <div>
             <div className="flex flex-col gap-y-2 border-b border-b-asisDark py-5">
-            <h1 className="flex w-full max-w-xl flex-col gap-y-4 text-6xl font-semibold uppercase sm:text-7xl md:text-5xl lg:text-6xl xl:text-7xl">
-              <span>
-                /<VowelItalicizer text={"Thank you"} />
-              </span>
-              <span className="flex w-full justify-end ">
-                <VowelItalicizer text={"For your"} />
-              </span>
-              <span>
-                <VowelItalicizer text={"Order"} />
-              </span>
-            </h1>
-            <p className="flex w-full flex-col gap-y-4 text-right text-xs font-semibold uppercase">
-              <span className="flex flex-col leading-6">
-                YOUR ORDER NUMBER IS:{" "}
-                <span className="text-sm font-bold italic underline">
-                  {orderInfo._id}
-                </span>{" "}
-              </span>
-              <span className="flex flex-col leading-6">
-                YOUR ORDER PAYMENT STATUS IS:{" "}
-                <span className="text-sm font-bold italic underline">
-                  {orderInfo.paymentStatus}
-                </span>{" "}
-              </span>
-              <span className="flex flex-col leading-6">
-                YOUR ORDER STATUS IS:{" "}
-                <span className="text-sm font-bold italic underline">
-                  {orderInfo.status}
-                </span>{" "}
-              </span>
-            </p>
-          </div>
-          <div className="flex w-full flex-col">
-            <section>
-              <section className="relative flex w-full flex-col items-stretch justify-between gap-8 border-t border-asisDark py-14 pt-12 uppercase">
-                <div className=" flex flex-col gap-y-8 text-left text-2xl font-semibold">
-                  <div className="flex w-full justify-between items-end">
-                    <p>
-                      {" "}
-                      /{" "}
-                      <VowelItalicizer
-                        text={"you may also be interested in"}
-                      />{" "}
-                    </p>
-                    <div className="">
-                      <div className="ml-auto flex w-24  items-center justify-between">
-                        <img
-                          src={left_button}
-                          alt="left_button"
-                          className="w-8 cursor-pointer"
-                          onClick={() => handleScroll(-305)}
+              <h1 className="flex w-full max-w-xl flex-col gap-y-4 text-6xl font-semibold uppercase sm:text-7xl md:text-5xl lg:text-6xl xl:text-7xl">
+                <span>
+                  /<VowelItalicizer text={"Thank you"} />
+                </span>
+                <span className="flex w-full justify-end ">
+                  <VowelItalicizer text={"For your"} />
+                </span>
+                <span>
+                  <VowelItalicizer text={"Order"} />
+                </span>
+              </h1>
+              <p className="flex w-full flex-col gap-y-4 text-right text-xs font-semibold uppercase">
+                <span className="flex flex-col leading-6">
+                  YOUR ORDER NUMBER IS:{" "}
+                  <span className="text-sm font-bold italic underline">
+                    {orderInfo._id}
+                  </span>{" "}
+                </span>
+                <span className="flex flex-col leading-6">
+                  YOUR ORDER PAYMENT STATUS IS:{" "}
+                  <span className="text-sm font-bold italic underline">
+                    {orderInfo.paymentStatus}
+                  </span>{" "}
+                </span>
+                <span className="flex flex-col leading-6">
+                  YOUR ORDER STATUS IS:{" "}
+                  <span className="text-sm font-bold italic underline">
+                    {orderInfo.status}
+                  </span>{" "}
+                </span>
+              </p>
+            </div>
+            {/* <div>
+              <h1 className="text-4xl font-semibold uppercase">
+                / <VowelItalicizer text={"your products"} />{" "}
+              </h1>
+              <div className="grid grid-cols-3 gap-4">
+                {orderInfo.products.map((data) => {
+                  return (
+                    <div key={data._id}>
+                      <Link to={`/product/${data._id}`}>
+                        <Products
+                          name={data.name}
+                          price={data.price}
+                          collaborations={data.collaborations}
+                          images={data.images}
                         />
-                        <img
-                          src={right_button}
-                          alt="right_button"
-                          className="w-8 cursor-pointer"
-                          onClick={() => handleScroll(305)}
-                        />
-                      </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div> */}
+            <div className="flex w-full flex-col">
+              <section>
+                <section className="relative flex w-full flex-col items-stretch justify-between gap-8 border-t border-asisDark py-14 pt-12 uppercase">
+                  <div className=" flex flex-col gap-y-8 text-left text-2xl font-semibold">
+                    <div className="flex w-full items-end justify-between">
+                      <p>
+                        {" "}
+                        /{" "}
+                        <VowelItalicizer
+                          text={"you may also be interested in"}
+                        />{" "}
+                      </p>
+                      {/* <div className="">
+                        <div className="ml-auto flex w-24  items-center justify-between">
+                          <img
+                            src={left_button}
+                            alt="left_button"
+                            className="w-8 cursor-pointer"
+                            onClick={() => handleScroll(-305)}
+                          />
+                          <img
+                            src={right_button}
+                            alt="right_button"
+                            className="w-8 cursor-pointer"
+                            onClick={() => handleScroll(305)}
+                          />
+                        </div>
+                      </div> */}
+                    </div>
+                    <div className="ml-auto w-56">
+                      <Link to={`/shop`}>
+                        <div className=" ml-auto flex h-8 w-32 cursor-pointer items-center justify-center gap-2 border border-black px-5 uppercase">
+                          <p className="text-xs font-medium">view all</p>
+                          <img src={up_arrow} alt="up_arrow" />
+                        </div>
+                      </Link>
                     </div>
                   </div>
-                  <div className="ml-auto w-56">
-                    <Link to={`/shop`}>
-                      <div className=" ml-auto flex h-8 w-32 cursor-pointer items-center justify-center gap-2 border border-black px-5 uppercase">
-                        <p className="text-xs font-medium">view all</p>
-                        <img src={up_arrow} alt="up_arrow" />
+                  <article className="scroll-container scroll-snap-x mandatory scrollbar-width-thin scrollbar-thumb-gray-500 w-full flex-1 overflow-x-auto scroll-smooth pb-5 transition-all duration-300">
+                    {products.length > 0 && (
+                      <div className="flex gap-10 pr-4">
+                        {products.map((data) => {
+                          return (
+                            <div key={data._id}>
+                              <Link to={`/product/${data._id}`}>
+                                <Products
+                                  name={data.name}
+                                  price={data.price}
+                                  collaborations={data.collaborations}
+                                  images={data.images}
+                                />
+                              </Link>
+                            </div>
+                          );
+                        })}
                       </div>
-                    </Link>
-                  </div>
-                </div>
-                <article className="scroll-container scroll-snap-x mandatory scrollbar-width-thin scrollbar-thumb-gray-500 w-full flex-1 overflow-x-auto scroll-smooth pb-5 transition-all duration-300">
-                  {products.length > 0 && (
-                    <div className="flex gap-10 pr-4">
-                      {products.map((data) => {
-                        return (
-                          <div key={data._id}>
-                            <Link to={`/product/${data._id}`}>
-                              <Products
-                                name={data.name}
-                                price={data.price}
-                                collaborations={data.collaborations}
-                                images={data.images}
-                              />
-                            </Link>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </article>
+                    )}
+                  </article>
+                </section>
               </section>
-            </section>
-          </div>
+            </div>
           </div>
         </section>
       </main>

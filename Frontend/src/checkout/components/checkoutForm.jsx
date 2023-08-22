@@ -8,6 +8,7 @@ import {
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ButtonLoader from "./btnLoader";
 
 export default function CheckoutForm({
   firstName,
@@ -121,7 +122,7 @@ export default function CheckoutForm({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${import.meta.env.VITE_STRIPE_REDIRECT_URL}/${orderId}`,
+        return_url: `${import.meta.env.VITE_STRIPE_REDIRECT_URL}`,
       },
     });
 
@@ -234,12 +235,8 @@ export default function CheckoutForm({
           id="submit"
           className="h-11 w-1/2 bg-black text-white"
         >
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pay now"
-            )}
+          <span id="button-text" className="relative">
+            {isLoading ? <ButtonLoader /> : "Pay now"}
           </span>
         </button>
       </section>
