@@ -13,7 +13,7 @@ const Products = ({ name, price, collaborations, images }) => {
   };
 
   return (
-    <div className="aspect-[9/16] h-[28rem] w-64 cursor-pointer ">
+    <div className="aspect-[9/16] flex justify-between flex-col h-[28rem] w-64 cursor-pointer ">
       <div className="h-96 w-64 border-[1px] border-[#878787] max-md:w-full">
         <img
           src={`${import.meta.env.VITE_BLOB_URL}${images[0]}`}
@@ -21,7 +21,7 @@ const Products = ({ name, price, collaborations, images }) => {
           className="h-full w-full object-cover object-top"
         />
       </div>
-      <div className="mt-2 font-semibold uppercase">
+      <div className="font-semibold uppercase">
         <p className="text-sm font-bold">{name}</p>
         <div className="flex gap-4">{renderCollaborations()}</div>
         <p className="text-sm font-semibold text-asisDark">

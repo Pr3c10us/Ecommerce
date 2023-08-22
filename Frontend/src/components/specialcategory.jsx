@@ -57,7 +57,7 @@ const SpecialCategory = ({ name, category, except }) => {
   }
   return (
     <section>
-      <section className="relative flex w-full items-stretch justify-between gap-x-4 border-t border-asisDark py-14 pt-12 uppercase">
+      <section className="relative flex w-full items-stretch justify-between gap-x-12 border-t border-asisDark py-14 pt-12 uppercase">
         <div className=" flex flex-col items-end text-left text-4xl font-semibold">
           <div className="flex flex-col items-end">
             <p>
@@ -90,7 +90,7 @@ const SpecialCategory = ({ name, category, except }) => {
             </Link>
           </div>
         </div>
-        <article className="scroll-container scroll-snap-x mandatory scrollbar-width-thin scrollbar-thumb-gray-500 w-[70%] flex-1 overflow-x-auto scroll-smooth pb-5 transition-all duration-300">
+        <article className="scroll-container scroll-snap-x mandatory pb-4 scrollbar-width-thin scrollbar-thumb-gray-500 w-[70%] flex-1 overflow-x-auto scroll-smooths transition-all duration-300">
           {products.length > 0 && (
             <div className="flex gap-10 pr-4">
               {products.map((data) => {
