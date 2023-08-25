@@ -40,7 +40,7 @@ const Page = () => {
   useEffect(() => {}, []);
 
   return (
-    <main className="h-full  flex flex-col px-8 pb-8">
+    <main className="h-full flex flex-col px-8 pb-8">
       <Toaster position="top-right" />
       <Header
         setHideCart={setHideCart}

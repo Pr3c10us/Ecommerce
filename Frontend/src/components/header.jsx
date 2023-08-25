@@ -6,6 +6,7 @@ import down from "../assets/icons/down.svg";
 import flag from "../assets/icons/flag.svg";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import guestIcon from "../assets/icons/guest.svg";
 
 const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
   const location = useLocation();
@@ -13,7 +14,11 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
     console.log(location.pathname);
   }, [location.pathname]);
   return (
-    <div className=" sticky top-[-66px] z-10 w-full pt-[10px] uppercase">
+    <div
+      className={`sticky top-[-66px] z-10 w-full pt-[10px] uppercase ${
+        location.pathname == "/homepage" && "hidden"
+      }`}
+    >
       <section className=" flex justify-end px-4 py-3">
         <div className="flex gap-6">
           <div className="flex w-[139px] cursor-pointer items-center gap-3 border border-asisDark px-[8px] py-[5px] font-[500] text-asisDark ">
@@ -30,51 +35,42 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
           </div>
         </div>
       </section>
-      <div className="flex items-center justify-between border-y border-asisDark backdrop-blur-md ">
-        <div className="flex flex-1">
+      <div className="flex  justify-between border-y border-asisDark backdrop-blur-md ">
+        <div className="flex ">
           <Link
             to="/shop"
             className="flex flex-1 cursor-pointer justify-center px-16 py-2.5 text-[14px]/[21px] font-[600] text-[#] text-asisDark  max-lg:hidden"
           >
-            <p className="">shop</p>
+            <p className="flex items-center gap-x-2">
+              <img src={guestIcon} alt="guest icon " /> Guest
+            </p>
           </Link>
-          <div
-            className="flex flex-1 cursor-pointer
-           justify-center border-x border-asisDark 
-           px-16 py-2.5 text-[14px]/[21px] font-[600] 
-           text-asisDark max-lg:border-l-0 max-md:w-full"
-          >
-            <div className="flex items-center gap-4">
-              <p>explore</p>
-              <img src={down} alt="down" />
-            </div>
-          </div>
         </div>
-        <Link className="flex flex-1 justify-center" to="/homepage">
+        <Link
+          className="flex flex-1 py-1 justify-center border-x border-x-asisDark"
+          to="/homepage"
+        >
           <img
             src={header_logo}
             alt="header_logo"
             className="ml-5 cursor-pointer"
           />
         </Link>
-        <article className="flex flex-1 justify-end">
+        <div className="flex">
           {location.pathname !== "/checkout" && (
             <div
               onClick={() => {
                 setHideCart((prev) => !prev);
                 // setHideWish(false);
               }}
-              className="flex min-w-[172px] flex-1 cursor-pointer justify-center border-l border-asisDark px-16 py-2.5 text-[14px]/[21px] font-[600] text-[#] text-asisDark  max-lg:hidden"
+              className="flex min-w-[172px] flex-1 cursor-pointer justify-center  px-16 py-2.5 text-[14px]/[21px] font-[600] text-[#] text-asisDark  max-lg:hidden"
             >
-              <p className="">
+              <p className="flex items-center gap-x-2">
                 cart <span className="">({cartLength || 0})</span>
               </p>
             </div>
           )}
-          <div className="flex min-w-[108px] flex-1 cursor-pointer justify-center border-l border-asisDark px-4 py-2.5 text-[14px]/[21px] font-[600] text-[#] text-asisDark max-lg:border-l max-md:w-full ">
-            <p className="">sign in</p>
-          </div>
-        </article>
+        </div>
       </div>
     </div>
   );

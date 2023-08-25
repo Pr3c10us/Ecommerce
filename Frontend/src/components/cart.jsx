@@ -137,7 +137,7 @@ const Cart = ({ setHideCart }) => {
   };
 
   return (
-    <div ref={ref} className="sticky  right-7 top-12 z-20 ml-auto mt-4">
+    <div ref={ref} className="fixed right-7 top-12 z-20 ml-auto mt-4">
       <div className="absolute right-0 min-w-[29rem] overflow-hidden bg-[url('./assets/images/bg_img.png')] uppercase shadow-[-7px_8px_30px_0px_#00000033]">
         {isLoading && <CartLoading />}
         {!isLoading && cartData?.products?.length >= 1 ? (
