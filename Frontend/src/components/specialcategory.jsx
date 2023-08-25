@@ -56,8 +56,7 @@ const SpecialCategory = ({ name, category, except }) => {
     return <Loading />;
   }
   return (
-    <section>
-      <section className="relative flex w-full items-stretch justify-between gap-x-12 border-t border-asisDark py-14 pt-12 uppercase">
+      <section className="relative h-full flex w-full items-stretch justify-between gap-x-12 border-t border-asisDark py-14 uppercase">
         <div className=" flex flex-col items-end text-left text-4xl font-semibold">
           <div className="flex flex-col items-end">
             <p>
@@ -112,7 +111,6 @@ const SpecialCategory = ({ name, category, except }) => {
           )}
         </article>
       </section>
-    </section>
   );
 };
 

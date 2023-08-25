@@ -66,6 +66,10 @@ app.use("/api/auth", authenticationRoutes);
 const productRoutes = require("./routes/products");
 app.use("/api/products", productRoutes);
 
+// PRODUCT ROUTES
+const dashboardRoutes = require("./routes/dashboard");
+app.use("/api/dashboard", dashboardRoutes);
+
 // CART ROUTES
 const cartRoutes = require("./routes/carts");
 app.use("/api/carts", cartRoutes);

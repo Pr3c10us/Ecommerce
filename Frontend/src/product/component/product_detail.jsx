@@ -100,12 +100,12 @@ const Product_detail = ({ data }) => {
   };
 
   return (
-    <section className="product_container mb-20 mt-10 h-full border-y border-asisDark">
+    <section className="product_container flex flex-col h-full border-y border-asisDark">
       {/* Product details */}
       {data ? (
-        <section className="flex items-start gap-5">
+        <section className="flex h-full items-stretch gap-5">
           {/* Thumbnail images */}
-          <section className="gap flex basis-7 flex-col items-center justify-center py-5">
+          <section className="gap flex basis-7  flex-col items-center justify-start py-5">
             {data.images?.map((img, index) => (
               <div
                 key={index}
@@ -126,11 +126,11 @@ const Product_detail = ({ data }) => {
           </section>
 
           {/* Selected image */}
-          <section className="items-cente flex h-[47rem] w-[32rem] flex-1  justify-center  overflow-hidden border-x border-asisDark px-3 py-5">
+          <section className="flex items-center justify-center border-x border-asisDark px-3 py-5">
             {selectedImage && (
               <img
                 src={`${import.meta.env.VITE_BLOB_URL}${selectedImage}`}
-                className="overflow-hidden object-contain object-top"
+                className="h-[47rem] w-[32rem] object-contain object-top"
               />
             )}
           </section>

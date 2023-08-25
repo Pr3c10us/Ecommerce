@@ -29,7 +29,7 @@ const Page = () => {
   };
   useEffect(() => {
     handleFetchProducts();
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [id]);
   useEffect(() => {
     handleFetchProducts();
@@ -41,22 +41,10 @@ const Page = () => {
   }
 
   return (
-    <div className=" h-full px-8">
-      <div>
-        {/* {hideCart && <Cart data={data} hideCart={hideCart} ShowCart={ShowCart} />} */}
-
-        {data && (
-          <div className="">
-            <Product_detail id={id} data={data} ShowCart={ShowCart} />
-            <SpecialCategory
-              category={data.category}
-              name={name}
-              except={data._id}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+    <main className="flex h-full flex-col gap-20 py-10">
+      <Product_detail id={id} data={data} ShowCart={ShowCart} />
+       <SpecialCategory category={data.category} name={name} except={data._id} />
+    </main>
   );
 };
 

@@ -39,58 +39,21 @@ const Page = () => {
 
   useEffect(() => {}, []);
 
-  // // Sample cart data
-  // const cartData = [
-  //   {
-  //     name: "OVERGROWTH CONVERTIBLE PANTS",
-  //     price: 135000,
-  //     size: 1,
-  //     color: "greenish brown",
-  //     qty: 1,
-  //     img: collection_img_2,
-  //   },
-  //   {
-  //     name: "ANOTHER ITEM",
-  //     price: 90000,
-  //     size: 2,
-  //     color: "blue",
-  //     qty: 2,
-  //     img: collection_img_2,
-  //   },
-  // ];
-
   return (
-    <main className="h-full bg-[url('./assets/images/bg_img.png')] bg-cover bg-no-repeat">
-      {/* <section className="flex w-full flex-col items-start justify-center"> */}
-        <div className="px-8 pb-8">
-          <Toaster position="top-right" />
-          {/* Render the header component and pass cart and wishlist data */}
-          <Header
-            setHideCart={setHideCart}
-            // setHideWish={setHideWish}
-            cartLength={cartData?.products?.length}
-            // wishlistData={wishData}
-          />
+    <main className="h-full  flex flex-col px-8 pb-8">
+      <Toaster position="top-right" />
+      <Header
+        setHideCart={setHideCart}
+        // setHideWish={setHideWish}
+        cartLength={cartData?.products?.length}
+        // wishlistData={wishData}
+      />
 
-          {/* Render the Cart component if hideCart is true */}
-          {hideCart && (
-            <Cart setHideCart={setHideCart} cartData={cartData.products} />
-          )}
-          {/* Render banner component */}
-          {/* <Banner /> */}
+      {hideCart && (
+        <Cart setHideCart={setHideCart} cartData={cartData.products} />
+      )}
 
-          {/* Render the Wishlist component if hideWish is true */}
-          {/* {hideWish && (
-            <Wishlist setHideWish={setHideWish} wishlistData={wishData} />
-          )} */}
-
-          {/* Render the nested route components */}
-          <Outlet />
-
-          {/* Render the footer component */}
-          {/* <Footer /> */}
-        </div>
-      {/* </section> */}
+      <Outlet />
     </main>
   );
 };
