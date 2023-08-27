@@ -26,7 +26,7 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
               setHideCart((prev) => !prev);
               // setHideWish(false);
             }}
-            className="md:py flex cursor-pointer justify-center px-2  py-1.5 text-xs font-[600] text-[#] text-asisDark sm:text-base md:px-16 "
+            className="md:py flex cursor-pointer justify-center px-2  py-2.5 text-xs font-[600] text-[#] text-asisDark sm:text-base md:px-16 "
           >
             <p className="flex items-center gap-x-2">
               cart <span className="">({cartLength || 0})</span>
@@ -46,7 +46,7 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
         <div className="flex ">
           <Link
             to="/shop"
-            className="flex cursor-pointer justify-center px-2 py-1.5 text-xs font-[600] text-[#] text-asisDark sm:text-base md:px-16 md:py-2.5 "
+            className="flex cursor-pointer justify-center px-2 py-2.5 text-xs font-[600] text-[#] text-asisDark sm:text-base md:px-16 md:py-2.5 "
           >
             <p className="flex items-center gap-x-2">
               <img

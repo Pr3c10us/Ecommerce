@@ -51,17 +51,17 @@ const OrderComplete = () => {
 
   if (redirectStatus == "succeeded") {
     return (
-      <main className="my-10 grid w-full flex-col-reverse lg:grid-cols-2 md:flex-row">
-        <section className="flex justify-center items-center px-10 py-5">
-          <div className="border border-asisDark object-cover object-center w-full md:h-[50rem] md:w-[36rem]">
+      <main className="my-10 grid w-full flex-col-reverse md:flex-row lg:grid-cols-2">
+        <section className="flex items-center justify-center px-10 py-5">
+          <div className=" w-full object-cover object-center md:h-[50rem] md:w-[36rem]">
             <img
-              className="object-cover"
+              className="border border-asisDark object-cover"
               src={thankyouImg}
               alt="thankyouImg"
             />
           </div>
         </section>
-        <section className="flex flex-col lg:py-16 overflow-auto md:px-10">
+        <section className="flex flex-col overflow-auto md:px-10 lg:py-16">
           <div>
             <div className="flex flex-col gap-y-8 px-4 py-5">
               <h1 className="flex  w-full max-w-xl flex-col gap-y-4 text-5xl font-semibold uppercase sm:text-7xl md:text-5xl lg:text-6xl xl:text-7xl">

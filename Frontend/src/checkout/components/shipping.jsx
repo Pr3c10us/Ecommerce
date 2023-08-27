@@ -37,7 +37,7 @@ const Shipping = ({ setActiveStep }) => {
           borderRadius: "4px",
         },
       });
-      
+
       setIsLoading(false);
       return;
     }
@@ -151,7 +151,7 @@ const Shipping = ({ setActiveStep }) => {
           </p>
         </div>
       </section>
-      <section className="flex items-end justify-start gap-1 pl-4 max-sm:justify-between ">
+      <section className="flex items-end justify-between gap-1 pl-4 ">
         <button
           onClick={() => setActiveStep(1)}
           className="h-min border-b-2 border-asisDark px-4 pb-1.5 text-sm font-bold max-sm:mt-3 max-sm:text-xs "

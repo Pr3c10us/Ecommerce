@@ -106,7 +106,7 @@ const Product_detail = ({ data }) => {
         <section className="flex h-full flex-col items-stretch gap-5 lg:flex-row">
           {/* Thumbnail images */}
           <div className="flex flex-col-reverse lg:flex-row">
-            <section className="gap flex flex-wrap basis-7 md:flex-col items-center justify-center lg:justify-start py-5">
+            <section className="gap flex flex-wrap basis-7 lg:flex-col items-center justify-center lg:justify-start py-5">
               {data.images?.map((img, index) => (
                 <div
                   key={index}
