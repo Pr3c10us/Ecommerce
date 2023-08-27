@@ -199,30 +199,33 @@ export default function CheckoutForm({
         onChange={(e) => setEmail(e.target.value)}
       />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <section className="border-2 border-asisDark/60 px-8 py-4">
-        <div className="flex gap-x-2">
+      <section className="border-2 border-asisDark px-8 py-4 text-sm backdrop-blur-md max-sm:px-3 md:text-base">
+        <div className="my-2 flex justify-between ">
           <h2 className="">Contact Information: </h2>
-          <p className=" font-semibold">
+          <p className="text-xs font-semibold max-sm:text-right md:text-sm">
             {` `}
-            {firstName},{lastName},{email2},{phone}
+            {firstName},{lastName},<br className="hidden max-sm:block"></br>
+            {email2},<br className="hidden max-sm:block"></br>
+            {phone}
           </p>
         </div>
-        <div className="flex gap-x-2">
+        <div className="my-2 flex items-start justify-between gap-x-2">
           <h2 className="">Shipping Address: </h2>
-          <p className=" font-semibold">
+          <p className="text-right text-xs font-semibold md:text-sm">
             {` `}
-            {address},{city},{state},{country},{zip}
+            {address},{city},<br className="hidden max-sm:block"></br>
+            {state},{country},{zip}
           </p>
         </div>
-        <div className="flex gap-x-2">
+        <div className="flex justify-between">
           <h2 className="">Shipping Method: </h2>
-          <p className=" font-semibold">
+          <p className="text-right text-xs font-semibold md:text-sm">
             {` `}
             {shippingMethods.name} {shippingMethods.durationInDays} days
           </p>
         </div>
       </section>
-      <section className="flex items-end justify-end gap-4 pl-4">
+      <section className="flex items-end justify-end gap-4 pl-4 max-sm:justify-between">
         <button
           type="button"
           onClick={cancelOrder}
@@ -233,9 +236,9 @@ export default function CheckoutForm({
         <button
           disabled={isLoading || !stripe || !elements}
           id="submit"
-          className="h-11 w-1/2 bg-black text-white"
+          className="h-11 w-1/2 rounded-md bg-black text-white"
         >
-          <span id="button-text" className="relative">
+          <span id="button-text">
             {isLoading ? <ButtonLoader /> : "Pay now"}
           </span>
         </button>

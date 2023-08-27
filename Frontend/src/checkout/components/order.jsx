@@ -9,7 +9,7 @@ const Order = () => {
   const [activeStep, setActiveStep] = React.useState(1);
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex flex-1 flex-col px-4 lg:px-8 py-4 ">
       <OrderNav activeStep={activeStep} setActiveStep={setActiveStep} />
       <section className="relative h-full">
         {activeStep === 1 && <Contact setActiveStep={setActiveStep} />}

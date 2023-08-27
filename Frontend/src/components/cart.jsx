@@ -1,7 +1,6 @@
 import React from "react";
 import cancel_cart from "../assets/icons/cancel_cart.svg";
 import cartIcon from "../assets/icons/cart-icon.svg";
-import down from "../assets/icons/down.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -10,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCart } from "../../redux/asis";
 import SpecialChar from "./specialChar";
 import VowelItalicizer from "./vowelItalicizer";
+import CartItem from "./cartItem";
 
 const Cart = ({ setHideCart }) => {
   const ref = React.useRef(null);
@@ -137,15 +137,18 @@ const Cart = ({ setHideCart }) => {
   };
 
   return (
-    <div ref={ref} className="fixed right-7 top-12 z-20 ml-auto mt-4">
-      <div className="absolute right-0 min-w-[29rem] overflow-hidden bg-[url('./assets/images/bg_img.png')] uppercase shadow-[-7px_8px_30px_0px_#00000033]">
+    <div
+      ref={ref}
+      className="fixed inset-0 z-20 ml-auto md:inset-auto md:left-8 md:top-14 md:mt-4"
+    >
+      <div className=" h-full w-full overflow-hidden bg-[url('./assets/images/bg_img.png')] uppercase shadow-[-7px_8px_30px_0px_#00000033] md:min-w-[28rem]">
         {isLoading && <CartLoading />}
         {!isLoading && cartData?.products?.length >= 1 ? (
           // Cart with items
           <section className="p-5">
-            <div className="item-center relative flex justify-between border-b-2 border-asisDark pb-10">
+            <div className="item-center relative flex justify-between border-b-2 border-asisDark pb-4 md:pb-10">
               <div>
-                <p className="text-4xl font-medium uppercase">
+                <p className="text-2xl font-medium uppercase md:text-4xl">
                   {/* <span className="mr-1 font-normal">/</span>y
                     <SpecialChar char={`o`} />
                     ur c
@@ -153,7 +156,7 @@ const Cart = ({ setHideCart }) => {
                     rt */}
                   / <VowelItalicizer text="your cart" />
                 </p>
-                <p className="absolute -top-2 left-[13.5rem] text-base font-medium text-black">
+                <p className="absolute -top-2 left-36 text-base font-medium text-black md:left-[13.5rem]">
                   ({cartData?.products?.length})
                 </p>
               </div>
@@ -161,74 +164,19 @@ const Cart = ({ setHideCart }) => {
               <img
                 src={cancel_cart}
                 alt="cancel_cart"
-                className="cursor-pointer"
+                className="w-8 cursor-pointer md:w-auto"
                 onClick={() => setHideCart(false)}
               />
             </div>
-            <div className="max-h-[40vh] overflow-y-scroll">
-              {cartData.products.map((data, index) => {
-                return (
-                  <section key={index}>
-                    <div className="my-5 flex items-start justify-between gap-5 border-b-2 border-asisDark pb-4">
-                      {/* cart image */}
-                      <img
-                        src={`${import.meta.env.VITE_BLOB_URL}${
-                          data.product.images[0]
-                        }`}
-                        alt="collection_img_2"
-                        className="h-36 w-[116px] object-contain object-top"
-                      />
-                      {/* right hand of the product detail of the cart */}
-                      <section className="w-4/5">
-                        {/* Product details */}
-                        <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
-                          <div>
-                            <Link to={`/product/${data.product._id}`}>
-                              <p className="w-[212px] text-sm font-bold text-asisDark">
-                                {data.product.name}
-                              </p>
-                            </Link>
-                            <p className="mt-2 text-xs font-semibold text-black">
-                              {Intl.NumberFormat("en-US", {
-                                style: "currency",
-                                currency: "USD",
-                              }).format(data.totalPrice)}{" "}
-                              USD{" "}
-                            </p>
-                          </div>
-                          {/* remove item from cart */}
-                          <button
-                            onClick={() =>
-                              removeItemFromCart(data.product._id, data.size)
-                            }
-                          >
-                            <img
-                              src={cancel_cart}
-                              alt="cancel_cart"
-                              className="w-5 cursor-pointer"
-                            />
-                          </button>
-                        </div>
-                        <div className="mt-3 flex w-full items-start justify-between text-xs font-semibold text-black">
-                          <div>
-                            {/* <p>{data.color}</p> */}
-                            <p>
-                              size:{" "}
-                              <span className="text-sm font-bold">
-                                {data.size}
-                              </span>
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-1 ">
-                            <p> q.ty:{data?.qty}</p>
-                            <img src={down} alt="down" />
-                          </div>
-                        </div>
-                      </section>
-                    </div>
-                  </section>
-                );
-              })}
+            <div className="overflow-y-scroll max-h-[60vh] md:max-h-[40vh]">
+              {cartData.products.map((data, index) => (
+                <CartItem
+                  data={data}
+                  index={index}
+                  removeItemFromCart={removeItemFromCart}
+                  handleGetCart={handleGetCartContent}
+                />
+              ))}
             </div>
             {/* total calculation  */}
             <div className="gap- flex flex-col border-b-2 border-b-asisDark ">
@@ -250,7 +198,7 @@ const Cart = ({ setHideCart }) => {
             {/* Link to checkout */}
             <Link to="/checkout">
               <button
-                className="mt-5 flex w-full cursor-pointer items-center justify-center bg-asisDark py-3 text-sm font-semibold uppercase text-[#FFFFFF]"
+                className="mt-5 flex w-full rounded cursor-pointer items-center justify-center bg-asisDark py-3 text-sm font-semibold uppercase text-[#FFFFFF]"
                 onClick={() => {
                   setHideCart(false);
                 }}
@@ -271,9 +219,11 @@ const Cart = ({ setHideCart }) => {
           // Empty cart
           <section className="relative w-full px-3 py-6">
             <div className="flex flex-col items-center">
-              <div className="item-center relative flex w-full justify-between border-b border-asisDark pb-8">
+              <div className="item-center relative flex w-full justify-between border-b border-asisDark pb-4 md:pb-8">
                 <div>
-                  <p className="text-4xl font-medium uppercase">/your cart</p>
+                  <p className="md:text-4xl text-2xl font-medium uppercase">
+                    / <VowelItalicizer text="your cart" />
+                  </p>
                   <p className="absolute -top-1 left-52 text-base font-medium text-black">
                     {/* ({cartData?.products?.length}) */}
                   </p>
@@ -286,7 +236,7 @@ const Cart = ({ setHideCart }) => {
                 />
               </div>
               <img src={cartIcon} alt="cartIcon" className="opacity-30 " />
-              <div className="mt-4 flex w-full items-center justify-center bg-[#525050] py-2 text-sm font-semibold text-[#FFFEF5]">
+              <div className="mt-4 flex w-full items-center rounded justify-center bg-[#525050] py-4 text-sm font-semibold text-[#FFFEF5]">
                 cart is empty
               </div>
             </div>

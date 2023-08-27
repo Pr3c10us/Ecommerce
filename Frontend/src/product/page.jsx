@@ -41,9 +41,9 @@ const Page = () => {
   }
 
   return (
-    <main className="flex h-full flex-col gap-20 py-10">
+    <main className="flex h-full flex-col gap-20 py-7 lg:py-14 px-4">
       <Product_detail id={id} data={data} ShowCart={ShowCart} />
-       <SpecialCategory category={data.category} name={name} except={data._id} />
+       {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
     </main>
   );
 };

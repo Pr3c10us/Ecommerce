@@ -100,54 +100,56 @@ const Product_detail = ({ data }) => {
   };
 
   return (
-    <section className="product_container flex flex-col h-full border-y border-asisDark">
+    <section className="product_container flex h-full flex-col lg:border-y-2 border-asisDark">
       {/* Product details */}
       {data ? (
-        <section className="flex h-full items-stretch gap-5">
+        <section className="flex h-full flex-col items-stretch gap-5 lg:flex-row">
           {/* Thumbnail images */}
-          <section className="gap flex basis-7  flex-col items-center justify-start py-5">
-            {data.images?.map((img, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedImage(img)}
-                className={` mb-5 flex h-20 w-24 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat ${
-                  img === selectedImage
-                    ? `bg-[url('./assets/images/frames.png')]`
-                    : ""
-                }`}
-              >
-                <img
-                  src={`${import.meta.env.VITE_BLOB_URL}${img}`}
-                  alt="collection_img"
-                  className="h-16 w-14 object-cover object-center "
-                />
-              </div>
-            ))}
-          </section>
+          <div className="flex flex-col-reverse lg:flex-row">
+            <section className="gap flex flex-wrap basis-7 md:flex-col items-center justify-center lg:justify-start py-5">
+              {data.images?.map((img, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedImage(img)}
+                  className={`flex h-20 w-24 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat ${
+                    img === selectedImage
+                      ? `bg-[url('./assets/images/frames.png')]`
+                      : ""
+                  }`}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_BLOB_URL}${img}`}
+                    alt="collection_img"
+                    className="h-16 w-14 object-cover object-center "
+                  />
+                </div>
+              ))}
+            </section>
 
-          {/* Selected image */}
-          <section className="flex items-center justify-center border-x border-asisDark px-3 py-5">
-            {selectedImage && (
-              <img
-                src={`${import.meta.env.VITE_BLOB_URL}${selectedImage}`}
-                className="h-[47rem] w-[32rem] object-contain object-top"
-              />
-            )}
-          </section>
+            {/* Selected image */}
+            <section className="flex items-center justify-center lg:border-x-2 border-asisDark px-4 lg:px-3 py-5">
+              {selectedImage && (
+                <img
+                  src={`${import.meta.env.VITE_BLOB_URL}${selectedImage}`}
+                  className="lg:h-[47rem] w-[32rem] object-contain object-top"
+                />
+              )}
+            </section>
+          </div>
 
           {/* Product information */}
 
-          <section className="w-full flex-1 py-5">
-            <p className="mb-9 text-3xl font-medium uppercase text-asisDark">
-              / <VowelItalicizer text={data.name} />
+          <section className="w-full flex-1 py-4 space-y-6 lg:px-4">
+            <p className=" text-3xl font-medium uppercase text-asisDark">
+             {data.name}
             </p>
             {/* Sizes */}
-            <section className="mb-5 flex flex-wrap gap-x-5 gap-y-3">
+            <section className="flex flex-wrap gap-x-5 gap-y-3">
               {data.countInStock?.map((sizeData, index) => (
                 <div
                   key={index}
                   onClick={() => setSelectedSize(sizeData.size)}
-                  className={`flex h-10 w-24 cursor-pointer items-center justify-center border text-xs font-medium uppercase ${
+                  className={`flex py-2 px-3 rounded cursor-pointer items-center justify-center border text-xs font-medium uppercase ${
                     selectedSize === sizeData.size
                       ? " border-asisDark text-asisDark"
                       : " border-[#C4C4C4] text-[#C4C4C4]"
@@ -161,20 +163,20 @@ const Product_detail = ({ data }) => {
             {/* Additional details */}
             <section className="">
               {/* Time */}
-              <article className="flex items-center justify-between text-base font-semibold">
+              <article className="flex mb-4 items-center justify-between text-sm md:text-base font-semibold">
                 <p className="uppercase text-asisDark">time</p>
                 <p className="text-[#17A500]">{currentTime}</p>
               </article>
 
               {/* Description */}
-              <p className="my-9 text-sm font-medium text-asisDark">
+              <p className="text-sm font-medium text-asisDark">
                 {data.brief}
               </p>
 
               {/* Add to cart */}
 
               <button
-                className={`relative my-3 flex max-h-12  w-full justify-center  py-4 text-center text-xs font-semibold uppercase ${
+                className={`relative my-4 flex max-h-12 rounded w-full justify-center  py-4 text-center text-xs font-semibold uppercase ${
                   selectedSize
                     ? "bg-asisDark text-[#FFFFFF]"
                     : "bg-asisDark/70 text-[#C4C4C4]"

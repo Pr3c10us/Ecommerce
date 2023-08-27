@@ -16,25 +16,31 @@ const Products = ({ product, index }) => {
 
   return (
     <div
-      className={`flex justify-between ${
-        index % 2 === 0 ? "flex-row-reverse gap-24" : "flex-row gap-12"
+      className={`flex flex-col items-center justify-between gap-4 md:items-start ${
+        index % 2 === 0
+          ? "md:flex-row-reverse md:gap-24"
+          : "md:flex-row md:gap-12"
       } `}
     >
-      <div className="h-min w-full max-w-[32rem] border border-[#878787] ">
+      <div className="h-min w-full max-w-[38rem] md:border border-[#878787] ">
         <img
           src={`${import.meta.env.VITE_BLOB_URL}${product.images[0]}`}
           alt="products_img"
           className="object-cover object-top"
         />
       </div>
-      <div className="flex max-w-sm flex-col gap-y-12 font-semibold uppercase">
-        <p className="text-2xl font-bold">{product.name}</p>
-        <p className="text-sm font-semibold text-asisDark">
+      <div className="flex flex-col items-center gap-y-4 font-semibold  uppercase md:max-w-sm md:items-start md:gap-y-12 ">
+        <p
+          className="text-center text-2xl font-semibold md:font-bold sm:text-4xl md:text-left md:text-2xl"
+        >
+          {product.name}
+        </p>
+        <p className="text-sm sm:text-base font-semibold text-asisDark md:text-sm">
           {product.description}
         </p>
-        <div className="flex items-start">
+        <div className="flex items-center md:items-start">
           <Link
-            className="flex w-auto gap-x-2  border border-asisDark px-4 py-2"
+            className="flex w-auto gap-x-2  border-2 border-asisDark px-2 text-sm md:text-base sm:px-4 py-1 md:py-2"
             to={`/product/${product._id}`}
           >
             View Product Page

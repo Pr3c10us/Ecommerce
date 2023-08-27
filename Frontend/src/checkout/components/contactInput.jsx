@@ -8,7 +8,7 @@ const ContactInput = ({ touched, errors, fieldProps, name, placeholder }) => {
         name={name}
         id={name}
         placeholder={placeholder}
-        className={`w-full border px-4 py-2.5 focus:outline-none focus:ring-0 ${
+        className={`w-full border bg-transparent px-4 py-2.5 focus:outline-none focus:ring-0 ${
           touched && errors ? "border-red-500" : "border-asisDark"
         }`}
         {...fieldProps}

@@ -53,19 +53,23 @@ const editCart = async (req, res) => {
             })
             .json({
                 msg: "Product added to cart",
-                cart: cart
+                cart: cart,
             });
     } else {
         const cart = await Cart.findById(cartId).populate(
-        "products.product",
-        "name price images"
-    );
+            "products.product",
+            "name price images"
+        );
         const productExist = cart.products.find(
             (item) =>
-                item.product.toString() === product._id.toString() &&
+                item.product._id.toString() === product._id.toString() &&
                 item.size === size
         );
 
+        // if (productExist) res.send("true");
+        // if (!productExist) res.send("false");
+        // console.log(productExist);
+        // return
         if (productExist) {
             // if (productExist.quantity + quantity > sizeExist.quantity) {
             //     throw new BadRequestError(
@@ -125,7 +129,7 @@ const removeItem = async (req, res) => {
     }
 
     const { productId, size } = req.body;
-    console.log(req.body)
+    console.log(req.body);
 
     if (!productId || !size) {
         throw new BadRequestError("Please fill all the fields");

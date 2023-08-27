@@ -58,17 +58,13 @@ const Page = () => {
   }
 
   return (
-    <div className="flex h-full flex-col gap-y-12">
-      <Search
-        setDynamicUrl={setDynamicUrl}
-        setHideFilter={setHideFilter}
-        hideFilter={hideFilter}
-      />
-      <section className="flex h-full justify-start px-8">
+    <div className="flex h-full flex-col md:gap-y-12">
+      <div className="animate-text-pulse capitalize flex w-full items-center justify-center pt-8 text-center text-2xl md:text-5xl font-semibold text-green-500">
+        <h1>Welcome to our online Store</h1>
+      </div>
+      <section className="flex h-full justify-start px-4">
         {" "}
-        <div
-          className={`flex h-full flex-1 justify-start gap-10`}
-        >
+        <div className={`flex h-full flex-1 justify-start gap-10`}>
           {/* Shop products */}
           {data && <ShopProducts hideFilter={hideFilter} data={data} />}
 
@@ -86,7 +82,7 @@ const Page = () => {
         <img
           src={backToTop}
           alt="back_to_top"
-          className="absolute -top-7 right-10 cursor-pointer"
+          className="fixed  bottom-8 right-2 w-8 md:w-12 md:right-10 cursor-pointer"
           onClick={() => {
             handleScrollToTop();
           }}

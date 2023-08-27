@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const ArticleCarousel = ({
   children: slides,
   autoSlide = true,
-  autoSlideInterval = 5100,
+  autoSlideInterval = 5050,
   setCursorType,
 }) => {
   const [curr, setCurr] = useState(0);
@@ -20,7 +20,7 @@ const ArticleCarousel = ({
     return () => clearInterval(slideInterval);
   }, []);
   return (
-    <div className="w-full h-full flex overflow-hidden">
+    <div className="w-full h-full flex overflow-x-hidden">
       <div
         className={`flex h-full w-full transition-all duration-500 ease-out`}
         style={{ transform: `translateX(-${curr * 100}%)` }}

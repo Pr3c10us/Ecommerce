@@ -126,7 +126,7 @@ const CheckoutCart = () => {
   };
 
   return (
-    <div className="relative min-w-[29rem] overflow-hidden uppercase ">
+    <div className="relative min-w-[29rem] hidden lg:block overflow-hidden uppercase ">
       {isLoading && <CartLoading />}
       {!isLoading && (
         // Cart with items
