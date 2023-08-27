@@ -8,6 +8,7 @@ import VowelItalicizer from "../components/vowelItalicizer";
 import Carousel from "../components/carousel";
 import ArticleCarousel from "../components/articleCarousel";
 import FancyBorder from "../components/fancyBorder";
+import arrow from "../assets/icons/upRightArrow.svg";
 
 const Page = () => {
   const [data, setData] = React.useState([]);
@@ -16,7 +17,7 @@ const Page = () => {
   const getData = async () => {
     setLoading(true);
     const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}dashboard`,
+      `${import.meta.env.VITE_API_URL}products?limit=4`,
     );
     setData(data.products);
     setLoading(false);
@@ -32,17 +33,17 @@ const Page = () => {
   };
 
   return (
-    <section className="flex min-h-screen flex-col items-center py-4 gap-y-4 sm:h-full sm:gap-y-8">
+    <section className="flex min-h-screen flex-col items-center gap-y-4 py-4 md:h-full md:gap-y-8">
       <div className="flex w-full justify-center px-4">
-        <img src={homeLogo} alt="homeLogo" className="h-12 sm:h-24" />
+        <img src={homeLogo} alt="homeLogo" className="h-12 md:h-24" />
       </div>
       <Marquee />
-      <article className="flex flex-1 w-full max-w-5xl flex-col h-full sm:gap-4">
-        <h1 className="text-center text-2xl  font-semibold uppercase sm:text-left sm:text-4xl">
+      <article className="flex h-full w-full max-w-5xl flex-1 flex-col md:gap-4">
+        <h1 className="px-10 text-center text-2xl font-normal uppercase md:text-left md:text-4xl md:font-semibold">
           Our newest products
         </h1>
         <div className="flex flex-1 items-stretch gap-8 px-4">
-          <div className="relative aspect-square basis-[100%] py-6 px-2 sm:px-6 sm:basis-[30%]">
+          <div className="relative aspect-square basis-[100%] px-2 py-6 md:basis-[30%] md:px-6">
             <ArticleCarousel>
               {data.map((product, index) => {
                 return (
@@ -50,36 +51,43 @@ const Page = () => {
                     className={`absolute h-full w-full space-y-4 `}
                     style={{ left: `${index * 100}%` }}
                   >
-                    <h2 className="text-center text-2xl font-semibold sm:text-left sm:text-base sm:font-bold">
+                    <h2 className="text-center text-2xl font-normal md:text-left md:text-base md:font-semibold">
                       {product.name}
                     </h2>
-                    <div className="relative flex h-80 w-full items-center overflow-hidden p-4 sm:h-auto sm:p-0">
-                      <div className="sm:hidden">
+                    <div className="relative flex h-80 w-full items-center overflow-hidden p-4 md:h-auto md:p-0">
+                      <div className="md:hidden">
                         <FancyBorder />
                       </div>
                       <img
-                        src={`${import.meta.env.VITE_BLOB_URL_DASHBOARD}${
-                          product.smallImage[0]
+                        src={`${import.meta.env.VITE_BLOB_URL}${
+                          product.images[1] || product.images[0]
                         }`}
                         alt={product.name}
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
-                    <p className="font-semibold">{product.description}</p>
+                    <p className="font-normal">{product.description}</p>
+                    <Link
+                      className="flex w-auto gap-x-2 items-center justify-center mx-auto max-w-xs border-2 border-asisDark px-2 py-1 text-sm md:px-4 md:py-2 md:text-base"
+                      to={`/product/${product._id}`}
+                    >
+                      View Product
+                      <img src={arrow} alt="arrow" className="w-4" />
+                    </Link>
                   </div>
                 );
               })}
             </ArticleCarousel>
           </div>
-          <div className="relative hidden aspect-square flex-1 p-6 sm:block">
+          <div className="relative hidden aspect-square flex-1 p-6 md:block">
             <div className="relative flex items-center p-6">
               <FancyBorder />
               <Carousel>
                 {data.map((product) => {
                   return (
                     <img
-                      src={`${import.meta.env.VITE_BLOB_URL_DASHBOARD}${
-                        product.largeImage[0]
+                      src={`${import.meta.env.VITE_BLOB_URL}${
+                        product.images[0]
                       }`}
                       alt={product.name}
                       className="object-cover"
@@ -91,18 +99,18 @@ const Page = () => {
           </div>
         </div>
       </article>
-      <div className="flex w-full px-[15vw] flex-col items-center justify-start gap-2 sm:flex-row sm:items-start sm:justify-center">
-        <div className=" grid grid-cols-2 sm:flex w-full gap-x-2 sm:w-auto">
-          <button className="cursor-not-allowed border border-asisDark px-6 py-2 sm:py-1 font-semibold capitalize">
+      <div className="flex w-full flex-col items-center justify-start gap-2 px-[15vw] md:flex-row md:items-start md:justify-center">
+        <div className=" grid w-full grid-cols-2 gap-x-2 md:flex md:w-auto">
+          <button className="cursor-not-allowed border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
             Sign In
           </button>
-          <button className="cursor-not-allowed border border-asisDark px-6 py-2 sm:py-1 font-semibold capitalize">
+          <button className="cursor-not-allowed border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
             Sign Up
           </button>
         </div>
         <Link
           to="/shop"
-          className="w-full bg-asisDark px-6 py-2 sm:py-1 capitalize text-white sm:w-auto"
+          className="w-full bg-asisDark px-6 py-2 text-center capitalize text-white md:w-auto md:py-1"
         >
           Continue to shop as guest
         </Link>

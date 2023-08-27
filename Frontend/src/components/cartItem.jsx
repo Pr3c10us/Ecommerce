@@ -67,11 +67,11 @@ const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
           <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
             <div>
               <Link to={`/product/${data.product._id}`}>
-                <p className="text-sm font-bold text-asisDark">
+                <p className="sm:text-sm text-xs font-bold text-asisDark">
                   {data.product.name}
                 </p>
               </Link>
-              <p className="mt-2 text-xs font-semibold text-black">
+              <p className="mt-2 text-[0.7rem] sm:text-xs font-semibold text-black">
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
@@ -81,13 +81,10 @@ const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
             </div>
             {/* remove item from cart */}
             <button
+            className="cursor-pointer underline capitalize text-[0.5rem] sm:text-xs font-semibold "
               onClick={() => removeItemFromCart(data.product._id, data.size)}
             >
-              <img
-                src={cancel_cart}
-                alt="cancel_cart"
-                className="w-5 cursor-pointer"
-              />
+              remove Item
             </button>
           </div>
           <div className="mt-3 flex h-full w-full items-center justify-between text-xs font-semibold text-black">

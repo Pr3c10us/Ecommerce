@@ -78,16 +78,14 @@ const Page = () => {
               </div> */}
         </div>
       </section>
-      <div className="relative mt-16 border-t border-asisDark">
         <img
           src={backToTop}
           alt="back_to_top"
-          className="fixed  bottom-8 right-2 w-8 md:w-12 md:right-10 cursor-pointer"
+          className="fixed  bottom-8 right-2 w-12 md:right-10 cursor-pointer"
           onClick={() => {
             handleScrollToTop();
           }}
         />
-      </div>
     </div>
   );
 };

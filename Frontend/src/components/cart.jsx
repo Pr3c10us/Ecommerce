@@ -74,7 +74,6 @@ const Cart = ({ setHideCart }) => {
       await axios.delete(`${import.meta.env.VITE_API_URL}carts/removeItem`, {
         data: item,
       });
-      console.log(item);
       toast.success("Item removed from cart", {
         style: {
           border: "1px solid green",
@@ -156,7 +155,7 @@ const Cart = ({ setHideCart }) => {
                     rt */}
                   / <VowelItalicizer text="your cart" />
                 </p>
-                <p className="absolute -top-2 left-36 text-base font-medium text-black md:left-[13.5rem]">
+                <p className="absolute -top-2 left-[9.5rem] text-base font-medium text-black md:left-[14rem]">
                   ({cartData?.products?.length})
                 </p>
               </div>

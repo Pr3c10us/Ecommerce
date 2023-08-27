@@ -53,9 +53,9 @@ const OrderComplete = () => {
     return (
       <main className="my-10 grid w-full flex-col-reverse lg:grid-cols-2 md:flex-row">
         <section className="flex justify-center items-center px-10 py-5">
-          <div className="border border-asisDark object-cover object-center md:h-[50rem] md:w-[36rem]">
+          <div className="border border-asisDark object-cover object-center w-full md:h-[50rem] md:w-[36rem]">
             <img
-              className="h-full object-cover"
+              className="object-cover"
               src={thankyouImg}
               alt="thankyouImg"
             />

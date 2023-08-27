@@ -163,10 +163,10 @@ const Product_detail = ({ data }) => {
             {/* Additional details */}
             <section className="">
               {/* Time */}
-              <article className="flex mb-4 items-center justify-between text-sm md:text-base font-semibold">
+              {/* <article className="flex mb-4 items-center justify-between text-sm md:text-base font-semibold">
                 <p className="uppercase text-asisDark">time</p>
                 <p className="text-[#17A500]">{currentTime}</p>
-              </article>
+              </article> */}
 
               {/* Description */}
               <p className="text-sm font-medium text-asisDark">
@@ -227,7 +227,7 @@ const Product_detail = ({ data }) => {
                 </article> */}
               </section>
               <div
-                className={`grid border-b border-asisDark  text-sm text-asisDark/80 transition-all duration-300 ${
+                className={`grid text-sm text-asisDark/80 transition-all duration-300 ${
                   showDescription ? "grid-rows-[1fr] py-2" : "grid-rows-[0fr]"
                 } `}
               >

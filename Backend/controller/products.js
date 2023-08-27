@@ -100,9 +100,9 @@ const getProducts = async (req, res) => {
     }
 
     // get products for admin
-    let result = Product.find(queryObject).select(
-        "-admin -createdAt -updatedAt -__v"
-    );
+    let result = Product.find(queryObject)
+        .select("-admin -createdAt -updatedAt -__v")
+        .sort({ createdAt: -1 });
 
     // #################################################################
     // Set up Pagination

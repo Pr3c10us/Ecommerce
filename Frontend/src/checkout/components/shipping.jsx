@@ -132,7 +132,7 @@ const Shipping = ({ setActiveStep }) => {
           </div>
         ))}
       </section>
-      <section className="border-2 border-asisDark px-8 py-4 text-xs backdrop-blur-md max-sm:px-2">
+      <section className="border-2 border-asisDark px-8 py-4 text-xs max-sm:px-2">
         <div className="mb-2 flex items-start justify-between">
           <h2 className="">Contact Information: </h2>
           <p className=" text-right font-semibold ">
