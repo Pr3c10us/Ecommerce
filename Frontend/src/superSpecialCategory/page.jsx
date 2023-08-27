@@ -1,9 +1,9 @@
 import React,{useEffect} from "react";
 import { useParams } from "react-router-dom";
 import Collection from "./components/collection";
-import new3 from "../assets/images/new3.png";
-import Category from "../components/Category";
-import SpecialCategory from "../components/specialCategory";
+// import new3 from "../assets/images/new3.png";
+// import Category from "../components/Category";
+// import SpecialCategory from "../components/specialCategory";
 const Page = () => {
   const { id } = useParams();
   console.log(id)
@@ -19,10 +19,10 @@ const Page = () => {
   }, []);
   return (
     <div className=" h-full p-0 uppercase">
-      <Collection product_data={product_data} id={id} />
+      {/* <Collection product_data={product_data} id={id} />
       <Category />
       <SpecialCategory name={name}/>
-      <Category />     
+      <Category />      */}
     </div>
   );
 };
