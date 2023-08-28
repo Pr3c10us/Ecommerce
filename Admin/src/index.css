@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+::-webkit-scrollbar {
+width: 0px;
+  height: 8px;
+  }
+::-webkit-scrollbar-thumb {
+    background-color: #878787;
+    border-radius: 2px; 
+
+  }
+::-webkit-scrollbar-track {
+    background-color: #cec9c9;
+  }
+ .filter_component {
+    height: 80vh;
+}
+.product_img {
+  height: 80vh;
+}
+
+/* Apply custom styling to the checkbox */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent; /* Desired background color */
+  border: 1px solid #0B0B0B; /* Matching border color */
+  width: 14px;
+  height: 14px;
+  outline: none;
+  position: relative; /* Required for pseudo-element */
+}
+
+/* Define the appearance of the checkbox when checked */
+input[type="checkbox"]:checked {
+  background-color: black; /* Keep the same background color */
+}
+
+/* Style the pseudo-element that represents the checkmark */
+input[type="checkbox"]::before {
+  content: "\2713"; /* Unicode character for checkmark */
+  font-size: 12px;
+  color: white; /* Color of the checkmark */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* Initially hidden */
+}
+
+/* Show the checkmark when the checkbox is checked */
+input[type="checkbox"]:checked::before {
+  opacity: 1;
+}
+
+.slide-in {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-out {
+  transform: translateY(-150%);
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (min-height: 1000px) {
+  .filter_component {
+    height: 700px;
+}
+.product_img {
+  height: 500px;
+}
+} 
