@@ -9,6 +9,7 @@ const { BadRequestError, UnauthorizedError } = require("../errors");
 const adminAuthorization = async (req, res, next) => {
     // get token from cookie and throw error if token is not present
     const { adminToken } = req.signedCookies;
+    console.log(adminToken);
     if (!adminToken) {
         throw new BadRequestError("Not authorized to access this route");
     }

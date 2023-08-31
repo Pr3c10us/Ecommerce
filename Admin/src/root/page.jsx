@@ -2,43 +2,87 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import Logo from "../assets/homeLogo.svg";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setAdminInfo } from "../../redux/asisAdmin";
+import Loading from "../loading";
 
 const Root = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [isLoaded, setIsLoaded] = React.useState(true);
+
+  const adminInfo = useSelector((state) => state.asisAdmin.adminInfo);
+
+  const handleEffect = async () => {
+    setIsLoaded(true);
+    axios.defaults.withCredentials = true;
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}isLoggedIn`,
+      );
+      dispatch(setAdminInfo({ admin: data.data }));
+      setIsLoaded(false);
+      // console.log({ data, admin });
+    } catch (error) {
+      console.log(error);
+      dispatch(setAdminInfo({}));
+      setIsLoaded(false);
+    }
+  };
+  React.useEffect(() => {
+    handleEffect();
+  }, []);
+
+  if (isLoaded) {
+    return <Loading />;
+  }
   return (
-    <main className="xl:px-44 px-4 sm:px-12 py-5 space-y-12">
-      <section className="flex flex-col items-center gap-y-3">
-        <img src={Logo} alt="Logo" className="h-8" />
-        <div className="relative grid w-full font-[500] grid-cols-2 place-items-center pb-3 text-sm sm:text-base md:text-lg text-asisDark">
-          <Link
-            to="/fashion/"
-            className={`${
-              !location.pathname.includes("/fashion") && "text-asisDark/50"
-            }`}
-          >
-            Asis Fashion Store
-          </Link>
-          <Link
-            to="/retail/"
-            className={`${
-              !location.pathname.includes("/retail") && "text-asisDark/50"
-            }`}
-          >
-            Asis Retail Store
-          </Link>
-          <div className="absolute bottom-0 h-0.5 w-full bg-asisDark/20">
-            <div
-              className={`absolute h-full w-1/2 bg-asisDark transition-all duration-200 ${
-                location.pathname.includes("/fashion") && "translate-x-0"
-              }
+    <>
+      {adminInfo.admin ? (
+        <main className="space-y-12 px-4 py-5 sm:px-12 xl:px-44">
+          <section className="flex flex-col items-center gap-y-3">
+            <img src={Logo} alt="Logo" className="h-8" />
+            <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-[500] text-asisDark sm:text-base md:text-lg">
+              <Link
+                to="/fashion/"
+                className={`${
+                  !location.pathname.includes("/fashion") && "text-asisDark/50"
+                }`}
+              >
+                Asis Fashion Store
+              </Link>
+              <Link
+                to="/retail/"
+                className={`${
+                  !location.pathname.includes("/retail") && "text-asisDark/50"
+                }`}
+              >
+                Asis Retail Store
+              </Link>
+              <div className="absolute bottom-0 h-0.5 w-full bg-asisDark/20">
+                <div
+                  className={`absolute h-full w-1/2 bg-asisDark transition-all duration-200 ${
+                    location.pathname.includes("/fashion") && "translate-x-0"
+                  }
                 ${location.pathname.includes("/retail") && "translate-x-full"}
              `}
-            ></div>
-          </div>
-        </div>
-      </section>
-      <Outlet />
-    </main>
+                ></div>
+              </div>
+            </div>
+          </section>
+          <Outlet />
+        </main>
+      ) : (
+        <main className="h-full min-h-screen w-full flex items-center justify-center gap-2 font-normal">
+          <Link className="px-8 py-2 rounded bg-asisDark text-white" to="/login">Login</Link>
+          <Link className="px-8 py-2 rounded border-asisDark border text-asisDark" to="/signup"> SignUp</Link>
+        </main>
+      )}
+    </>
   );
 };
 

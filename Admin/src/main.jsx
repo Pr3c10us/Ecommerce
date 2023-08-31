@@ -14,6 +14,9 @@ import Root from "./root/page.jsx";
 import AddProduct from "./addProductFashion/page";
 import ProductsDisplay from "./productsFashion/components/productsDisplay";
 import EditProduct from "./editProductFashion/page";
+import Login from "./login/page";
+import Signup from "./signup/page";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -68,11 +71,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
+      <Toaster position="top-right" />
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,

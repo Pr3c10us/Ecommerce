@@ -34,6 +34,7 @@ const Nav = () => {
       {pages.map((page) => {
         return (
           <Link
+          key={page.name}
             to={page.href}
             className={`flex w-full items-center justify-center gap-2 rounded py-2 ${
               location.pathname.includes(page.href)

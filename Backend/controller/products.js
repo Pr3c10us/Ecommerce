@@ -18,30 +18,31 @@ const createProduct = async (req, res) => {
     if (nameExist) {
         throw new BadRequestError("Product name already exist");
     }
+    console.log(req.body);
 
-    if (req.body.specialCategories.length > 0) {
-        const validSpecialCategoryIds = req.body.specialCategories.filter(
-            (id) => mongoose.isValidObjectId(id)
-        );
+    // if (req.body.specialCategories.length > 0) {
+    //     const validSpecialCategoryIds = req.body.specialCategories.filter(
+    //         (id) => mongoose.isValidObjectId(id)
+    //     );
 
-        if (
-            validSpecialCategoryIds.length !== req.body.specialCategories.length
-        ) {
-            throw new BadRequestError("Invalid Special Category Ids");
-        }
+    //     if (
+    //         validSpecialCategoryIds.length !== req.body.specialCategories.length
+    //     ) {
+    //         throw new BadRequestError("Invalid Special Category Ids");
+    //     }
 
-        const specialCategories = await SpecialCategory.find({
-            _id: { $in: validSpecialCategoryIds },
-        });
+    //     const specialCategories = await SpecialCategory.find({
+    //         _id: { $in: validSpecialCategoryIds },
+    //     });
 
-        if (specialCategories.length !== validSpecialCategoryIds.length) {
-            throw new BadRequestError("Special Category does not exist");
-        }
+    //     if (specialCategories.length !== validSpecialCategoryIds.length) {
+    //         throw new BadRequestError("Special Category does not exist");
+    //     }
 
-        req.body.specialCategories = specialCategories.map(
-            (category) => category._id
-        );
-    }
+    //     req.body.specialCategories = specialCategories.map(
+    //         (category) => category._id
+    //     );
+    // }
 
     // Push Images to Azure Blob Storage
     const imagePromises = req.files.map(async (image) => {

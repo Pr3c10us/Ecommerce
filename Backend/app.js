@@ -82,6 +82,10 @@ app.use("/api/shippings", shippingRoutes);
 const orderRoutes = require("./routes/orders");
 app.use("/api/orders", orderRoutes);
 
+// IS LOGGED IN ROUTES
+const isLoggedInRoutes = require("./routes/loggedIn");
+app.use("/api/isLoggedIn", isLoggedInRoutes);
+
 // WEBHOOK ROUTES
 const webhookRoutes = require("./routes/webhooks");
 app.use("/webhook", webhookRoutes);

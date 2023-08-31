@@ -23,6 +23,10 @@ const adminSchema = new mongoose.Schema(
         state: {
             type: String,
         },
+        isApproved: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,
