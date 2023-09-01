@@ -45,8 +45,8 @@ const ProductsDisplay = () => {
             <img src={ThinAddIcon} alt="edit" className="h-30" />
           </Link>
           <Link
-            className="flex items-center justify-center gap-2 rounded border border-asisDark py-2 text-sm font-[500] capitalize"
-            to={`/fashion/addProduct`}
+            className="flex items-center justify-center gap-2 rounded border border-asisDark py-2 text-sm font-medium capitalize"
+            to={`/fashion/products/addProduct`}
           >
             <img src={AddIcon} alt="edit" className="h-6" />
             Add Product
@@ -55,7 +55,7 @@ const ProductsDisplay = () => {
         {products.map((product) => {
           return (
             <ProductItem
-            key={product._id}
+              key={product._id}
               image={product.images[0]}
               id={product._id}
               name={product.name}

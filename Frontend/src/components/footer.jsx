@@ -55,7 +55,7 @@ const Footer = () => {
           alt="footer_logo"
           className="absolute top-8 ml-5 cursor-pointer"
         />
-        <p className="absolute top-[30%] ml-5 w-[90%] text-sm font-[500] uppercase text-asisDark max-lg:w-[100%]">
+        <p className="absolute top-[30%] ml-5 w-[90%] text-sm font-medium uppercase text-asisDark max-lg:w-[100%]">
           asis offers a carefully curated collection of stylish and versatile
           clothing pieces that are designed to elevate everyday looks. From
           comfortable essentials to trendy statement pieces, asis aims to

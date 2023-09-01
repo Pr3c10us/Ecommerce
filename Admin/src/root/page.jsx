@@ -46,7 +46,7 @@ const Root = () => {
         <main className="space-y-12 px-4 py-5 sm:px-12 xl:px-60">
           <section className="flex flex-col items-center gap-y-3">
             <img src={Logo} alt="Logo" className="h-8" />
-            <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-[500] text-asisDark sm:text-base md:text-lg">
+            <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-medium text-asisDark sm:text-base md:text-lg">
               <Link
                 to="/fashion/"
                 className={`${
@@ -77,9 +77,20 @@ const Root = () => {
           <Outlet />
         </main>
       ) : (
-        <main className="h-full min-h-screen w-full flex items-center justify-center gap-2 font-normal">
-          <Link className="px-8 py-2 rounded bg-asisDark text-white" to="/login">Login</Link>
-          <Link className="px-8 py-2 rounded border-asisDark border text-asisDark" to="/signup"> SignUp</Link>
+        <main className="flex h-full min-h-screen w-full items-center justify-center gap-2 font-normal">
+          <Link
+            className="rounded bg-asisDark px-8 py-2 text-white"
+            to="/login"
+          >
+            Login
+          </Link>
+          <Link
+            className="rounded border border-asisDark px-8 py-2 text-asisDark"
+            to="/signup"
+          >
+            {" "}
+            SignUp
+          </Link>
         </main>
       )}
     </>

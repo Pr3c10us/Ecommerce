@@ -40,7 +40,7 @@ const Collection = ({ product_data, id }) => {
             />
           </div>
           <div className="w-[340px]">
-            <p className="mb-3 text-[32px]/[32px] font-[500]">collections</p>
+            <p className="mb-3 text-[32px]/[32px] font-medium">collections</p>
             <div className="text-[16px]/[24px] font-[400] text-[#5C5C5C]">
               {superSpecialCategoryData.map((data, index) => (
                 <div key={index}>
@@ -48,7 +48,7 @@ const Collection = ({ product_data, id }) => {
                     <div
                       className={`flex w-full cursor-pointer items-center justify-between border-t-[1px] border-[#5C5C5C] py-2 ${
                         index === superSpecialCategoryData.length - 1
-                          ? "border-y-[1px] border-asisDark pl-14 text-center font-[500] italic text-asisDark"
+                          ? "border-y-[1px] border-asisDark pl-14 text-center font-medium italic text-asisDark"
                           : ""
                       }`}
                     >

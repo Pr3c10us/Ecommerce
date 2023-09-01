@@ -5,7 +5,7 @@ const CountInStockDisplay = ({ setCountInStock, countInStock }) => {
     setCountInStock(countInStock.filter((item) => item.size !== size));
   };
   return (
-    <section className="flex w-full flex-wrap justify-center gap-x-5 font-[500] md:justify-start">
+    <section className="flex w-full flex-wrap justify-center gap-x-5 font-medium md:justify-start">
       {countInStock.map((item, index) => (
         <div key={index} className="flex flex-col gap-2">
           <p className="flex min-w-[100px] items-center justify-center gap-2 rounded border border-asisDark/50 px-3 py-2 text-center text-[0.65rem] capitalize">

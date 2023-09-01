@@ -11,10 +11,10 @@ const New_Arrival = () => {
     <section className="relative mt-7 flex items-start justify-between border-t-[1.5px] border-black pt-16 max-md:block">
       <article className=" h-[100%]">
         <div className="w-[194px] uppercase ">
-          <p className="text-right text-[40px]/[40px] font-[500]">
+          <p className="text-right text-[40px]/[40px] font-medium">
             n<em className="font-[400]">e</em>w{" "}
           </p>
-          <p className="text-right text-[40px]/[40px]  font-[500]">
+          <p className="text-right text-[40px]/[40px]  font-medium">
             arriv<em className="font-[400]">a</em>l
           </p>
         </div>
@@ -33,7 +33,7 @@ const New_Arrival = () => {
           </div>
         </div>
         <div className="absolute bottom-0 left-[80px] flex h-[32px] w-[104px] items-center justify-center gap-2 border-[1.5px] border-black uppercase">
-          <p className="text-[12px]/[16px] font-[500]">view all</p>
+          <p className="text-[12px]/[16px] font-medium">view all</p>
           <img src={up_arrow} alt="up_arrow" />
         </div>
       </article>

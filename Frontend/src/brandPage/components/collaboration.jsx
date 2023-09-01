@@ -10,7 +10,7 @@ const Collaboration = () => {
   return (
     <section>
       <div className="relative mt-[40px]   border-t-[1.5px] border-asisDark"></div>
-      <p className="mb-16 mt-10 text-[30px]/[30px] font-[500] uppercase">
+      <p className="mb-16 mt-10 text-[30px]/[30px] font-medium uppercase">
         /C<em className="font-[400]">o</em>llaborati
         <em className="font-[400]">o</em>ns
       </p>

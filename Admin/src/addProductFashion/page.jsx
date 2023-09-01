@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import CountInStock from "./components/countInStock";
 import CountInStockDisplay from "./components/countInStockDisplay";
+import AddImages from "./components/addImages";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ const AddProduct = () => {
     "accessories",
     "Others",
   ]);
+  const [fileList, setFileLIst] = React.useState([]);
+  const lorem =
+    "lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.";
+
   const [selectedCategory, setSelectedCategory] = React.useState("clothes");
   const [countInStock, setCountInStock] = React.useState([]);
 
@@ -29,22 +34,55 @@ const AddProduct = () => {
 
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-
-      setSubmitting(false);
+      if (countInStock.length === 0) {
+        toast.error("Please add atleast one size");
+        setSubmitting(false);
+        return;
+      }
+      if (fileList.length === 0) {
+        toast.error("Please Upload atleast one image");
+        setSubmitting(false);
+        return;
+      }
+      const data = new FormData();
+      data.append("name", values.name);
+      data.append("price", values.price);
+      data.append("description", values.description);
+      data.append("brief", values.brief);
+      data.append("category", selectedCategory);
+      countInStock.forEach((item, index) => {
+        data.append(`countInStock[${index}][size]`, item.size);
+        data.append(`countInStock[${index}][quantity]`, item.quantity);
+      });
+      fileList.forEach((file) => {
+        data.append("images", file);
+      });
+      setTimeout(() => {
+        toast.success("Product Added Successfully");
+        setSubmitting(false);
+      }, 3000);
+      axios
+        .post(`${import.meta.env.VITE_API_URL}products/`, data)
+        .then((res) => {
+          toast.success("Product Added Successfully");
+          navigate("/fashion/products");
+        })
+        .catch((err) => {
+          toast.error("Something went wrong");
+          setSubmitting(false);
+        });
     },
 
     validationSchema: Yup.object({
       name: Yup.string().required("name is Required"),
-      price: Yup.string()
-        .matches(/^[0-9.]+$/, "enter a valid price")
-        .required("can not be empty"),
+      price: Yup.number().min(1).positive().required("price is Required"),
 
       description: Yup.string().required("description is Required"),
       brief: Yup.string().required("brief is Required"),
     }),
   });
   return (
-    <main className="py-12 font-[500]">
+    <main className="py-12 font-medium">
       <form className="flex flex-col gap-y-8" onSubmit={formik.handleSubmit}>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="name">
@@ -144,7 +182,7 @@ const AddProduct = () => {
                   selectedCategory == item
                     ? "bg-asisDark text-white"
                     : "border border-asisDark bg-transparent text-asisDark"
-                } rounded px-4 py-2 capitalize font-normal`}
+                } rounded px-4 py-2 font-normal capitalize`}
                 onClick={() => setSelectedCategory(item)}
               >
                 {item}
@@ -166,6 +204,33 @@ const AddProduct = () => {
               setCountInStock={setCountInStock}
             />
           </section>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Image Upload & Preview
+          </label>
+          <AddImages fileList={fileList} setFileLIst={setFileLIst} />
+        </section>
+        <section className="flex w-full items-end justify-end gap-4">
+          <button
+            type="button"
+            disabled={formik.isSubmitting}
+            onClick={() => navigate("/fashion/products")}
+            className={`rounded bg-red-500 px-8 py-1.5 text-white ${
+              formik.isSubmitting && "cursor-not-allowed opacity-50"
+            }`}
+          >
+            cancel
+          </button>
+          <button
+            disabled={formik.isSubmitting}
+            type="submit"
+            className={`rounded bg-green-500 px-8 py-1.5 text-white ${
+              formik.isSubmitting && "cursor-not-allowed opacity-50"
+            }`}
+          >
+            Add Product
+          </button>
         </section>
       </form>
     </main>

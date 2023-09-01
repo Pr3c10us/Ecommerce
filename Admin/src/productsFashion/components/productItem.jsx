@@ -10,7 +10,7 @@ const ProductItem = ({ image, id, name }) => {
         className="h-[25rem] w-full border border-asisDark object-cover object-top "
       />
       <Link
-        className="flex items-center justify-center gap-2 rounded border border-asisDark py-2 text-sm font-[500] capitalize"
+        className="flex items-center justify-center gap-2 rounded border border-asisDark py-2 text-sm font-medium capitalize"
         to={`/fashion/products/${id}`}
       >
         <img src={PenIcon} alt="edit" className="h-6" />

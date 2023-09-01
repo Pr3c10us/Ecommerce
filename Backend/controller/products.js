@@ -18,7 +18,7 @@ const createProduct = async (req, res) => {
     if (nameExist) {
         throw new BadRequestError("Product name already exist");
     }
-    console.log(req.body);
+    // console.log(req.body);
 
     // if (req.body.specialCategories.length > 0) {
     //     const validSpecialCategoryIds = req.body.specialCategories.filter(

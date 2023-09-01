@@ -3,6 +3,7 @@ const { CustomError } = require("../errors");
 
 // Create error handler middleware
 const errorHandler = (err, req, res, next) => {
+    console.log(err);
     // if error is a custom error
     if (err instanceof CustomError) {
         // return error message
@@ -18,7 +19,6 @@ const errorHandler = (err, req, res, next) => {
             msg: ` ${Object.keys(err.keyValue)} Already Exists`,
         });
     }
-    console.log(err);
 
     // return generic error message
     return res

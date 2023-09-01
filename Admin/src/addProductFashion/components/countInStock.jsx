@@ -29,7 +29,9 @@ const CountInStock = ({ setCountInStock, countInStock }) => {
     <section className="flex w-full flex-col gap-y-3">
       <div className="flex w-full gap-x-12 text-sm">
         <div className="flex items-center gap-4">
-          <label className="font-[500]" htmlFor="size">Sizes:</label>
+          <label className="font-medium" htmlFor="size">
+            Sizes:
+          </label>
           <input
             className="w-16 rounded border border-asisDark/50 bg-transparent px-0 py-2 text-center"
             type="text"
@@ -40,7 +42,9 @@ const CountInStock = ({ setCountInStock, countInStock }) => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <label className="font-[500]" htmlFor="quantity">Quantity:</label>
+          <label className="font-medium" htmlFor="quantity">
+            Quantity:
+          </label>
           <input
             className="w-16 rounded border border-asisDark/50 bg-transparent px-0 py-2 text-center"
             type="number"

@@ -11,7 +11,7 @@ const About_user = () => {
     <section>
       <section className="mt-[40px] flex items-start justify-between">
         <section className="basis-[40%]">
-          <article className="w-[360px]  text-[96px]/[96px] font-[500] uppercase text-asisDark">
+          <article className="w-[360px]  text-[96px]/[96px] font-medium uppercase text-asisDark">
             <p>/Judith</p>
             <p className="text-right">Bisi</p>
           </article>
