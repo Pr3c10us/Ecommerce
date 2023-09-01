@@ -1,4 +1,5 @@
 const Order = require("../models/orders");
+const Product = require("../models/products");
 const stripe = require("stripe")(process.env.STRIPE_SECRETE_KEY);
 
 const stripeWebhook = async (req, res) => {
@@ -38,6 +39,16 @@ const stripeWebhook = async (req, res) => {
             break;
         case "payment_intent.succeeded":
             order.paymentStatus = "successful";
+            // get all the items in the order and subract quantity from the database
+            order.products.forEach(async (product) => {
+                const { product:productId, size, quantity } = product;
+                const productInDb = await Product.findById(productId);
+                const countInStock = productInDb.countInStock.find(
+                    (item) => item.size === size
+                );
+                countInStock.quantity -= quantity;
+                await productInDb.save();
+            });
             break;
         // ... handle other event types
         default:

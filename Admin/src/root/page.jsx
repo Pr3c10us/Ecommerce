@@ -43,7 +43,7 @@ const Root = () => {
   return (
     <>
       {adminInfo.admin ? (
-        <main className="space-y-12 px-4 py-5 sm:px-12 xl:px-44">
+        <main className="space-y-12 px-4 py-5 sm:px-12 xl:px-60">
           <section className="flex flex-col items-center gap-y-3">
             <img src={Logo} alt="Logo" className="h-8" />
             <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-[500] text-asisDark sm:text-base md:text-lg">
