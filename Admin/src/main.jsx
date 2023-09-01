@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import ProductsFashion from "./productsFashion/page.jsx";
 import ThankYouFashion from "./thankYouFashion/page.jsx";
 import OrdersFashion from "./ordersFashion/page.jsx";
+import ShippingFashion from "./shippingFashion/page.jsx";
 import ProductsRetail from "./productsRetail/page.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./root/page.jsx";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
           {
             path: "ThankYou",
             element: <ThankYouFashion />,
+          },
+          {
+            path: "shipping",
+            element: <ShippingFashion />,
           },
           // {
           //   path: "addProduct",

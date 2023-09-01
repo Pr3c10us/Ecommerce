@@ -17,6 +17,12 @@ const Nav = () => {
       darkIcon: ProductsPageDarkIcon,
     },
     {
+      name: "Shipping",
+      href: "/fashion/shipping",
+      icon: ProductsPageIcon,
+      darkIcon: ProductsPageDarkIcon,
+    },
+    {
       name: "thankYou",
       href: "/fashion/ThankYou",
       icon: ThankYouPageIcon,

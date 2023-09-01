@@ -314,33 +314,9 @@ const updateProduct = async (req, res) => {
             name: req.body.name,
         });
 
-        if (nameExist) {
+        if (nameExist?._id?.toString() !== id && nameExist) {
             throw new BadRequestError("Name already exists");
         }
-    }
-
-    if (req.body.specialCategories.length > 0) {
-        const validSpecialCategoryIds = req.body.specialCategories.filter(
-            (id) => mongoose.isValidObjectId(id)
-        );
-
-        if (
-            validSpecialCategoryIds.length !== req.body.specialCategories.length
-        ) {
-            throw new BadRequestError("Invalid Special Category Ids");
-        }
-
-        const specialCategories = await SpecialCategory.find({
-            _id: { $in: validSpecialCategoryIds },
-        });
-
-        if (specialCategories.length !== validSpecialCategoryIds.length) {
-            throw new BadRequestError("Special Category does not exist");
-        }
-
-        req.body.specialCategories = specialCategories.map(
-            (category) => category._id
-        );
     }
 
     const newProductInfo = await Product.findByIdAndUpdate(id, req.body, {

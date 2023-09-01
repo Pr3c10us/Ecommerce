@@ -15,7 +15,7 @@ const AddProduct = () => {
     "clothes",
     "footwear",
     "accessories",
-    "Others",
+    "others",
   ]);
   const [fileList, setFileLIst] = React.useState([]);
   const lorem =
@@ -57,10 +57,7 @@ const AddProduct = () => {
       fileList.forEach((file) => {
         data.append("images", file);
       });
-      setTimeout(() => {
-        toast.success("Product Added Successfully");
-        setSubmitting(false);
-      }, 3000);
+
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}products/`, data)
         .then((res) => {
@@ -68,7 +65,7 @@ const AddProduct = () => {
           navigate("/fashion/products");
         })
         .catch((err) => {
-          toast.error("Something went wrong");
+          toast.error(err.response.data.msg || "Something went wrong");
           setSubmitting(false);
         });
     },
@@ -209,7 +206,9 @@ const AddProduct = () => {
           <label className="basis-[20%] capitalize" htmlFor="brief">
             Image Upload & Preview
           </label>
-          <AddImages fileList={fileList} setFileLIst={setFileLIst} />
+          <section className="flex w-full flex-col gap-y-4 text-asisDark">
+            <AddImages fileList={fileList} setFileLIst={setFileLIst} />
+          </section>
         </section>
         <section className="flex w-full items-end justify-end gap-4">
           <button
