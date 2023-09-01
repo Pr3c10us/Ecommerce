@@ -43,6 +43,8 @@ const stripeWebhook = async (req, res) => {
             order.products.forEach(async (product) => {
                 const { product: productId, size, quantity } = product;
                 const productInDb = await Product.findById(productId);
+                console.log(productInDb);
+
                 productInDb.countInStock = productInDb.countInStock.map(
                     (item) => {
                         if (item.size === size) {
@@ -51,6 +53,7 @@ const stripeWebhook = async (req, res) => {
                         return item;
                     }
                 );
+                console.log(productInDb);
                 await productInDb.save();
             });
             break;
