@@ -41,12 +41,16 @@ const stripeWebhook = async (req, res) => {
             order.paymentStatus = "successful";
             // get all the items in the order and subract quantity from the database
             order.products.forEach(async (product) => {
-                const { product:productId, size, quantity } = product;
+                const { product: productId, size, quantity } = product;
                 const productInDb = await Product.findById(productId);
-                const countInStock = productInDb.countInStock.find(
-                    (item) => item.size === size
+                productInDb.countInStock = productInDb.countInStock.map(
+                    (item) => {
+                        if (item.size === size) {
+                            item.quantity -= quantity;
+                        }
+                        return item;
+                    }
                 );
-                countInStock.quantity -= quantity;
                 await productInDb.save();
             });
             break;
