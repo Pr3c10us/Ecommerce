@@ -19,7 +19,7 @@ const Page = () => {
       const { name, phone, email, password } = values;
       const userInfo = { name, phone, email, password };
       axios
-        .post(`${import.meta.env.VITE_API_URL}auth/admin/login`, userInfo)
+        .post(`${import.meta.env.VITE_BACKEND_URL}auth/admin/login`, userInfo)
         .then((res) => {
           toast.success("Signed in successfully");
           navigate("/fashion/products");

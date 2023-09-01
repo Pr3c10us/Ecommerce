@@ -39,7 +39,9 @@ const Cart = ({ setHideCart }) => {
     setIsLoading(true);
     try {
       axios.defaults.withCredentials = true;
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}carts`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}carts`,
+      );
       // console.log(response.data);
       // setCartData(response.data);
       dispatch(setCart(response.data));
@@ -71,9 +73,12 @@ const Cart = ({ setHideCart }) => {
         productId: id,
         size: size,
       };
-      await axios.delete(`${import.meta.env.VITE_API_URL}carts/removeItem`, {
-        data: item,
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}carts/removeItem`,
+        {
+          data: item,
+        },
+      );
       toast.success("Item removed from cart", {
         style: {
           border: "1px solid green",
@@ -106,7 +111,7 @@ const Cart = ({ setHideCart }) => {
     setIsLoading(true);
     try {
       axios.defaults.withCredentials = true;
-      await axios.delete(`${import.meta.env.VITE_API_URL}carts/`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}carts/`);
       toast.success("Item removed from cart", {
         style: {
           border: "1px solid green",
@@ -167,7 +172,7 @@ const Cart = ({ setHideCart }) => {
                 onClick={() => setHideCart(false)}
               />
             </div>
-            <div className="overflow-y-scroll max-h-[60vh] md:max-h-[40vh]">
+            <div className="max-h-[60vh] overflow-y-scroll md:max-h-[40vh]">
               {cartData.products.map((data, index) => (
                 <CartItem
                   data={data}
@@ -197,7 +202,7 @@ const Cart = ({ setHideCart }) => {
             {/* Link to checkout */}
             <Link to="/checkout">
               <button
-                className="mt-5 flex w-full rounded cursor-pointer items-center justify-center bg-asisDark py-3 text-sm font-semibold uppercase text-[#FFFFFF]"
+                className="mt-5 flex w-full cursor-pointer items-center justify-center rounded bg-asisDark py-3 text-sm font-semibold uppercase text-[#FFFFFF]"
                 onClick={() => {
                   setHideCart(false);
                 }}
@@ -220,7 +225,7 @@ const Cart = ({ setHideCart }) => {
             <div className="flex flex-col items-center">
               <div className="item-center relative flex w-full justify-between border-b border-asisDark pb-4 md:pb-8">
                 <div>
-                  <p className="md:text-4xl text-2xl font-medium uppercase">
+                  <p className="text-2xl font-medium uppercase md:text-4xl">
                     / <VowelItalicizer text="your cart" />
                   </p>
                   <p className="absolute -top-1 left-52 text-base font-medium text-black">
@@ -235,7 +240,7 @@ const Cart = ({ setHideCart }) => {
                 />
               </div>
               <img src={cartIcon} alt="cartIcon" className="opacity-30 " />
-              <div className="mt-4 flex w-full items-center rounded justify-center bg-[#525050] py-4 text-sm font-semibold text-[#FFFEF5]">
+              <div className="mt-4 flex w-full items-center justify-center rounded bg-[#525050] py-4 text-sm font-semibold text-[#FFFEF5]">
                 cart is empty
               </div>
             </div>

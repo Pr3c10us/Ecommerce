@@ -3,7 +3,9 @@ import useFetch from "./useFetch.jsx";
 import Products from "./products.jsx";
 import { Link } from "react-router-dom";
 const Category = () => {
-  const { data } = useFetch(`${import.meta.env.VITE_API_URL}products/?limit=3`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_BACKEND_URL}products/?limit=3`,
+  );
   console.log(data);
   return (
     <section className=" flex w-full items-start justify-between border-t-[1.5px] border-asisDark pt-12 uppercase">

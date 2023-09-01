@@ -22,7 +22,9 @@ const Page = () => {
   const handleGetCartContent = async () => {
     try {
       axios.defaults.withCredentials = true;
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}carts`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}carts`,
+      );
       console.log(response.data);
       // setCartData(response.data.products);
       dispatch(setCart(response.data));

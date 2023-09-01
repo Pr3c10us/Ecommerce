@@ -32,7 +32,7 @@ const Payment = ({ setActiveStep }) => {
   const [shippingMethods, setShippingMethods] = useState({});
 
   const getShippingMethods = async () => {
-    const apiUrl = `${import.meta.env.VITE_API_URL}shippings/${shipping}`;
+    const apiUrl = `${import.meta.env.VITE_BACKEND_URL}shippings/${shipping}`;
     try {
       const { data } = await axios.get(apiUrl);
       setShippingMethods(data);
@@ -43,7 +43,7 @@ const Payment = ({ setActiveStep }) => {
   };
   const handleEffect = async () => {
     setIsLoading(true);
-    const apiUrl = `${import.meta.env.VITE_API_URL}orders/stripe`;
+    const apiUrl = `${import.meta.env.VITE_BACKEND_URL}orders/stripe`;
     if (
       !firstName ||
       !lastName ||
@@ -65,9 +65,9 @@ const Payment = ({ setActiveStep }) => {
     try {
       await getShippingMethods();
       let { data } = await axios.post(apiUrl, orderDetails);
-      const { clientSecret,_id } = data.order;
+      const { clientSecret, _id } = data.order;
       setClientSecret(clientSecret);
-      setOrderId(_id)
+      setOrderId(_id);
       setIsLoading(false);
     } catch (error) {
       console.log(error);

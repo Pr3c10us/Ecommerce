@@ -57,7 +57,7 @@ const Product_detail = ({ data }) => {
           quantity: 1,
         };
         const response = await axios.put(
-          `${import.meta.env.VITE_API_URL}carts`,
+          `${import.meta.env.VITE_BACKEND_URL}carts`,
           item,
         );
         dispatch(setCart(response.data.cart));
@@ -100,13 +100,13 @@ const Product_detail = ({ data }) => {
   };
 
   return (
-    <section className="product_container flex h-full flex-col lg:border-y-2 border-asisDark">
+    <section className="product_container flex h-full flex-col border-asisDark lg:border-y-2">
       {/* Product details */}
       {data ? (
         <section className="flex h-full flex-col items-stretch gap-5 lg:flex-row">
           {/* Thumbnail images */}
           <div className="flex flex-col-reverse lg:flex-row">
-            <section className="gap flex flex-wrap basis-7 lg:flex-col items-center justify-center lg:justify-start py-5">
+            <section className="gap flex basis-7 flex-wrap items-center justify-center py-5 lg:flex-col lg:justify-start">
               {data.images?.map((img, index) => (
                 <div
                   key={index}
@@ -127,11 +127,11 @@ const Product_detail = ({ data }) => {
             </section>
 
             {/* Selected image */}
-            <section className="flex items-center justify-center lg:border-x-2 border-asisDark px-4 lg:px-3 py-5">
+            <section className="flex items-center justify-center border-asisDark px-4 py-5 lg:border-x-2 lg:px-3">
               {selectedImage && (
                 <img
                   src={`${import.meta.env.VITE_BLOB_URL}${selectedImage}`}
-                  className="lg:h-[47rem] w-[32rem] object-contain object-top"
+                  className="w-[32rem] object-contain object-top lg:h-[47rem]"
                 />
               )}
             </section>
@@ -139,9 +139,9 @@ const Product_detail = ({ data }) => {
 
           {/* Product information */}
 
-          <section className="w-full flex-1 py-4 space-y-6 lg:px-4">
+          <section className="w-full flex-1 space-y-6 py-4 lg:px-4">
             <p className=" text-3xl font-medium uppercase text-asisDark">
-             {data.name}
+              {data.name}
             </p>
             {/* Sizes */}
             <section className="flex flex-wrap gap-x-5 gap-y-3">
@@ -149,7 +149,7 @@ const Product_detail = ({ data }) => {
                 <div
                   key={index}
                   onClick={() => setSelectedSize(sizeData.size)}
-                  className={`flex py-2 px-3 rounded cursor-pointer items-center justify-center border text-xs font-medium uppercase ${
+                  className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${
                     selectedSize === sizeData.size
                       ? " border-asisDark text-asisDark"
                       : " border-[#C4C4C4] text-[#C4C4C4]"
@@ -169,14 +169,12 @@ const Product_detail = ({ data }) => {
               </article> */}
 
               {/* Description */}
-              <p className="text-sm font-medium text-asisDark">
-                {data.brief}
-              </p>
+              <p className="text-sm font-medium text-asisDark">{data.brief}</p>
 
               {/* Add to cart */}
 
               <button
-                className={`relative my-4 flex max-h-12 rounded w-full justify-center  py-4 text-center text-xs font-semibold uppercase ${
+                className={`relative my-4 flex max-h-12 w-full justify-center rounded  py-4 text-center text-xs font-semibold uppercase ${
                   selectedSize
                     ? "bg-asisDark text-[#FFFFFF]"
                     : "bg-asisDark/70 text-[#C4C4C4]"

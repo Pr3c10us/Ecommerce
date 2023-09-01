@@ -62,7 +62,7 @@ const AddProduct = () => {
         setSubmitting(false);
       }, 3000);
       axios
-        .post(`${import.meta.env.VITE_API_URL}products/`, data)
+        .post(`${import.meta.env.VITE_BACKEND_URL}products/`, data)
         .then((res) => {
           toast.success("Product Added Successfully");
           navigate("/fashion/products");

@@ -25,10 +25,10 @@ const OrderComplete = () => {
     setIsLoading(true);
     try {
       let { data: productData } = await axios.get(
-        `${import.meta.env.VITE_API_URL}products/?limit=10`,
+        `${import.meta.env.VITE_BACKEND_URL}products/?limit=10`,
       );
       let { data: orderData } = await axios.post(
-        `${import.meta.env.VITE_API_URL}orders/clientSecret`,
+        `${import.meta.env.VITE_BACKEND_URL}orders/clientSecret`,
         { clientSecret },
       );
       console.log({ orderData, productData });

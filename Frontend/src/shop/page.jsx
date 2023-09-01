@@ -18,7 +18,7 @@ const Page = () => {
   const navigate = useNavigate();
 
   // API URL
-  const apiUrl = `${import.meta.env.VITE_API_URL}${dynamicUrl}`;
+  const apiUrl = `${import.meta.env.VITE_BACKEND_URL}${dynamicUrl}`;
   // const { data } = useFetch(apiUrl);
 
   // Scroll to top on component mount
@@ -78,14 +78,14 @@ const Page = () => {
               </div> */}
         </div>
       </section>
-        <img
-          src={backToTop}
-          alt="back_to_top"
-          className="fixed  bottom-8 right-2 w-12 md:right-10 cursor-pointer"
-          onClick={() => {
-            handleScrollToTop();
-          }}
-        />
+      <img
+        src={backToTop}
+        alt="back_to_top"
+        className="fixed  bottom-8 right-2 w-12 md:right-10 cursor-pointer"
+        onClick={() => {
+          handleScrollToTop();
+        }}
+      />
     </div>
   );
 };

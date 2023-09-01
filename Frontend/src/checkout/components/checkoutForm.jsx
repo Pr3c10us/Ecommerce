@@ -159,7 +159,9 @@ export default function CheckoutForm({
   };
 
   const cancelOrder = async () => {
-    const apiUrl = `${import.meta.env.VITE_API_URL}orders/${orderId}/customer`;
+    const apiUrl = `${
+      import.meta.env.VITE_BACKEND_URL
+    }orders/${orderId}/customer`;
     try {
       await axios.put(apiUrl, { status: "cancelled" });
       toast.success("Order Canceled!", {

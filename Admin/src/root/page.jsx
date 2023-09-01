@@ -22,7 +22,7 @@ const Root = () => {
     axios.defaults.withCredentials = true;
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}isLoggedIn`,
+        `${import.meta.env.VITE_BACKEND_URL}isLoggedIn`,
       );
       dispatch(setAdminInfo({ admin: data.data }));
       setIsLoaded(false);

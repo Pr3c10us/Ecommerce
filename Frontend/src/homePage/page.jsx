@@ -17,7 +17,7 @@ const Page = () => {
   const getData = async () => {
     setLoading(true);
     const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}products?limit=4`,
+      `${import.meta.env.VITE_BACKEND_URL}products?limit=4`,
     );
     setData(data.products);
     setLoading(false);

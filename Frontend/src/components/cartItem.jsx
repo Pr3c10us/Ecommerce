@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { setCart } from "../../redux/asis";
 
-const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
+const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
   const [quantity, setQuantity] = React.useState(data.quantity);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
         quantity: quantity,
       };
       const { data: cartData } = await axios.put(
-        `${import.meta.env.VITE_API_URL}carts`,
+        `${import.meta.env.VITE_BACKEND_URL}carts`,
         item,
       );
       dispatch(setCart(cartData.cart));
@@ -67,11 +67,11 @@ const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
           <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
             <div>
               <Link to={`/product/${data.product._id}`}>
-                <p className="sm:text-sm text-xs font-bold text-asisDark">
+                <p className="text-xs font-bold text-asisDark sm:text-sm">
                   {data.product.name}
                 </p>
               </Link>
-              <p className="mt-2 text-[0.7rem] sm:text-xs font-semibold text-black">
+              <p className="mt-2 text-[0.7rem] font-semibold text-black sm:text-xs">
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
@@ -81,7 +81,7 @@ const CartItem = ({ data, index, removeItemFromCart,handleGetCart }) => {
             </div>
             {/* remove item from cart */}
             <button
-            className="cursor-pointer underline capitalize text-[0.5rem] sm:text-xs font-semibold "
+              className="cursor-pointer text-[0.5rem] font-semibold capitalize underline sm:text-xs "
               onClick={() => removeItemFromCart(data.product._id, data.size)}
             >
               remove Item

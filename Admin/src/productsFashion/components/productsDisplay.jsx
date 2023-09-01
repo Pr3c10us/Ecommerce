@@ -11,7 +11,7 @@ const ProductsDisplay = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiUrl = `${import.meta.env.VITE_API_URL}products`;
+  const apiUrl = `${import.meta.env.VITE_BACKEND_URL}products`;
 
   // Scroll to top on component mount
   const fetchData = async () => {

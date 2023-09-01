@@ -48,7 +48,7 @@ const Shipping = ({ setActiveStep }) => {
 
   const handleFetchShippingDetails = async () => {
     setIsLoading(true);
-    const apiUrl = `${import.meta.env.VITE_API_URL}shippings`;
+    const apiUrl = `${import.meta.env.VITE_BACKEND_URL}shippings`;
 
     if (
       !firstName ||

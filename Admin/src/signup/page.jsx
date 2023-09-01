@@ -22,7 +22,7 @@ const Page = () => {
       const { name, phone, email, password } = values;
       const userInfo = { name, phone, email, password };
       axios
-        .post(`${import.meta.env.VITE_API_URL}auth/admin/signup`, userInfo)
+        .post(`${import.meta.env.VITE_BACKEND_URL}auth/admin/signup`, userInfo)
         .then((res) => {
           toast.success("Account Created Successfully");
           navigate("/login");

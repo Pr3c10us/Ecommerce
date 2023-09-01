@@ -12,7 +12,7 @@ const Page = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const apiUrl = `${import.meta.env.VITE_API_URL}products/${id}`;
+  const apiUrl = `${import.meta.env.VITE_BACKEND_URL}products/${id}`;
   // const { data } = useFetch(apiUrl);
 
   const name = "you may also like";
@@ -41,9 +41,9 @@ const Page = () => {
   }
 
   return (
-    <main className="flex h-full flex-col gap-20 py-7 lg:py-14 px-4">
+    <main className="flex h-full flex-col gap-20 px-4 py-7 lg:py-14">
       <Product_detail id={id} data={data} ShowCart={ShowCart} />
-       {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
+      {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
     </main>
   );
 };
