@@ -90,7 +90,7 @@ const Page = () => {
                         product.images[0]
                       }`}
                       alt={product.name}
-                      className="object-cover"
+                      className="aspect-[9/16] h-full object-cover object-center "
                     />
                   );
                 })}

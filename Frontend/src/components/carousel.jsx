@@ -20,9 +20,9 @@ const Carousel = ({
     return () => clearInterval(slideInterval);
   }, []);
   return (
-    <div className="w-full overflow-hidden">
+    <div className="relative flex aspect-[9/16] h-full  overflow-hidden">
       <div
-        className={`flex relative transition-all duration-500 ease-out`}
+        className={`relative flex transition-all duration-500 ease-out`}
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         {slides}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const ArticleCarousel = ({
   children: slides,
   autoSlide = true,
-  autoSlideInterval = 5050,
+  autoSlideInterval = 5000,
   setCursorType,
 }) => {
   const [curr, setCurr] = useState(0);
