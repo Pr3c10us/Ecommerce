@@ -35,7 +35,7 @@ const Page = () => {
           setSubmitting(false);
         });
 
-      setSubmitting(false);
+      // setSubmitting(false);
     },
 
     validationSchema: Yup.object({
@@ -56,9 +56,9 @@ const Page = () => {
     }),
   });
   return (
-    <main className="flex h-full flex-col gap-8 md:gap-20 pb-8">
+    <main className="flex h-full flex-col gap-8 pb-8 md:gap-20">
       <div className="flex w-full justify-center border-b border-b-asisDark/20 py-4">
-        <img src={Logo} alt="Logo" className="md:h-20 h-8" />
+        <img src={Logo} alt="Logo" className="h-8 md:h-20" />
       </div>
 
       <form
