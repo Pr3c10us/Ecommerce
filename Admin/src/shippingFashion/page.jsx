@@ -168,7 +168,7 @@ const ShippingFashion = () => {
           </section>
           <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
             <label className="basis-[20%] capitalize" htmlFor="durationInDays">
-              shipping fee
+              shipping fee [$]
             </label>
             <div className="flex w-full flex-col text-asisDark ">
               <input
@@ -206,7 +206,7 @@ const ShippingFashion = () => {
           <div className="flex flex-col gap-8">
             {shippings.map((shipping) => (
               <div
-                className="flex  grid-cols-6 flex-col gap-y-2 rounded-lg border border-asisDark py-4 text-sm capitalize shadow-lg md:grid md:flex-row md:items-center"
+                className="flex  grid-cols-6 flex-col gap-y-2 rounded-lg border border-asisDark py-4 text-sm capitalize shadow-lg md:grid md:flex-row"
                 key={shipping?._id}
               >
                 <div className="flex w-full justify-end px-6 md:hidden md:py-3">
@@ -225,10 +225,12 @@ const ShippingFashion = () => {
                   {shipping.name}
                 </div>
                 <div className="px-6 md:py-3">
-                  <span className="text-base font-medium capitalize">Fee:</span>{" "}
-                  {shipping.fee} usd
+                  <span className="text-base font-medium capitalize">
+                    Fee:
+                  </span>{" "}
+                  ${shipping.fee}
                 </div>
-                <div className="px-6 md:col-span-2 md:py-3">
+                <div className="px-6 md:col-span-2 md:py-3 flex gap-2">
                   <span className="text-base font-medium capitalize">
                     Description:
                   </span>{" "}
@@ -240,7 +242,7 @@ const ShippingFashion = () => {
                   </span>{" "}
                   {shipping.durationInDays} days
                 </div>
-                <div className="md:flex w-full justify-end px-6 hidden md:py-3">
+                <div className="hidden w-full justify-end px-6 md:flex md:py-3">
                   <button
                     type="button"
                     className="text-red-500"

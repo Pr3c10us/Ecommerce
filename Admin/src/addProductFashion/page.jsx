@@ -146,7 +146,7 @@ const AddProduct = () => {
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
-            product Price
+            product Price [$]
           </label>
           <div className="flex w-full flex-col text-asisDark ">
             <input
