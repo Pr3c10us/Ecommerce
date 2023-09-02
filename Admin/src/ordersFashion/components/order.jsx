@@ -36,6 +36,7 @@ const Order = ({ orders }) => {
       overflow: "auto",
       backgroundColor: "transparent",
       outline: "none",
+      width: "250px",
       ring: "0px none transparent",
       borderColor: "rgb(0 0 0 )",
       padding: "2px 4px",
@@ -68,9 +69,9 @@ const Order = ({ orders }) => {
     }
   };
   return (
-    <section className="flex flex-col gap-12 font-medium">
+    <section className="flex flex-col gap-8 font-medium">
       {orders.map((order) => (
-        <section className="flex flex-col gap-6 rounded-d border-b-2 border-asisDark/50 px-8 py-8 hadow-xl ">
+        <section className="flex flex-col gap-6 rounded-d border-b-2 border-asisDark/50 md:px-8 py-8 hadow-xl ">
           <div className="grid flex-col gap-2 lg:md:grid-cols-2">
             <h2 className="text-lg font-semibold uppercase lg:col-span-2">
               Products Bought
@@ -160,7 +161,7 @@ const Order = ({ orders }) => {
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-semibold uppercase">Order Status</h2>
 
-            <div className="flex max-w-md flex-col gap-4">
+            <div className="flex flex-wrap sm:flex-row gap-4">
               <Select
                 options={options}
                 defaultValue={options.find(
