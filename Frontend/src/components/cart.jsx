@@ -95,14 +95,17 @@ const Cart = ({ setHideCart }) => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
-      toast.error("Failed to remove item, try again", {
-        style: {
-          border: "1px solid red",
-          padding: "8px 16px",
-          color: "red",
-          borderRadius: "4px",
+      toast.error(
+        error.response.data.msg || "Failed to remove item, try again",
+        {
+          style: {
+            border: "1px solid red",
+            padding: "8px 16px",
+            color: "red",
+            borderRadius: "4px",
+          },
         },
-      });
+      );
       setIsLoading(false);
     }
   };
@@ -128,14 +131,17 @@ const Cart = ({ setHideCart }) => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
-      toast.error("Failed to remove item, try again", {
-        style: {
-          border: "1px solid red",
-          padding: "8px 16px",
-          color: "red",
-          borderRadius: "4px",
+      toast.error(
+        error.response.data.msg || "Failed to remove item, try again",
+        {
+          style: {
+            border: "1px solid red",
+            padding: "8px 16px",
+            color: "red",
+            borderRadius: "4px",
+          },
         },
-      });
+      );
       setIsLoading(false);
     }
   };

@@ -58,7 +58,9 @@ const createOrderStripe = async (req, res) => {
             "Invalid Shipping details, use a dollar shipping info"
         );
     }
-    req.body.shipping = shippingDetails;
+    req.body.shipping = [
+        { shipping: shippingDetails._id, name: shippingDetails.name, fee: shippingDetails.fee },
+    ];
     req.body.totalPrice = cart.totalPrice + shippingDetails.fee;
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -167,13 +169,15 @@ const getOrdersAdmin = async (req, res) => {
     // get orders for admin
     let result = Order.find(queryObject)
         .select("-createdAt -updatedAt -__v")
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: -1 })
+        .populate("products.product")
+        .populate("shipping.shipping");
 
     // #################################################################
     // Set up Pagination
 
     // set limit and page(from query) variable
-    const limit = Number(req.query.limit) || 30;
+    const limit = Number(req.query.limit) || 20;
     const page = Number(req.query.page) || 1;
     const skip = (page - 1) * limit;
 

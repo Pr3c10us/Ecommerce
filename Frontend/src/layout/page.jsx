@@ -43,7 +43,7 @@ const Page = () => {
 
   return (
     <main className="h-full flex flex-col pb-8">
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <Header
         setHideCart={setHideCart}
         // setHideWish={setHideWish}

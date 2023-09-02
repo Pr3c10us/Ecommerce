@@ -76,14 +76,17 @@ const Product_detail = ({ data }) => {
         setIsAddingToCart(false);
       } catch (error) {
         console.log(error);
-        toast.error("Failed to add item to cart", {
-          style: {
-            border: "1px solid red",
-            padding: "8px 16px",
-            color: "red",
-            borderRadius: "4px",
+        toast.error(
+          error.response.data.msg || "Failed to add item, try again",
+          {
+            style: {
+              border: "1px solid red",
+              padding: "8px 16px",
+              color: "red",
+              borderRadius: "4px",
+            },
           },
-        });
+        );
         setIsAddingToCart(false);
       }
     } else {

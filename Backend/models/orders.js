@@ -15,11 +15,7 @@ const orderSchema = new mongoose.Schema(
             enum: ["Nigeria", "United States"],
         },
         clientSecret: String,
-        shipping: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Shipping",
-            required: true,
-        },
+
         status: {
             type: String,
             enum: [
@@ -53,6 +49,21 @@ const orderSchema = new mongoose.Schema(
                     type: Number,
                 },
                 price: {
+                    type: Number,
+                },
+            },
+        ],
+        shipping: [
+            {
+                shipping: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Shipping",
+                    required: true,
+                },
+                name: {
+                    type: String,
+                },
+                fee: {
                     type: Number,
                 },
             },
