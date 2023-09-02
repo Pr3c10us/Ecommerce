@@ -22,12 +22,12 @@ const Nav = () => {
       icon: ProductsPageIcon,
       darkIcon: ProductsPageDarkIcon,
     },
-    {
-      name: "thankYou",
-      href: "/fashion/ThankYou",
-      icon: ThankYouPageIcon,
-      darkIcon: ThankYouPageDarkIcon,
-    },
+    // {
+    //   name: "thankYou",
+    //   href: "/fashion/ThankYou",
+    //   icon: ThankYouPageIcon,
+    //   darkIcon: ThankYouPageDarkIcon,
+    // },
     {
       name: "orders",
       href: "/fashion/orders",
