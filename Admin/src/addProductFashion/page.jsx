@@ -62,7 +62,7 @@ const AddProduct = () => {
         .post(`${import.meta.env.VITE_BACKEND_URL}products/`, data)
         .then((res) => {
           toast.success("Product Added Successfully");
-          navigate("/fashion/products");
+          navigate("/products");
         })
         .catch((err) => {
           toast.error(err.response.data.msg || "Something went wrong");
@@ -214,7 +214,7 @@ const AddProduct = () => {
           <button
             type="button"
             disabled={formik.isSubmitting}
-            onClick={() => navigate("/fashion/products")}
+            onClick={() => navigate("/products")}
             className={`rounded bg-red-500 px-8 py-1.5 text-white ${
               formik.isSubmitting && "cursor-not-allowed opacity-50"
             }`}

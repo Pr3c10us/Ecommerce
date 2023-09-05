@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/homeLogo.svg";
+// import Logo from "../assets/homeLogo.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "./components/inputs";
@@ -19,10 +19,13 @@ const Page = () => {
       const { name, phone, email, password } = values;
       const userInfo = { name, phone, email, password };
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}auth/admin/login`, userInfo)
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}auth/customer/login`,
+          userInfo,
+        )
         .then((res) => {
           toast.success("Signed in successfully");
-          navigate("/products");
+          navigate("/shop");
         })
         .catch((error) => {
           if (error.response) {
@@ -43,17 +46,18 @@ const Page = () => {
     }),
   });
   return (
-    <main className="flex h-full flex-col gap-20 pb-8">
-      <div className="flex w-full justify-center border-b border-b-asisDark/20 py-4">
+    <main className="flex h-full flex-col gap-20 py-8">
+      {/* <div className="flex w-full justify-center border-b border-b-asisDark/20 py-4">
         <img src={Logo} alt="Logo" className="h-8 md:h-20" />
-      </div>
+      </div> */}
 
       <form
         className="flex flex-col items-center gap-8"
         onSubmit={formik.handleSubmit}
       >
-        <header className="flex w-full justify-center">
-          <h1 className="text-lg font-normal capitalize">Sign in</h1>
+        <header className="flex flex-col text-center w-full justify-center">
+          <h1 className="text-2xl font-medium capitalize">Sign in</h1>
+          <p className="text-asisDark ml-2">Login to your Asis account for extra benefits</p>
         </header>
         <section className="grid w-full max-w-lg gap-x-5 gap-y-4 px-4">
           <Input

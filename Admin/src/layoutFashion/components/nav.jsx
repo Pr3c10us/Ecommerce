@@ -12,25 +12,25 @@ const Nav = () => {
   const pages = [
     {
       name: "Products",
-      href: "/fashion/products",
+      href: "/products",
       icon: ProductsPageIcon,
       darkIcon: ProductsPageDarkIcon,
     },
     {
       name: "Shipping",
-      href: "/fashion/shipping",
+      href: "/shipping",
       icon: ProductsPageIcon,
       darkIcon: ProductsPageDarkIcon,
     },
     // {
     //   name: "thankYou",
-    //   href: "/fashion/ThankYou",
+    //   href: "/ThankYou",
     //   icon: ThankYouPageIcon,
     //   darkIcon: ThankYouPageDarkIcon,
     // },
     {
       name: "orders",
-      href: "/fashion/orders",
+      href: "/orders",
       icon: OrdersPageIcon,
       darkIcon: OrdersPageDarkIcon,
     },

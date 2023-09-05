@@ -101,12 +101,12 @@ const Page = () => {
       </article>
       <div className="flex w-full flex-col items-center justify-start gap-2 px-[15vw] md:flex-row md:items-start md:justify-center">
         <div className=" grid w-full grid-cols-2 gap-x-2 md:flex md:w-auto">
-          <button className="cursor-not-allowed border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
-            Sign In
-          </button>
-          <button className="cursor-not-allowed border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
+          <Link to={"/login"} className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
+            Login
+          </Link>
+          <Link to={"/signup"} className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
             Sign Up
-          </button>
+          </Link>
         </div>
         <Link
           to="/shop"

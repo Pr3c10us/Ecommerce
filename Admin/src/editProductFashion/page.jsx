@@ -33,11 +33,12 @@ const EditProduct = () => {
   );
   const [countInStock, setCountInStock] = React.useState([]);
   React.useEffect(() => {
+    console.log(location.pathname.split("/")[2]);
     const getProductDetails = async () => {
       setLoading(true);
       const res = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}products/${
-          location.pathname.split("/")[3]
+          location.pathname.split("/")[2]
         }`,
       );
       setProductDetails((prev) => ({ ...prev, ...res.data }));
@@ -81,13 +82,13 @@ const EditProduct = () => {
       axios
         .put(
           `${import.meta.env.VITE_BACKEND_URL}products/${
-            location.pathname.split("/")[3]
+            location.pathname.split("/")[2]
           }`,
           data,
         )
         .then((res) => {
           toast.success("Edit Complete");
-          // navigate("/fashion/products");
+          // navigate("/products");
           console.log(res.data);
           setProductDetails((prev) => ({ ...prev, ...res.data.product }));
           setCountInStock(res.data.product.countInStock);
@@ -120,7 +121,7 @@ const EditProduct = () => {
       const imageNames = [imageName];
       await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}products/${
-          location.pathname.split("/")[3]
+          location.pathname.split("/")[2]
         }/image`,
         {
           data: { imageNames },
@@ -140,11 +141,11 @@ const EditProduct = () => {
     try {
       await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}products/${
-          location.pathname.split("/")[3]
+          location.pathname.split("/")[2]
         }`,
       );
       toast.success("Product Deleted Successfully");
-      navigate("/fashion/products");
+      navigate("/products");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg || "Something went wrong");
@@ -310,7 +311,7 @@ const EditProduct = () => {
               fileList={fileList}
               setImages={setImages}
               images={images}
-              id={location.pathname.split("/")[3]}
+              id={location.pathname.split("/")[2]}
             />
           </section>
         </section>

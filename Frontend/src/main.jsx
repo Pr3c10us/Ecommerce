@@ -14,6 +14,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import OrderComplete from "./completed/page.jsx";
+import Login from "./login/page";
+import Signup from "./signup/page";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "/receipt/:id",
         element: <Receipt />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },

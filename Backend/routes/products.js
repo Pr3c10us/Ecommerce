@@ -13,6 +13,7 @@ const {
     addProductImage,
     createSpecialCategory,
     createSuperSpecialCategory,
+    getRandomProducts,
 } = require("../controller/products");
 const convertToArray = require("../middleware/convertToArray");
 
@@ -26,6 +27,8 @@ router
         convertToArray("collaborations"),
         createProduct
     );
+
+router.route("/random").get(getRandomProducts);
 
 router
     .route("/:id")

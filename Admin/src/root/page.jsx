@@ -46,9 +46,9 @@ const Root = () => {
         <main className="space-y-12 px-4 py-5 sm:px-12 xl:px-60">
           <section className="flex flex-col items-center gap-y-3">
             <img src={Logo} alt="Logo" className="h-8" />
-            <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-medium text-asisDark sm:text-base md:text-lg">
+            {/* <div className="relative grid w-full grid-cols-2 place-items-center pb-3 text-sm font-medium text-asisDark sm:text-base md:text-lg">
               <Link
-                to="/fashion/"
+                to="/"
                 className={`${
                   !location.pathname.includes("/fashion") && "text-asisDark/50"
                 }`}
@@ -72,7 +72,7 @@ const Root = () => {
              `}
                 ></div>
               </div>
-            </div>
+            </div> */}
           </section>
           <Outlet />
         </main>

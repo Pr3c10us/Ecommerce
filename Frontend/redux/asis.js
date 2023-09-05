@@ -14,6 +14,7 @@ const initialState = {
     country: "",
     shipping: "",
   },
+  customer: {},
 };
 
 export const asis = createSlice({
@@ -26,10 +27,13 @@ export const asis = createSlice({
     setOrder: (state, action) => {
       state.order = { ...state.order, ...action.payload };
     },
+    setCustomer: (state, action) => {
+      state.customer = action.payload;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCart, setOrder } = asis.actions;
+export const { setCart, setOrder,setCustomer } = asis.actions;
 
 export default asis.reducer;

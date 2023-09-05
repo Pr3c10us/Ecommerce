@@ -49,7 +49,7 @@ const ShippingFashion = () => {
         .post(`${import.meta.env.VITE_BACKEND_URL}shippings`, data)
         .then((res) => {
           toast.success("Edit Complete");
-          // navigate("/fashion/products");
+          // navigate("/products");
           console.log(res.data);
           axios
             .get(`${import.meta.env.VITE_BACKEND_URL}shippings`)
@@ -99,7 +99,7 @@ const ShippingFashion = () => {
     return <Loading />;
   }
   return (
-    <main className="py-12 font-medium">
+    <main className="py-12 space-y-8 font-medium">
       <form className="flex flex-col gap-y-12" onSubmit={formik.handleSubmit}>
         <section className="flex w-full flex-col gap-y-4">
           <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
@@ -225,12 +225,10 @@ const ShippingFashion = () => {
                   {shipping.name}
                 </div>
                 <div className="px-6 md:py-3">
-                  <span className="text-base font-medium capitalize">
-                    Fee:
-                  </span>{" "}
+                  <span className="text-base font-medium capitalize">Fee:</span>{" "}
                   ${shipping.fee}
                 </div>
-                <div className="px-6 md:col-span-2 md:py-3 flex gap-2">
+                <div className="flex gap-2 px-6 md:col-span-2 md:py-3">
                   <span className="text-base font-medium capitalize">
                     Description:
                   </span>{" "}

@@ -32,21 +32,23 @@ const ProductsDisplay = () => {
     fetchData();
   }, []);
 
-  if (isLoading) <Loading />;
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <section className="2xl:grid-cols- grid gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-16">
         <div className="flex flex-col gap-y-4">
           <Link
-            to={`/fashion/products/addProduct`}
+            to={`/products/addProduct`}
             className="flex h-[25rem] items-center justify-center border border-asisDark bg-white/50"
           >
             <img src={ThinAddIcon} alt="edit" className="h-30" />
           </Link>
           <Link
             className="flex items-center justify-center gap-2 rounded border border-asisDark py-2 text-sm font-medium capitalize"
-            to={`/fashion/products/addProduct`}
+            to={`/products/addProduct`}
           >
             <img src={AddIcon} alt="edit" className="h-6" />
             Add Product

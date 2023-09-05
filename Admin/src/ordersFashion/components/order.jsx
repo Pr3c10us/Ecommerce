@@ -73,7 +73,7 @@ const Order = ({ orders }) => {
       {orders.map((order) => (
         <section className="flex flex-col gap-6 rounded-d border-b-2 border-asisDark/50 md:px-8 py-8 hadow-xl ">
           <div className="grid flex-col gap-2 lg:md:grid-cols-2">
-            <h2 className="text-lg font-semibold uppercase lg:col-span-2">
+            <h2 className="text-lg font-semibold uppercase underline lg:col-span-2">
               Products Bought
             </h2>
             {order?.products.map((item, index) => (
@@ -102,7 +102,7 @@ const Order = ({ orders }) => {
             ))}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase">
+            <h2 className="text-lg font-semibold uppercase underline">
               Customer Contact INFO
             </h2>
             <div className="grid md:grid-cols-2 gap-2">
@@ -114,7 +114,7 @@ const Order = ({ orders }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase">
+            <h2 className="text-lg font-semibold uppercase underline">
               SHIPPING ADDRESS
             </h2>
             <div className="grid md:grid-cols-2 gap-2">
@@ -126,7 +126,7 @@ const Order = ({ orders }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase">SHIPPING Method</h2>
+            <h2 className="text-lg font-semibold uppercase underline">SHIPPING Method</h2>
             {order?.shipping.map((item, index) => {
               return (
                 <div className="grid md:grid-cols-2 gap-2" key={index}>
@@ -137,7 +137,7 @@ const Order = ({ orders }) => {
             })}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase">Payment</h2>
+            <h2 className="text-lg font-semibold uppercase underline">Payment</h2>
 
             <div className="grid md:grid-cols-2 gap-2">
               <p className="">
@@ -159,7 +159,7 @@ const Order = ({ orders }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase">Order Status</h2>
+            <h2 className="text-lg font-semibold uppercase underline">Order Status</h2>
 
             <div className="flex flex-wrap sm:flex-row gap-4">
               <Select

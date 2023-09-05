@@ -5,7 +5,7 @@ const Products = () => {
   const location = useLocation();
   return (
     <main className="space-y-6 pt-7">
-      {location.pathname === "/fashion/products" && (
+      {location.pathname === "/products" && (
         <h1 className="font-semibold">Products</h1>
       )}
       <Outlet />

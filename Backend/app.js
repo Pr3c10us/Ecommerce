@@ -62,6 +62,10 @@ app.get(
 const authenticationRoutes = require("./routes/authentications");
 app.use("/api/auth", authenticationRoutes);
 
+// CUSTOMER ROUTES
+const customerRoutes = require("./routes/customers");
+app.use("/api/customers", customerRoutes);
+
 // PRODUCT ROUTES
 const productRoutes = require("./routes/products");
 app.use("/api/products", productRoutes);

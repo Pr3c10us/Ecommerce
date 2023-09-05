@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <main>
       <Nav />
-      {location.pathname === "/fashion/" ? (
+      {location.pathname === "/" ? (
         <div className="w-full py-12 flex items-center justify-center gap-2 text-center text-2xl underline ">
           Select an Option <BsArrowUp className="animate-bounce" />
         </div>
