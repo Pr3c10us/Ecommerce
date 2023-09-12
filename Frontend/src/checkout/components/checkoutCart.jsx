@@ -11,6 +11,7 @@ import { setCart } from "../../../redux/asis";
 import SpecialChar from "../../components/specialChar";
 import { useNavigate } from "react-router-dom";
 import VowelItalicizer from "../../components/vowelItalicizer";
+import CartItem from "../../components/cartItem";
 
 const CheckoutCart = () => {
   const ref = React.useRef(null);
@@ -155,65 +156,13 @@ const CheckoutCart = () => {
           <div className="max-h-[50vh] overflow-y-scroll">
             {cartData.products.map((data, index) => {
               return (
-                <section key={index}>
-                  <div className="my-5 flex items-start justify-between gap-5 border-b-2 border-asisDark pb-4">
-                    {/* cart image */}
-                    <img
-                      src={`${import.meta.env.VITE_BLOB_URL}${
-                        data.product.images[0]
-                      }`}
-                      alt="collection_img_2"
-                      className="h-36 w-[116px] object-contain object-top"
-                    />
-                    {/* right hand of the product detail of the cart */}
-                    <section className="w-4/5">
-                      {/* Product details */}
-                      <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
-                        <div>
-                          <Link to={`/product/${data.product._id}`}>
-                            <p className="w-[212px] text-sm font-bold text-asisDark">
-                              {data.product.name}
-                            </p>
-                          </Link>
-                          <p className="mt-2 text-xs font-semibold text-black">
-                            {Intl.NumberFormat("en-US", {
-                              style: "currency",
-                              currency: "USD",
-                            }).format(data.totalPrice)}{" "}
-                            USD
-                          </p>
-                        </div>
-                        {/* remove item from cart */}
-                        <button
-                          onClick={() =>
-                            removeItemFromCart(data.product._id, data.size)
-                          }
-                        >
-                          <img
-                            src={cancel_cart}
-                            alt="cancel_cart"
-                            className="w-5 cursor-pointer"
-                          />
-                        </button>
-                      </div>
-                      <div className="mt-3 flex w-full items-start justify-between text-xs font-semibold text-black">
-                        <div>
-                          {/* <p>{data.color}</p> */}
-                          <p>
-                            size:{" "}
-                            <span className="text-sm font-bold">
-                              {data.size}
-                            </span>
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-1 ">
-                          <p> q.ty:{data?.qty}</p>
-                          <img src={down} alt="down" />
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </section>
+                <CartItem
+                  key={data._id}
+                  data={data}
+                  index={index}
+                  removeItemFromCart={removeItemFromCart}
+                  handleGetCart={handleGetCartContent}
+                />
               );
             })}
           </div>

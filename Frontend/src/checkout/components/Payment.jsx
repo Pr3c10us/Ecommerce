@@ -29,6 +29,7 @@ const Payment = ({ setActiveStep }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [clientSecret, setClientSecret] = useState("");
   const [orderId, setOrderId] = useState("");
+  const [total, setTotal] = useState(0);
   const [shippingMethods, setShippingMethods] = useState({});
 
   const getShippingMethods = async () => {
@@ -65,9 +66,10 @@ const Payment = ({ setActiveStep }) => {
     try {
       await getShippingMethods();
       let { data } = await axios.post(apiUrl, orderDetails);
-      const { clientSecret, _id } = data.order;
+      const { clientSecret, _id,totalPrice } = data.order;
       setClientSecret(clientSecret);
       setOrderId(_id);
+      setTotal(totalPrice);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -165,6 +167,7 @@ const Payment = ({ setActiveStep }) => {
             shipping={shipping}
             shippingMethods={shippingMethods}
             orderId={orderId}
+            total={total}
           />
         </Elements>
       )}

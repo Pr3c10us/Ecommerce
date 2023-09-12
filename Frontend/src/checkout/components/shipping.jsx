@@ -24,6 +24,8 @@ const Shipping = ({ setActiveStep }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedShipping, setSelectedShipping] = useState(shipping || null);
+  const [selectedShippingPrice, setSelectedShippingPrice] = useState(0);
+
   const dispatch = useDispatch();
 
   const handleAddShippingDetails = () => {
@@ -67,6 +69,11 @@ const Shipping = ({ setActiveStep }) => {
     try {
       let { data } = await axios.get(apiUrl);
       setData(data.shipping);
+      if (selectedShipping) {
+        setSelectedShippingPrice(
+          data.shipping.find((item) => item._id === selectedShipping).fee,
+        );
+      }
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -92,7 +99,10 @@ const Shipping = ({ setActiveStep }) => {
           <div
             key={shippingDetail._id}
             className="flex cursor-pointer items-center gap-x-6 px-2 py-2 text-sm font-semibold text-asisDark/40 backdrop-blur-md sm:text-base"
-            onClick={() => setSelectedShipping(shippingDetail._id)}
+            onClick={() => {
+              setSelectedShipping(shippingDetail._id);
+              setSelectedShippingPrice(shippingDetail.fee);
+            }}
           >
             <div className=" flex h-5 w-5 items-center justify-center rounded-full border-2 border-asisDark">
               <div
@@ -169,7 +179,7 @@ const Shipping = ({ setActiveStep }) => {
           {Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-          }).format(cartData.totalPrice)}{" "}
+          }).format(cartData.totalPrice + selectedShippingPrice)}{" "}
           USD
         </button>
       </section>

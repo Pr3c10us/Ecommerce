@@ -23,6 +23,7 @@ export default function CheckoutForm({
   shipping,
   shippingMethods,
   orderId,
+  total,
 }) {
   const navigate = useNavigate();
 
@@ -241,7 +242,15 @@ export default function CheckoutForm({
           className="h-11 w-1/2 rounded-md bg-black text-white"
         >
           <span id="button-text">
-            {isLoading ? <ButtonLoader /> : "Pay now"}
+            {isLoading ? (
+              <ButtonLoader />
+            ) : (
+              `Pay ${Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(total)}
+          now`
+            )}
           </span>
         </button>
       </section>

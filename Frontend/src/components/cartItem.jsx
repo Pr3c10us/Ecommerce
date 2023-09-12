@@ -112,7 +112,7 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
                 }}
                 className="peer flex h-full w-8 flex-1 items-center justify-center border border-asisDark bg-transparent py-2 text-center text-xs"
               />
-              <p
+              <div
                 onClick={() => {
                   if (quantity === data.quantity) return;
                   handleAddQuantity();
@@ -130,7 +130,7 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
                 ) : (
                   "Update"
                 )}
-              </p>
+              </div>
             </div>
           </div>
         </section>
