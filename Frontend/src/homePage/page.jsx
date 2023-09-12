@@ -68,7 +68,7 @@ const Page = () => {
                     </div>
                     <p className="font-normal">{product.description}</p>
                     <Link
-                      className="flex w-auto gap-x-2 items-center justify-center mx-auto max-w-xs border-2 border-asisDark px-2 py-1 text-sm md:px-4 md:py-2 md:text-base"
+                      className="flex mx-2 w-auto gap-x-2 items-center justify-center max-w-xs border-2 border-asisDark px-2 py-1 text-sm md:px-4 md:py-2 md:text-base"
                       to={`/product/${product._id}`}
                     >
                       View Product

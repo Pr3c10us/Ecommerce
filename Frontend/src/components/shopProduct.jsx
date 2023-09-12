@@ -26,7 +26,7 @@ const Products = ({ product, index }) => {
         <img
           src={`${import.meta.env.VITE_BLOB_URL}${product.images[0]}`}
           alt="products_img"
-          className="object-cover object-top"
+          className="object-cover object-top w-full"
         />
       </div>
       <div className="flex flex-col items-center gap-y-4 font-semibold  uppercase md:max-w-sm md:items-start md:gap-y-12 ">

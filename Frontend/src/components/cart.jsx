@@ -181,6 +181,7 @@ const Cart = ({ setHideCart }) => {
             <div className="max-h-[60vh] overflow-y-scroll md:max-h-[40vh]">
               {cartData.products.map((data, index) => (
                 <CartItem
+                key={data._id}
                   data={data}
                   index={index}
                   removeItemFromCart={removeItemFromCart}

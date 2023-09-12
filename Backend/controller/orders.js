@@ -59,7 +59,11 @@ const createOrderStripe = async (req, res) => {
         );
     }
     req.body.shipping = [
-        { shipping: shippingDetails._id, name: shippingDetails.name, fee: shippingDetails.fee },
+        {
+            shipping: shippingDetails._id,
+            name: shippingDetails.name,
+            fee: shippingDetails.fee,
+        },
     ];
     req.body.totalPrice = cart.totalPrice + shippingDetails.fee;
 

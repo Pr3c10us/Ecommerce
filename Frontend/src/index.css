@@ -25,6 +25,18 @@ width: 0px;
   height: 80vh;
 }
 
+Chrome, Safari, Edge, Opera
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /* Apply custom styling to the checkbox */
 input[type="checkbox"] {
   appearance: none;

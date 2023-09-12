@@ -5,12 +5,18 @@ import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { setCart } from "../../redux/asis";
+import { FaPen } from "react-icons/fa6";
 
 const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
   const [quantity, setQuantity] = React.useState(data.quantity);
+  const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   const handleAddQuantity = async () => {
+    setIsLoading(true);
+    if (quantity <= 0) {
+      return removeItemFromCart(data.product._id, data.size);
+    }
     try {
       axios.defaults.withCredentials = true;
       const item = {
@@ -23,17 +29,19 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
         item,
       );
       dispatch(setCart(cartData.cart));
-      handleGetCart();
-      toast.success("increased", {
+      // handleGetCart();
+      toast.success("Quantity changed", {
         style: {
-          border: "1px solid red",
+          border: "1px solid green",
           padding: "8px 16px",
           color: "green",
           borderRadius: "4px",
         },
       });
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setQuantity(data.quantity);
       toast.error(error?.response?.data?.msg, {
         style: {
           border: "1px solid red",
@@ -42,6 +50,7 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
           borderRadius: "4px",
         },
       });
+      setIsLoading(false);
     }
   };
 
@@ -95,31 +104,32 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
               </p>
             </div>
             <div className="flex h-full place-items-center items-center gap-1 ">
-              <p
-                onClick={() => {
-                  if (quantity > 1) {
-                    setQuantity((prev) => prev - 1);
-                    handleAddQuantity();
-                  }
+              <input
+                type="number"
+                value={quantity}
+                onChange={(e) => {
+                  setQuantity(Number(e.target.value));
                 }}
-                className="cursor-pointer text-3xl"
-              >
-                {" "}
-                -
-              </p>
-              <div className="flex h-full w-6 flex-1 items-center justify-center border border-asisDark bg-transparent p-2 text-center">
-                {" "}
-                {quantity}{" "}
-              </div>
+                className="peer flex h-full w-8 flex-1 items-center justify-center border border-asisDark bg-transparent py-2 text-center text-xs"
+              />
               <p
                 onClick={() => {
-                  setQuantity((prev) => prev + 1);
+                  if (quantity === data.quantity) return;
                   handleAddQuantity();
                 }}
-                className="cursor-pointer text-3xl"
+                className={`flex h-full w-16 cursor-pointer items-center justify-center bg-asisDark py-2 text-center text-xs text-white ${
+                  quantity === data.quantity
+                    ? "hidden cursor-default opacity-50 peer-focus:flex"
+                    : "flex"
+                }`}
               >
                 {" "}
-                +
+                {/* <FaPen className="h-4 w-4" /> */}
+                {isLoading ? (
+                  <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-t-white"></div>
+                ) : (
+                  "Update"
+                )}
               </p>
             </div>
           </div>
