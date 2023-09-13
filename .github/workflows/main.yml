@@ -27,7 +27,17 @@ jobs:
                   port: 22
                   script: |
 
-                      cd /var/www/Asis/Backend && sudo npm stop && sudo npm start
+                      cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
+                        # If command1 succeeds
+                        echo "Command 1 succeeded"
+                        # Run another command
+                        sudo npm start
+                      else
+                          # If command1 fails
+                          echo "Command 1 failed"
+                          # Run a different command
+                          sudo npm start
+                      fi
 
 #  if [ -d /var/www/Asis ]; then
 #               cd /var/www/Asis && git pull
