@@ -48,8 +48,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install sshpass
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global 
+
+      - name: Connect to AWS Lightsail, extract file and delete the file
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: " "
+          password: ${{ secrets.SSH_PASSWORD }}
+          passphrase: ""
+          port: 22
+          script: |
+            ls -a
+
 
       # - name: Install sshpass
       #   run: sudo apt-get install -y sshpass
