@@ -2,6 +2,7 @@ name: Deploy to Instance
 
 env:
   REPO_NAME: ${{ github.event.repository.name }}
+  REPO_URL: ${{ github.event.repository.url }}
 
 on:
   push:
@@ -17,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Install sshpass
-        run: echo $REPO_NAME
+        run: echo $REPO_NAME $REPO_URL
 
       # - name: Install sshpass
       #   run: sudo apt-get install -y sshpass
