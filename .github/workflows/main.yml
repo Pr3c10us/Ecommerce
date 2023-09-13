@@ -58,7 +58,14 @@ jobs:
           passphrase: ""
           port: 22
           script: |
-            ls -a 
+            if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
+              sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
+            else
+              sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
+            fi 
+            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build"
+            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Admin && sudo npm install && sudo npm run build"
+            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Backend && sudo npm stop && sudo npm start"
 
 
       # - name: Install sshpass
@@ -66,11 +73,11 @@ jobs:
 
       # - name: Clone or pull the repository
       #   run: |
-      #     if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
-      #       sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
-      #     else
-      #       sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
-      #     fi
+          # if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
+          #   sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
+          # else
+          #   sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
+          # fi
 
       # - name: Build Frontend
       #   run: |
