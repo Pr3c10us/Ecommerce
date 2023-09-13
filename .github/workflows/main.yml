@@ -26,7 +26,13 @@ jobs:
                   passphrase: ""
                   port: 22
                   script: |
-
+                      if [ -d /var/www/Asis ]; then
+                        cd /var/www/Asis && git pull
+                      else
+                        git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
+                      fi
+                      cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build
+                      cd /var/www/Asis/Admin && sudo npm install && sudo npm run build
                       cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
                         # If command1 succeeds
                         echo "Command 1 succeeded"
@@ -38,11 +44,3 @@ jobs:
                           # Run a different command
                           sudo npm start
                       fi
-
-#  if [ -d /var/www/Asis ]; then
-#               cd /var/www/Asis && git pull
-#             else
-#               git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
-#             fi
-#             cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build
-#             cd /var/www/Asis/Admin && sudo npm install && sudo npm run build
