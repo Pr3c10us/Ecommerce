@@ -7,7 +7,7 @@
         "start": "pm2 start app.js",
         "restart": "pm2 restart app.js",
         "dev": "nodemon app.js",
-        "stop": "pm2 delete app.js"
+        "stop": "pm2 delete app.js" 
     },
     "author": "",
     "license": "ISC",
