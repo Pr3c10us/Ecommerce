@@ -9,6 +9,38 @@ on:
     branches:
       - master
 
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Install sshpass
+#         run: sudo apt-get install -y sshpass
+
+#       - name: Clone or pull the repository
+#         run: |
+#           if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/$REPO_NAME ]'; then
+#             sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME && git pull"
+#           else
+#             sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone $REPO_URL /var/www/$REPO_NAME"
+#           fi
+
+#       - name: Build Frontend
+#         run: |
+#           sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Frontend && sudo npm install && sudo npm run build"
+
+#       - name: Build Admin
+#         run: |
+#           sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Admin && sudo npm install && sudo npm run build"
+
+#       - name: Stop and Start Backend
+#         run: |
+#           sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Backend && sudo npm stop && sudo npm start"
+
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,20 +54,20 @@ jobs:
 
       - name: Clone or pull the repository
         run: |
-          if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/$REPO_NAME ]'; then
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME && git pull"
+          if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
+            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
           else
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone $REPO_URL /var/www/$REPO_NAME"
+            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
           fi
 
       - name: Build Frontend
         run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Frontend && sudo npm install && sudo npm run build"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build"
 
       - name: Build Admin
         run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Admin && sudo npm install && sudo npm run build"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Admin && sudo npm install && sudo npm run build"
 
       - name: Stop and Start Backend
         run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/$REPO_NAME/Backend && sudo npm stop && sudo npm start"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Backend && sudo npm stop && sudo npm start"
