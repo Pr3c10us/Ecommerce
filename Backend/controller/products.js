@@ -127,7 +127,7 @@ const getProducts = async (req, res) => {
 const getRandomProducts = async (req, res) => {
     const randomProducts = await Product.aggregate([{ $sample: { size: 10 } }]);
     res.json(randomProducts);
-}
+};
 
 const getProductById = async (req, res) => {
     // get product id from request params
@@ -385,5 +385,5 @@ module.exports = {
     addProductImage,
     createSpecialCategory,
     createSuperSpecialCategory,
-    getRandomProducts
+    getRandomProducts,
 };

@@ -18,6 +18,7 @@ const AddProduct = () => {
     "others",
   ]);
   const [fileList, setFileLIst] = React.useState([]);
+  const [comingSoon, setComingSoon] = React.useState(false);
   const lorem =
     "lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.";
 
@@ -50,6 +51,7 @@ const AddProduct = () => {
       data.append("description", values.description);
       data.append("brief", values.brief);
       data.append("category", selectedCategory);
+      data.append("comingSoon", comingSoon);
       countInStock.forEach((item, index) => {
         data.append(`countInStock[${index}][size]`, item.size);
         data.append(`countInStock[${index}][quantity]`, item.quantity);
@@ -142,6 +144,21 @@ const AddProduct = () => {
                 </p>
               ) : null}
             </div>
+          </div>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Product coming soon
+          </label>
+          <div className="flex w-full flex-col text-asisDark ">
+            <input
+              type="checkbox"
+              id="comingSoon"
+              name="comingSoon"
+              checked={comingSoon}
+              onChange={() => setComingSoon(!comingSoon)}
+              className=" w-full cursor-pointer border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"
+            />
           </div>
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">

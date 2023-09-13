@@ -17,6 +17,10 @@ const EditProduct = () => {
   const [loading, setLoading] = React.useState(false);
   const [imageDelete, setImageDelete] = React.useState("");
   const [productDetails, setProductDetails] = React.useState({});
+  const [comingSoon, setComingSoon] = React.useState(
+    productDetails.comingSoon || false,
+  );
+
   const [category, setCategory] = React.useState([
     "clothes",
     "footwear",
@@ -45,6 +49,7 @@ const EditProduct = () => {
       setCountInStock(res.data.countInStock);
       setImages(res.data.images);
       setSelectedCategory(res.data.category);
+      setComingSoon(res.data.comingSoon);
       formik.setFieldValue("name", res.data.name);
       formik.setFieldValue("price", res.data.price);
       formik.setFieldValue("description", res.data.description);
@@ -75,6 +80,7 @@ const EditProduct = () => {
         price: values.price,
         description: values.description,
         brief: values.brief,
+        comingSoon: comingSoon,
         category: selectedCategory,
         countInStock: countInStock,
       };
@@ -221,6 +227,21 @@ const EditProduct = () => {
                 </p>
               ) : null}
             </div>
+          </div>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Product coming soon
+          </label>
+          <div className="flex w-full flex-col text-asisDark ">
+            <input
+              type="checkbox"
+              id="comingSoon"
+              name="comingSoon"
+              checked={comingSoon}
+              onChange={() => setComingSoon(!comingSoon)}
+              className=" w-full cursor-pointer border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"
+            />
           </div>
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">

@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema(
         description: {
             type: String,
         },
+        comingSoon: {
+            type: Boolean,
+            default: false,
+        },
         gender: {
             type: String,
             enum: ["male", "female", "unisex"],
