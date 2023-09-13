@@ -33,4 +33,4 @@ jobs:
             fi 
             cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build
             cd /var/www/Asis/Admin && sudo npm install && sudo npm run build
-            cd /var/www/Asis/Backend && sudo npm stop && sudo npm start
+            cd /var/www/Asis/Backend && sudo npm stop && sudo npm restart
