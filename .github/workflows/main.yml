@@ -48,26 +48,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+        run: echo ${{ secrets.SSH_PASSWORD }}
+      # - name: Install sshpass
+      #   run: sudo apt-get install -y sshpass
 
-      - name: Clone or pull the repository
-        run: |
-          if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
-          else
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
-          fi
+      # - name: Clone or pull the repository
+      #   run: |
+      #     if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
+      #       sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
+      #     else
+      #       sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
+      #     fi
 
-      - name: Build Frontend
-        run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build"
+      # - name: Build Frontend
+      #   run: |
+      #     sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build"
 
-      - name: Build Admin
-        run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Admin && sudo npm install && sudo npm run build"
+      # - name: Build Admin
+      #   run: |
+      #     sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Admin && sudo npm install && sudo npm run build"
 
-      - name: Stop and Start Backend
-        run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Backend && sudo npm stop && sudo npm start"
+      # - name: Stop and Start Backend
+      #   run: |
+      #     sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Backend && sudo npm stop && sudo npm start"
