@@ -5,9 +5,9 @@
     "main": "app.js",
     "scripts": {
         "start": "pm2 start app.js",
-        "restart": "pm2 restart app.js",
+        "restart": "pm2 restart all",
         "dev": "nodemon app.js",
-        "stop": "pm2 stop app.js"
+        "stop": "pm2 stop all"
     },
     "author": "",
     "license": "ISC",
