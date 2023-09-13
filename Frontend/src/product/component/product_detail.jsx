@@ -4,15 +4,14 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setCart } from "../../../redux/asis";
-import CartLoading from "../../components/cartLoader";
 import AddToCartLoading from "./addToCartLoading";
-import VowelItalicizer from "../../components/vowelItalicizer";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const Product_detail = ({ data }) => {
   // States
   const [selectedImage, setSelectedImage] = useState(null);
   const [showDescription, setShowDescription] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
@@ -54,7 +53,7 @@ const Product_detail = ({ data }) => {
         let item = {
           productId: data._id,
           size: selectedSize,
-          quantity: 1,
+          quantity,
         };
         const response = await axios.put(
           `${import.meta.env.VITE_BACKEND_URL}carts`,
@@ -146,21 +145,52 @@ const Product_detail = ({ data }) => {
             <p className=" text-3xl font-medium uppercase text-asisDark">
               {data.name}
             </p>
-            {/* Sizes */}
-            <section className="flex flex-wrap gap-x-5 gap-y-3">
-              {data.countInStock?.map((sizeData, index) => (
+            {/* Quantity */}
+            <section className="flex flex-col gap-2">
+              {" "}
+              <h2 className="font-semibold">Quantity</h2>
+              <div className="flex items-center">
                 <div
-                  key={index}
-                  onClick={() => setSelectedSize(sizeData.size)}
-                  className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${
-                    selectedSize === sizeData.size
-                      ? " border-asisDark text-asisDark"
-                      : " border-[#C4C4C4] text-[#C4C4C4]"
-                  }`}
+                  onClick={() => {
+                    if (quantity > 1) {
+                      setQuantity((prev) => prev - 1);
+                    }
+                  }}
+                  className="peer flex h-10 w-10 cursor-pointer items-center justify-center border border-asisDark bg-transparent py-2 text-center text-xs"
                 >
-                  {sizeData.size}
+                  <AiOutlineMinus />
                 </div>
-              ))}
+                <div className="peer flex h-10 w-10 cursor-pointer items-center justify-center border-y border-y-asisDark bg-transparent py-2 text-center text-xs">
+                  {quantity}
+                </div>
+                <div
+                  onClick={() => {
+                    setQuantity((prev) => prev + 1);
+                  }}
+                  className="peer flex h-10 w-10 cursor-pointer items-center justify-center border border-asisDark bg-transparent py-2 text-center text-xs"
+                >
+                  <AiOutlinePlus />
+                </div>
+              </div>
+            </section>
+            {/* Sizes */}
+            <section className="flex flex-col gap-2">
+              <h2 className="font-semibold">SIZE</h2>
+              <div className="flex flex-wrap gap-x-5 gap-y-3">
+                {data.countInStock?.map((sizeData, index) => (
+                  <div
+                    key={index}
+                    onClick={() => setSelectedSize(sizeData.size)}
+                    className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${
+                      selectedSize === sizeData.size
+                        ? " border-asisDark text-asisDark"
+                        : " border-[#C4C4C4] text-[#C4C4C4]"
+                    }`}
+                  >
+                    {sizeData.size}
+                  </div>
+                ))}
+              </div>{" "}
             </section>
 
             {/* Additional details */}
@@ -195,7 +225,7 @@ const Product_detail = ({ data }) => {
                     {Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "USD",
-                    }).format(data.price)}{" "}
+                    }).format(data.price * quantity)}{" "}
                     USD
                   </p>
                 )}

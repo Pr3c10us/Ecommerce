@@ -24,7 +24,7 @@ const editCart = async (req, res) => {
     );
     if (!sizeExist) {
         throw new BadRequestError(
-            `quantity of size ${size} in stock is less than ${quantity}`
+            `Stock size ${size} is less than ${quantity}`
         );
     }
 

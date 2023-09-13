@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cancel_cart from "../../assets/icons/cancel_cart.svg";
 import cartIcon from "../../assets/icons/cart-icon.svg";
 import down from "../../assets/icons/down.svg";
@@ -16,8 +16,26 @@ import CartItem from "../../components/cartItem";
 const CheckoutCart = () => {
   const ref = React.useRef(null);
   const cartData = useSelector((state) => state.asis.cart);
+  const orderDetails = useSelector((state) => state.asis.order);
+  const [shippingFee, setShippingFee] = useState(0);
+
+  const handleFetchShippingDetails = async () => {
+    try {
+      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}shippings/${
+        orderDetails.shipping
+      }`;
+      let { data } = await axios.get(apiUrl);
+      setShippingFee(data.fee);
+    } catch (error) {
+      setShippingFee(0);
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleFetchShippingDetails();
+  }, [orderDetails]);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -52,7 +70,7 @@ const CheckoutCart = () => {
   React.useEffect(() => {
     cartData?.products?.length === 0 && navigate("/shop", { replace: true });
     handleGetCartContent();
-    console.log(cartData);
+    handleFetchShippingDetails();
   }, []);
 
   const removeItemFromCart = async (id, size) => {
@@ -168,8 +186,8 @@ const CheckoutCart = () => {
           </div>
           {/* total calculation  */}
           <div className="flex flex-col gap-4 border-b-2 border-b-asisDark ">
-            <div className="mt-4 flex items-center justify-between  text-sm font-bold">
-              <p>Total</p>
+            <div className="mt-4 flex items-center justify-between  text-sm font-semibold">
+              <p>SubTotal</p>
               <p>
                 {Intl.NumberFormat("en-US", {
                   style: "currency",
@@ -178,9 +196,26 @@ const CheckoutCart = () => {
                 NGN
               </p>
             </div>
-            <div className="mt-3 flex items-center justify-between  pb-4 text-[13px]/[20px] font-medium">
+            <div className="mt-3 flex items-center justify-between  text-[13px]/[20px] font-medium">
               <p>shipping</p>
-              <p>calculated at checkout</p>
+              <p>
+                {!orderDetails.shipping
+                  ? "Not selected"
+                  : `${Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(shippingFee)}`}{" "}
+              </p>
+            </div>
+            <div className="py-4 border-t-2 border-t-asisDark flex items-center justify-between  text-sm font-bold">
+              <p>SubTotal</p>
+              <p>
+                {Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(cartData.totalPrice + (shippingFee || 0))}{" "}
+                NGN
+              </p>
             </div>
           </div>
 

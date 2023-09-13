@@ -101,6 +101,7 @@ const Shipping = ({ setActiveStep }) => {
             className="flex cursor-pointer items-center gap-x-6 px-2 py-2 text-sm font-semibold text-asisDark/40 backdrop-blur-md sm:text-base"
             onClick={() => {
               setSelectedShipping(shippingDetail._id);
+              dispatch(setOrder({ shipping: shippingDetail._id }));
               setSelectedShippingPrice(shippingDetail.fee);
             }}
           >
