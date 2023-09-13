@@ -40,7 +40,7 @@ const Page = () => {
       <Marquee />
       <article className="flex h-full w-full max-w-5xl flex-1 flex-col md:gap-4">
         <h1 className="px-10 text-center text-2xl font-normal uppercase md:text-left md:text-4xl md:font-semibold">
-          Our newest products j
+          Our newest products
         </h1>
         <div className="flex flex-1 items-stretch gap-8 px-4">
           <div className="relative aspect-square basis-[100%] px-2 py-6 md:basis-[30%] md:px-6">
