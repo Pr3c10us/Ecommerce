@@ -58,14 +58,14 @@ jobs:
           passphrase: ""
           port: 22
           script: |
-            if sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global '[ -d /var/www/Asis ]'; then
-              sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis && git pull"
+            if [ -d /var/www/Asis ]; then
+              cd /var/www/Asis && git pull
             else
-              sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis"
+              git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
             fi 
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build"
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Admin && sudo npm install && sudo npm run build"
-            sshpass -p ${{ secrets.SSH_PASSWORD }} ssh precious@luxury-designs.asis.global "cd /var/www/Asis/Backend && sudo npm stop && sudo npm start"
+            cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build
+            cd /var/www/Asis/Admin && sudo npm install && sudo npm run build
+            cd /var/www/Asis/Backend && sudo npm stop && sudo npm start
 
 
       # - name: Install sshpass
