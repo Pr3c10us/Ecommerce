@@ -27,7 +27,7 @@ jobs:
                   port: 22
                   script: |
 
-                      cd /var/www/Asis/Backend && sudo npm stop && sudo npm restart
+                      cd /var/www/Asis/Backend && sudo npm restart
 
 #  if [ -d /var/www/Asis ]; then
 #               cd /var/www/Asis && git pull
