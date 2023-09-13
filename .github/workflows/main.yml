@@ -54,7 +54,6 @@ jobs:
         with:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
-          key: " "
           password: ${{ secrets.SSH_PASSWORD }}
           passphrase: ""
           port: 22
