@@ -17,10 +17,10 @@ import VowelItalicizer from "../../components/vowelItalicizer";
 
 const SelectedOne = () => {
   const [demoItem, setDemoItem] = React.useState({
-    name: "Genevive Sweater",
+    name: "Overgrowth Convertible Pant",
     shortDescription:
       "Lightweight, stretchy pants for hiking and everyday wear. Lorem ipsum duble geralt",
-    image: "/GeneviveSweater.png",
+    image: "/convertiblePant.png",
   });
   const [icons, setIcons] = React.useState([
     {
@@ -76,13 +76,13 @@ const SelectedOne = () => {
           <motion.div
             initial={{ top: "-100%" }}
             animate={{ top: "0%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 1 }}
+            transition={{ type: "tween", ease: "circOut", duration: 2 }}
             className="absolute left-[60vw] top-0 h-[80%] w-20 bg-asisDark"
           />
           <motion.div
             initial={{ top: "100%" }}
             animate={{ top: "20%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 1 }}
+            transition={{ type: "tween", ease: "circOut", duration: 2 }}
             className="absolute left-[50vw] top-[20%] h-[80%] w-20 bg-asisGreen"
           />
           <motion.img
@@ -92,7 +92,7 @@ const SelectedOne = () => {
               height: "100%",
               opacity: 1,
             }}
-            transition={{ type: "tween", duration: 1 }}
+            transition={{ type: "tween", duration: 2 }}
             className="object-fit absolute left-[36.5vw] top-0 h-full w-full object-center"
             src={"/rose.svg"}
             alt="rose"
@@ -102,7 +102,7 @@ const SelectedOne = () => {
             animate={{
               top: "50%",
             }}
-            transition={{ type: "tween", ease: "circOut", duration: 1 }}
+            transition={{ type: "tween", ease: "circOut", duration: 2 }}
             className="absolute left-1/2 top-1/2 h-4/5 -translate-x-1/2 -translate-y-1/2 sm:h-full sm:-translate-y-1/3"
             src={demoItem.image}
             alt="rose"
