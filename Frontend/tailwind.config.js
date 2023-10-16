@@ -7,6 +7,10 @@ module.exports = {
       colors: {
         "twitter-blue": "#1DA1F2",
         asisDark: "#0B0B0B",
+        asisGreen: "#003400",
+      },
+      fontFamily:{
+        playfair: ["Playfair Display", "serif"],
       },
       animation: {
         marquee: "marquee 25s linear infinite",

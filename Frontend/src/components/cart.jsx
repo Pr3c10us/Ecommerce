@@ -149,7 +149,7 @@ const Cart = ({ setHideCart }) => {
   return (
     <div
       ref={ref}
-      className="fixed inset-0 z-20 ml-auto md:inset-auto md:left-8 md:top-14 md:mt-4"
+      className="fixed inset-0 z-20 ml-auto bg-white md:inset-auto md:left-8 md:top-14 md:mt-4"
     >
       <div className=" h-full w-full overflow-hidden bg-[url('./assets/images/bg_img.png')] uppercase shadow-[-7px_8px_30px_0px_#00000033] md:min-w-[28rem]">
         {isLoading && <CartLoading />}
@@ -181,7 +181,7 @@ const Cart = ({ setHideCart }) => {
             <div className="max-h-[60vh] overflow-y-scroll md:max-h-[40vh]">
               {cartData.products.map((data, index) => (
                 <CartItem
-                key={data._id}
+                  key={data._id}
                   data={data}
                   index={index}
                   removeItemFromCart={removeItemFromCart}

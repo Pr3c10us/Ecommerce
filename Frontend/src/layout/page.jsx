@@ -42,7 +42,12 @@ const Page = () => {
   useEffect(() => {}, []);
 
   return (
-    <main className="h-full flex flex-col pb-8">
+    <main className="flex h-full flex-col">
+      <img
+        src="/background.jpeg"
+        alt="Vite Logo"
+        class="fixed -z-10 h-screen w-screen object-cover"
+      />
       <Toaster position="top-center" />
       <Header
         setHideCart={setHideCart}

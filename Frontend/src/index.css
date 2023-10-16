@@ -1,39 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-
 ::-webkit-scrollbar {
-width: 0px;
+  width: 0px;
   height: 8px;
-  }
+}
 ::-webkit-scrollbar-thumb {
-    background-color: #878787;
-    border-radius: 2px; 
-
-  }
+  background-color: #878787;
+  border-radius: 2px;
+}
 ::-webkit-scrollbar-track {
-    background-color: #cec9c9;
-  }
- .filter_component {
-    height: 80vh;
+  background-color: #cec9c9;
+}
+.filter_component {
+  height: 80vh;
 }
 .product_img {
   height: 80vh;
 }
 
-Chrome, Safari, Edge, Opera
-input::-webkit-outer-spin-button,
+Chrome,
+Safari,
+Edge,
+Opera input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -42,7 +41,7 @@ input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   background-color: transparent; /* Desired background color */
-  border: 1px solid #0B0B0B; /* Matching border color */
+  border: 1px solid #0b0b0b; /* Matching border color */
   width: 14px;
   height: 14px;
   outline: none;
@@ -84,8 +83,8 @@ input[type="checkbox"]:checked::before {
 @media (min-height: 1000px) {
   .filter_component {
     height: 700px;
+  }
+  .product_img {
+    height: 500px;
+  }
 }
-.product_img {
-  height: 500px;
-}
-} 

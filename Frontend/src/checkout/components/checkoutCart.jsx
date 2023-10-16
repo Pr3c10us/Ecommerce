@@ -200,7 +200,7 @@ const CheckoutCart = () => {
               <p>shipping</p>
               <p>
                 {!orderDetails.shipping
-                  ? "Not selected"
+                  ? "Calculated at Shipping"
                   : `${Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "USD",

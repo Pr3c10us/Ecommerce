@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import Layout from "./layout/page.jsx";
 import HomePage from "./homePage/page.jsx";
+import HomePage2 from "./homePage/page2.jsx";
 import BrandPage from "./brandPage/page.jsx";
 import SuperSpecialCategory from "./superSpecialCategory/page.jsx";
 import Shop from "./shop/page.jsx";
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "/home",
+        element: <HomePage2 />,
       },
       {
         path: "brandpage",
