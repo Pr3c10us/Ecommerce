@@ -166,7 +166,7 @@ const SelectedOne = () => {
       </section>
       {/* Desktop */}
       <section className="hidden h-full w-full overflow-hidden  lg:flex lg:grid-cols-2">
-        <div className="z-10 flex basis-[50%] flex-col justify-center gap-10 px-[8vw] xl:basis-[50%]">
+        <div className="z-10 flex basis-[50%] flex-col justify-center gap-10 px-[4vw] xl:basis-[50%]">
           <div className="flex flex-col gap-2 px-4">
             {demoItem.name.split(" ").map((word, index) => {
               const randomNumber = Math.floor(Math.random() * 10);
@@ -179,7 +179,7 @@ const SelectedOne = () => {
                   {index < 3 && (
                     <p
                       key={index + 1}
-                      className={`flex w-full items-end text-3xl font-medium uppercase xl:text-4xl 2xl:text-5xl`}
+                      className={`flex w-full items-end text-3xl font-semibold uppercase xl:text-5xl`}
                       style={pStyle}
                     >
                       {index > 0 && icons[randomNumber].icon}
@@ -203,7 +203,7 @@ const SelectedOne = () => {
               );
             })}
           </div>
-          <p className="px-4 font-semibold xl:text-lg">
+          <p className="px-4 font-semibold xl:text-lg text-right w-3/4 ml-auto">
             {demoItem.shortDescription}
           </p>
           <div className="flex justify-end px-4 pb-2">

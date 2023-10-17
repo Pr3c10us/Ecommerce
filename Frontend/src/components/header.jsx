@@ -20,14 +20,14 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
 
   return (
     <div
-      className={`fixed top-0 z-10 flex w-full items-center justify-between px-4 pt-5 uppercase text-asisDark md:px-[5vw]`}
+      className={`fixed top-0 z-50 flex w-full items-center justify-between px-4 pt-5 uppercase text-asisDark md:px-[5vw]`}
     >
       <button
         onClick={() => {
           setHideCart((prev) => !prev);
           // setHideWish(false);
         }}
-        className="flex cursor-pointer items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2 md:backdrop-blur-lg "
+        className="flex shadow-xl items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2 md:backdrop-blur-lg "
       >
         {" "}
         <img
@@ -46,7 +46,7 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
           className="h-8 cursor-pointer"
         />
       </Link>
-      <button className="flex cursor-pointer items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2  md:backdrop-blur-lg">
+      <button className="flex shadow-xl items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2  md:backdrop-blur-lg">
         <BiShoppingBag className="w-6 text-asisDark h-6" />{" "}
         <p className="hidden items-center uppercase md:flex">Shop</p>
       </button>
