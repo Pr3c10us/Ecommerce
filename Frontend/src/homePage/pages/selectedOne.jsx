@@ -19,99 +19,51 @@ const SelectedOne = () => {
   const [demoItem, setDemoItem] = React.useState({
     name: "Overgrowth Convertible Pant",
     shortDescription:
-      "Lightweight, stretchy pants for hiking and everyday wear. Lorem ipsum duble geralt",
+      "Lightweight, stretchy pants for hiking and everyday wear. Lorem ipsum duble geralt. Consectetur, necessitatibus?",
     image: "/convertiblePant.png",
   });
   const [icons, setIcons] = React.useState([
     {
-      icon: <FaHeart className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
+      icon: <img src="/spiral.svg" className="aspect-square h-8 xl:h-10" />,
+      text: "spiral",
     },
     {
-      icon: <FaStar className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: (
-        <FaShoppingBag className="aspect-square h-6 text-asisGreen xl:h-8" />
-      ),
-      text: "100% Organic",
-    },
-    {
-      icon: <FaTag className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: <FaCamera className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: <FaCrown className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: <FaCheck className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: <FaGift className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
-    },
-    {
-      icon: (
-        <PiCoatHangerBold className="aspect-square h-6 text-asisGreen xl:h-8" />
-      ),
-      text: "100% Organic",
-    },
-    {
-      icon: <FaClock className="aspect-square h-6 text-asisGreen xl:h-8" />,
-      text: "100% Organic",
+      icon: <img src="/rose.svg" className="aspect-square h-8 xl:h-10" />,
+      text: "rose",
     },
   ]);
   return (
     <>
       {/* mobile */}
       <section className="bg-gray300 flex h-full w-full flex-col overflow-hidden lg:hidden">
-        <div className="overflow-xhidden relative flex basis-[60%] items-center justify-center">
+        <div className="relative flex basis-[60%] items-center justify-center sm:basis-[50%]">
           <motion.div
             initial={{ top: "-100%" }}
             animate={{ top: "0%" }}
             transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[60vw] top-0 h-[80%] w-20 bg-asisDark"
+            className="absolute left-[60vw] top-0 h-[80%] w-[25vw] bg-[#121212] sm:h-full sm:w-[18vw]"
           />
           <motion.div
             initial={{ top: "100%" }}
             animate={{ top: "20%" }}
             transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[50vw] top-[20%] h-[80%] w-20 bg-asisGreen"
+            className="absolute left-[50vw] top-[20%] h-[80%] w-[25vw] bg-asisGreen sm:h-[120%] sm:w-[18vw]"
           />
-          <motion.img
-            initial={{ width: "0%", height: "0%", opacity: 0 }}
-            animate={{
-              width: "100%",
-              height: "100%",
-              opacity: 1,
-            }}
-            transition={{ type: "tween", duration: 2 }}
-            className="object-fit absolute left-[36.5vw] top-0 h-full w-full object-center"
-            src={"/rose.svg"}
-            alt="rose"
-          />
+
           <motion.img
             initial={{ top: "-150%" }}
             animate={{
               top: "50%",
             }}
             transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-1/2 top-1/2 h-4/5 -translate-x-1/2 -translate-y-1/2 sm:h-full sm:-translate-y-1/3"
+            className="absolute left-1/2 top-1/2 h-4/5 -translate-x-1/2 -translate-y-1/2 sm:h-[125%] sm:-translate-y-1/3"
             src={demoItem.image}
             alt="rose"
           />
         </div>
         <div className="z-10 basis-[40%] space-y-2">
-          <div className="flex flex-col px-4 sm:px-8 md:px-12">
+          <div className="flex flex-col px-4">
             {demoItem.name.split(" ").map((word, index) => {
-              const randomNumber = Math.floor(Math.random() * 10);
               const marginLeft =
                 index * (100 / demoItem.name.split(" ").length); // Adjust the margin as needed
               const pStyle = {
@@ -122,10 +74,12 @@ const SelectedOne = () => {
                   {index < 3 && (
                     <p
                       key={index + 1}
-                      className={`flex w-full items-center text-2xl font-bold uppercase sm:text-4xl`}
+                      className={`flex w-full items-center justify-center gap-2 text-4xl font-extrabold uppercase text-white sm:text-5xl`}
                       style={pStyle}
                     >
-                      {index > 0 && icons[randomNumber].icon}
+                      {index == 1 && icons[0].icon}
+                      {index == 2 && icons[1].icon}
+
                       <VowelItalicizer
                         text={
                           word.split("").length > 5 && index === 2
@@ -136,7 +90,9 @@ const SelectedOne = () => {
                       {index === 2 && (
                         <>
                           {demoItem.name.split(" ").length > 3 && (
-                            <p className="text-3xl">. . .</p>
+                            <p className="flex h-full items-end text-3xl">
+                              . . .
+                            </p>
                           )}
                         </>
                       )}
@@ -146,11 +102,14 @@ const SelectedOne = () => {
               );
             })}
           </div>
-          <p className="px-4 text-sm font-semibold sm:px-8 md:px-12">
+          {/* <p className="px-4 text-center text-4xl font-extrabold sm:px-8 sm:text-5xl md:px-12">
+            <VowelItalicizer text={demoItem.name} />
+          </p> */}
+          <p className="px-4 text-center text-sm font-bold sm:px-8 sm:text-base md:px-12">
             {demoItem.shortDescription}
           </p>
-          <div className="flex justify-end px-4 pb-2 sm:px-8 md:px-12">
-            <button className="flex items-center gap-2 bg-asisGreen px-4 py-2 text-white">
+          <div className="flex justify-center px-4 pb-2 sm:px-8 md:px-12">
+            <button className="flex items-center gap-2 bg-asisGold px-4 py-2 text-sm text-white">
               View Product <img src="/arrow.svg" alt="arrow" />
             </button>
           </div>
@@ -159,7 +118,7 @@ const SelectedOne = () => {
               initial={{ top: "100%" }}
               animate={{ top: "0%" }}
               transition={{ type: "tween", ease: "circOut", duration: 1 }}
-              className="absolute left-[50vw] h-[100%] w-20 bg-asisGreen"
+              className="absolute left-[50vw] h-[100%] w-[25vw] bg-asisGreen sm:w-[18vw]"
             />
           </div>
         </div>
@@ -167,22 +126,29 @@ const SelectedOne = () => {
       {/* Desktop */}
       <section className="hidden h-full w-full overflow-hidden  lg:flex lg:grid-cols-2">
         <div className="z-10 flex basis-[50%] flex-col justify-center gap-10 px-[4vw] xl:basis-[50%]">
-          <div className="flex flex-col gap-2 px-4">
+          {/* <p className="text-right text-6xl font-extrabold uppercase 2xl:text-[4vw]">
+            <VowelItalicizer text={demoItem.name} />
+          </p> */}
+          <div className="flex gap-4 flex-col px-4">
             {demoItem.name.split(" ").map((word, index) => {
-              const randomNumber = Math.floor(Math.random() * 10);
-              const marginLeft = index * (80 / demoItem.name.split(" ").length); // Adjust the margin as needed
-              const pStyle = {
-                paddingLeft: `${marginLeft}%`,
-              };
+              // const marginLeft =
+              //   index * (50 / demoItem.name.split(" ").length); // Adjust the margin as needed
+              // const pStyle = {
+              //   paddingLeft: `${marginLeft}%`,
+              // };
               return (
                 <>
                   {index < 3 && (
                     <p
                       key={index + 1}
-                      className={`flex w-full items-end text-3xl font-semibold uppercase xl:text-5xl`}
-                      style={pStyle}
+                      className={`flex w-full items-center gap-2 text-5xl font-extrabold uppercase text-white xl:text-6xl 2xl:text-[4.5vw] ${
+                        index === 1 && "justify-end"
+                      } ${index === 2 && "justify-end"}`}
+                      // style={pStyle}
                     >
-                      {index > 0 && icons[randomNumber].icon}
+                      {index == 1 && icons[0].icon}
+                      {index == 2 && icons[1].icon}
+
                       <VowelItalicizer
                         text={
                           word.split("").length > 5 && index === 2
@@ -193,7 +159,9 @@ const SelectedOne = () => {
                       {index === 2 && (
                         <>
                           {demoItem.name.split(" ").length > 3 && (
-                            <p className="text-3xl">. . .</p>
+                            <p className="flex h-full items-end text-3xl">
+                              . . .
+                            </p>
                           )}
                         </>
                       )}
@@ -203,12 +171,12 @@ const SelectedOne = () => {
               );
             })}
           </div>
-          <p className="px-4 font-semibold xl:text-lg text-right w-3/4 ml-auto">
+          <p className="px-4 font-bold xl:text-lg">
             {demoItem.shortDescription}
           </p>
           <div className="flex justify-end px-4 pb-2">
-            <button className="flex items-center gap-2 bg-asisGreen px-10 py-2 text-white">
-              View Product <img src="/arrow.svg" alt="arrow" />
+            <button className="flex items-center gap-2 bg-asisGold px-10 py-1.5 text-white 2xl:py-2 2xl:text-lg">
+              View Product Page <img src="/arrow.svg" alt="arrow" />
             </button>
           </div>
         </div>{" "}
@@ -216,52 +184,36 @@ const SelectedOne = () => {
           <ComponentMouseFollow
             initialObject={{ top: "-200%" }}
             animateObject={{ top: "0%" }}
-            className={`absolute inset-y-0 left-[67%] flex h-full -translate-x-1/2 -translate-y-1/2 items-center`}
-            flow={2}
+            className={`absolute inset-y-0 left-[35%] flex h-full -translate-x-1/2 -translate-y-1/2 items-center`}
+            flow={10}
             opposite={false}
           >
-            <div className=" h-[50%] w-32 bg-asisDark" />
+            <div className=" h-[50%] w-[22vw] bg-asisGreen xl:w-[18vw]" />
           </ComponentMouseFollow>
           <ComponentMouseFollow
             initialObject={{ bottom: "-200%" }}
             animateObject={{ bottom: "0%" }}
-            className={`absolute bottom-0 left-0 flex h-[90%] w-[22vw] bg-asisDark`}
-            flow={5}
+            className={`absolute bottom-0 left-0 flex h-[90%] w-[22vw] bg-asisGreen xl:w-[18vw]`}
+            flow={10}
             opposite={false}
           />
           <ComponentMouseFollow
             initialObject={{ top: "-200%" }}
             animateObject={{ top: "0%" }}
-            className={` absolute left-[35%] flex h-[90%] w-[22vw]  bg-asisGreen`}
+            className={` absolute left-[25%] flex h-[90%] w-[22vw] bg-[#121212]  xl:w-[18vw]`}
             flow={100}
           />
-          <ComponentMouseFollow
-            className={`absolute left-[17%] top-0 flex aspect-square w-[35vw]`}
-            flow={3}
-            initialObject={{ left: "200%" }}
-            animateObject={{ left: "17%" }}
-          >
-            <img className="object-fit" src={"/rose.svg"} alt="rose" />
-          </ComponentMouseFollow>
-          <ComponentMouseFollow
-            initialObject={{ bottom: "-50%" }}
-            animateObject={{ bottom: "0%" }}
-            className={` absolute bottom-0 left-[-10%] flex aspect-square w-[20vw]`}
-            flow={3}
-          >
-            <img
-              className="object-fit"
-              src={"/butterfly.svg"}
-              alt="butterfly"
-            />
-          </ComponentMouseFollow>{" "}
           <ComponentMouseFollow
             className={` absolute bottom-0 left-[3%] flex h-full items-center `}
             initialObject={{ bottom: "-100%" }}
             animateObject={{ bottom: "0%" }}
             flow={10}
           >
-            <img className="object-fit h-full" src={demoItem.image} alt="iem" />
+            <img
+              className="h-[85%] object-contain"
+              src={demoItem.image}
+              alt="iem"
+            />
           </ComponentMouseFollow>
         </div>
       </section>

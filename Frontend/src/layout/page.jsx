@@ -44,16 +44,14 @@ const Page = () => {
   return (
     <main className="flex h-full flex-col">
       <img
-        src="/background.jpeg"
+        src="/bgNews.png"
         alt="Vite Logo"
         class="fixed -z-10 h-screen w-screen object-cover"
       />
       <Toaster position="top-center" />
       <Header
         setHideCart={setHideCart}
-        // setHideWish={setHideWish}
         cartLength={cartData?.products?.length}
-        // wishlistData={wishData}
       />
 
       {hideCart && (

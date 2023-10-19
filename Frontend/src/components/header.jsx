@@ -27,7 +27,7 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
           setHideCart((prev) => !prev);
           // setHideWish(false);
         }}
-        className="flex shadow-xl items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2 md:backdrop-blur-lg "
+        className="flex text-xs font-extrabold sm:text-lg"
       >
         {" "}
         <img
@@ -39,14 +39,14 @@ const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
           cart <span className="">({cartLength || 0})</span>
         </p>
       </button>
-      <Link className={`flex flex-1 items-center justify-center `} to="/">
+      <Link className={`flex items-center justify-center `} to="/">
         <img
           src={header_logo}
           alt="header_logo"
           className="h-8 cursor-pointer"
         />
       </Link>
-      <button className="flex shadow-xl items-center justify-center gap-x-2 rounded-md border-asisDark text-xs font-semibold sm:text-base md:border md:px-12 md:py-2  md:backdrop-blur-lg">
+      <button className="flex gap-x-1 text-xs font-extrabold sm:text-lg">
         <BiShoppingBag className="w-6 text-asisDark h-6" />{" "}
         <p className="hidden items-center uppercase md:flex">Shop</p>
       </button>

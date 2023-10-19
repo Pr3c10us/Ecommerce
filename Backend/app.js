@@ -66,6 +66,10 @@ app.use("/api/auth", authenticationRoutes);
 const customerRoutes = require("./routes/customers");
 app.use("/api/customers", customerRoutes);
 
+// HOME ROUTES
+const homeRoutes = require("./routes/home");
+app.use("/api/home", homeRoutes);
+
 // PRODUCT ROUTES
 const productRoutes = require("./routes/products");
 app.use("/api/products", productRoutes);

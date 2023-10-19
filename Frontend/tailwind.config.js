@@ -8,9 +8,11 @@ module.exports = {
         "twitter-blue": "#1DA1F2",
         asisDark: "#0B0B0B",
         asisGreen: "#003400",
+        asisGold: "#4E3600",
       },
-      fontFamily:{
+      fontFamily: {
         playfair: ["Playfair Display", "serif"],
+        rochester: ["Rochester", "cursive"],
       },
       animation: {
         marquee: "marquee 25s linear infinite",
