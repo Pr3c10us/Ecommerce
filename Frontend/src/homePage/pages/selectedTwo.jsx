@@ -68,7 +68,7 @@ const SelectedTwo = ({ product, setNavType }) => {
           onClick={() => {
             setPlay((prev) => !prev);
           }}
-          src="../../../public/vid1.mp4"
+          src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
           loop
           autoPlay
         ></video>
