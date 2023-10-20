@@ -57,7 +57,7 @@ const page2 = () => {
   }
 
   return (
-    <main className="flex h-[100svh] sm:h-screen flex-col items-center">
+    <main className="flex h-screen flex-col items-center">
       <Header type={navType} />
       {displayProduct != null ? (
         <Displayed product={displayProduct} setNavType={setNavType} />
