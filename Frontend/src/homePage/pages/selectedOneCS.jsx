@@ -38,7 +38,7 @@ const SelectedOneCS = ({ product, setNavType }) => {
         </div>
         <div className="flex w-full justify-end">
           <h2 className="flex w-3/4 flex-col font-comforter text-5xl sm:text-[7vw] uppercase leading-tight sm:w-full ">
-            <span className="text-right">Coming</span> <span>Soon!</span>
+            <span className="sm:text-right">Coming</span> <span className="text-right sm:text-left">Soon!</span>
           </h2>
         </div>
       </article>
