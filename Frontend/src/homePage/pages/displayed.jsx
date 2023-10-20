@@ -7,18 +7,18 @@ import SelectedTwo from "./selectedTwo";
 const Displayed = ({ product,setNavType }) => {
   const [show, setShow] = React.useState(1);
 
-//   React.useEffect(() => {
-//     const interval = setInterval(() => {
-//       setShow((prev) => {
-//         if (prev == 3) {
-//           return 1;
-//         } else {
-//           return prev + 1;
-//         }
-//       });
-//     }, 5000);
-//     return () => clearInterval(interval);
-//   }, []);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setShow((prev) => {
+        if (prev == 3) {
+          return 1;
+        } else {
+          return prev + 1;
+        }
+      });
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       {show == 1 &&
@@ -27,8 +27,8 @@ const Displayed = ({ product,setNavType }) => {
         ) : (
           <SelectedOne product={product} setNavType={setNavType} />
         ))}
-      {show == 2 && <SelectedTwo />}
-      {show == 3 && <SelectedThree />}
+      {show == 2 && <SelectedTwo product={product} setNavType={setNavType} />}
+      {show == 3 && <SelectedThree product={product} setNavType={setNavType} />}
     </>
   );
 };

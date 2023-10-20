@@ -4,51 +4,91 @@ import React from "react";
 import VideoJS from "../components/videoJs";
 import CustomCursorInDiv from "../components/customCursor";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { PiPauseFill, PiPlayFill } from "react-icons/pi";
 
-const SelectedTwo = () => {
+const SelectedTwo = ({ product, setNavType }) => {
   const playerRef = React.useRef(null);
+  const [play, setPlay] = React.useState(true);
+  React.useEffect(() => {
+    setNavType(1);
+  }, []);
 
-  const videoJsOptions = {
-    autoplay: "muted",
-    loop: true,
-    controls: false,
-    responsive: true,
-    fluid: true,
-    sources: [
-      {
-        src: "../../../public/vid1.mp4",
-        type: "video/mp4",
-      },
-    ],
-  };
-
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-
-    // You can handle player events here, for example:
-    player.on("waiting", () => {
-      videojs.log("player is waiting");
-    });
-
-    player.on("dispose", () => {
-      videojs.log("player will dispose");
-    });
-  };
+  React.useEffect(() => {
+    if (play) {
+      playerRef.current.play();
+    } else {
+      playerRef.current.pause();
+    }
+  }, [play]);
 
   return (
-    <section className="relative flex h-full w-full overflow-hidden px-[14vw]">
-      <div className="fixed left-1/2 h-[200%] w-screen -translate-x-1/2 -translate-y-1/3">
-        <div
-          className={`fixed inset-y-0 left-1/2 w-[12vw] -translate-x-1/2 -rotate-[30deg]  bg-asisGreen`}
-          flow={100}
-        />
+    <section className="relative flex h-full w-full flex-col-reverse  sm:flex-row">
+      <div className="flex basis-[35.5%] flex-col justify-center gap-4 pl-[5vw] pr-[3.5vw] lg:pl-[10vw] lg:pr-[7vw]">
+        <div className="flex grid-cols-2 flex-col items-center justify-center gap-4">
+          <div className="hidden w-[15vw] flex-col items-center text-center font-extrabold uppercase sm:flex">
+            <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
+            <p>
+              An <span className="text-gray-600">acees</span> creation
+            </p>
+          </div>
+          <div className="flex flex-col px-4 font-cinzel">
+            {product?.name.split(" ").map((word, index) => {
+              return (
+                <>
+                  <p
+                    key={index + 1}
+                    className={`flex w-full items-center justify-center gap-2 text-4xl font-medium uppercase text-asisDark sm:text-3xl lg:text-4xl`}
+                  >
+                    {word}
+                  </p>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        {!product?.isComingSoon && (
+          <Link
+            className="flex items-center justify-center sm:justify-end"
+            to={`/product/${product?.product._id}`}
+          >
+            <button className="flex items-center gap-2 rounded bg-black px-2 py-1 text-sm text-white md:px-6 md:py-2 md:text-lg">
+              View Product{" "}
+              <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
+            </button>
+          </Link>
+        )}
       </div>
-      <motion.img
-        src="/eclipse.svg"
-        alt="eclipse"
-        className="fixed -bottom-44 -right-1/3 w-[70vw] object-center lg:-right-32"
-      />
-      <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+      <div className="group relative mt-[10vh] flex basis-[64.5%] cursor-pointer overflow-hidden sm:my-[10vh] sm:mr-[5vw] sm:rounded-3xl lg:mr-[10.4vw]">
+        {" "}
+        {/*<VideoJS options={videoJsOptions} onReady={handlePlayerReady} /> */}
+        <video
+          className="group h-full w-full bg-asisDark object-cover sm:rounded-3xl"
+          ref={playerRef}
+          onClick={() => {
+            setPlay((prev) => !prev);
+          }}
+          src="../../../public/vid1.mp4"
+          loop
+          autoPlay
+        ></video>
+        {!play && (
+          <>
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full p-4 text-4xl backdrop-blur-2xl lg:text-6xl ">
+              <PiPlayFill className="" />
+            </div>{" "}
+            <div className="pointer-events-none absolute inset-0 z-10 bg-black bg-opacity-20 p-4 text-4xl transition-all duration-100"></div>
+          </>
+        )}
+        {play && (
+          <>
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full p-4 text-4xl opacity-0 backdrop-blur-2xl transition-all duration-100  group-hover:opacity-100 lg:text-6xl">
+              <PiPauseFill />
+            </div>
+            <div className="pointer-events-none absolute inset-0 z-10 bg-black bg-opacity-20 p-4 text-4xl opacity-0 transition-all duration-100  group-hover:opacity-100 lg:text-6xl"></div>
+          </>
+        )}
+      </div>
     </section>
   );
 };

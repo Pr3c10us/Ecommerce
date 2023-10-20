@@ -44,10 +44,9 @@ export const VideoJS = (props) => {
   }, [playerRef]);
 
   return (
-    <div className="w-full grid place-self-center rounded-3xl overflow-hidden" data-vjs-player>
+    <div className="w-full " data-vjs-player>
       <div className="" ref={videoRef} />
     </div>
   );
 };
-
 export default VideoJS;

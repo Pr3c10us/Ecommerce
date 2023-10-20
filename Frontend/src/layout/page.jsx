@@ -37,7 +37,7 @@ const Page = () => {
   return (
     <main className=" flex h-full flex-col">
       <img
-        src="/bg.jpeg"
+        src="/bg.png"
         alt="Vite Logo"
         class="fixed -z-10 h-screen w-screen object-cover"
       />

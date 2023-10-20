@@ -5,6 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.vjs-matrix.video-js {
+  color: #00ff00;
+}
+
+.vjs-matrix .vjs-big-play-button {
+  border-color: #00ff00;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   height: 8px;
