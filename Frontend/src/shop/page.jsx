@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Banner from "../components/banner";
 import backToTop from "../assets/icons/back_to_top.svg";
 import ShopProducts from "./component/shop_products";
 import Filter from "./component/filter";

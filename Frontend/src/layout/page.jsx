@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/header";
-import Footer from "../components/footer";
 import Cart from "../components/cart";
-import Wishlist from "../components/wishlist";
-import collection_img_2 from "../assets/images/collection_img_2.png";
-import Banner from "../components/banner";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setCart } from "../../redux/asis";
 
 const Page = () => {
+  const location = useLocation();
   // State to control the visibility of the cart and wishlist
   const [hideCart, setHideCart] = useState(false);
-  // const [hideWish, setHideWish] = useState(false);
 
   const cartData = useSelector((state) => state.asis.cart);
   const dispatch = useDispatch();
@@ -25,10 +21,8 @@ const Page = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}carts`,
       );
-      console.log(response.data);
       // setCartData(response.data.products);
       dispatch(setCart(response.data));
-      console.log(cartData);
     } catch (error) {
       console.log(error);
     }
@@ -39,20 +33,21 @@ const Page = () => {
     handleGetCartContent();
   }, []);
 
-  useEffect(() => {}, []);
 
   return (
-    <main className="flex h-full flex-col">
+    <main className=" flex h-full flex-col">
       <img
-        src="/bgNews.png"
+        src="/bg.jpeg"
         alt="Vite Logo"
         class="fixed -z-10 h-screen w-screen object-cover"
       />
       <Toaster position="top-center" />
-      <Header
-        setHideCart={setHideCart}
-        cartLength={cartData?.products?.length}
-      />
+      {location.pathname !== "/home" && (
+        <Header
+          setHideCart={setHideCart}
+          cartLength={cartData?.products?.length}
+        />
+      )}
 
       {hideCart && (
         <Cart setHideCart={setHideCart} cartData={cartData.products} />

@@ -2,171 +2,94 @@ import React from "react";
 import ComponentMouseFollow from "../components/componentMouseFollow";
 import { motion } from "framer-motion";
 import VowelItalicizer from "../../components/vowelItalicizer";
+import { Link } from "react-router-dom";
 
-const SelectedOneCS = () => {
-  const [demoItem, setDemoItem] = React.useState({
-    name: "Overgrowth Convertible Pant",
-    shortDescription:
-      "Lightweight, stretchy pants for hiking and everyday wear. Lorem ipsum duble geralt",
-    image: "/convertiblePant.png",
-  });
+const SelectedOneCS = ({ product, setNavType }) => {
+  React.useEffect(() => {
+    setNavType(2);
+  }, []);
 
   return (
-    <>
-      {/* mobile */}
-      <section className="bg-gray300 z-0 flex h-full w-full flex-col overflow-hidden lg:hidden">
-        <div className="relative flex basis-[60%] items-center justify-center">
-          <motion.div
-            initial={{ top: "-100%" }}
-            animate={{ top: "0%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[60vw] top-0 h-[80%] w-20 bg-asisDark"
-          />
-          <motion.div
-            initial={{ top: "100%" }}
-            animate={{ top: "20%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[50vw] top-[20%] h-[80%] w-20 bg-asisGreen"
-          />
-          <motion.img
-            initial={{ width: "0%", height: "0%", opacity: 0 }}
-            animate={{
-              width: "100%",
-              height: "100%",
-              opacity: 1,
-            }}
-            transition={{ type: "tween", duration: 2 }}
-            className="object-fit absolute left-[36.5vw] top-0 h-full w-full object-center"
-            src={"/rose.svg"}
-            alt="rose"
-          />
-          <motion.img
-            initial={{ top: "-150%" }}
-            animate={{
-              top: "50%",
-            }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-1/2 top-1/2 h-4/5 -translate-x-1/2 -translate-y-1/2 sm:h-full sm:-translate-y-1/3"
-            src={demoItem.image}
-            alt="rose"
-          />
-        </div>
-        <div className="z-10 basis-[40%] space-y-4 px-8 pt-5 sm:pt-0">
-          <p className=" flex flex-col font-rochester text-5xl uppercase sm:text-6xl">
-            <span>coming</span>{" "}
-            <span className="pl-[25vw] sm:pl-32">soon!</span>
-          </p>
-          <p className="flex flex-col items-end text-right text-4xl sm:text-5xl">
-            <svg
-              width="32"
-              height="30"
-              viewBox="0 0 16 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.4679 0.046959C10.8159 0.0730215 8.30197 1.66977 9.43272 4.93565C9.81043 4.8619 10.2005 4.88071 10.5675 4.9874C9.4809 1.77733 11.8662 0.65249 13.1143 0.912209C14.3862 1.1769 14.9324 2.80837 14.2813 3.43658C13.6865 4.01065 12.8659 4.21055 12.3487 3.67877C11.5386 2.84587 12.3472 1.70133 13.5353 1.83602C12.1238 1.09046 10.9282 2.66187 11.6847 3.75496C12.4654 4.88318 14.2678 5.0194 15.0929 3.59871C16.071 1.9144 14.4131 0.0772715 12.5488 0.046959C12.5218 0.0465215 12.4948 0.0465215 12.4678 0.046959H12.4679ZM7.12997 0.099709C7.55581 1.30746 6.9959 1.75602 6.51372 2.35358C6.2304 1.48193 5.48747 1.04649 4.7784 1.0538C4.01059 1.06168 3.28297 1.5878 3.22372 2.64068C3.99422 1.0739 5.99509 1.39427 5.96884 3.58212H5.96978C5.9574 3.7173 5.95603 3.86383 5.96884 4.02352C6.19957 3.90466 6.44838 3.8248 6.70518 3.78718C6.828 3.76924 6.9505 3.76055 7.07137 3.7618C7.16776 3.76305 7.26399 3.77023 7.3595 3.7833C7.59093 2.58899 9.26762 2.0604 8.52162 0.099709H7.12997ZM2.73353 0.156334C-0.105659 1.03602 0.0956219 4.22058 2.10947 5.57915C1.00584 6.19921 0.450622 7.91196 1.60165 9.36434C1.0679 7.75693 1.83822 6.33227 3.03331 6.30477C3.48937 5.8849 4.09712 5.6539 4.72275 5.66999C4.76337 5.47496 4.82799 5.28571 4.91512 5.10655C1.55478 5.25327 0.140184 2.03871 2.73353 0.156334ZM6.99715 4.34677C6.92822 4.3484 6.85834 4.35427 6.78915 4.36433C5.94056 4.48902 5.32978 5.18765 5.26084 6.00693L5.23447 6.31646L4.92684 6.27052C4.11518 6.14915 3.29443 6.59233 2.97762 7.39068C2.66084 8.18899 2.95393 9.07393 3.62806 9.54205L3.8829 9.71883L3.6915 9.96196C3.18697 10.6062 3.15503 11.5203 3.68462 12.1896C4.21406 12.8585 5.12337 13.046 5.86531 12.6993L6.14756 12.5674L6.26081 12.8585C6.55931 13.6237 7.36162 14.1126 8.21393 13.9874C9.05831 13.8633 9.66197 13.1752 9.73643 12.3604L9.76472 12.0528L10.0703 12.0977C10.882 12.2192 11.7027 11.777 12.0196 10.9786C12.3364 10.1802 12.0423 9.29546 11.3682 8.82724L11.1124 8.64943L11.3057 8.40537C11.8173 7.76171 11.8507 6.83474 11.3185 6.16215C10.7858 5.48912 9.86456 5.29315 9.12315 5.64458L8.8419 5.77833L8.72665 5.48927C8.55518 5.05902 8.24081 4.72074 7.8409 4.52833C7.5988 4.41192 7.33414 4.34995 7.06553 4.34677C7.04272 4.34646 7.02015 4.34615 6.99715 4.34677ZM13.252 5.7374C15.0873 6.56415 15.0745 8.83449 12.9005 9.27059C12.7666 9.26929 12.6328 9.27778 12.5001 9.29599C12.6409 9.59426 12.7187 9.91838 12.7286 10.2481C14.4825 10.3451 15.2464 12.2596 14.0646 13.9014C15.9633 12.674 15.5738 10.4939 14.1739 9.63383C16.012 8.74124 15.686 5.85977 13.252 5.7374ZM7.32728 6.00102L7.51181 7.25883C7.65181 7.25958 7.79337 7.27521 7.93368 7.30771L8.09287 6.90833L8.63581 7.12315L8.47662 7.52449C8.59881 7.59652 8.70975 7.68112 8.81062 7.77552L9.80865 6.98546L10.171 7.44349L9.17197 8.23446C9.24151 8.35726 9.2975 8.48725 9.33897 8.62215L9.77059 8.55871L9.85559 9.13583L9.42293 9.19927C9.42205 9.33932 9.4057 9.47885 9.37418 9.6153L10.5597 10.0851L10.3438 10.628L9.15828 10.1573C9.08755 10.2778 9.00371 10.3902 8.90828 10.4923L9.18078 10.837L8.72275 11.1993L8.44931 10.8536C8.32745 10.923 8.19844 10.979 8.06453 11.0206L8.25009 12.2843L7.6729 12.3693L7.4874 11.1065C7.34808 11.1061 7.20922 11.0904 7.07334 11.0596L6.91222 11.4659L6.36925 11.2501L6.5294 10.8458C6.40743 10.7747 6.29377 10.6902 6.19053 10.5938L5.19147 11.3849L4.82918 10.9268L5.82825 10.1358C5.75904 10.0146 5.70305 9.88624 5.66125 9.75302L5.2345 9.81552L5.1495 9.2374L5.57434 9.1749C5.57465 9.0349 5.59015 8.89412 5.62215 8.75396L4.44153 8.28521L4.65634 7.74227L5.83697 8.21102C5.90847 8.08904 5.99331 7.97538 6.08993 7.87215L5.82431 7.53621L6.28231 7.1739L6.54893 7.51083C6.67114 7.44146 6.80047 7.38547 6.93468 7.34383L6.75009 6.08602L7.32728 6.00102ZM7.4679 7.8409C6.94522 7.85168 6.4579 8.16887 6.25206 8.68758C6.18651 8.85123 6.15398 9.02622 6.15633 9.20249C6.15868 9.37875 6.19587 9.55282 6.26576 9.71465C6.33564 9.87649 6.43685 10.0229 6.56355 10.1455C6.69025 10.268 6.83993 10.3643 7.004 10.4288C7.16764 10.4944 7.34264 10.5269 7.51891 10.5245C7.69517 10.5222 7.86923 10.485 8.03107 10.4151C8.19291 10.3452 8.33932 10.244 8.46189 10.1173C8.58446 9.99059 8.68076 9.8409 8.74525 9.67684C8.8108 9.51319 8.84333 9.33819 8.84098 9.16192C8.83862 8.98565 8.80143 8.81159 8.73154 8.64975C8.66164 8.48791 8.56043 8.34149 8.43372 8.21893C8.30702 8.09636 8.15732 8.00006 7.99325 7.93559C7.82622 7.86927 7.64757 7.83708 7.4679 7.8409ZM1.57525 11.6182C0.247497 12.0339 0.228684 14.2686 1.89556 14.6915C3.42006 15.0782 4.42125 14.3582 4.87018 13.4424C4.55697 13.4132 4.25081 13.3213 3.96978 13.172C3.6475 13.772 3.04025 14.2118 2.07915 13.9239C1.00165 13.601 0.792216 12.247 1.57531 11.6182H1.57525ZM12.2266 11.7794C11.9702 12.1083 11.6344 12.3595 11.2588 12.5157C11.9102 13.075 12.1455 13.8713 11.8389 14.9523H12.9922C13.3427 13.6951 12.9669 12.5465 12.2266 11.7794Z"
-                fill="#000"
-              />
-            </svg>
-
-            <VowelItalicizer text={demoItem.name} />
-          </p>
-          <div className="relative h-full w-full flex-1">
-            <motion.div
-              initial={{ top: "100%" }}
-              animate={{ top: "0%" }}
-              transition={{ type: "tween", ease: "circOut", duration: 1 }}
-              className="absolute left-[50vw] h-[100%] w-20 bg-asisGreen"
-            />
+    <section className="flex h-full w-full flex-col-reverse sm:flex-row">
+      <article className="flex basis-[30%] flex-col justify-center gap-5 px-8 py-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0">
+        <div className="flex grid-cols-2 items-center justify-start lg:justify-end">
+          <div className="hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
+            <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
+            <p>
+              An <span className="text-gray-700 font-[900]">acees</span> creation
+            </p>
+          </div>
+          <div className="flex flex-col px-4 font-cinzel sm:gap-6 ">
+            {product?.name.split(" ").map((word, index) => {
+              return (
+                <>
+                  {index < 3 && (
+                    <p
+                      key={index + 1}
+                      className={`flex w-full font-bold sm:font-medium items-center justify-center gap-2 text-3xl uppercase text-asisDark sm:text-4xl xl:text-5xl`}
+                    >
+                      {word}
+                    </p>
+                  )}
+                </>
+              );
+            })}
           </div>
         </div>
-      </section>
-      {/* Desktop */}
-      <section className="z-0 hidden h-full w-full overflow-hidden  lg:flex lg:grid-cols-2">
-        <div className="z-10 flex basis-[50%] flex-col items-end justify-center px-[4vw] xl:basis-[50%]">
-          <p className=" mb-16 flex w-full flex-col font-rochester text-7xl uppercase xl:text-8xl">
-            <span>coming</span> <span className="pl-48">soon!</span>
-          </p>
-          <svg
-            width="45"
-            height="45"
-            viewBox="0 0 16 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12.4679 0.046959C10.8159 0.0730215 8.30197 1.66977 9.43272 4.93565C9.81043 4.8619 10.2005 4.88071 10.5675 4.9874C9.4809 1.77733 11.8662 0.65249 13.1143 0.912209C14.3862 1.1769 14.9324 2.80837 14.2813 3.43658C13.6865 4.01065 12.8659 4.21055 12.3487 3.67877C11.5386 2.84587 12.3472 1.70133 13.5353 1.83602C12.1238 1.09046 10.9282 2.66187 11.6847 3.75496C12.4654 4.88318 14.2678 5.0194 15.0929 3.59871C16.071 1.9144 14.4131 0.0772715 12.5488 0.046959C12.5218 0.0465215 12.4948 0.0465215 12.4678 0.046959H12.4679ZM7.12997 0.099709C7.55581 1.30746 6.9959 1.75602 6.51372 2.35358C6.2304 1.48193 5.48747 1.04649 4.7784 1.0538C4.01059 1.06168 3.28297 1.5878 3.22372 2.64068C3.99422 1.0739 5.99509 1.39427 5.96884 3.58212H5.96978C5.9574 3.7173 5.95603 3.86383 5.96884 4.02352C6.19957 3.90466 6.44838 3.8248 6.70518 3.78718C6.828 3.76924 6.9505 3.76055 7.07137 3.7618C7.16776 3.76305 7.26399 3.77023 7.3595 3.7833C7.59093 2.58899 9.26762 2.0604 8.52162 0.099709H7.12997ZM2.73353 0.156334C-0.105659 1.03602 0.0956219 4.22058 2.10947 5.57915C1.00584 6.19921 0.450622 7.91196 1.60165 9.36434C1.0679 7.75693 1.83822 6.33227 3.03331 6.30477C3.48937 5.8849 4.09712 5.6539 4.72275 5.66999C4.76337 5.47496 4.82799 5.28571 4.91512 5.10655C1.55478 5.25327 0.140184 2.03871 2.73353 0.156334ZM6.99715 4.34677C6.92822 4.3484 6.85834 4.35427 6.78915 4.36433C5.94056 4.48902 5.32978 5.18765 5.26084 6.00693L5.23447 6.31646L4.92684 6.27052C4.11518 6.14915 3.29443 6.59233 2.97762 7.39068C2.66084 8.18899 2.95393 9.07393 3.62806 9.54205L3.8829 9.71883L3.6915 9.96196C3.18697 10.6062 3.15503 11.5203 3.68462 12.1896C4.21406 12.8585 5.12337 13.046 5.86531 12.6993L6.14756 12.5674L6.26081 12.8585C6.55931 13.6237 7.36162 14.1126 8.21393 13.9874C9.05831 13.8633 9.66197 13.1752 9.73643 12.3604L9.76472 12.0528L10.0703 12.0977C10.882 12.2192 11.7027 11.777 12.0196 10.9786C12.3364 10.1802 12.0423 9.29546 11.3682 8.82724L11.1124 8.64943L11.3057 8.40537C11.8173 7.76171 11.8507 6.83474 11.3185 6.16215C10.7858 5.48912 9.86456 5.29315 9.12315 5.64458L8.8419 5.77833L8.72665 5.48927C8.55518 5.05902 8.24081 4.72074 7.8409 4.52833C7.5988 4.41192 7.33414 4.34995 7.06553 4.34677C7.04272 4.34646 7.02015 4.34615 6.99715 4.34677ZM13.252 5.7374C15.0873 6.56415 15.0745 8.83449 12.9005 9.27059C12.7666 9.26929 12.6328 9.27778 12.5001 9.29599C12.6409 9.59426 12.7187 9.91838 12.7286 10.2481C14.4825 10.3451 15.2464 12.2596 14.0646 13.9014C15.9633 12.674 15.5738 10.4939 14.1739 9.63383C16.012 8.74124 15.686 5.85977 13.252 5.7374ZM7.32728 6.00102L7.51181 7.25883C7.65181 7.25958 7.79337 7.27521 7.93368 7.30771L8.09287 6.90833L8.63581 7.12315L8.47662 7.52449C8.59881 7.59652 8.70975 7.68112 8.81062 7.77552L9.80865 6.98546L10.171 7.44349L9.17197 8.23446C9.24151 8.35726 9.2975 8.48725 9.33897 8.62215L9.77059 8.55871L9.85559 9.13583L9.42293 9.19927C9.42205 9.33932 9.4057 9.47885 9.37418 9.6153L10.5597 10.0851L10.3438 10.628L9.15828 10.1573C9.08755 10.2778 9.00371 10.3902 8.90828 10.4923L9.18078 10.837L8.72275 11.1993L8.44931 10.8536C8.32745 10.923 8.19844 10.979 8.06453 11.0206L8.25009 12.2843L7.6729 12.3693L7.4874 11.1065C7.34808 11.1061 7.20922 11.0904 7.07334 11.0596L6.91222 11.4659L6.36925 11.2501L6.5294 10.8458C6.40743 10.7747 6.29377 10.6902 6.19053 10.5938L5.19147 11.3849L4.82918 10.9268L5.82825 10.1358C5.75904 10.0146 5.70305 9.88624 5.66125 9.75302L5.2345 9.81552L5.1495 9.2374L5.57434 9.1749C5.57465 9.0349 5.59015 8.89412 5.62215 8.75396L4.44153 8.28521L4.65634 7.74227L5.83697 8.21102C5.90847 8.08904 5.99331 7.97538 6.08993 7.87215L5.82431 7.53621L6.28231 7.1739L6.54893 7.51083C6.67114 7.44146 6.80047 7.38547 6.93468 7.34383L6.75009 6.08602L7.32728 6.00102ZM7.4679 7.8409C6.94522 7.85168 6.4579 8.16887 6.25206 8.68758C6.18651 8.85123 6.15398 9.02622 6.15633 9.20249C6.15868 9.37875 6.19587 9.55282 6.26576 9.71465C6.33564 9.87649 6.43685 10.0229 6.56355 10.1455C6.69025 10.268 6.83993 10.3643 7.004 10.4288C7.16764 10.4944 7.34264 10.5269 7.51891 10.5245C7.69517 10.5222 7.86923 10.485 8.03107 10.4151C8.19291 10.3452 8.33932 10.244 8.46189 10.1173C8.58446 9.99059 8.68076 9.8409 8.74525 9.67684C8.8108 9.51319 8.84333 9.33819 8.84098 9.16192C8.83862 8.98565 8.80143 8.81159 8.73154 8.64975C8.66164 8.48791 8.56043 8.34149 8.43372 8.21893C8.30702 8.09636 8.15732 8.00006 7.99325 7.93559C7.82622 7.86927 7.64757 7.83708 7.4679 7.8409ZM1.57525 11.6182C0.247497 12.0339 0.228684 14.2686 1.89556 14.6915C3.42006 15.0782 4.42125 14.3582 4.87018 13.4424C4.55697 13.4132 4.25081 13.3213 3.96978 13.172C3.6475 13.772 3.04025 14.2118 2.07915 13.9239C1.00165 13.601 0.792216 12.247 1.57531 11.6182H1.57525ZM12.2266 11.7794C11.9702 12.1083 11.6344 12.3595 11.2588 12.5157C11.9102 13.075 12.1455 13.8713 11.8389 14.9523H12.9922C13.3427 13.6951 12.9669 12.5465 12.2266 11.7794Z"
-              fill="#000"
-            />
-          </svg>
-          <p className="text-right text-5xl uppercase 2xl:text-[4vw]">
-            <VowelItalicizer text={demoItem.name} />
-          </p>
-        </div>{" "}
-        <div className="relative flex basis-[50%] xl:basis-[50%]">
-          <ComponentMouseFollow
-            initialObject={{ top: "-200%" }}
-            animateObject={{ top: "0%" }}
-            className={`absolute inset-y-0 left-[67%] flex h-full -translate-x-1/2 -translate-y-1/2 items-center`}
-            flow={2}
-            opposite={false}
-          >
-            <div className=" h-[50%] w-32 bg-asisDark" />
-          </ComponentMouseFollow>
-          <ComponentMouseFollow
-            initialObject={{ bottom: "-200%" }}
-            animateObject={{ bottom: "0%" }}
-            className={`absolute bottom-0 left-0 flex h-[90%] w-[22vw] bg-asisDark`}
-            flow={5}
-            opposite={false}
-          />
-          <ComponentMouseFollow
-            initialObject={{ top: "-200%" }}
-            animateObject={{ top: "0%" }}
-            className={` absolute left-[35%] flex h-[90%] w-[22vw]  bg-asisGreen`}
-            flow={100}
-          />
-          <ComponentMouseFollow
-            className={`absolute left-[17%] top-0 flex aspect-square w-[35vw]`}
-            flow={3}
-            initialObject={{ left: "200%" }}
-            animateObject={{ left: "17%" }}
-          >
-            <img className="object-fit" src={"/rose.svg"} alt="rose" />
-          </ComponentMouseFollow>
-          <ComponentMouseFollow
-            initialObject={{ bottom: "-50%" }}
-            animateObject={{ bottom: "0%" }}
-            className={` absolute bottom-0 left-[-10%] flex aspect-square w-[20vw]`}
-            flow={3}
-          >
-            <img
-              className="object-fit"
-              src={"/butterfly.svg"}
-              alt="butterfly"
-            />
-          </ComponentMouseFollow>{" "}
-          <ComponentMouseFollow
-            className={` absolute bottom-0 left-[3%] flex h-full items-center `}
-            initialObject={{ bottom: "-100%" }}
-            animateObject={{ bottom: "0%" }}
-            flow={10}
-          >
-            <img
-              className="h-full object-contain"
-              src={demoItem.image}
-              alt="iem"
-            />
-          </ComponentMouseFollow>
+        <div className="flex w-full justify-end">
+          <h2 className="flex w-3/4 flex-col font-comforter text-5xl sm:text-[7vw] uppercase leading-tight sm:w-full ">
+            <span className="text-right">Coming</span> <span>Soon!</span>
+          </h2>
         </div>
-      </section>
-      <img
-        src="/eclipse.svg"
-        alt="eclipse"
-        className="object-fit absolute -z-10 -translate-x-1/2 -translate-y-1/2 object-center lg:-translate-x-1/3 lg:scale-125"
-      />
-    </>
+      </article>
+      <div className="relative flex h-full basis-[70%] items-end justify-center pt-[10vh] sm:basis-[45.5%] sm:items-center sm:pb-[3.9vh] sm:pt-[11.8vh]">
+        <img src="/eclipse.svg" alt="eclipse" className="fixed sm:hidden w-full scale-150 -z-10 -bottom-10" />
+        <div className="absolute bottom-0 hidden w-full justify-center rounded-t-full sm:flex">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="512"
+            height="23"
+            viewBox="0 0 512 23"
+            fill="none"
+          >
+            <g filter="url(#filter0_f_1414_4383)">
+              <path
+                d="M2 33.8542C2 29.7542 2 27.7041 3.21061 26.2978C4.42123 24.8914 6.46498 24.584 10.5525 23.9691C197.572 -4.16419 307.783 -6.00327 501.486 23.9378C505.557 24.567 507.592 24.8816 508.796 26.286C510 27.6904 510 29.732 510 33.8152V50C510 54.714 510 57.0711 508.536 58.5355C507.071 60 504.714 60 500 60H12C7.28595 60 4.92893 60 3.46447 58.5355C2 57.0711 2 54.714 2 50V33.8542Z"
+                fill="black"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_f_1414_4383"
+                x="0"
+                y="0.169922"
+                width="512"
+                height="61.8301"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="BackgroundImageFix"
+                  result="shape"
+                />
+                <feGaussianBlur
+                  stdDeviation="1"
+                  result="effect1_foregroundBlur_1414_4383"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+        <img
+          src={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}
+          alt="product image"
+          className="h-[60vh] object-contain sm:h-full"
+        />
+      </div>
+    </section>
   );
 };
 

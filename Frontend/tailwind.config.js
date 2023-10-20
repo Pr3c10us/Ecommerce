@@ -12,7 +12,8 @@ module.exports = {
       },
       fontFamily: {
         playfair: ["Playfair Display", "serif"],
-        rochester: ["Rochester", "cursive"],
+        cinzel: ["Cinzel Decorative", "serif"],
+        comforter: ["Comforter Brush", "cursive"],
       },
       animation: {
         marquee: "marquee 25s linear infinite",

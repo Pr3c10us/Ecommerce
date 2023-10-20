@@ -7,7 +7,7 @@ import guestIcon from "../assets/icons/guest.svg";
 import cartIcon from "../assets/icons/cart-icon.svg";
 import {BiShoppingBag} from 'react-icons/bi'
 
-const Header = ({ setHideCart, setHideWish, cartLength, wishlistData }) => {
+const Header = ({ setHideCart, cartLength }) => {
   const location = useLocation();
 
   React.useEffect(() => {

@@ -1,223 +1,101 @@
 import React from "react";
 import ComponentMouseFollow from "../components/componentMouseFollow";
 import { motion } from "framer-motion";
-import {
-  FaHeart,
-  FaStar,
-  FaShoppingBag,
-  FaTag,
-  FaCamera,
-  FaCrown,
-  FaCheck,
-  FaGift,
-  FaClock,
-} from "react-icons/fa";
-import { PiCoatHangerBold } from "react-icons/pi";
 import VowelItalicizer from "../../components/vowelItalicizer";
+import { Link } from "react-router-dom";
 
-const SelectedOne = () => {
-  const [demoItem, setDemoItem] = React.useState({
-    name: "Overgrowth Convertible Pant",
-    shortDescription:
-      "Lightweight, stretchy pants for hiking and everyday wear. Lorem ipsum duble geralt. Consectetur, necessitatibus?",
-    image: "/convertiblePant.png",
-  });
-  const [icons, setIcons] = React.useState([
-    {
-      icon: <img src="/spiral.svg" className="aspect-square h-8 xl:h-10" />,
-      text: "spiral",
-    },
-    {
-      icon: <img src="/rose.svg" className="aspect-square h-8 xl:h-10" />,
-      text: "rose",
-    },
-  ]);
+const SelectedOne = ({ product, setNavType }) => {
+  React.useEffect(() => {
+    setNavType(2);
+  }, []);
+
   return (
-    <>
-      {/* mobile */}
-      <section className="bg-gray300 flex h-full w-full flex-col overflow-hidden lg:hidden">
-        <div className="relative flex basis-[60%] items-center justify-center sm:basis-[50%]">
-          <motion.div
-            initial={{ top: "-100%" }}
-            animate={{ top: "0%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[60vw] top-0 h-[80%] w-[25vw] bg-[#121212] sm:h-full sm:w-[18vw]"
-          />
-          <motion.div
-            initial={{ top: "100%" }}
-            animate={{ top: "20%" }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-[50vw] top-[20%] h-[80%] w-[25vw] bg-asisGreen sm:h-[120%] sm:w-[18vw]"
-          />
-
-          <motion.img
-            initial={{ top: "-150%" }}
-            animate={{
-              top: "50%",
-            }}
-            transition={{ type: "tween", ease: "circOut", duration: 2 }}
-            className="absolute left-1/2 top-1/2 h-4/5 -translate-x-1/2 -translate-y-1/2 sm:h-[125%] sm:-translate-y-1/3"
-            src={demoItem.image}
-            alt="rose"
-          />
-        </div>
-        <div className="z-10 basis-[40%] space-y-2">
-          <div className="flex flex-col px-4">
-            {demoItem.name.split(" ").map((word, index) => {
-              const marginLeft =
-                index * (100 / demoItem.name.split(" ").length); // Adjust the margin as needed
-              const pStyle = {
-                paddingLeft: `${marginLeft}%`,
-              };
+    <section className="flex h-full w-full flex-col-reverse sm:flex-row">
+      <article className="flex basis-[30%] flex-col justify-center gap-5 px-8 py-5 sm:basis-[55.5%] sm:gap-0 sm:py-0 sm:pl-[10.4vw] sm:pr-0">
+        <div className="flex grid-cols-2 items-center justify-center sm:mb-[6.7vh]  lg:justify-end">
+          <div className="hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
+            <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
+            <p>
+              An <span className="text-gray-600">acees</span> creation
+            </p>
+          </div>
+          <div className="flex flex-col px-4 font-cinzel sm:gap-6">
+            {product?.name.split(" ").map((word, index) => {
               return (
                 <>
                   {index < 3 && (
                     <p
                       key={index + 1}
-                      className={`flex w-full items-center justify-center gap-2 text-4xl font-extrabold uppercase text-white sm:text-5xl`}
-                      style={pStyle}
+                      className={`flex w-full items-center justify-center gap-2 text-2xl font-medium uppercase text-asisDark sm:text-4xl xl:text-5xl`}
                     >
-                      {index == 1 && icons[0].icon}
-                      {index == 2 && icons[1].icon}
-
-                      <VowelItalicizer
-                        text={
-                          word.split("").length > 5 && index === 2
-                            ? word.substring(0, 5)
-                            : word
-                        }
-                      />
-                      {index === 2 && (
-                        <>
-                          {demoItem.name.split(" ").length > 3 && (
-                            <p className="flex h-full items-end text-3xl">
-                              . . .
-                            </p>
-                          )}
-                        </>
-                      )}
+                      {word}
                     </p>
                   )}
                 </>
               );
             })}
           </div>
-          {/* <p className="px-4 text-center text-4xl font-extrabold sm:px-8 sm:text-5xl md:px-12">
-            <VowelItalicizer text={demoItem.name} />
-          </p> */}
-          <p className="px-4 text-center text-sm font-bold sm:px-8 sm:text-base md:px-12">
-            {demoItem.shortDescription}
-          </p>
-          <div className="flex justify-center px-4 pb-2 sm:px-8 md:px-12">
-            <button className="flex items-center gap-2 bg-asisGold px-4 py-2 text-sm text-white">
-              View Product <img src="/arrow.svg" alt="arrow" />
-            </button>
-          </div>
-          <div className="relative h-full w-full flex-1">
-            <motion.div
-              initial={{ top: "100%" }}
-              animate={{ top: "0%" }}
-              transition={{ type: "tween", ease: "circOut", duration: 1 }}
-              className="absolute left-[50vw] h-[100%] w-[25vw] bg-asisGreen sm:w-[18vw]"
-            />
-          </div>
         </div>
-      </section>
-      {/* Desktop */}
-      <section className="hidden h-full w-full overflow-hidden  lg:flex lg:grid-cols-2">
-        <div className="z-10 flex basis-[50%] flex-col justify-center gap-10 px-[4vw] xl:basis-[50%]">
-          {/* <p className="text-right text-6xl font-extrabold uppercase 2xl:text-[4vw]">
-            <VowelItalicizer text={demoItem.name} />
-          </p> */}
-          <div className="flex gap-4 flex-col px-4">
-            {demoItem.name.split(" ").map((word, index) => {
-              // const marginLeft =
-              //   index * (50 / demoItem.name.split(" ").length); // Adjust the margin as needed
-              // const pStyle = {
-              //   paddingLeft: `${marginLeft}%`,
-              // };
-              return (
-                <>
-                  {index < 3 && (
-                    <p
-                      key={index + 1}
-                      className={`flex w-full items-center gap-2 text-5xl font-extrabold uppercase text-white xl:text-6xl 2xl:text-[4.5vw] ${
-                        index === 1 && "justify-end"
-                      } ${index === 2 && "justify-end"}`}
-                      // style={pStyle}
-                    >
-                      {index == 1 && icons[0].icon}
-                      {index == 2 && icons[1].icon}
-
-                      <VowelItalicizer
-                        text={
-                          word.split("").length > 5 && index === 2
-                            ? word.substring(0, 5)
-                            : word
-                        }
-                      />
-                      {index === 2 && (
-                        <>
-                          {demoItem.name.split(" ").length > 3 && (
-                            <p className="flex h-full items-end text-3xl">
-                              . . .
-                            </p>
-                          )}
-                        </>
-                      )}
-                    </p>
-                  )}
-                </>
-              );
-            })}
-          </div>
-          <p className="px-4 font-bold xl:text-lg">
-            {demoItem.shortDescription}
-          </p>
-          <div className="flex justify-end px-4 pb-2">
-            <button className="flex items-center gap-2 bg-asisGold px-10 py-1.5 text-white 2xl:py-2 2xl:text-lg">
-              View Product Page <img src="/arrow.svg" alt="arrow" />
-            </button>
-          </div>
-        </div>{" "}
-        <div className="relative flex basis-[50%] xl:basis-[50%]">
-          <ComponentMouseFollow
-            initialObject={{ top: "-200%" }}
-            animateObject={{ top: "0%" }}
-            className={`absolute inset-y-0 left-[35%] flex h-full -translate-x-1/2 -translate-y-1/2 items-center`}
-            flow={10}
-            opposite={false}
+        <p className="text-xs font-bold sm:mb-[7.6vh] sm:text-base  lg:w-3/4 xl:text-lg">
+          {product?.shortDescription}
+        </p>
+        <Link
+          className="flex items-center sm:justify-end"
+          to={`/product/${product?.product._id}`}
+        >
+          <button className="flex items-center gap-2 rounded bg-black px-2 py-1 text-sm text-white sm:px-6 sm:py-2">
+            View Product{" "}
+            <img src="/arrow.svg" alt="arrow" className="w-3 sm:w-4" />
+          </button>
+        </Link>
+      </article>
+      <div className="relative flex h-full basis-[70%] items-end justify-center pt-[10vh] sm:basis-[45.5%] sm:items-center sm:pb-[3.9vh] sm:pt-[11.8vh]">
+        <div className="absolute bottom-0 hidden w-full justify-center rounded-t-full sm:flex">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="512"
+            height="23"
+            viewBox="0 0 512 23"
+            fill="none"
           >
-            <div className=" h-[50%] w-[22vw] bg-asisGreen xl:w-[18vw]" />
-          </ComponentMouseFollow>
-          <ComponentMouseFollow
-            initialObject={{ bottom: "-200%" }}
-            animateObject={{ bottom: "0%" }}
-            className={`absolute bottom-0 left-0 flex h-[90%] w-[22vw] bg-asisGreen xl:w-[18vw]`}
-            flow={10}
-            opposite={false}
-          />
-          <ComponentMouseFollow
-            initialObject={{ top: "-200%" }}
-            animateObject={{ top: "0%" }}
-            className={` absolute left-[25%] flex h-[90%] w-[22vw] bg-[#121212]  xl:w-[18vw]`}
-            flow={100}
-          />
-          <ComponentMouseFollow
-            className={` absolute bottom-0 left-[3%] flex h-full items-center `}
-            initialObject={{ bottom: "-100%" }}
-            animateObject={{ bottom: "0%" }}
-            flow={10}
-          >
-            <img
-              className="h-[85%] object-contain"
-              src={demoItem.image}
-              alt="iem"
-            />
-          </ComponentMouseFollow>
+            <g filter="url(#filter0_f_1414_4383)">
+              <path
+                d="M2 33.8542C2 29.7542 2 27.7041 3.21061 26.2978C4.42123 24.8914 6.46498 24.584 10.5525 23.9691C197.572 -4.16419 307.783 -6.00327 501.486 23.9378C505.557 24.567 507.592 24.8816 508.796 26.286C510 27.6904 510 29.732 510 33.8152V50C510 54.714 510 57.0711 508.536 58.5355C507.071 60 504.714 60 500 60H12C7.28595 60 4.92893 60 3.46447 58.5355C2 57.0711 2 54.714 2 50V33.8542Z"
+                fill="black"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_f_1414_4383"
+                x="0"
+                y="0.169922"
+                width="512"
+                height="61.8301"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="BackgroundImageFix"
+                  result="shape"
+                />
+                <feGaussianBlur
+                  stdDeviation="1"
+                  result="effect1_foregroundBlur_1414_4383"
+                />
+              </filter>
+            </defs>
+          </svg>
         </div>
-      </section>
-    </>
+        <img
+          src={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}
+          alt="product image"
+          className="h-[60vh] object-contain sm:h-full"
+        />
+      </div>
+    </section>
   );
 };
 
