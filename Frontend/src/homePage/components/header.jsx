@@ -32,7 +32,7 @@ const Header = ({ type }) => {
         <Cart setHideCart={setHideCart} cartData={cartData.products} />
       )}
       {type == 1 ? (
-        <nav className="absolute inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold sm:flex">
+        <nav className="fixed inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold sm:flex">
           <button
             onClick={() => {
               setHideCart((prev) => !prev);
@@ -62,7 +62,7 @@ const Header = ({ type }) => {
       ) : (
         <>
           {/* Desktop */}
-          <nav className="absolute inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end font-bold sm:flex">
+          <nav className="fixed inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end font-bold sm:flex">
             <div className="flex basis-[55.5%] justify-between px-[10vw]">
               <button
                 onClick={() => {
@@ -96,7 +96,7 @@ const Header = ({ type }) => {
             </div>
           </nav>
           {/* mobile */}
-          <nav className="absolute inset-x-0 top-0 z-10 flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold sm:hidden">
+          <nav className="fixed inset-x-0 top-0 z-10 flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold sm:hidden">
             <button
               onClick={() => {
                 setHideCart((prev) => !prev);

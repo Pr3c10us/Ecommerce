@@ -23,14 +23,12 @@ const SelectedOneCS = ({ product, setNavType }) => {
             {product?.name.split(" ").map((word, index) => {
               return (
                 <>
-                  {index < 3 && (
                     <p
                       key={index + 1}
                       className={`flex w-full font-bold sm:font-medium items-center justify-center gap-2 text-3xl uppercase text-asisDark sm:text-4xl xl:text-5xl`}
                     >
                       {word}
                     </p>
-                  )}
                 </>
               );
             })}

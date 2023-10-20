@@ -23,14 +23,12 @@ const SelectedOne = ({ product, setNavType }) => {
             {product?.name.split(" ").map((word, index) => {
               return (
                 <>
-                  {index < 3 && (
-                    <p
-                      key={index + 1}
-                      className={`flex w-full items-center justify-center gap-2 text-2xl font-medium uppercase text-asisDark sm:text-4xl xl:text-5xl`}
-                    >
-                      {word}
-                    </p>
-                  )}
+                  <p
+                    key={index + 1}
+                    className={`flex w-full items-center justify-center gap-2 text-2xl font-medium uppercase text-asisDark sm:text-4xl xl:text-5xl`}
+                  >
+                    {word}
+                  </p>
                 </>
               );
             })}
