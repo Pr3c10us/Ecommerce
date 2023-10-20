@@ -16,7 +16,8 @@ const SelectedOneCS = ({ product, setNavType }) => {
           <div className="hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
             <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
             <p>
-              An <span className="text-gray-700 font-[900]">acees</span> creation
+              An <span className="font-[900] text-gray-700">acees</span>{" "}
+              creation
             </p>
           </div>
           <div className="flex flex-col px-4 font-cinzel sm:gap-6 ">
@@ -26,7 +27,7 @@ const SelectedOneCS = ({ product, setNavType }) => {
                   {index < 3 && (
                     <p
                       key={index + 1}
-                      className={`flex w-full font-bold sm:font-medium items-center justify-center gap-2 text-3xl uppercase text-asisDark sm:text-4xl xl:text-5xl`}
+                      className={`flex w-full items-center justify-center gap-2 text-2xl font-bold uppercase text-asisDark sm:text-4xl sm:font-medium xl:text-5xl`}
                     >
                       {word}
                     </p>
@@ -37,13 +38,18 @@ const SelectedOneCS = ({ product, setNavType }) => {
           </div>
         </div>
         <div className="flex w-full justify-end">
-          <h2 className="flex w-3/4 flex-col font-comforter text-5xl sm:text-[7vw] uppercase leading-tight sm:w-full ">
-            <span className="sm:text-right">Coming</span> <span className="text-right sm:text-left">Soon!</span>
+          <h2 className="flex w-3/4 flex-col font-comforter text-4xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
+            <span className="sm:text-right">Coming</span>{" "}
+            <span className="text-right sm:text-left">Soon!</span>
           </h2>
         </div>
       </article>
       <div className="relative flex h-full basis-[70%] items-end justify-center pt-[10vh] sm:basis-[45.5%] sm:items-center sm:pb-[3.9vh] sm:pt-[11.8vh]">
-        <img src="/eclipse.svg" alt="eclipse" className="fixed sm:hidden w-full scale-150 -z-10 -bottom-10" />
+        <img
+          src="/eclipse.svg"
+          alt="eclipse"
+          className="fixed -bottom-10 -z-10 w-full scale-150 sm:hidden"
+        />
         <div className="absolute bottom-0 hidden w-full justify-center rounded-t-full sm:flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
