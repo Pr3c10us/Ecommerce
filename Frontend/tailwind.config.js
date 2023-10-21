@@ -14,6 +14,7 @@ module.exports = {
         playfair: ["Playfair Display", "serif"],
         cinzel: ["Cinzel Decorative", "serif"],
         comforter: ["Comforter Brush", "cursive"],
+        inter: ["Inter", "sans-serif"],
       },
       animation: {
         marquee: "marquee 25s linear infinite",

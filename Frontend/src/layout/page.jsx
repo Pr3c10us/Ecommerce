@@ -42,7 +42,7 @@ const Page = () => {
         class="fixed -z-10 h-screen w-screen object-cover"
       />
       <Toaster position="top-center" />
-      {location.pathname !== "/home" && (
+      {location.pathname !== "/" && (
         <Header
           setHideCart={setHideCart}
           cartLength={cartData?.products?.length}

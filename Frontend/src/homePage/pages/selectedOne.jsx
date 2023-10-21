@@ -41,7 +41,7 @@ const SelectedOne = ({ product, setNavType }) => {
           className="flex items-center sm:justify-end"
           to={`/product/${product?.product._id}`}
         >
-          <button className="flex items-center gap-2 rounded bg-black px-2 py-1 text-sm text-white sm:px-6 sm:py-2">
+          <button className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs sm:text-sm text-white sm:px-6 sm:py-2">
             View Product{" "}
             <img src="/arrow.svg" alt="arrow" className="w-3 sm:w-4" />
           </button>

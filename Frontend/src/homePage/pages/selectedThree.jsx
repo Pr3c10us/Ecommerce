@@ -23,12 +23,12 @@ const SelectedThree = ({ product, setNavType }) => {
           </p>
         </div>
         <div className="grid sm:grid-cols-2">
-          <div className="flex flex-col justify-center gap-2 sm:gap-8 font-cinzel mb-4">
+          <div className="mb-4 flex flex-col justify-center gap-2 font-cinzel sm:gap-8">
             {product?.name.split(" ").map((word, index) => {
               return (
                 <p
                   key={index + 1}
-                  className={`flex w-full items-center justify-center text-2xl sm:gap-2 sm:text-4xl font-semibold uppercase text-asisDark xl:text-5xl `}
+                  className={`flex w-full items-center justify-center text-2xl font-semibold uppercase text-asisDark sm:gap-2 sm:text-4xl xl:text-5xl `}
                 >
                   {word}
                 </p>
@@ -49,7 +49,7 @@ const SelectedThree = ({ product, setNavType }) => {
           className="flex w-full items-center justify-center"
           to={`/product/${product?.product._id}`}
         >
-          <button className="flex items-center gap-2 rounded bg-black px-2 py-1 text-sm text-white md:px-6 md:py-2 md:text-lg">
+          <button className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2 md:text-lg">
             View Product{" "}
             <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
           </button>

@@ -52,7 +52,7 @@ const SelectedTwo = ({ product, setNavType }) => {
             className="flex items-center justify-center sm:justify-end"
             to={`/product/${product?.product._id}`}
           >
-            <button className="flex items-center gap-2 rounded bg-black px-2 py-1 text-sm text-white md:px-6 md:py-2 md:text-lg">
+            <button className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2 md:text-lg">
               View Product{" "}
               <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
             </button>
