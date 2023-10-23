@@ -6,6 +6,7 @@ import SelectedTwo from "./pages/selectedTwo";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Displayed from "./pages/displayed";
+import Displayed2 from "./pages/displayed2";
 import Header from "./components/header";
 
 const page2 = () => {
@@ -61,8 +62,17 @@ const page2 = () => {
   return (
     <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
       <Header type={navType} />
-      {displayProduct != null ? (
+      {/* {displayProduct != null ? (
         <Displayed
+          bodyRef={bodyRef}
+          product={displayProduct}
+          setNavType={setNavType}
+        />
+      ) : (
+        <></>
+      )} */}
+      {displayProduct != null ? (
+        <Displayed2
           bodyRef={bodyRef}
           product={displayProduct}
           setNavType={setNavType}
