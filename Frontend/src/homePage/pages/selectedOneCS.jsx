@@ -118,7 +118,7 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
           <img
             src={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}
             alt="product image"
-            className="pointer-events-none h-[60vh] object-contain sm:h-full"
+            className="pointer-events-none h-[55vh] object-contain sm:h-full"
           />
         </div>
       </section>
