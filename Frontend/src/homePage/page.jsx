@@ -52,7 +52,7 @@ const page2 = () => {
 
   if (loading) {
     return (
-      <div className="flex h-[svh] items-center justify-center sm:h-screen">
+      <div className="flex h-[100svh] items-center justify-center sm:h-screen">
         <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900"></div>
       </div>
     );
