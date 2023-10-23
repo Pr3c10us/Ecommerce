@@ -11,7 +11,7 @@ import Header from "./components/header";
 const page2 = () => {
   const navigate = useNavigate();
 
-  const bodyRef = useRef(null)
+  const bodyRef = useRef(null);
 
   const [displayProduct, setDisplayProduct] = React.useState(null);
   const [fallbackProducts, setFallbackProducts] = React.useState([]);
@@ -52,7 +52,7 @@ const page2 = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-[svh] items-center justify-center sm:h-screen">
         <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900"></div>
       </div>
     );
@@ -62,7 +62,11 @@ const page2 = () => {
     <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
       <Header type={navType} />
       {displayProduct != null ? (
-        <Displayed bodyRef={bodyRef} product={displayProduct} setNavType={setNavType} />
+        <Displayed
+          bodyRef={bodyRef}
+          product={displayProduct}
+          setNavType={setNavType}
+        />
       ) : (
         <></>
       )}
