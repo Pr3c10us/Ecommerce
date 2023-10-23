@@ -13,7 +13,7 @@ const Filter = ({
   gender,
   setGender,
 }) => {
-  const [hideFilter, setHideFilter] = useState(false);
+  const [hideFilter, setHideFilter] = useState(true);
   const sortArray = [
     { keyWord: "-createdAt", displayText: "Newest Product" },
     { keyWord: "createdAt", displayText: "Oldest Product" },

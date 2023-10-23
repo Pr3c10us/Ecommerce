@@ -69,7 +69,7 @@ const SelectedTwo = ({ product, setNavType }) => {
           onClick={() => {
             setPlay((prev) => !prev);
           }}
-          // src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
+          src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
           loop
           autoPlay
           placeholder={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}
