@@ -14,7 +14,7 @@ const Displayed = ({ product, setNavType, bodyRef }) => {
       drag="x"
       dragConstraints={bodyRef}
       // dragMomentum={false}
-      className="flex h-screen w-max min-w-full flex-nowrap items-start justify-start active:cursor-grabbing cursor-grab"
+      className="flex h-[100svh] sm:h-screen w-max min-w-full flex-nowrap items-start justify-start active:cursor-grabbing cursor-grab"
     >
       {product?.isComingSoon == true ? (
         <SelectedOneCS product={product} setNavType={setNavType} />
