@@ -13,7 +13,7 @@ const Displayed = ({ product, setNavType, bodyRef }) => {
     <motion.div
       drag="x"
       dragConstraints={bodyRef}
-      whileDrag={{ scale: 0.95 }}
+      dragMomentum={false}
       className="flex h-screen w-max min-w-full flex-nowrap items-start justify-start active:cursor-grabbing cursor-grab"
     >
       {product?.isComingSoon == true ? (
