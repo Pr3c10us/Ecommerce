@@ -35,12 +35,7 @@ const Page = () => {
 
 
   return (
-    <main className=" flex h-full flex-col bg-[url">
-      <img
-        src="/bg.png"
-        alt="Vite Logo"
-        className="fixed -z-10 h-screen w-screen object-cover"
-      />
+    <main className="flex h-full flex-col">
       <Toaster position="top-center" />
       {location.pathname !== "/" && (
         <Header
