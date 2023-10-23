@@ -64,7 +64,7 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
             </div>
           </div>
           <div className="flex w-full justify-end">
-            <h2 className="flex w-3/4 flex-col font-comforter text-4xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
+            <h2 className="flex w-3/4 flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
               <span className="text-right">Coming</span>{" "}
               <span className="text-left">Soon!</span>
             </h2>
