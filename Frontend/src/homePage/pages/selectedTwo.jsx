@@ -23,40 +23,41 @@ const SelectedTwo = ({ product, setNavType }) => {
   }, [play]);
 
   return (
-    <section className="relative flex h-full w-full flex-col-reverse  sm:flex-row">
+    <section className="relative flex h-full w-screen flex-col-reverse  sm:flex-row">
       <div className="flex basis-[35.5%] flex-col justify-center gap-4 pl-[5vw] pr-[3.5vw] lg:pl-[10vw] lg:pr-[7vw]">
         <div className="flex grid-cols-2 flex-col items-center justify-center gap-4">
-          <div className="hidden w-[15vw] flex-col items-center text-center font-extrabold uppercase sm:flex">
-            <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
+          <div className="hidden w-[15vw] flex-col items-center text-center text-sm font-extrabold uppercase lg:flex">
+            <img
+              src="/spade.svg"
+              alt="spade logo"
+              className="pointer-events-none w-[260px] "
+            />
             <p>
-              An <span className="text-gray-600">acees</span> creation
+              An <span className="text-gray-500 ">acees</span> creation
             </p>
           </div>
-          <div className="flex flex-col px-4 font-cinzel">
+          <div className="flex flex-col gap-2 px-4 font-cinzel">
             {product?.name.split(" ").map((word, index) => {
               return (
-                <>
-                  <p
-                    key={index + 1}
-                    className={`flex w-full items-center justify-center gap-2 text-4xl font-medium uppercase text-asisDark sm:text-3xl lg:text-4xl`}
-                  >
-                    {word}
-                  </p>
-                </>
+                <p
+                  key={index + 1}
+                  className={`flex w-full items-center justify-center gap-2 text-2xl font-medium uppercase text-asisDark sm:text-3xl lg:text-4xl`}
+                >
+                  {word}
+                </p>
               );
             })}
           </div>
         </div>
         {!product?.isComingSoon && (
-          <Link
-            className="flex items-center justify-center sm:justify-end"
-            to={`/product/${product?.product._id}`}
-          >
-            <button className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2 md:text-lg">
-              View Product{" "}
-              <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
-            </button>
-          </Link>
+          <div className="flex items-center justify-center sm:justify-end">
+            <Link
+              to={`/product/${product?.product._id}`}
+              className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2"
+            >
+              View Product <img src="/arrow.svg" alt="arrow" className="w-3 " />
+            </Link>
+          </div>
         )}
       </div>
       <div className="group relative mt-[10vh] flex basis-[64.5%] cursor-pointer overflow-hidden sm:my-[10vh] sm:mr-[5vw] sm:rounded-3xl lg:mr-[10.4vw]">
@@ -68,7 +69,7 @@ const SelectedTwo = ({ product, setNavType }) => {
           onClick={() => {
             setPlay((prev) => !prev);
           }}
-          src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
+          // src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
           loop
           autoPlay
           placeholder={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}

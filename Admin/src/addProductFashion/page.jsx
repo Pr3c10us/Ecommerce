@@ -17,12 +17,14 @@ const AddProduct = () => {
     "accessories",
     "others",
   ]);
+  const [gender, setGender] = React.useState(["male", "female", "unisex"]);
   const [fileList, setFileLIst] = React.useState([]);
   const [comingSoon, setComingSoon] = React.useState(false);
   const lorem =
     "lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.";
 
   const [selectedCategory, setSelectedCategory] = React.useState("clothes");
+  const [selectedGender,setSelectedGender] = React.useState("unisex")
   const [countInStock, setCountInStock] = React.useState([]);
 
   const formik = useFormik({
@@ -51,6 +53,7 @@ const AddProduct = () => {
       data.append("description", values.description);
       data.append("brief", values.brief);
       data.append("category", selectedCategory);
+      data.append("gender",selectedGender)
       data.append("comingSoon", comingSoon);
       countInStock.forEach((item, index) => {
         data.append(`countInStock[${index}][size]`, item.size);
@@ -181,6 +184,27 @@ const AddProduct = () => {
                 </p>
               ) : null}
             </div>
+          </div>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Gender
+          </label>
+          <div className="flex w-full flex-wrap gap-4 text-asisDark ">
+            {gender.map((item, index) => (
+              <button
+                type="button"
+                key={index}
+                className={`${
+                  selectedGender == item
+                    ? "bg-asisDark text-white"
+                    : "border border-asisDark bg-transparent text-asisDark"
+                } rounded px-4 py-2 font-normal capitalize`}
+                onClick={() => setSelectedGender(item)}
+              >
+                {item}
+              </button>
+            ))}
           </div>
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">

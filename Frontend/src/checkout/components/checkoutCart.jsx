@@ -49,7 +49,7 @@ const CheckoutCart = () => {
       // console.log(response.data);
       // setCartData(response.data);
       if (response.data.products.length === 0) {
-        navigate("/shop", { replace: true });
+        navigate("/store", { replace: true });
       }
       dispatch(setCart(response.data));
       setIsLoading(false);
@@ -68,7 +68,7 @@ const CheckoutCart = () => {
     }
   };
   React.useEffect(() => {
-    cartData?.products?.length === 0 && navigate("/shop", { replace: true });
+    cartData?.products?.length === 0 && navigate("/store", { replace: true });
     handleGetCartContent();
     handleFetchShippingDetails();
   }, []);
@@ -207,7 +207,7 @@ const CheckoutCart = () => {
                     }).format(shippingFee)}`}{" "}
               </p>
             </div>
-            <div className="py-4 border-t-2 border-t-asisDark flex items-center justify-between  text-sm font-bold">
+            <div className="flex items-center justify-between border-t-2 border-t-asisDark py-4  text-sm font-bold">
               <p>SubTotal</p>
               <p>
                 {Intl.NumberFormat("en-US", {

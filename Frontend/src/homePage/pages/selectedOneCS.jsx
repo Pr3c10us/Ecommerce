@@ -6,42 +6,49 @@ import { Link } from "react-router-dom";
 
 const SelectedOneCS = ({ product, setNavType }) => {
   React.useEffect(() => {
-    setNavType(2);
+    setNavType(1);
   }, []);
 
   return (
-    <section className="flex h-full w-full flex-col-reverse sm:flex-row">
+    <section className="flex h-full w-screen flex-col-reverse sm:flex-row">
       <article className="flex basis-[30%] flex-col justify-center gap-5 px-8 py-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0">
         <div className="flex grid-cols-2 items-center justify-start lg:justify-end">
-          <div className="hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
-            <img src="/spade.svg" alt="spade logo" className="w-[260px]" />
+          <div className="hidden w-[18vw] flex-col items-center text-center text-sm font-extrabold uppercase lg:flex">
+            <img
+              src="/spade.svg"
+              alt="spade logo"
+              className="pointer-events-none w-[260px]"
+            />
             <p>
-              An <span className="text-gray-700 font-[900]">acees</span> creation
+              An <span className="text-gray-500 ">acees</span> creation
             </p>
           </div>
           <div className="flex flex-col px-4 font-cinzel sm:gap-6 ">
             {product?.name.split(" ").map((word, index) => {
               return (
-                <>
-                    <p
-                      key={index + 1}
-                      className={`flex w-full font-bold sm:font-medium items-center justify-center gap-2 text-3xl uppercase text-asisDark sm:text-4xl xl:text-5xl`}
-                    >
-                      {word}
-                    </p>
-                </>
+                <p
+                  key={index + 1}
+                  className={`flex w-full items-center justify-center gap-2 text-3xl font-bold uppercase text-asisDark sm:text-4xl sm:font-medium xl:text-5xl`}
+                >
+                  {word}
+                </p>
               );
             })}
           </div>
         </div>
         <div className="flex w-full justify-end">
-          <h2 className="flex w-3/4 flex-col font-comforter text-5xl sm:text-[7vw] uppercase leading-tight sm:w-full ">
-            <span className="sm:text-right">Coming</span> <span className="text-right sm:text-left">Soon!</span>
+          <h2 className="flex w-3/4 flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
+            <span className="sm:text-right">Coming</span>{" "}
+            <span className="text-right sm:text-left">Soon!</span>
           </h2>
         </div>
       </article>
       <div className="relative flex h-full basis-[70%] items-end justify-center pt-[10vh] sm:basis-[45.5%] sm:items-center sm:pb-[3.9vh] sm:pt-[11.8vh]">
-        <img src="/eclipse.svg" alt="eclipse" className="fixed sm:hidden w-full scale-150 -z-10 -bottom-10" />
+        <img
+          src="/eclipse.svg"
+          alt="eclipse"
+          className="fixed -bottom-10 -z-10 w-full scale-150 sm:hidden"
+        />
         <div className="absolute bottom-0 hidden w-full justify-center rounded-t-full sm:flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +71,9 @@ const SelectedOneCS = ({ product, setNavType }) => {
                 width="512"
                 height="61.8301"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feBlend
                   mode="normal"
                   in="SourceGraphic"
@@ -84,7 +91,7 @@ const SelectedOneCS = ({ product, setNavType }) => {
         <img
           src={`${import.meta.env.VITE_BLOB_URL}${product?.images[0]}`}
           alt="product image"
-          className="h-[60vh] object-contain sm:h-full"
+          className="pointer-events-none h-[60vh] object-contain sm:h-full"
         />
       </div>
     </section>

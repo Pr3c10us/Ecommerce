@@ -14,12 +14,16 @@ const SelectedThree = ({ product, setNavType }) => {
   const restDesc = words.slice(60).join(" ");
 
   return (
-    <section className="flex h-full w-full flex-col justify-center px-[5.2vw] py-[10vh] lg:px-[10.4vw]">
+    <section className="flex h-full w-screen flex-col px-[5.2vw] py-[14vh] sm:justify-center lg:px-[10.4vw]">
       <article className="mb-[6vh] flex">
-        <div className="hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
-          <img src="/spade.svg" alt="spade logo" className="w-[18vw]" />
+        <div className="text- hidden w-[18vw] flex-col items-center text-center font-extrabold uppercase lg:flex">
+          <img
+            src="/spade.svg"
+            alt="spade logo"
+            className="pointer-events-none w-[18vw]"
+          />
           <p className="w-[18vw] text-center">
-            An <span className="text-gray-600">acees</span> creation
+            An <span className="text-gray-500">acees</span> creation
           </p>
         </div>
         <div className="grid sm:grid-cols-2">
@@ -28,32 +32,31 @@ const SelectedThree = ({ product, setNavType }) => {
               return (
                 <p
                   key={index + 1}
-                  className={`flex w-full items-center justify-center text-2xl font-semibold uppercase text-asisDark sm:gap-2 sm:text-4xl xl:text-5xl `}
+                  className={`flex w-full items-center justify-center text-2xl uppercase text-asisDark sm:gap-2 sm:text-4xl xl:text-5xl `}
                 >
                   {word}
                 </p>
               );
             })}
           </div>
-          <p className="flex items-center text-xs font-semibold sm:text-base lg:max-w-[29vw] xl:text-lg">
-            {halfDesc}
+          <p className="flex items-center text-xs font-medium sm:text-base lg:max-w-[29vw] xl:text-lg">
+            {halfDesc},
           </p>
-          <p className="text-xs font-semibold sm:col-span-2 sm:text-base xl:text-lg">
-            {restDesc}
+          <p className="text-xs font-medium sm:col-span-2 sm:text-base xl:text-lg">
             {restDesc}
           </p>
         </div>
       </article>
       {!product?.isComingSoon && (
-        <Link
-          className="flex w-full items-center justify-center"
-          to={`/product/${product?.product._id}`}
-        >
-          <button className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2 md:text-lg">
+        <div className="flex w-full items-center justify-center">
+          <Link
+            to={`/product/${product?.product._id}`}
+            className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2"
+          >
             View Product{" "}
             <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
-          </button>
-        </Link>
+          </Link>
+        </div>
       )}
     </section>
   );

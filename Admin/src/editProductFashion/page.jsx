@@ -27,6 +27,8 @@ const EditProduct = () => {
     "accessories",
     "others",
   ]);
+  const [gender, setGender] = React.useState(["male", "female", "unisex"]);
+
   const [fileList, setFileLIst] = React.useState([]);
   const [images, setImages] = React.useState(productDetails.images || []);
   const lorem =
@@ -34,6 +36,9 @@ const EditProduct = () => {
 
   const [selectedCategory, setSelectedCategory] = React.useState(
     productDetails?.category?.toLowerCase(),
+  );
+  const [selectedGender, setSelectedGender] = React.useState(
+    productDetails?.gender?.toLowerCase(),
   );
   const [countInStock, setCountInStock] = React.useState([]);
   React.useEffect(() => {
@@ -49,6 +54,7 @@ const EditProduct = () => {
       setCountInStock(res.data.countInStock);
       setImages(res.data.images);
       setSelectedCategory(res.data.category);
+      setSelectedGender(res.data.gender);
       setComingSoon(res.data.comingSoon);
       formik.setFieldValue("name", res.data.name);
       formik.setFieldValue("price", res.data.price);
@@ -82,6 +88,7 @@ const EditProduct = () => {
         brief: values.brief,
         comingSoon: comingSoon,
         category: selectedCategory,
+        gender: selectedGender,
         countInStock: countInStock,
       };
 
@@ -264,6 +271,27 @@ const EditProduct = () => {
                 </p>
               ) : null}
             </div>
+          </div>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Gender
+          </label>
+          <div className="flex w-full flex-wrap gap-4 text-asisDark ">
+            {gender.map((item, index) => (
+              <button
+                type="button"
+                key={index}
+                className={`${
+                  selectedGender == item
+                    ? "bg-asisDark text-white"
+                    : "border border-asisDark bg-transparent text-asisDark"
+                } rounded px-4 py-2 font-normal capitalize`}
+                onClick={() => setSelectedGender(item)}
+              >
+                {item}
+              </button>
+            ))}
           </div>
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">

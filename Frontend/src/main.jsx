@@ -7,7 +7,7 @@ import HomePage from "./homePage/page.jsx";
 import HomePage2 from "./homePage/page2.jsx";
 import BrandPage from "./brandPage/page.jsx";
 import SuperSpecialCategory from "./superSpecialCategory/page.jsx";
-import Shop from "./shop/page.jsx";
+import Store from "./store/page.jsx";
 import Product from "./product/page.jsx";
 import Checkout from "./checkout/page.jsx";
 import Receipt from "./receipt/page.jsx";
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
         element: <SuperSpecialCategory />,
       },
       {
-        path: "/shop",
-        element: <Shop />,
+        path: "/store",
+        element: <Store />,
       },
       {
         path: "/product/:id",

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import homeLogo from "../assets/icons/homeLogo.svg";
-import Marquee from "../components/marquee";
 import Loading from "../components/loading";
 import VowelItalicizer from "../components/vowelItalicizer";
 import Carousel from "../components/carousel";
@@ -37,7 +36,6 @@ const Page = () => {
       <div className="flex w-full justify-center px-4">
         <img src={homeLogo} alt="homeLogo" className="h-12 md:h-24" />
       </div>
-      <Marquee />
       <article className="flex h-full w-full max-w-5xl flex-1 flex-col md:gap-4">
         <h1 className="px-10 text-center text-2xl font-normal uppercase md:text-left md:text-4xl md:font-semibold">
           Our newest products
@@ -68,7 +66,7 @@ const Page = () => {
                     </div>
                     <p className="font-normal">{product.description}</p>
                     <Link
-                      className="flex mx-2 w-auto gap-x-2 items-center justify-center max-w-xs border-2 border-asisDark px-2 py-1 text-sm md:px-4 md:py-2 md:text-base"
+                      className="mx-2 flex w-auto max-w-xs items-center justify-center gap-x-2 border-2 border-asisDark px-2 py-1 text-sm md:px-4 md:py-2 md:text-base"
                       to={`/product/${product._id}`}
                     >
                       View Product
@@ -101,18 +99,24 @@ const Page = () => {
       </article>
       <div className="flex w-full flex-col items-center justify-start gap-2 px-[15vw] md:flex-row md:items-start md:justify-center">
         <div className=" grid w-full grid-cols-2 gap-x-2 md:flex md:w-auto">
-          <Link to={"/login"} className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
+          <Link
+            to={"/login"}
+            className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1"
+          >
             Login
           </Link>
-          <Link to={"/signup"} className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1">
+          <Link
+            to={"/signup"}
+            className="border border-asisDark px-6 py-2 font-semibold capitalize md:py-1"
+          >
             Sign Up
           </Link>
         </div>
         <Link
-          to="/shop"
+          to="/store"
           className="w-full bg-asisDark px-6 py-2 text-center capitalize text-white md:w-auto md:py-1"
         >
-          Continue to shop as guest
+          Continue to store as guest
         </Link>
       </div>
     </section>

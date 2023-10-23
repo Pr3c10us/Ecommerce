@@ -41,7 +41,7 @@ const Page = () => {
   }
 
   return (
-    <main className="flex h-full flex-col gap-20 px-4 py-7 lg:py-14">
+    <main className="flex h-full flex-col gap-20 px-4 py-[10.4vh]">
       <Product_detail id={id} data={data} ShowCart={ShowCart} />
       {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
     </main>

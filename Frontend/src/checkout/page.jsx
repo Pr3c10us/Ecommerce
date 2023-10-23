@@ -3,7 +3,7 @@ import Order from "./components/order";
 import CheckoutCart from "./components/checkoutCart";
 const Page = () => {
   return (
-    <main className="flex items-stretch ">
+    <main className="flex items-stretch py-[5vh]">
       <Order />
 
       <CheckoutCart />

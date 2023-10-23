@@ -35,11 +35,11 @@ const Page = () => {
 
 
   return (
-    <main className=" flex h-full flex-col">
+    <main className=" flex h-full flex-col bg-[url">
       <img
         src="/bg.png"
         alt="Vite Logo"
-        class="fixed -z-10 h-screen w-screen object-cover"
+        className="fixed -z-10 h-screen w-screen object-cover"
       />
       <Toaster position="top-center" />
       {location.pathname !== "/" && (

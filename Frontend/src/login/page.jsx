@@ -25,7 +25,7 @@ const Page = () => {
         )
         .then((res) => {
           toast.success("Signed in successfully");
-          navigate("/shop");
+          navigate("/store");
         })
         .catch((error) => {
           if (error.response) {
@@ -55,9 +55,11 @@ const Page = () => {
         className="flex flex-col items-center gap-8"
         onSubmit={formik.handleSubmit}
       >
-        <header className="flex flex-col text-center w-full justify-center">
+        <header className="flex w-full flex-col justify-center text-center">
           <h1 className="text-2xl font-medium capitalize">Sign in</h1>
-          <p className="text-asisDark ml-2">Login to your Asis account for extra benefits</p>
+          <p className="ml-2 text-asisDark">
+            Login to your Asis account for extra benefits
+          </p>
         </header>
         <section className="grid w-full max-w-lg gap-x-5 gap-y-4 px-4">
           <Input

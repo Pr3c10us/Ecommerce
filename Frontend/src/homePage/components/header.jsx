@@ -3,6 +3,8 @@ import { GiShop } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import Cart from "../../components/cart";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { setCart } from "../../../redux/asis";
 
 const Header = ({ type }) => {
   const [hideCart, setHideCart] = React.useState(false);
@@ -33,7 +35,7 @@ const Header = ({ type }) => {
         <Cart setHideCart={setHideCart} cartData={cartData.products} />
       )}
       {type == 1 ? (
-        <nav className="fixed inset-x-0 top-0 z-10  flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold">
+        <nav className="fixed inset-x-0 top-0 z-10  flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-medium">
           <button
             onClick={() => {
               setHideCart((prev) => !prev);
@@ -53,17 +55,19 @@ const Header = ({ type }) => {
             {" "}
             <img src="/spade.svg" alt="spade logo" className="w-4 sm:w-6" />
           </div>
-          <Link to="/shop">
-            <GiShop className="h-6 w-6 sm:hidden sm:w-4" />{" "}
-            <p className="mb-1 hidden items-center gap-x-2 uppercase sm:flex">
-              Shop
+               <Link to="/store" className="flex items-center mb-1 gap-1">
+
+                    <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
+
+            <p className="hidden items-center gap-x-2 uppercase sm:flex">
+              Store
             </p>
           </Link>
         </nav>
       ) : (
         <>
           {/* Desktop */}
-          <nav className="fixed inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end font-bold sm:flex">
+          <nav className="fixed inset-x-0 top-0 z-10 hidden h-[8.3vh] w-full items-end font-medium sm:flex">
             <div className="flex basis-[55.5%] justify-between px-[10vw]">
               <button
                 onClick={() => {
@@ -82,10 +86,12 @@ const Header = ({ type }) => {
                 </p>
               </button>
 
-              <Link to="/shop">
-                <GiShop className="h-6 w-6 sm:hidden sm:w-4" />{" "}
-                <p className="mb-1 hidden items-center gap-x-2 uppercase sm:flex">
-                  Shop
+                   <Link to="/store" className="flex items-center mb-1 gap-1">
+
+                        <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
+
+                <p className="hidden items-center gap-x-2 uppercase sm:flex">
+                  Store
                 </p>
               </Link>
             </div>
@@ -97,7 +103,7 @@ const Header = ({ type }) => {
             </div>
           </nav>
           {/* mobile */}
-          <nav className="fixed inset-x-0 top-0 z-10 flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-bold sm:hidden">
+          <nav className="fixed inset-x-0 top-0 z-10 flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-medium sm:hidden">
             <button
               onClick={() => {
                 setHideCart((prev) => !prev);
@@ -118,10 +124,12 @@ const Header = ({ type }) => {
               {" "}
               <img src="/spade.svg" alt="spade logo" className="w-4 sm:w-6" />
             </div>
-            <Link to="/shop">
-              <GiShop className="h-6 w-6 sm:hidden sm:w-4" />{" "}
-              <p className="mb-1 hidden items-center gap-x-2 uppercase sm:flex">
-                Shop
+                 <Link to="/store" className="flex items-center mb-1 gap-1">
+
+                      <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
+
+              <p className="hidden items-center gap-x-2 uppercase sm:flex">
+                Store
               </p>
             </Link>
           </nav>

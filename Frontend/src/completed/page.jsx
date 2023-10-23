@@ -61,9 +61,7 @@ const OrderComplete = () => {
               src={`${import.meta.env.VITE_BLOB_URL}${products[0].images[0]}`}
               alt="thankyouImg"
             />
-            <h2 className="text-2xl font-bold uppercase">
-              {products[0].name}
-            </h2>
+            <h2 className="text-2xl font-bold uppercase">{products[0].name}</h2>
             <p className="text-xs font-medium">{products[0].brief}</p>
             <Link
               className="mr-auto flex w-auto max-w-xs items-center justify-center gap-x-2 border-2 border-asisDark px-2 py-1 text-sm font-medium md:px-4 md:py-2 md:text-base"
@@ -106,9 +104,8 @@ const OrderComplete = () => {
                     "text-red-500"
                   }`}
                   >
-                    {orderInfo.paymentStatus}{
-                      orderInfo.paymentStatus == "processing" && ". . ."
-                    }
+                    {orderInfo.paymentStatus}
+                    {orderInfo.paymentStatus == "processing" && ". . ."}
                   </span>{" "}
                 </span>
                 <span className="flex flex-col gap-2 leading-6 sm:flex-row sm:items-center">
@@ -122,7 +119,7 @@ const OrderComplete = () => {
                 </span>
                 <Link
                   className="ml-auto flex w-auto max-w-xs items-center justify-center gap-x-2 border-b-2 border-b-asisDark px-1 py-0.5 text-sm font-medium capitalize italic"
-                  to={`/shop`}
+                  to={`/store`}
                 >
                   Continue Shopping
                   <img src={arrow} alt="arrow" className="w-4 rotate-45" />

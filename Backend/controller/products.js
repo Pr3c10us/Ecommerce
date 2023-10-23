@@ -48,7 +48,7 @@ const createProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
     // get name query from request
-    const { name, category, specialCategories, gender, collaborations } =
+    let { name, category, specialCategories, gender, collaborations, sort } =
         req.query;
 
     // create a query object to filter result and for search attribute add admin to it
@@ -76,9 +76,16 @@ const getProducts = async (req, res) => {
     }
 
     // get products for admin
-    let result = Product.find(queryObject)
-        .select("-admin -createdAt -updatedAt -__v")
-        .sort({ createdAt: -1 });
+    let result = Product.find(queryObject).select(
+        "-admin -createdAt -updatedAt -__v"
+    );
+
+    if (sort) {
+        const sortList = sort.split(",").join(" ");
+        result = result.sort(sortList);
+    } else {
+        result = result.sort("-createdAt");
+    }
 
     // #################################################################
     // Set up Pagination

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import SelectedOne from "./pages/selectedOne";
 import SelectedOneCS from "./pages/selectedOneCS";
 import SelectedThree from "./pages/selectedThree";
@@ -10,6 +10,8 @@ import Header from "./components/header";
 
 const page2 = () => {
   const navigate = useNavigate();
+
+  const bodyRef = useRef(null)
 
   const [displayProduct, setDisplayProduct] = React.useState(null);
   const [fallbackProducts, setFallbackProducts] = React.useState([]);
@@ -35,11 +37,11 @@ const page2 = () => {
           setLoading(false);
         } catch (error) {
           console.log(error);
-          // navigate("/shop");
+          // navigate("/store");
         }
       } else {
         console.log(error);
-        // navigate("/shop");
+        // navigate("/store");
       }
     }
   };
@@ -57,10 +59,10 @@ const page2 = () => {
   }
 
   return (
-    <main className="flex h-screen flex-col items-center">
+    <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
       <Header type={navType} />
       {displayProduct != null ? (
-        <Displayed product={displayProduct} setNavType={setNavType} />
+        <Displayed bodyRef={bodyRef} product={displayProduct} setNavType={setNavType} />
       ) : (
         <></>
       )}
