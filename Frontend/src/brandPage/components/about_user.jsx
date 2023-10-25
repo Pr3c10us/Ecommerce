@@ -59,8 +59,8 @@ const About_user = () => {
             </p>
           </article>
         </section>
-        <article className="relative h-[100%] w-[100%] basis-[45%]  max-md:h-[100%] max-md:w-[100%]">
-          <div className="mt-[20px] flex h-[100%] w-[100%] items-center justify-center  max-md:h-[100%] ">
+        <article className="relative h-[100%] w-[100%] basis-[45%] ">
+          <div className="mt-[20px] flex h-[100%] w-[100%] items-center justify-center">
             <img
               src={about_img}
               alt="about_img"

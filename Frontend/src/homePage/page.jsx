@@ -8,6 +8,8 @@ import axios from "axios";
 import Displayed from "./pages/displayed";
 import Displayed2 from "./pages/displayed2";
 import Header from "./components/header";
+import Loading from "../components/loading";
+import { AnimatePresence, motion } from "framer-motion";
 
 const page2 = () => {
   const navigate = useNavigate();
@@ -51,18 +53,20 @@ const page2 = () => {
     handleFetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex h-[100svh] items-center justify-center sm:h-screen">
-        <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900"></div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return ;
+  // }
 
   return (
-    <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
-      <Header type={navType} />
-      {/* {displayProduct != null ? (
+    <AnimatePresence>
+      {loading ? (
+        <motion.div key="loading">
+          <Loading />
+        </motion.div>
+      ) : (
+        <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
+          <Header type={navType} />
+          {/* {displayProduct != null ? (
         <Displayed
           bodyRef={bodyRef}
           product={displayProduct}
@@ -71,16 +75,18 @@ const page2 = () => {
       ) : (
         <></>
       )} */}
-      {displayProduct != null ? (
-        <Displayed2
-          bodyRef={bodyRef}
-          product={displayProduct}
-          setNavType={setNavType}
-        />
-      ) : (
-        <></>
+          {displayProduct != null ? (
+            <Displayed2
+              bodyRef={bodyRef}
+              product={displayProduct}
+              setNavType={setNavType}
+            />
+          ) : (
+            <></>
+          )}
+        </main>
       )}
-    </main>
+    </AnimatePresence>
   );
 };
 

@@ -5,6 +5,7 @@ import Product_detail from "./component/product_detail";
 import Loading from "../components/loading";
 import axios from "axios";
 import SpecialCategory from "../components/specialcategory";
+import { AnimatePresence,motion } from "framer-motion";
 
 const Page = () => {
   const { id } = useParams();
@@ -36,15 +37,21 @@ const Page = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  
 
   return (
-    <main className="flex h-full flex-col gap-20 px-4 py-[10.4vh]">
-      <Product_detail id={id} data={data} ShowCart={ShowCart} />
-      {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
-    </main>
+    <AnimatePresence>
+      {isLoading ? (
+        <motion.div key="loading">
+          <Loading />
+        </motion.div>
+      ) : (
+        <main className="flex h-full flex-col gap-20 px-[10vw] py-[10.4vh] ">
+          <Product_detail id={id} data={data} ShowCart={ShowCart} />
+          {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
+        </main>
+      )}
+    </AnimatePresence>
   );
 };
 

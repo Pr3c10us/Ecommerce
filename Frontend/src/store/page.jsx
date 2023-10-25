@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import backToTop from "../assets/icons/back_to_top.svg";
 import ShopProducts from "./component/shop_products";
-
 import Loading from "../components/loading";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FrameOne from "./frames/frameOne";
 import Filter from "./component/filter";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Page = () => {
   // States
@@ -15,13 +15,14 @@ const Page = () => {
   const [gender, setGender] = useState("");
   const [sort, setSort] = useState("-createdAt");
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   // API URL
   const apiUrl = `${
     import.meta.env.VITE_BACKEND_URL
   }products?&category=${category}&sort=${sort}&gender=${gender}`;
+  
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -56,90 +57,94 @@ const Page = () => {
     setIsLoading(false);
   }, [category, sort, gender]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
-    <main className="flex flex-col items-center py-[10.4vh]">
-      <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:pl-20 md:text-[6vw]">
-        Acees Store
-      </h1>
-      <Filter
-        category={category}
-        sort={sort}
-        setSort={setSort}
-        setCategory={setCategory}
-        gender={gender}
-        setGender={setGender}
-      />
-      {data?.products?.length > 1 ? (
-        <>
-          <section className="grid w-full gap-y-20 px-4 sm:grid-cols-2 md:px-0 2xl:grid-cols-3">
-            {data?.products?.map((product, index) => {
-              return (
-                <Link
-                  to={`/product/${product._id}`}
-                  className="flex cursor-pointer flex-col gap-4"
-                >
-                  <div
-                    key={product._id}
-                    className="group relative aspect-[8/10] w-full"
-                  >
-                    <img
-                      src={`${import.meta.env.VITE_BLOB_URL}${
-                        product.images[0]
-                      }`}
-                      alt={product.name}
-                      className=" absolute hidden h-full w-full object-contain object-center group-hover:hidden md:block"
-                    />
-                    <img
-                      src={`${import.meta.env.VITE_BLOB_URL}${
-                        product.images[1] || product.images[0]
-                      }`}
-                      alt={product.name}
-                      className="absolute h-full w-full bg-white object-cover object-top group-hover:block md:hidden"
-                    />
-                  </div>
-
-                  <div className="text-center font-playfair capitalize">
-                    <h3 className="text-lg font-bold uppercase">
-                      {product?.name}
-                    </h3>
-                    <p>{product?.gender}</p>
-                    <p>
-                      {Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(product?.price)}{" "}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
-          </section>
-        </>
+    <AnimatePresence>
+      {isLoading ? (
+        <motion.div key="loading">
+          <Loading />
+        </motion.div>
       ) : (
-        <section className="flex w-full flex-col">
-          <h1 className="w-full text-center font-playfair text-[8vw]">
-            No Matches Found
+        <main className="flex flex-col items-center py-[10.4vh]">
+          <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:pl-20 md:text-[6vw]">
+            Acees Store
           </h1>
-          <p className="w-full text-center font-playfair">
-            Please try another filter
-          </p>
-        </section>
+          <Filter
+            category={category}
+            sort={sort}
+            setSort={setSort}
+            setCategory={setCategory}
+            gender={gender}
+            setGender={setGender}
+          />
+          {data?.products?.length > 1 ? (
+            <>
+              <section className="grid w-full gap-y-20 px-4 sm:grid-cols-2 md:px-0 2xl:grid-cols-3">
+                {data?.products?.map((product, index) => {
+                  return (
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="flex cursor-pointer flex-col gap-4"
+                    >
+                      <div
+                        key={product._id}
+                        className="group relative aspect-[8/10] w-full"
+                      >
+                        <img
+                          src={`${import.meta.env.VITE_BLOB_URL}${
+                            product.images[0]
+                          }`}
+                          alt={product.name}
+                          className=" absolute hidden h-full w-full object-contain object-center group-hover:hidden md:block"
+                        />
+                        <img
+                          src={`${import.meta.env.VITE_BLOB_URL}${
+                            product.images[1] || product.images[0]
+                          }`}
+                          alt={product.name}
+                          className="absolute h-full w-full bg-white object-cover object-top group-hover:block md:hidden"
+                        />
+                      </div>
+
+                      <div className="text-center font-playfair capitalize">
+                        <h3 className="text-lg font-bold uppercase">
+                          {product?.name}
+                        </h3>
+                        <p>{product?.gender}</p>
+                        <p>
+                          {Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }).format(product?.price)}{" "}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </section>
+            </>
+          ) : (
+            <section className="flex w-full flex-col">
+              <h1 className="w-full text-center font-playfair text-[8vw]">
+                No Matches Found
+              </h1>
+              <p className="w-full text-center font-playfair">
+                Please try another filter
+              </p>
+            </section>
+          )}
+          {data?.products?.length > 1 && (
+            <img
+              src={backToTop}
+              alt="back_to_top"
+              className="fixed  bottom-8 right-2 w-12 cursor-pointer md:right-10"
+              onClick={() => {
+                handleScrollToTop();
+              }}
+            />
+          )}
+        </main>
       )}
-      {data?.products?.length > 1 && (
-        <img
-          src={backToTop}
-          alt="back_to_top"
-          className="fixed  bottom-8 right-2 w-12 cursor-pointer md:right-10"
-          onClick={() => {
-            handleScrollToTop();
-          }}
-        />
-      )}
-    </main>
+    </AnimatePresence>
   );
 };
 

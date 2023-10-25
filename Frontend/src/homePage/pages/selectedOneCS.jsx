@@ -38,9 +38,9 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
         )}
       </AnimatePresence> */}
       <section className="flex h-full w-screen flex-col-reverse sm:flex-row">
-        <article className="flex basis-[30%] flex-col justify-center gap-5 px-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0">
+        <article className="flex basis-[30%] flex-col justify-center gap-5 px-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0 mb-4">
           <div className="flex grid-cols-2 items-center justify-start lg:justify-end">
-            <div className="hidden w-[18vw] flex-col items-center text-center text-sm font-extrabold uppercase lg:flex">
+            <div className="hidden min-w-[260px] flex-col items-center text-center text-sm font-extrabold uppercase lg:flex">
               <img
                 src="/spade.svg"
                 alt="spade logo"
@@ -50,7 +50,7 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
                 An <span className="text-gray-500 ">acees</span> creation
               </p>
             </div>
-            <div className="flex flex-col px-4 font-cinzel sm:gap-6 ">
+            <div className="flex h-full w-full flex-col items-center justify-center px-4 font-cinzel sm:gap-6">
               {product?.name.split(" ").map((word, index) => {
                 return (
                   <p
@@ -64,10 +64,19 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
             </div>
           </div>
           <div className="flex w-full justify-end">
-            <h2 className="flex w-3/4 flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
-              <span className="text-right">Coming</span>{" "}
-              <span className="text-left">Soon!</span>
+            <h2 className="flex w-full flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
+              <span className="text-right">Newest </span>{" "}
+              <span className="text-left sm:text-center">Collection!</span>
             </h2>
+          </div>
+          <div className="flex items-center justify-center sm:justify-end">
+            <Link
+              to={`/product/${product?.product._id}`}
+              className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:px-6 sm:py-2 sm:text-sm"
+            >
+              View Product{" "}
+              <img src="/arrow.svg" alt="arrow" className="w-3 sm:w-4" />
+            </Link>
           </div>
         </article>
         <div className="relative flex h-full basis-[70%] items-end justify-center pt-[10vh] sm:basis-[45.5%] sm:items-center sm:pb-[3.9vh] sm:pt-[11.8vh]">

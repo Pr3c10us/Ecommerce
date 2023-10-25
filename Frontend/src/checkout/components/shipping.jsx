@@ -143,13 +143,12 @@ const Shipping = ({ setActiveStep }) => {
           </div>
         ))}
       </section>
-      <section className="border-2 border-asisDark px-8 py-4 text-xs max-sm:px-2">
+      <section className="border-2 border-asisDark px-2 py-4 text-xs sm:px-8">
         <div className="mb-2 flex items-start justify-between">
           <h2 className="">Contact Information: </h2>
           <p className=" text-right font-semibold ">
             {` `}
-            {firstName},{lastName},{email},
-            <br className="hidden max-sm:block"></br>
+            {firstName},{lastName},{email},<br className="block sm:hidden"></br>
             {phone}
           </p>
         </div>
@@ -165,14 +164,14 @@ const Shipping = ({ setActiveStep }) => {
       <section className="flex items-end justify-between gap-1 pl-4 ">
         <button
           onClick={() => setActiveStep(1)}
-          className="h-min border-b-2 border-asisDark px-4 pb-1.5 text-sm font-bold max-sm:mt-3 max-sm:text-xs "
+          className="mt-3 h-min border-b-2 border-asisDark px-4 pb-1.5 text-xs font-bold sm:mt-auto sm:text-sm "
         >
           Go back
         </button>
         <button
           disabled={isLoading}
           onClick={handleAddShippingDetails}
-          className={`w-9/12 rounded-md bg-asisDark py-3 font-bold  text-white max-sm:w-8/12 max-sm:text-xs ${
+          className={`w-8/12 rounded-md bg-asisDark py-3 text-xs  font-bold text-white sm:w-9/12 sm:text-base ${
             selectedShipping ? "" : "opacity-50 "
           }`}
         >

@@ -202,13 +202,13 @@ export default function CheckoutForm({
         onChange={(e) => setEmail(e.target.value)}
       />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <section className="border-2 border-asisDark px-8 py-4 text-sm max-sm:px-3 md:text-base">
+      <section className="border-2 border-asisDark sm:px-8 py-4 text-sm px-3 md:text-base">
         <div className="my-2 flex justify-between ">
           <h2 className="">Contact Information: </h2>
-          <p className="text-xs font-semibold max-sm:text-right md:text-sm">
+          <p className="text-xs font-semibold sm:text-left text-right md:text-sm">
             {` `}
-            {firstName},{lastName},<br className="hidden max-sm:block"></br>
-            {email2},<br className="hidden max-sm:block"></br>
+            {firstName},{lastName},<br className="sm:hidden block"></br>
+            {email2},<br className="sm:hidden :block"></br>
             {phone}
           </p>
         </div>
@@ -216,7 +216,7 @@ export default function CheckoutForm({
           <h2 className="">Shipping Address: </h2>
           <p className="text-right text-xs font-semibold md:text-sm">
             {` `}
-            {address},{city},<br className="hidden max-sm:block"></br>
+            {address},{city},<br className="sm:hidden block"></br>
             {state},{country},{zip}
           </p>
         </div>
@@ -228,7 +228,7 @@ export default function CheckoutForm({
           </p>
         </div>
       </section>
-      <section className="flex items-end justify-end gap-4 pl-4 max-sm:justify-between">
+      <section className="flex items-end sm:justify-end gap-4 pl-4 justify-between">
         <button
           type="button"
           onClick={cancelOrder}
