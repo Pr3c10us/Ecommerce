@@ -46,7 +46,7 @@ const Page = () => {
           <Loading />
         </motion.div>
       ) : (
-        <main className="flex h-full flex-col gap-20 px-[10vw] py-[10.4vh] ">
+        <main className="flex h-full flex-col gap-20 sm:px-[10vw] py-[10.4vh] ">
           <Product_detail id={id} data={data} ShowCart={ShowCart} />
           {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
         </main>

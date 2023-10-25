@@ -21,7 +21,7 @@ const Loading = () => {
         duration: 1,
         ease: [0.76, 0, 0.24, 1],
       }}
-      className="fixed left-0 top-0 z-50 h-screen w-screen bg-black"
+      className="fixed left-0 top-0 z-50 h-[100svh] w-screen bg-black"
     >
       <div className="flex h-full flex-col justify-around">
         <img
