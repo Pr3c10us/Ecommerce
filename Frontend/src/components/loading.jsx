@@ -7,9 +7,16 @@ const Loading = () => {
   return (
     <motion.div
       key={"loading"}
-      initial={{ y: 0 }}
+      initial={{ y: 0}}
       animate={{ y: 0 }}
-      exit={{ y: window.innerHeight }}
+      exit={{
+        y: window.innerHeight,
+        transition: {
+          duration: 1,
+          delay: 2,
+          ease: [0.76, 0, 0.24, 1],
+        },
+      }}
       transition={{
         duration: 1,
         ease: [0.76, 0, 0.24, 1],
