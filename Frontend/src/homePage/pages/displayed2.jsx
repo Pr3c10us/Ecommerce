@@ -25,7 +25,7 @@ const Displayed = ({ product, setNavType, bodyRef }) => {
       // drag="x"
       // dragConstraints={bodyRef}
       // dragMomentum={false}
-      className="flex h-[100svh] w-max min-w-full flex-nowrap items-start justify-start sm:h-screen"
+      className="flex  w-max min-w-full flex-nowrap items-start justify-start h-screen"
     >
       {show == 1 && (
         <SelectedOneCS
