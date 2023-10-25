@@ -63,11 +63,11 @@ const page2 = () => {
 
   return (
     <AnimatePresence>
-      {loading && (
+      {loading ? (
         <motion.div key="loading">
           <Loading />
         </motion.div>
-      )}
+      ):(
         <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
           <Header type={navType} />
           {/* {displayProduct != null ? (
@@ -89,7 +89,7 @@ const page2 = () => {
             <></>
           )}
         </main>
-    
+    )}
     </AnimatePresence>
   );
 };
