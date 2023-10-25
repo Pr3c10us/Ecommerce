@@ -29,7 +29,9 @@ const page2 = () => {
       );
       const displayProduct = data.product;
       setDisplayProduct(displayProduct);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     } catch (error) {
       if (error.response.status === 404) {
         try {
@@ -37,7 +39,9 @@ const page2 = () => {
             `${import.meta.env.VITE_BACKEND_URL}products?limit=5`,
           );
           setFallbackProducts(data.products);
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
         } catch (error) {
           console.log(error);
           // navigate("/store");

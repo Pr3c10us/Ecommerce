@@ -66,14 +66,18 @@ const Payment = ({ setActiveStep }) => {
     try {
       await getShippingMethods();
       let { data } = await axios.post(apiUrl, orderDetails);
-      const { clientSecret, _id,totalPrice } = data.order;
+      const { clientSecret, _id, totalPrice } = data.order;
       setClientSecret(clientSecret);
       setOrderId(_id);
       setTotal(totalPrice);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   useEffect(() => {

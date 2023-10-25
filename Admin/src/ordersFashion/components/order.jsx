@@ -61,23 +61,30 @@ const Order = ({ orders }) => {
       console.log(data);
       toast.success("Order Status Updated");
 
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.msg || "Order Status Update Failed");
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   return (
     <section className="flex flex-col gap-8 font-medium">
       {orders.map((order) => (
-        <section className="flex flex-col gap-6 rounded-d border-b-2 border-asisDark/50 md:px-8 py-8 hadow-xl ">
+        <section className="rounded-d hadow-xl flex flex-col gap-6 border-b-2 border-asisDark/50 py-8 md:px-8 ">
           <div className="grid flex-col gap-2 lg:md:grid-cols-2">
             <h2 className="text-lg font-semibold uppercase underline lg:col-span-2">
               Products Bought
             </h2>
             {order?.products.map((item, index) => (
-              <div className="grid sm:flex grid-cols-2 gap-4" key={item?._id || index}>
+              <div
+                className="grid grid-cols-2 gap-4 sm:flex"
+                key={item?._id || index}
+              >
                 {item.product?.images[0] ? (
                   <img
                     src={`${import.meta.env.VITE_BLOB_URL}${
@@ -92,7 +99,7 @@ const Order = ({ orders }) => {
                   </div>
                 )}
 
-                <div className="grid md:grid-cols-3 gap-4 text-sm md:text-base">
+                <div className="grid gap-4 text-sm md:grid-cols-3 md:text-base">
                   <p className="md:col-span-3">Product Name: {item.name}</p>
                   <p>Size: {item.size}</p>
                   <p>Price: {item.price}</p>
@@ -105,7 +112,7 @@ const Order = ({ orders }) => {
             <h2 className="text-lg font-semibold uppercase underline">
               Customer Contact INFO
             </h2>
-            <div className="grid md:grid-cols-2 gap-2">
+            <div className="grid gap-2 md:grid-cols-2">
               <p className="">
                 Name: {order?.firstName} {order?.lastName}
               </p>
@@ -117,7 +124,7 @@ const Order = ({ orders }) => {
             <h2 className="text-lg font-semibold uppercase underline">
               SHIPPING ADDRESS
             </h2>
-            <div className="grid md:grid-cols-2 gap-2">
+            <div className="grid gap-2 md:grid-cols-2">
               <p className="">Street: {order?.address}</p>
               <p className="">City: {order?.city}</p>
               <p className="">State: {order?.state}</p>
@@ -126,10 +133,12 @@ const Order = ({ orders }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase underline">SHIPPING Method</h2>
+            <h2 className="text-lg font-semibold uppercase underline">
+              SHIPPING Method
+            </h2>
             {order?.shipping.map((item, index) => {
               return (
-                <div className="grid md:grid-cols-2 gap-2" key={index}>
+                <div className="grid gap-2 md:grid-cols-2" key={index}>
                   <p className="">Shipping Method: {item.name}</p>
                   <p className="">Price [$]: {item.fee}</p>
                 </div>
@@ -137,13 +146,15 @@ const Order = ({ orders }) => {
             })}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase underline">Payment</h2>
+            <h2 className="text-lg font-semibold uppercase underline">
+              Payment
+            </h2>
 
-            <div className="grid md:grid-cols-2 gap-2">
+            <div className="grid gap-2 md:grid-cols-2">
               <p className="">
                 Payment Status:{" "}
                 <span
-                  className={`uppercase font-bold text-lg ${
+                  className={`text-lg font-bold uppercase ${
                     order.paymentStatus == "successful" && "text-green-500"
                   } 
                    ${order.paymentStatus == "processing" && "text-orange-500"}
@@ -159,9 +170,11 @@ const Order = ({ orders }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-semibold uppercase underline">Order Status</h2>
+            <h2 className="text-lg font-semibold uppercase underline">
+              Order Status
+            </h2>
 
-            <div className="flex flex-wrap sm:flex-row gap-4">
+            <div className="flex flex-wrap gap-4 sm:flex-row">
               <Select
                 options={options}
                 defaultValue={options.find(

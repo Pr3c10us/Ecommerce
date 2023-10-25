@@ -5,7 +5,7 @@ import Product_detail from "./component/product_detail";
 import Loading from "../components/loading";
 import axios from "axios";
 import SpecialCategory from "../components/specialcategory";
-import { AnimatePresence,motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Page = () => {
   const { id } = useParams();
@@ -22,10 +22,14 @@ const Page = () => {
     try {
       let { data } = await axios.get(apiUrl);
       setData(data);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   useEffect(() => {
@@ -37,8 +41,6 @@ const Page = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  
-
   return (
     <AnimatePresence>
       {isLoading ? (
@@ -46,7 +48,7 @@ const Page = () => {
           <Loading />
         </motion.div>
       ) : (
-        <main className="flex h-full flex-col gap-20 sm:px-[10vw] py-[10.4vh] ">
+        <main className="flex h-full flex-col gap-20 py-[10.4vh] sm:px-[10vw] px-4">
           <Product_detail id={id} data={data} ShowCart={ShowCart} />
           {/* <SpecialCategory category={data.category} name={name} except={data._id} /> */}
         </main>

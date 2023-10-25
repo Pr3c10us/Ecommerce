@@ -84,11 +84,15 @@ const AddImages = ({ fileList, setImages, images, id }) => {
         toast.success("Image added successfully");
         setImages([...images, newData.images[0]]);
         setImage(null);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       } catch (error) {
         console.log(error);
         toast.error(error?.response?.data?.msg || "Something went wrong");
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       }
     }
   };

@@ -25,10 +25,14 @@ const SpecialCategory = ({ name, category, except }) => {
           `${import.meta.env.VITE_BACKEND_URL}products/?limit=10`,
         );
         setProducts(data.products);
-        return setIsLoading(false);
+        return setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       }
       setProducts(data.products);
-      return setIsLoading(false);
+      return setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }

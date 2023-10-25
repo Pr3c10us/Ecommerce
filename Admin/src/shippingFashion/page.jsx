@@ -21,7 +21,9 @@ const ShippingFashion = () => {
         `${import.meta.env.VITE_BACKEND_URL}shippings`,
       );
       setShippings(res.data.shipping);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       console.log(res.data);
     };
     getProductDetails();
@@ -91,7 +93,9 @@ const ShippingFashion = () => {
       console.log(error);
       toast.error(error.response.data.msg || "Something went wrong");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
@@ -99,7 +103,7 @@ const ShippingFashion = () => {
     return <Loading />;
   }
   return (
-    <main className="py-12 space-y-8 font-medium">
+    <main className="space-y-8 py-12 font-medium">
       <form className="flex flex-col gap-y-12" onSubmit={formik.handleSubmit}>
         <section className="flex w-full flex-col gap-y-4">
           <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">

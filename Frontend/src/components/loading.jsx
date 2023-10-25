@@ -2,39 +2,44 @@
 import React from "react";
 import Marquee from "./marquee";
 import { AnimatePresence, motion } from "framer-motion";
+import Curve from "./curve";
 
 const Loading = () => {
   return (
     <motion.div
-      key={"loading"}
-      initial={{ y: 0}}
-      animate={{ y: 0 }}
+      initial={{
+        y: `calc(100% + 100px)`,
+      }}
+      animate={{
+        y: "0",
+        transition: { duration: 2, ease: [0.76, 0, 0.24, 1] },
+      }}
       exit={{
-        y: window.innerHeight,
+        y: `calc(100% + 100px)`,
         transition: {
-          duration: 1,
-          delay: 2,
+          duration: 2,
           ease: [0.76, 0, 0.24, 1],
         },
       }}
-      transition={{
-        duration: 1,
-        ease: [0.76, 0, 0.24, 1],
-      }}
-      className="fixed left-0 top-0 z-50 h-[100svh] w-screen bg-black"
+      className="fixed z-10 flex h-screen w-screen flex-col items-center justify-center bg-black"
     >
-      <div className="flex h-full flex-col justify-around">
-        <img
-          src="/whiteSpade.svg"
-          className="absolute left-1/2 top-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/4 lg:w-1/5"
-        />
-        <div>
-          <Marquee direction={1} word={"· ACEES · ACEES"} />
-        </div>
-        <div>
-          <Marquee direction={-1} word={"· ACEES · ACEES "} />
-        </div>
-      </div>
+      <Curve />
+      <img
+        src="/whiteSpade.svg"
+        className="absolute left-1/2 top-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/4 lg:w-1/5"
+      />
+      <motion.h1
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        exit={{
+          y: 100,
+          transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
+        }}
+        transition={{ duration: 1,delay:0.5, ease: [0.76, 0, 0.24, 1] }}
+        className="text-center font-cinzel text-[30vw] leading-none text-white mix-blend-difference sm:text-[20vw] lg:text-[15vw]"
+      >
+        ACEES
+      </motion.h1>
     </motion.div>
   );
 };

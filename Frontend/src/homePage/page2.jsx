@@ -19,7 +19,9 @@ const Page = () => {
       `${import.meta.env.VITE_BACKEND_URL}products?limit=4`,
     );
     setData(data.products);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
   useEffect(() => {
     getData();

@@ -9,7 +9,7 @@ import left_button from "../assets/icons/left_button.svg";
 import right_button from "../assets/icons/right_button.svg";
 import up_arrow from "../assets/icons/up_arrow.svg";
 import arrow from "../assets/icons/upRightArrow.svg";
-import { AnimatePresence,motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -43,19 +43,21 @@ const OrderComplete = () => {
       if (productData.length <= 0) {
         navigate("/store");
       }
-      return setIsLoading(false);
+      return setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       navigate("/store");
-      return setIsLoading(false);
+      return setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
   useEffect(() => {
     handleEffect();
   }, []);
-
-  
 
   if (redirectStatus == "succeeded") {
     return (

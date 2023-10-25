@@ -19,10 +19,14 @@ const OrdersFashion = () => {
         `${import.meta.env.VITE_BACKEND_URL}orders/admin?orderId=${orderId}`,
       );
       setOrders(data.orders);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
   const handleSearch = async () => {
@@ -46,7 +50,7 @@ const OrdersFashion = () => {
   }, []);
   useEffect(() => {
     handleSearch();
-  }, [orderId, status,paymentStatus]);
+  }, [orderId, status, paymentStatus]);
 
   const statusOptions = [
     { value: "", label: "All Status" },
@@ -103,11 +107,8 @@ const OrdersFashion = () => {
 
   return (
     <main className="flex flex-col gap-8 py-12">
-
       <section className="flex w-full flex-wrap place-items-center justify-end gap-4 ">
-        <h1 className="w-full text-lg font-semibold">
-          Sort and search
-        </h1>
+        <h1 className="w-full text-lg font-semibold">Sort and search</h1>
         <div className="relative w-full max-w-md">
           <label htmlFor="Search" className="sr-only">
             {" "}

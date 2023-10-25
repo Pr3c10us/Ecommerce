@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
+import { useEffect, useState } from "react";
+import Axios from "axios";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -8,19 +8,23 @@ const useFetch = (url) => {
 
   useEffect(() => {
     const abortCont = new AbortController();
-    
+
     async function fetchData() {
       try {
         const response = await Axios.get(url, { signal: abortCont.signal });
         setData(response.data);
         setError(null);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       } catch (error) {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
         setError(error);
       }
     }
-    
+
     fetchData();
 
     return () => {

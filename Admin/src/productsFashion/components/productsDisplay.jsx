@@ -21,11 +21,15 @@ const ProductsDisplay = () => {
       axios.defaults.withCredentials = true;
       const res = await axios.get(apiUrl);
       setProducts(res.data.products);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       // navigate("/", { replace: true });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   useEffect(() => {

@@ -22,18 +22,22 @@ const Page = () => {
   const apiUrl = `${
     import.meta.env.VITE_BACKEND_URL
   }products?&category=${category}&sort=${sort}&gender=${gender}`;
-  
+
   const fetchData = async () => {
     try {
       setIsLoading(true);
       axios.defaults.withCredentials = true;
       const res = await axios.get(apiUrl);
       setData(res.data);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       navigate("/", { replace: true });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   // Handle scroll to top
@@ -48,13 +52,17 @@ const Page = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchData();
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
   // Scroll to top on component mount
   useEffect(() => {
     setIsLoading(true);
     fetchData();
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, [category, sort, gender]);
 
   return (

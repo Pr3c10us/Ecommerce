@@ -52,8 +52,12 @@ const CheckoutCart = () => {
         navigate("/store", { replace: true });
       }
       dispatch(setCart(response.data));
-      setIsLoading(false);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.error("Failed to load cart items", {
@@ -64,7 +68,9 @@ const CheckoutCart = () => {
           borderRadius: "4px",
         },
       });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   React.useEffect(() => {
@@ -101,7 +107,9 @@ const CheckoutCart = () => {
         },
       });
       await handleGetCartContent();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.error("Failed to remove item, try again", {
@@ -112,7 +120,9 @@ const CheckoutCart = () => {
           borderRadius: "4px",
         },
       });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
@@ -134,7 +144,9 @@ const CheckoutCart = () => {
         },
       });
       await handleGetCartContent();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.error("Failed to remove item, try again", {
@@ -145,7 +157,9 @@ const CheckoutCart = () => {
           borderRadius: "4px",
         },
       });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 

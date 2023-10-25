@@ -38,7 +38,9 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
           borderRadius: "4px",
         },
       });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
       setQuantity(data.quantity);
@@ -50,7 +52,9 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
           borderRadius: "4px",
         },
       });
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 

@@ -40,12 +40,16 @@ const Shipping = ({ setActiveStep }) => {
         },
       });
 
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
       return;
     }
     dispatch(setOrder({ shipping: selectedShipping }));
     setActiveStep(3);
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   };
 
   const handleFetchShippingDetails = async () => {
@@ -74,10 +78,14 @@ const Shipping = ({ setActiveStep }) => {
           data.shipping.find((item) => item._id === selectedShipping).fee,
         );
       }
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
   useEffect(() => {

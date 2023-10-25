@@ -60,7 +60,9 @@ const EditProduct = () => {
       formik.setFieldValue("price", res.data.price);
       formik.setFieldValue("description", res.data.description);
       formik.setFieldValue("brief", res.data.brief);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       console.log(res.data);
     };
     getProductDetails();
@@ -163,7 +165,9 @@ const EditProduct = () => {
       console.log(error);
       toast.error(error.response.data.msg || "Something went wrong");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
