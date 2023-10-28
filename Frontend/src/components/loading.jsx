@@ -8,7 +8,7 @@ const Loading = () => {
   return (
     <motion.div
       initial={{
-        y: `calc(100% + 100px)`,
+        // y: `calc(100% + 100px)`,
       }}
       animate={{
         y: "0",
