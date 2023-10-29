@@ -4,8 +4,8 @@ const Product = require("../models/products.js");
 const mongoose = require("mongoose");
 
 const editCart = async (req, res) => {
-    const { productId, size, quantity } = req.body;
-    if (!productId || !size || !quantity) {
+    const { productId, measurements, quantity, id } = req.body;
+    if (!productId || measurements.length <= 0 || !quantity) {
         throw new BadRequestError("Please fill all the fields");
     }
 
@@ -18,16 +18,6 @@ const editCart = async (req, res) => {
         throw new BadRequestError("Product doesn't exist");
     }
 
-    // check if size with quantity is available
-    const sizeExist = product.countInStock.find(
-        (item) => item.size === size && item.quantity >= quantity
-    );
-    if (!sizeExist) {
-        throw new BadRequestError(
-            `Stock size ${size} is less than ${quantity}`
-        );
-    }
-
     const cartId = req.cart;
 
     if (!cartId) {
@@ -35,7 +25,7 @@ const editCart = async (req, res) => {
             products: [
                 {
                     product,
-                    size,
+                    measurements,
                     quantity,
                     price: product.price,
                     totalPrice: product.price * quantity,
@@ -60,37 +50,33 @@ const editCart = async (req, res) => {
             "products.product",
             "name price images"
         );
-        const productExist = cart.products.find(
-            (item) =>
-                item.product._id.toString() === product._id.toString() &&
-                item.size === size
-        );
+        console.log(id);
 
-        // if (productExist) res.send("true");
-        // if (!productExist) res.send("false");
-        // console.log(productExist);
-        // return
-        if (productExist) {
-            // if (productExist.quantity + quantity > sizeExist.quantity) {
-            //     throw new BadRequestError(
-            //         `quantity of size ${size} in stock is less than ${quantity}`
-            //     );
-            // }
-            // productExist.quantity += quantity;
-            // productExist.totalPrice += product.price * quantity;
-            productExist.quantity = quantity;
-            productExist.totalPrice = product.price * quantity;
-            // cart.totalPrice += product.price * quantity;
+        if (id ) {
+            if (!mongoose.isValidObjectId(id)) {
+                throw new BadRequestError("Product Id is not valid");
+            }
+            const productExist = cart.products.find(
+                (item) => item._id.toString() === id.toString()
+            );
+
+            if (!productExist) {
+                throw new BadRequestError("Product doesn't exist in cart");
+            } else {
+                productExist.quantity = quantity;
+                productExist.totalPrice = product.price * quantity;
+            }
         } else {
             cart.products.push({
                 product,
-                size,
+                measurements,
                 quantity,
                 price: product.price,
                 totalPrice: product.price * quantity,
-            });
-            // cart.totalPrice += product.price * quantity;
+            }); // cart.totalPrice += product.price * quantity;
         }
+
+        
 
         cart.totalPrice = cart.products.reduce(
             (acc, item) => acc + item.totalPrice,
@@ -128,13 +114,13 @@ const removeItem = async (req, res) => {
         throw new BadRequestError("Cart doesn't exist");
     }
 
-    const { productId, size } = req.body;
+    const { id } = req.body;
     console.log(req.body);
 
-    if (!productId || !size) {
+    if (!id) {
         throw new BadRequestError("Please fill all the fields");
     }
-    if (!mongoose.isValidObjectId(productId)) {
+    if (!mongoose.isValidObjectId(id)) {
         throw new BadRequestError("Product Id is not valid");
     }
 
@@ -145,9 +131,7 @@ const removeItem = async (req, res) => {
     }
 
     const productExist = cart.products.find(
-        (item) =>
-            item.product.toString() === productId.toString() &&
-            item.size === size
+        (item) => item._id.toString() === id.toString()
     );
 
     if (!productExist) {
@@ -155,9 +139,7 @@ const removeItem = async (req, res) => {
     }
 
     cart.products = cart.products.filter(
-        (item) =>
-            item.product.toString() !== productId.toString() ||
-            item.size !== size
+        (item) => item._id.toString() !== id.toString()
     );
 
     cart.totalPrice = cart.products.reduce(

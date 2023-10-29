@@ -15,14 +15,23 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
   const handleAddQuantity = async () => {
     setIsLoading(true);
     if (quantity <= 0) {
-      return removeItemFromCart(data.product._id, data.size);
+      setQuantity(data.quantity);
+      return toast.error("Quantity must be greater than 0", {
+        style: {
+          border: "1px solid red",
+          padding: "8px 16px",
+          color: "red",
+          borderRadius: "4px",
+        },
+      });
     }
     try {
       axios.defaults.withCredentials = true;
       const item = {
         productId: data.product._id,
-        size: data.size,
+        measurements: data.measurements,
         quantity: quantity,
+        id: data._id,
       };
       const { data: cartData } = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}carts`,
@@ -95,17 +104,30 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
             {/* remove item from cart */}
             <button
               className="cursor-pointer text-[0.5rem] font-semibold capitalize underline sm:text-xs "
-              onClick={() => removeItemFromCart(data.product._id, data.size)}
+              onClick={() => removeItemFromCart(data._id)}
             >
               remove Item
             </button>
           </div>
-          <div className="mt-3 flex h-full w-full items-center justify-between text-xs font-semibold text-black">
+          <div className="mt-3 flex h-full w-full justify-between text-xs font-semibold text-black">
             <div>
               {/* <p>{data.color}</p> */}
-              <p>
-                size: <span className="text-sm font-bold">{data.size}</span>
-              </p>
+              <p>measurements:</p>
+              {data.measurements.map((measurement, index) => {
+                return (
+                  <section className="flex gap-2 font-normal capitalize">
+                    <label htmlFor="name" className="flex font-semibold">
+                      {measurement?.name}
+                    </label>
+                    <div className="relative flex items-end gap-1">
+                      <p className="">{measurement?.value}</p>
+                      <p className="text-[0.6rem] font-light">
+                        {measurement?.unit}
+                      </p>
+                    </div>
+                  </section>
+                );
+              })}
             </div>
             <div className="flex h-full place-items-center items-center gap-1 ">
               <input

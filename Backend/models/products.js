@@ -56,17 +56,20 @@ const productSchema = new mongoose.Schema(
                 ref: "SpecialCategory",
             },
         ],
-        countInStock: [
+        measurements: [
             {
-                size: {
+                name: {
                     type: String,
                 },
-                quantity: {
-                    type: Number,
-                    default: 0,
+                unit: {
+                    type: String,
+                    default: "inches",
                 },
             },
         ],
+        urlForSizeChart: {
+            type: String,
+        },
     },
     {
         timestamps: true,

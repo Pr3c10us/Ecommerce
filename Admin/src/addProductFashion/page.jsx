@@ -5,8 +5,8 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import CountInStock from "./components/countInStock";
-import CountInStockDisplay from "./components/countInStockDisplay";
+import Measurements from "./components/measurements";
+import MeasurementsDisplay from "./components/measurementsDisplay";
 import AddImages from "./components/addImages";
 
 const AddProduct = () => {
@@ -24,8 +24,8 @@ const AddProduct = () => {
     "lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.";
 
   const [selectedCategory, setSelectedCategory] = React.useState("clothes");
-  const [selectedGender,setSelectedGender] = React.useState("unisex")
-  const [countInStock, setCountInStock] = React.useState([]);
+  const [selectedGender, setSelectedGender] = React.useState("unisex");
+  const [measurements, setMeasurements] = React.useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -33,12 +33,13 @@ const AddProduct = () => {
       price: 0,
       description: "",
       brief: "",
+      urlForSizeChart: "",
     },
 
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      if (countInStock.length === 0) {
-        toast.error("Please add atleast one size");
+      if (measurements.length === 0) {
+        toast.error("Please add atleast one name");
         setSubmitting(false);
         return;
       }
@@ -52,12 +53,13 @@ const AddProduct = () => {
       data.append("price", values.price);
       data.append("description", values.description);
       data.append("brief", values.brief);
+      data.append("urlForSizeChart", values.urlForSizeChart);
       data.append("category", selectedCategory);
-      data.append("gender",selectedGender)
+      data.append("gender", selectedGender);
       data.append("comingSoon", comingSoon);
-      countInStock.forEach((item, index) => {
-        data.append(`countInStock[${index}][size]`, item.size);
-        data.append(`countInStock[${index}][quantity]`, item.quantity);
+      measurements.forEach((item, index) => {
+        data.append(`measurements[${index}][name]`, item.name);
+        data.append(`measurements[${index}][unit]`, item.unit);
       });
       fileList.forEach((file) => {
         data.append("images", file);
@@ -81,6 +83,13 @@ const AddProduct = () => {
 
       description: Yup.string().required("description is Required"),
       brief: Yup.string().required("brief is Required"),
+      // add yup validator for a url making sure it is a url
+      urlForSizeChart: Yup.string()
+        .required("url For SizeChart is Required")
+        .matches(
+          /^(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]$/i,
+          "Invalid url",
+        ),
     }),
   });
   return (
@@ -207,6 +216,7 @@ const AddProduct = () => {
             ))}
           </div>
         </section>
+
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
             Category
@@ -230,18 +240,40 @@ const AddProduct = () => {
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
-            Count in Stock
+            Measurements
           </label>
           <section className="flex w-full flex-col gap-y-4 text-asisDark">
-            <CountInStock
-              countInStock={countInStock}
-              setCountInStock={setCountInStock}
+            <Measurements
+              measurements={measurements}
+              setMeasurements={setMeasurements}
             />
-            <CountInStockDisplay
-              countInStock={countInStock}
-              setCountInStock={setCountInStock}
+            <MeasurementsDisplay
+              measurements={measurements}
+              setMeasurements={setMeasurements}
             />
           </section>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Size Chart Link
+          </label>
+          <div className="flex w-full flex-col text-asisDark ">
+            <input
+              type="text"
+              id="urlForSizeChart"
+              name="urlForSizeChart"
+              {...formik.getFieldProps("urlForSizeChart")}
+              className=" w-full border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"
+            />
+            <div className="h-2">
+              {formik.touched.urlForSizeChart &&
+              formik.errors.urlForSizeChart ? (
+                <p className="text-xs capitalize text-red-500">
+                  {formik.errors.urlForSizeChart}
+                </p>
+              ) : null}
+            </div>
+          </div>
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
@@ -283,9 +315,9 @@ export default AddProduct;
 //   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.',
 //   brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 //   category: 'Shirts',
-//   countInStock: [
-//     [Object: null prototype] { size: 'xl', quantity: '5' },
-//     [Object: null prototype] { size: 'lg', quantity: '5' },
-//     [Object: null prototype] { size: 'md', quantity: '5' },
-//     [Object: null prototype] { size: 'sm', quantity: '5' }
+//   measurements: [
+//     [Object: null prototype] { name: 'xl', unit: '5' },
+//     [Object: null prototype] { name: 'lg', unit: '5' },
+//     [Object: null prototype] { name: 'md', unit: '5' },
+//     [Object: null prototype] { name: 'sm', unit: '5' }
 //   ],

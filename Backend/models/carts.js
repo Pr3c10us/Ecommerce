@@ -8,9 +8,20 @@ const cartSchema = new mongoose.Schema(
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Product",
                 },
-                size: {
-                    type: String,
-                },
+                measurements: [
+                    {
+                        name: {
+                            type: String,
+                        },
+                        unit: {
+                            type: String,
+                            default: "inches",
+                        },
+                        value: {
+                            type: Number,
+                        },
+                    },
+                ],
                 quantity: {
                     type: Number,
                     default: 1,

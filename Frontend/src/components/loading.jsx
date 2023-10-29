@@ -21,7 +21,7 @@ const Loading = () => {
           ease: [0.76, 0, 0.24, 1],
         },
       }}
-      className="fixed z-10 flex h-screen w-screen flex-col items-center justify-center bg-black"
+      className="fixed z-50 flex h-screen w-screen flex-col items-center justify-center bg-black"
     >
       <Curve />
       <img

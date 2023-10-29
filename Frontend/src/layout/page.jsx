@@ -6,6 +6,7 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setCart } from "../../redux/asis";
+import { AnimatePresence } from "framer-motion";
 
 const Page = () => {
   const location = useLocation();
@@ -33,7 +34,6 @@ const Page = () => {
     handleGetCartContent();
   }, []);
 
-
   return (
     <main className="flex h-full flex-col">
       <Toaster position="top-center" />
@@ -44,9 +44,11 @@ const Page = () => {
         />
       )}
 
-      {hideCart && (
-        <Cart setHideCart={setHideCart} cartData={cartData.products} />
-      )}
+      <AnimatePresence>
+        {hideCart && (
+          <Cart setHideCart={setHideCart} cartData={cartData.products} />
+        )}
+      </AnimatePresence>
 
       <Outlet />
     </main>

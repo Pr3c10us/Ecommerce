@@ -79,7 +79,7 @@ const SelectedTwo = ({ product, setNavType, direction }) => {
               })}
             </div>
           </div>
-          <div className="flex items-center justify-center sm:justify-end">
+          <div className="flex items-center justify-center">
             <Link
               to={`/product/${product?.product._id}`}
               className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2"
@@ -97,7 +97,7 @@ const SelectedTwo = ({ product, setNavType, direction }) => {
             onClick={() => {
               setPlay((prev) => !prev);
             }}
-            // src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
+            src={`${import.meta.env.VITE_BLOB_URL}${product?.video}`}
             loop
             autoPlay
             placeholder={`${import.meta.env.VITE_BLOB_URL}${

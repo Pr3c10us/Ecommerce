@@ -42,9 +42,20 @@ const orderSchema = new mongoose.Schema(
                 name: {
                     type: String,
                 },
-                size: {
-                    type: String,
-                },
+                measurements: [
+                    {
+                        name: {
+                            type: String,
+                        },
+                        unit: {
+                            type: String,
+                            default: "inches",
+                        },
+                        value: {
+                            type: Number,
+                        },
+                    },
+                ],
                 quantity: {
                     type: Number,
                 },

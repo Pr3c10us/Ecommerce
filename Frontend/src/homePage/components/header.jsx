@@ -5,6 +5,7 @@ import Cart from "../../components/cart";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { setCart } from "../../../redux/asis";
+import { AnimatePresence } from "framer-motion";
 
 const Header = ({ type }) => {
   const [hideCart, setHideCart] = React.useState(false);
@@ -31,9 +32,11 @@ const Header = ({ type }) => {
 
   return (
     <>
-      {hideCart && (
-        <Cart setHideCart={setHideCart} cartData={cartData.products} />
-      )}
+      <AnimatePresence>
+        {hideCart && (
+          <Cart setHideCart={setHideCart} cartData={cartData.products} />
+        )}
+      </AnimatePresence>
       {type == 1 ? (
         <nav className="fixed inset-x-0 top-0 z-10  flex h-[8.3vh] w-full items-end justify-between px-[10vw] font-medium">
           <button
@@ -55,10 +58,8 @@ const Header = ({ type }) => {
             {" "}
             <img src="/spade.svg" alt="spade logo" className="w-4 sm:w-6" />
           </div>
-               <Link to="/store" className="flex items-center mb-1 gap-1">
-
-                    <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
-
+          <Link to="/store" className="mb-1 flex items-center gap-1">
+            <GiShop className="h-6 w-6 sm:h-5 sm:w-5" />{" "}
             <p className="hidden items-center gap-x-2 uppercase sm:flex">
               Store
             </p>
@@ -86,10 +87,8 @@ const Header = ({ type }) => {
                 </p>
               </button>
 
-                   <Link to="/store" className="flex items-center mb-1 gap-1">
-
-                        <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
-
+              <Link to="/store" className="mb-1 flex items-center gap-1">
+                <GiShop className="h-6 w-6 sm:h-5 sm:w-5" />{" "}
                 <p className="hidden items-center gap-x-2 uppercase sm:flex">
                   Store
                 </p>
@@ -124,10 +123,8 @@ const Header = ({ type }) => {
               {" "}
               <img src="/spade.svg" alt="spade logo" className="w-4 sm:w-6" />
             </div>
-                 <Link to="/store" className="flex items-center mb-1 gap-1">
-
-                      <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}
-
+            <Link to="/store" className="mb-1 flex items-center gap-1">
+              <GiShop className="h-6 w-6 sm:h-5 sm:w-5" />{" "}
               <p className="hidden items-center gap-x-2 uppercase sm:flex">
                 Store
               </p>

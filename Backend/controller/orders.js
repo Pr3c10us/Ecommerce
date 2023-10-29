@@ -21,7 +21,7 @@ const createOrderStripe = async (req, res) => {
         return {
             product: item.product,
             name: item.product.name,
-            size: item.size,
+            measurements: item.measurements,
             quantity: item.quantity,
             price: item.price,
         };

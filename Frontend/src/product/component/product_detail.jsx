@@ -7,6 +7,7 @@ import { setCart } from "../../../redux/asis";
 import AddToCartLoading from "./addToCartLoading";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { HiArrowLongRight } from "react-icons/hi2";
+import Measurements from "./measurements";
 
 const Product_detail = ({ data }) => {
   // States
@@ -14,28 +15,14 @@ const Product_detail = ({ data }) => {
   const [showDescription, setShowDescription] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
+  const [isFilled, setIsFilled] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [measurements, setMeasurements] = React.useState([]);
 
   const dispatch = useDispatch();
 
-  function getFormattedTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
-    const milliseconds = String(now.getMilliseconds()).padStart(3, "0");
-
-    return `${hours}:${minutes}:${seconds}:${milliseconds}`;
-  }
-  const [currentTime, setCurrentTime] = useState(getFormattedTime());
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(getFormattedTime());
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    setMeasurements(data.measurements);
   }, []);
 
   // Effect to set initial selected image
@@ -48,12 +35,22 @@ const Product_detail = ({ data }) => {
   // Handle adding to cart
   const handleAddToCart = async () => {
     setIsAddingToCart(true);
-    if (selectedSize) {
+    // check if all item value in measurements is filled
+    measurements.forEach((measurement) => {
+      if (
+        !measurement.value ||
+        measurement.value === "" ||
+        measurement.value <= 0
+      ) {
+        setIsFilled(false);
+      }
+    });
+    if (isFilled) {
       try {
         axios.defaults.withCredentials = true;
         let item = {
           productId: data._id,
-          size: selectedSize,
+          measurements,
           quantity,
         };
         const response = await axios.put(
@@ -90,7 +87,7 @@ const Product_detail = ({ data }) => {
         setIsAddingToCart(false);
       }
     } else {
-      toast.error("Select a size to add to cart", {
+      toast.error("Fill all measurements", {
         style: {
           border: "1px solid red",
           padding: "8px 16px",
@@ -102,6 +99,20 @@ const Product_detail = ({ data }) => {
     }
   };
 
+  useEffect(() => {
+    measurements.forEach((measurement) => {
+      if (
+        !measurement.value ||
+        // measurement.value === "" ||
+        measurement.value <= 0
+      ) {
+        setIsFilled(false);
+      } else {
+        setIsFilled(true);
+      }
+    });
+  }, [measurements]);
+
   return (
     <section className="product_container flex h-full flex-col border-asisDark lg:border-y-2">
       {/* Product details */}
@@ -109,7 +120,7 @@ const Product_detail = ({ data }) => {
         <section className="flex h-full flex-col items-stretch gap-5 lg:flex-row">
           {/* Thumbnail images */}
           <div className="flex flex-col-reverse lg:flex-row">
-            <section className="gap flex basis-7 flex-wrap items-center justify-center py-5 lg:flex-col lg:justify-start">
+            <section className="gap-2 flex basis-7 flex-wrap items-center justify-center py-5 lg:flex-col lg:justify-start">
               {data.images?.map((img, index) => (
                 <div
                   key={index}
@@ -123,7 +134,7 @@ const Product_detail = ({ data }) => {
                   <img
                     src={`${import.meta.env.VITE_BLOB_URL}${img}`}
                     alt="collection_img"
-                    className="h-16 w-14 object-cover object-center "
+                    className="h-16 w-14 object-contain object-top "
                   />
                 </div>
               ))}
@@ -142,13 +153,17 @@ const Product_detail = ({ data }) => {
           {/* Product information */}
           {!data.comingSoon && (
             <section className="w-full flex-1 space-y-6 py-4 lg:px-4">
-              <p className=" text-3xl font-medium uppercase text-asisDark">
+              <p className=" font-cinzel text-3xl font-bold uppercase text-asisDark">
                 {data.name}
+              </p>
+              {/* Description */}
+              <p className="text-sm font-medium capitalize text-asisDark">
+                {data.brief}
               </p>
               {/* Quantity */}
               <section className="flex flex-col gap-2">
                 {" "}
-                <h2 className="font-semibold">Quantity</h2>
+                <h2 className="font-medium">Quantity</h2>
                 <div className="flex items-center">
                   <div
                     onClick={() => {
@@ -173,36 +188,24 @@ const Product_detail = ({ data }) => {
                   </div>
                 </div>
               </section>
-              {/* Sizes */}
+
+              {/* Measurements */}
               <section className="flex flex-col gap-2">
-                <h2 className="font-semibold">SIZE</h2>
-                <div className="flex flex-wrap gap-x-5 gap-y-3">
-                  {data.countInStock?.map((sizeData, index) => (
-                    <div
-                      key={index}
-                      onClick={() => setSelectedSize(sizeData.size)}
-                      className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${
-                        selectedSize === sizeData.size
-                          ? " border-asisDark text-asisDark"
-                          : " border-[#C4C4C4] text-[#C4C4C4]"
-                      }`}
-                    >
-                      {sizeData.size}
-                    </div>
-                  ))}
-                </div>{" "}
+                <h2 className="font-medium">MEASUREMENTS</h2>
+                <section className="flex flex-wrap items-center gap-5">
+                  <Measurements
+                    measurements={measurements}
+                    setMeasurements={setMeasurements}
+                  />
+                </section>
               </section>
 
               {/* Additional details */}
               <section className="">
-                {/* Description */}
-                <p className="text-sm font-medium text-asisDark">
-                  {data.brief}
-                </p>
                 {/* Add to cart */}
                 <button
                   className={`relative my-4 flex max-h-12 w-full justify-center rounded  py-4 text-center text-xs font-semibold uppercase ${
-                    selectedSize
+                    isFilled
                       ? "bg-asisDark text-[#FFFFFF]"
                       : "bg-asisDark/70 text-[#C4C4C4]"
                   }`}
@@ -250,7 +253,7 @@ const Product_detail = ({ data }) => {
             </section>
           )}
           {data.comingSoon && (
-            <section className="flex flex-1 flex-col py-4 gap-4">
+            <section className="flex flex-1 flex-col gap-4 py-4">
               <p className="text-3xl font-medium uppercase text-asisDark">
                 {data.name}
               </p>
@@ -259,7 +262,9 @@ const Product_detail = ({ data }) => {
               </div> */}
               <div className="flex items-center gap-4 text-3xl font-bold">
                 <h1>This Product would be</h1>
-                <h2 className="bg-asisDark w-64 text-white p-2">Launching Soon.</h2>
+                <h2 className="w-64 bg-asisDark p-2 text-white">
+                  Launching Soon.
+                </h2>
               </div>
             </section>
           )}

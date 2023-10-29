@@ -39,20 +39,20 @@ const stripeWebhook = async (req, res) => {
             break;
         case "payment_intent.succeeded":
             order.paymentStatus = "successful";
-            // get all the items in the order and subract quantity from the database
-            order.products.forEach(async (product) => {
-                const { product: productId, size, quantity } = product;
-                const productInDb = await Product.findById(productId);
-                productInDb.countInStock = productInDb.countInStock.map(
-                    (item) => {
-                        if (item.size === size) {
-                            item.quantity -= quantity;
-                        }
-                        return item;
-                    }
-                );
-                await productInDb.save();
-            });
+            // // get all the items in the order and subract quantity from the database
+            // order.products.forEach(async (product) => {
+            //     const { product: productId, size, quantity } = product;
+            //     const productInDb = await Product.findById(productId);
+            //     productInDb.countInStock = productInDb.countInStock.map(
+            //         (item) => {
+            //             if (item.size === size) {
+            //                 item.quantity -= quantity;
+            //             }
+            //             return item;
+            //         }
+            //     );
+            //     await productInDb.save();
+            // });
             break;
         // ... handle other event types
         default:

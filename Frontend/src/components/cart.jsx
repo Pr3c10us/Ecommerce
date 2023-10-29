@@ -10,6 +10,8 @@ import { setCart } from "../../redux/asis";
 import SpecialChar from "./specialChar";
 import VowelItalicizer from "./vowelItalicizer";
 import CartItem from "./cartItem";
+import { menuSlide } from "./anim";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Cart = ({ setHideCart }) => {
   const ref = React.useRef(null);
@@ -71,13 +73,12 @@ const Cart = ({ setHideCart }) => {
     console.log(cartData);
   }, []);
 
-  const removeItemFromCart = async (id, size) => {
+  const removeItemFromCart = async (id) => {
     setIsLoading(true);
     try {
       axios.defaults.withCredentials = true;
       const item = {
-        productId: id,
-        size: size,
+        id,
       };
       await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}carts/removeItem`,
@@ -161,15 +162,20 @@ const Cart = ({ setHideCart }) => {
   };
 
   return (
-    <div
+    <motion.nav
+      key={`cart`}
+      variants={menuSlide}
+      initial="initial"
+      animate="enter"
+      exit="exit"
       ref={ref}
-      className="fixed inset-0 z-20 ml-auto bg-white md:inset-auto md:left-8 md:top-14 md:mt-4"
+      className="fixed w-full md:w-1/3 z-20 top-0 bottom-0"
     >
       <div className=" h-full w-full overflow-hidden bg-[url('/bg.png')] bg-left-top uppercase shadow-[-7px_8px_30px_0px_#00000033] md:min-w-[28rem]">
         {isLoading && <CartLoading />}
         {!isLoading && cartData?.products?.length >= 1 ? (
           // Cart with items
-          <section className="p-5">
+          <section className="p-5 h-full">
             <div className="item-center relative flex justify-between border-b-2 border-asisDark pb-4 md:pb-10">
               <div>
                 <p className="text-2xl font-medium uppercase md:text-4xl">
@@ -192,7 +198,7 @@ const Cart = ({ setHideCart }) => {
                 onClick={() => setHideCart(false)}
               />
             </div>
-            <div className="max-h-[60vh] overflow-y-scroll md:max-h-[40vh]">
+            <div className="max-h-[60vh] overflow-y-scroll">
               {cartData.products.map((data, index) => (
                 <CartItem
                   key={data._id}
@@ -268,7 +274,7 @@ const Cart = ({ setHideCart }) => {
           </section>
         )}
       </div>
-    </div>
+    </motion.nav>
   );
 };
 

@@ -5,8 +5,8 @@ import * as Yup from "yup";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import CountInStock from "./components/countInStock";
-import CountInStockDisplay from "./components/countInStockDisplay";
+import Measurements from "./components/measurements";
+import MeasurementsDisplay from "./components/measurementsDisplay";
 import AddImages from "./components/addImages";
 import Loading from "../loading";
 import { FaTrash } from "react-icons/fa";
@@ -40,7 +40,7 @@ const EditProduct = () => {
   const [selectedGender, setSelectedGender] = React.useState(
     productDetails?.gender?.toLowerCase(),
   );
-  const [countInStock, setCountInStock] = React.useState([]);
+  const [measurements, setMeasurements] = React.useState([]);
   React.useEffect(() => {
     console.log(location.pathname.split("/")[2]);
     const getProductDetails = async () => {
@@ -51,7 +51,7 @@ const EditProduct = () => {
         }`,
       );
       setProductDetails((prev) => ({ ...prev, ...res.data }));
-      setCountInStock(res.data.countInStock);
+      setMeasurements(res.data.measurements);
       setImages(res.data.images);
       setSelectedCategory(res.data.category);
       setSelectedGender(res.data.gender);
@@ -60,6 +60,7 @@ const EditProduct = () => {
       formik.setFieldValue("price", res.data.price);
       formik.setFieldValue("description", res.data.description);
       formik.setFieldValue("brief", res.data.brief);
+      formik.setFieldValue("urlForSizeChart", res.data.urlForSizeChart);
       setTimeout(() => {
         setLoading(false);
       }, 2000);
@@ -74,11 +75,12 @@ const EditProduct = () => {
       price: productDetails.price,
       description: productDetails.description,
       brief: productDetails.brief,
+      urlForSizeChart: productDetails.urlForSizeChart,
     },
 
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      if (countInStock.length === 0) {
+      if (measurements.length === 0) {
         toast.error("Please add atleast one size");
         setSubmitting(false);
         return;
@@ -88,10 +90,11 @@ const EditProduct = () => {
         price: values.price,
         description: values.description,
         brief: values.brief,
+        urlForSizeChart: values.urlForSizeChart,
         comingSoon: comingSoon,
         category: selectedCategory,
         gender: selectedGender,
-        countInStock: countInStock,
+        measurements: measurements,
       };
 
       axios
@@ -106,13 +109,17 @@ const EditProduct = () => {
           // navigate("/products");
           console.log(res.data);
           setProductDetails((prev) => ({ ...prev, ...res.data.product }));
-          setCountInStock(res.data.product.countInStock);
+          setMeasurements(res.data.product.measurements);
           setImages(res.data.product.images);
           setSelectedCategory(res.data.product.category);
           formik.setFieldValue("name", res.data.product.name);
           formik.setFieldValue("price", res.data.product.price);
           formik.setFieldValue("description", res.data.product.description);
           formik.setFieldValue("brief", res.data.product.brief);
+          formik.setFieldValue(
+            "urlForSizeChart",
+            res.data.product.urlForSizeChart,
+          );
           setSubmitting(false);
         })
         .catch((err) => {
@@ -127,6 +134,12 @@ const EditProduct = () => {
 
       description: Yup.string().required("description is Required"),
       brief: Yup.string().required("brief is Required"),
+      urlForSizeChart: Yup.string()
+        .required("url For SizeChart is Required")
+        .matches(
+          /^(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]$/i,
+          "Invalid url",
+        ),
     }),
   });
 
@@ -321,18 +334,40 @@ const EditProduct = () => {
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
-            Count in Stock
+            Measurements
           </label>
           <section className="flex w-full flex-col gap-y-4 text-asisDark">
-            <CountInStock
-              countInStock={countInStock}
-              setCountInStock={setCountInStock}
+            <Measurements
+              measurements={measurements}
+              setMeasurements={setMeasurements}
             />
-            <CountInStockDisplay
-              countInStock={countInStock}
-              setCountInStock={setCountInStock}
+            <MeasurementsDisplay
+              measurements={measurements}
+              setMeasurements={setMeasurements}
             />
           </section>
+        </section>
+        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
+          <label className="basis-[20%] capitalize" htmlFor="brief">
+            Size Chart Link
+          </label>
+          <div className="flex w-full flex-col text-asisDark ">
+            <input
+              type="text"
+              id="urlForSizeChart"
+              name="urlForSizeChart"
+              {...formik.getFieldProps("urlForSizeChart")}
+              className=" w-full border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"
+            />
+            <div className="h-2">
+              {formik.touched.urlForSizeChart &&
+              formik.errors.urlForSizeChart ? (
+                <p className="text-xs capitalize text-red-500">
+                  {formik.errors.urlForSizeChart}
+                </p>
+              ) : null}
+            </div>
+          </div>
         </section>
         <section className="flex w-full items-end justify-end gap-4">
           <button
@@ -421,7 +456,7 @@ export default EditProduct;
 //   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempus libero. Morbi a bibendum lacus. Mauris blandit, ipsum id elementum pellentesque, augue augue aliquam risus, non egestas quam dui vitae ipsum. Ut sodales tempus tortor, eget sagittis mauris molestie et. Aliquam placerat augue at ipsum ornare, id egestas elit pulvinar. Morbi a massa aliquet, pellentesque dolor vitae, dignissim felis.',
 //   brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 //   category: 'Shirts',
-//   countInStock: [
+//   measurements: [
 //     [Object: null prototype] { size: 'xl', quantity: '5' },
 //     [Object: null prototype] { size: 'lg', quantity: '5' },
 //     [Object: null prototype] { size: 'md', quantity: '5' },
