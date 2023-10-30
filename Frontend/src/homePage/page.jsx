@@ -29,12 +29,17 @@ const page2 = () => {
       );
       const displayProduct = data.product;
       setDisplayProduct(displayProduct);
+      if (!data.product.name || data.product == {}) {
+        navigate("/store");
+      }
       setTimeout(() => {
         setLoading(false);
       }, 2000);
     } catch (error) {
       if (error.response.status === 404) {
         try {
+          navigate("/store");
+
           const { data } = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}products?limit=5`,
           );
@@ -44,11 +49,11 @@ const page2 = () => {
           }, 2000);
         } catch (error) {
           console.log(error);
-          // navigate("/store");
+          navigate("/store");
         }
       } else {
         console.log(error);
-        // navigate("/store");
+        navigate("/store");
       }
     }
   };
@@ -67,7 +72,7 @@ const page2 = () => {
         <motion.div key="loading">
           <Loading />
         </motion.div>
-      ):(
+      ) : (
         <main className="flex h-screen flex-col overflow-hidden" ref={bodyRef}>
           <Header type={navType} />
           {/* {displayProduct != null ? (
@@ -89,7 +94,7 @@ const page2 = () => {
             <></>
           )}
         </main>
-    )}
+      )}
     </AnimatePresence>
   );
 };

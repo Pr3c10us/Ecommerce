@@ -11,6 +11,8 @@ const {
     replaceVideo,
     addProductImage,
     deleteProductImage,
+    getAllHomeProduct,
+    getHomeProductById,
 } = require("../controller/home");
 
 router
@@ -23,8 +25,10 @@ router
         addHomeProduct
     );
 
+router.route("/all").get(getAllHomeProduct);
 router
     .route("/:id")
+    .get(getHomeProductById)
     .put(adminAuthorization, editHomeProduct)
     .delete(adminAuthorization, deleteHomeProduct);
 

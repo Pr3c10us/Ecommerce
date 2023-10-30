@@ -14,7 +14,7 @@ const addHomeProduct = async (req, res) => {
         throw new BadRequestError("Product name already exist");
     }
 
-    if (req.body.display === "true") {
+    if (req.body.display === true) {
         const displayExist = await Home.findOne({ display: true });
         displayExist.display = false;
         await displayExist.save();
@@ -77,6 +77,42 @@ const getHomeProduct = async (req, res) => {
     res.status(200).json({
         message: "Product fetched successfully",
         product: product[0],
+    });
+};
+
+const getHomeProductById = async (req, res) => {
+    // get product id from request params
+    const { id } = req.params;
+
+    // check if id is valid
+    if (!mongoose.isValidObjectId(id)) {
+        throw new BadRequestError("Invalid product id");
+    }
+
+    // find product by id and delete
+    const product = await Home.findById(id);
+
+    // if product not found throw error
+    if (!product) {
+        throw new NotFoundError("Not Found");
+    }
+
+    res.status(200).json({
+        message: "Product fetched successfully",
+        product,
+    });
+};
+
+const getAllHomeProduct = async (req, res) => {
+    const product = await Home.find({}).populate("product");
+
+    if (product.length === 0) {
+        throw new NotFoundError("No product found");
+    }
+
+    res.status(200).json({
+        message: "Product fetched successfully",
+        product,
     });
 };
 
@@ -178,7 +214,6 @@ const replaceVideo = async (req, res) => {
     // send success message
     res.json({ message: "Video added successfully", video: blobName });
 };
-
 
 const deleteProductImage = async (req, res) => {
     // get product id and image id from request params
@@ -312,6 +347,16 @@ const editHomeProduct = async (req, res) => {
             throw new BadRequestError("Name already exists");
         }
     }
+    console.log(req.body);
+    if (req.body.display == true) {
+        const displayExist = await Home.findOne({ display: true });
+        if (displayExist?._id?.toString() !== id && displayExist) {
+            displayExist.display = false;
+            await displayExist.save();
+        }
+
+        req.body.display = true;
+    }
 
     const newProductInfo = await Home.findByIdAndUpdate(id, req.body, {
         new: true,
@@ -327,6 +372,8 @@ const editHomeProduct = async (req, res) => {
 module.exports = {
     addHomeProduct,
     getHomeProduct,
+    getHomeProductById,
+    getAllHomeProduct,
     editHomeProduct,
     deleteHomeProduct,
     replaceVideo,
