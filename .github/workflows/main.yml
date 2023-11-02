@@ -107,8 +107,8 @@ jobs:
                   host: ${{ secrets.HOST_IP }}
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
-                  source: "Backend/.env"
-                  target: "/var/www/Asis/Backend/.env"
+                  source: "./Backend/.env"
+                  target: "/var/www/Asis/Backend/"
 
             - name: Connect to AWS Lightsail, extract file and delete the file
               uses: appleboy/ssh-action@v0.1.7
