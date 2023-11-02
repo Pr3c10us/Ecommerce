@@ -72,24 +72,13 @@ jobs:
                       else
                         sudo git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
                       fi
-                      cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
-                        # If command1 succeeds
-                        echo "Command 1 succeeded"
-                        # Run another command
-                        sudo npm start
-                      else
-                          # If command1 fails
-                          echo "Command 1 failed"
-                          # Run a different command
-                          sudo npm start
-                      fi
+                      sudo chown -R asis:asis /var/www/Asis
                       if [ ! -d /var/www/Asis/Frontend/dist ]; then
                         sudo mkdir /var/www/Asis/Frontend/dist
                       fi
                       if [ ! -d /var/www/Asis/Admin/dist ]; then
                         sudo mkdir /var/www/Asis/Admin/dist
                       fi
-                      sudo chown -R asis:asis /var/www/Asis
 
             - name: copy file via ssh password
               uses: appleboy/scp-action@v0.1.4
@@ -112,3 +101,33 @@ jobs:
                   target: "/var/www/Asis/Admin/"
                   strip_components: 1
                   rm: true
+            - name: copy env file via ssh password
+              uses: appleboy/scp-action@v0.1.4
+              with:
+                  host: ${{ secrets.HOST_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  source: "Backend/.env"
+                  target: "/var/www/Asis/Backend/"
+
+            - name: Connect to AWS Lightsail, extract file and delete the file
+              uses: appleboy/ssh-action@v0.1.7
+              with:
+                  host: ${{ secrets.HOST_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  passphrase: ""
+                  port: 22
+                  script: |
+                      cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
+                        # If command1 succeeds
+                        echo "Command 1 succeeded"
+                        # Run another command
+                        sudo npm start
+                      else
+                          # If command1 fails
+                          echo "Command 1 failed"
+                          # Run a different command
+                          sudo npm start
+                      fi
+                      
