@@ -6,7 +6,7 @@ import LayoutFashion from "./layoutFashion/page.jsx";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import ProductsFashion from "./productsFashion/page.jsx";
-// import HomePage from "./homepage/page.jsx";
+import HomePage from "./homePage/page.jsx";
 import ThankYouFashion from "./thankYouFashion/page.jsx";
 import OrdersFashion from "./ordersFashion/page.jsx";
 import ShippingFashion from "./shippingFashion/page.jsx";
@@ -14,7 +14,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./root/page.jsx";
 import AddProduct from "./addProductFashion/page";
 import ProductsDisplay from "./productsFashion/components/productsDisplay";
-import HomePageDisplay from "./homepage/components/productsDisplay";
+import HomePageDisplay from "./homePage/components/productsDisplay";
 import EditProduct from "./editProductFashion/page";
 import AddHomePageProduct from "./addHomeProduct/page";
 import EditHomePageProduct from "./editHomeProduct/page";
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
           },
           {
             path: "homepage",
-            // element: <HomePage />,
+            element: <HomePage />,
             children: [
               {
                 path: "",
