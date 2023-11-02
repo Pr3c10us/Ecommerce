@@ -59,7 +59,7 @@ jobs:
                       if [ ! -d /var/www/Asis/Admin/dist ]; then
                         sudo mkdir /var/www/Asis/Admin/dist
                       fi
-                      sudo chown -R asis:asis folder
+                      sudo chown -R asis:asis /var/www/Asis
 
             - name: copy file via ssh password
               uses: appleboy/scp-action@v0.1.4
