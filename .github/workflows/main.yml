@@ -17,6 +17,36 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
+            # Add admin eviroment secrets to /Admin/.env
+            - name: Add admin eviroment secrets to /Admin/.env
+              run: |
+                  echo "CLIENT_ORIGIN_1=${{ secrets.CLIENT_ORIGIN_1 }}" >> Backend/.env
+                  echo "CLIENT_ORIGIN_2=${{ secrets.CLIENT_ORIGIN_2 }}" >> Backend/.env
+                  echo "COOKIE_SECRET=${{ secrets.COOKIE_SECRET }}" >> Backend/.env
+                  echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> Backend/.env
+                  echo "JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }}" >> Backend/.env
+                  echo "PORT=${{ secrets.PORT }}" >> Backend/.env
+                  echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" >> Backend/.env
+                  echo "AZURE_STORAGE_ACCOUNT_NAME=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" >> Backend/.env
+                  echo "ASIS_IMAGE_CONTAINER_NAME=${{ secrets.ASIS_IMAGE_CONTAINER_NAME }}" >> Backend/.env
+                  echo "ASIS_DASHBOARD_IMAGE_CONTAINER_NAME=${{ secrets.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME }}" >> Backend/.env
+                  echo "AZURE_IMAGE_URL=${{ secrets.AZURE_IMAGE_URL }}" >> Backend/.env
+                  echo "STRIPE_SECRETE_KEY=${{ secrets.STRIPE_SECRETE_KEY }}" >> Backend/.env
+                  echo "STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> Backend/.env
+                  echo "STRIPE_WEBHOOK_SECRETE=${{ secrets.STRIPE_WEBHOOK_SECRETE }}" >> Backend/.env
+
+                  echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> Admin/.env
+                  echo "VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }}" >> Admin/.env
+                  echo "VITE_BLOB_URL_DASHBOARD=${{ secrets.VITE_BLOB_URL_DASHBOARD }}" >> Admin/.env
+                  echo "VITE_STRIPE_PUBLIC_KEY=${{ secrets.VITE_STRIPE_PUBLIC_KEY }}" >> Admin/.env
+                  echo "VITE_STRIPE_REDIRECT_URL=${{ secrets.VITE_STRIPE_REDIRECT_URL }}" >> Admin/.env
+
+                  echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> Frontend/.env
+                  echo "VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }}" >> Frontend/.env
+                  echo "VITE_BLOB_URL_DASHBOARD=${{ secrets.VITE_BLOB_URL_DASHBOARD }}" >> Frontend/.env
+                  echo "VITE_STRIPE_PUBLIC_KEY=${{ secrets.VITE_STRIPE_PUBLIC_KEY }}" >> Frontend/.env
+                  echo "VITE_STRIPE_REDIRECT_URL=${{ secrets.VITE_STRIPE_REDIRECT_URL }}" >> Frontend/.env
+                  
             - name: Build and package the code
               run: |
                   ls -la
