@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet,useLocation } from "react-router-dom";
 
-const Products = () => {
+const HomePage = () => {
   const location = useLocation();
   return (
     <main className="space-y-6 pt-7">
@@ -13,4 +13,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default HomePage;

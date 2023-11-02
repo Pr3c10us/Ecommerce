@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import LayoutFashion from "./layoutFashion/page.jsx";
-import LayoutHomePage from "./layoutFashion/page.jsx";
+// import LayoutHomePage from "./layoutFashion/page.jsx";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import ProductsFashion from "./productsFashion/page.jsx";

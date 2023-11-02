@@ -130,7 +130,6 @@ const AddProduct = () => {
       backgroundColor: "transparent",
       outline: "none",
       ring: "0px none transparent",
-      borderColor: "rgb(11 11 11 / 0.3)",
       borderColor: state.isFocused ? "rgb(11 11 11)" : "rgb(11 11 11 / 0.3)",
       padding: "8px 12px",
       boxShadow: "none",
