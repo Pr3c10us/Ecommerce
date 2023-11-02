@@ -50,7 +50,7 @@ const SelectedThree = ({ product, setNavType, direction }) => {
               className="pointer-events-none w-[18vw]"
             />
             <p className="w-[18vw] text-center">
-              An <span className="text-gray-500">acees</span> creation
+              Your <span className="text-gray-500 ">Digital</span> Tailor
             </p>
           </div>
           <div className="grid text-center sm:grid-cols-2 sm:text-left">
@@ -72,18 +72,20 @@ const SelectedThree = ({ product, setNavType, direction }) => {
             <p className="hidden text-xs font-medium sm:col-span-2 sm:block sm:text-base xl:text-lg">
               {restDesc}
             </p>
-            <p className="text-xs sm:hidden font-medium sm:col-span-2 sm:text-base xl:text-lg">{product?.description}</p>
+            <p className="text-xs font-medium sm:col-span-2 sm:hidden sm:text-base xl:text-lg">
+              {product?.description}
+            </p>
           </div>
         </article>
-          <div className="flex w-full items-center justify-center">
-            <Link
-              to={`/product/${product?.product._id}`}
-              className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2"
-            >
-              View Product{" "}
-              <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
-            </Link>
-          </div>
+        <div className="flex w-full items-center justify-center">
+          <Link
+            to={`/product/${product?.product._id}`}
+            className="flex items-center gap-2 rounded bg-black px-4 py-1.5 text-xs text-white sm:text-sm md:px-6 md:py-2"
+          >
+            View Product{" "}
+            <img src="/arrow.svg" alt="arrow" className="w-3 lg:w-4" />
+          </Link>
+        </div>
       </section>
     </>
   );

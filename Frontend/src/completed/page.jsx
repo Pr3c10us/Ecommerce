@@ -98,9 +98,10 @@ const OrderComplete = () => {
                     <span className="flex w-full justify-end ">For your</span>
                     <span className="pl-8">Order</span>
                   </h1>
+                  <h2>Check email for update on order</h2>
                   <p className="flex w-full flex-col gap-y-4 text-left text-xs font-semibold uppercase">
                     <span className="flex flex-col gap-2 leading-6 sm:flex-row sm:items-center">
-                      YOUR ORDER NUMBER ID:{" "}
+                      YOUR ORDER ID:{" "}
                       <span className="text-base  font-bold underline">
                         {orderInfo._id}
                       </span>{" "}

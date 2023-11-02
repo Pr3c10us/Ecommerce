@@ -47,7 +47,7 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
                 className="pointer-events-none w-[260px]"
               />
               <p>
-                An <span className="text-gray-500 ">acees</span> creation
+                Your <span className="text-gray-500 ">Digital</span> Tailor
               </p>
             </div>
             <div className="flex h-full w-full flex-col items-center justify-center px-4 font-cinzel sm:gap-6">

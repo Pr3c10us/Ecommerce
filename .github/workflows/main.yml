@@ -7,7 +7,7 @@ env:
 on:
     push:
         branches:
-            - master
+            - main
 
 jobs:
     deploy:
@@ -16,6 +16,17 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
+
+            - name: Build and package the code
+              run: |
+                  ls -la
+                  cd Frontend
+                  npm install
+                  npm run build
+                  cd ../Admin
+                  npm install
+                  npm run build
+                  ls -la
 
             - name: Connect to AWS Lightsail, extract file and delete the file
               uses: appleboy/ssh-action@v0.1.7
@@ -31,8 +42,6 @@ jobs:
                       else
                         git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
                       fi
-                      cd /var/www/Asis/Frontend && sudo npm install && sudo npm run build
-                      cd /var/www/Asis/Admin && sudo npm install && sudo npm run build
                       cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
                         # If command1 succeeds
                         echo "Command 1 succeeded"
@@ -44,3 +53,29 @@ jobs:
                           # Run a different command
                           sudo npm start
                       fi
+                      if [ ! -d /var/www/Asis/Frontend/dist ]; then
+                        sudo mkdir /var/www/Asis/Frontend/dist
+                      fi
+                      if [ ! -d /var/www/Asis/Admin/dist ]; then
+                        sudo mkdir /var/www/Asis/Admin/dist
+                      fi
+                      sudo rm -rf /var/www/Asis/Frontend/dist/*
+                      sudo rm -rf /var/www/Asis/Admin/dist/*
+
+            - name: copy file via ssh password
+              uses: appleboy/scp-action@v0.1.4
+              with:
+                  host: ${{ secrets.HOST_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  source: "./Frontend/dist/*"
+                  target: "/var/www/Asis/Frontend/dist/"
+
+            - name: copy file via ssh password
+              uses: appleboy/scp-action@v0.1.4
+              with:
+                  host: ${{ secrets.HOST_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  source: "./Admin/dist/*"
+                  target: "/var/www/Asis/Admin/dist/"

@@ -63,7 +63,7 @@ const SelectedTwo = ({ product, setNavType, direction }) => {
                 className="pointer-events-none w-[260px] "
               />
               <p>
-                An <span className="text-gray-500 ">acees</span> creation
+                Your <span className="text-gray-500 ">Digital</span> Tailor
               </p>
             </div>
             <div className="flex flex-col gap-2 px-4 font-cinzel">

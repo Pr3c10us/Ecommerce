@@ -199,6 +199,10 @@ const Product_detail = ({ data }) => {
                   />
                 </section>
               </section>
+              <section className="flex flex-col gap-2">
+                <h2 className="font-medium">Size Chart:</h2>
+                <p className="text-blue-400 underline italic font-light text-sm">{data.urlForSizeChart}</p>
+              </section>
 
               {/* Additional details */}
               <section className="">
