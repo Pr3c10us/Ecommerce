@@ -68,7 +68,7 @@ jobs:
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   source: "Frontend/dist/"
-                  target: "/var/www/Asis/Frontend/dist/"
+                  target: "/var/www/Asis/Frontend/"
                   rm: true
                   strip_components: 1
 
@@ -79,6 +79,6 @@ jobs:
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   source: "Admin/dist/"
-                  target: "/var/www/Asis/Admin/dist/"
+                  target: "/var/www/Asis/Admin/"
                   strip_components: 1
                   rm: true
