@@ -38,9 +38,9 @@ jobs:
                   port: 22
                   script: |
                       if [ -d /var/www/Asis ]; then
-                        cd /var/www/Asis && git pull
+                        cd /var/www/Asis && sudo git pull
                       else
-                        git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
+                        sudo git clone https://github.com/Pr3c10us/Asis.git /var/www/Asis
                       fi
                       cd /var/www/Asis/Backend && sudo npm install && if sudo npm stop; then
                         # If command1 succeeds
