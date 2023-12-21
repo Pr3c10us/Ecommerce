@@ -52,17 +52,17 @@ const Page = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchData();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2000);
   }, []);
   // Scroll to top on component mount
   useEffect(() => {
     setIsLoading(true);
     fetchData();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2000);
   }, [category, sort, gender]);
 
   return (
@@ -84,7 +84,7 @@ const Page = () => {
             gender={gender}
             setGender={setGender}
           />
-          {data?.products?.length > 1 ? (
+          {data?.products?.length >= 1 ? (
             <>
               <section className="grid w-full gap-y-20 px-4 sm:grid-cols-2 md:px-0 2xl:grid-cols-3">
                 {data?.products?.map((product, index) => {
@@ -109,7 +109,7 @@ const Page = () => {
                             product.images[1] || product.images[0]
                           }`}
                           alt={product.name}
-                          className="absolute h-full w-full bg-white object-cover object-top group-hover:block md:hidden"
+                          className="absolute h-full w-full bg-black object-cover object-top group-hover:block md:hidden"
                         />
                       </div>
 

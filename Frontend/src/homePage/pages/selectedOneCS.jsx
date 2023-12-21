@@ -38,13 +38,13 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
         )}
       </AnimatePresence> */}
       <section className="flex h-full w-screen flex-col-reverse sm:flex-row">
-        <article className="flex basis-[30%] flex-col justify-center gap-5 px-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0 mb-4">
+        <article className="flex basis-[30%] flex-col justify-center gap-5 px-5 sm:basis-[55.5%] sm:py-0 sm:pl-[10.4vw] sm:pr-0 lg:gap-0">
           <div className="flex grid-cols-2 items-center justify-start lg:justify-end">
             <div className="hidden min-w-[260px] flex-col items-center text-center text-sm font-extrabold uppercase lg:flex">
               <img
                 src="/spade.svg"
                 alt="spade logo"
-                className="pointer-events-none w-[260px]"
+                className="pointer-events-none w-[240px]"
               />
               <p>
                 Your <span className="text-gray-500 ">Digital</span> Tailor
@@ -64,7 +64,7 @@ const SelectedOneCS = ({ product, setNavType,direction, }) => {
             </div>
           </div>
           <div className="flex w-full justify-end">
-            <h2 className="flex w-full flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[7vw] ">
+            <h2 className="flex w-full flex-col font-comforter text-5xl uppercase leading-tight sm:w-full sm:text-[6vw] ">
               <span className="text-right">Newest </span>{" "}
               <span className="text-left sm:text-center">Collection!</span>
             </h2>

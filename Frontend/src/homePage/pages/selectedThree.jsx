@@ -47,7 +47,7 @@ const SelectedThree = ({ product, setNavType, direction }) => {
             <img
               src="/spade.svg"
               alt="spade logo"
-              className="pointer-events-none w-[18vw]"
+              className="pointer-events-none h-[240px]"
             />
             <p className="w-[18vw] text-center">
               Your <span className="text-gray-500 ">Digital</span> Tailor

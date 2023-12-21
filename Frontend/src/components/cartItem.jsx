@@ -89,7 +89,7 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
           <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
             <div>
               <Link to={`/product/${data.product._id}`}>
-                <p className="text-xs font-bold text-asisDark sm:text-sm">
+                <p className="text-xs font-bold text-asisDark sm:text-sm max-w-[280px]">
                   {data.product.name}
                 </p>
               </Link>

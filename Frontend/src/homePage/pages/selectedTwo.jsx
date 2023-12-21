@@ -88,11 +88,11 @@ const SelectedTwo = ({ product, setNavType, direction }) => {
             </Link>
           </div>
         </div>
-        <div className="group relative mt-[10vh] flex basis-[64.5%] cursor-pointer overflow-hidden px-[10vw] sm:my-[10vh] sm:mr-[5vw] sm:rounded-3xl sm:px-0 lg:mr-[10.4vw]">
+        <div className="group relative mt-[10vh] flex basis-[64.5%] cursor-pointer overflow-hidden px-[10vw] sm:my-[10vh] sm:mr-[5vw] fsm:rounded-3xl sm:px-0 lg:mr-[10.4vw]">
           {" "}
           {/*<VideoJS options={videoJsOptions} onReady={handlePlayerReady} /> */}
           <video
-            className="group h-full w-full bg-asisDark object-cover sm:rounded-3xl"
+            className="group h-full w-full bg-asisDark object-cover fsm:rounded-3xl"
             ref={playerRef}
             onClick={() => {
               setPlay((prev) => !prev);

@@ -120,7 +120,7 @@ const Product_detail = ({ data }) => {
         <section className="flex h-full flex-col items-stretch gap-5 lg:flex-row">
           {/* Thumbnail images */}
           <div className="flex flex-col-reverse lg:flex-row">
-            <section className="gap-2 flex basis-7 flex-wrap items-center justify-center py-5 lg:flex-col lg:justify-start">
+            <section className="flex basis-7 flex-wrap items-center justify-center gap-2 py-5 lg:flex-col lg:justify-start">
               {data.images?.map((img, index) => (
                 <div
                   key={index}
@@ -201,7 +201,13 @@ const Product_detail = ({ data }) => {
               </section>
               <section className="flex flex-col gap-2">
                 <h2 className="font-medium">Size Chart:</h2>
-                <p className="text-blue-400 underline italic font-light text-sm">{data.urlForSizeChart}</p>
+                <a
+                  href={data.urlForSizeChart}
+                  target="_blank"
+                  className="text-sm font-light italic text-blue-400 underline"
+                >
+                  {data.urlForSizeChart}
+                </a>
               </section>
 
               {/* Additional details */}
