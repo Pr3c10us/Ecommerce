@@ -39,6 +39,5 @@
 
 # DEMO
 <p>Home Page</p>
-<p align="center">
-    <video src="./demo/Home page.mp4" width="100%" title="Home page">
-</p>
+[![Watch the Video]](https://raw.githubusercontent.com/Pr3c10us/Asis/master/demo/Home\ /page.mp4)
+
