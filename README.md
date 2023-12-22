@@ -45,7 +45,10 @@ style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
 Home Page
 </p>
 
-https://github.com/Pr3c10us/Asis/assets/96595416/38c24d5e-c8b9-4f4a-8a74-b30c74fa7c46
+
+
+https://github.com/Pr3c10us/Asis/assets/96595416/598d4d30-297d-44d1-b5c4-ade43690a0dc
+
 
 <p
 style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
