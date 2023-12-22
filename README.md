@@ -1,14 +1,14 @@
 <p align="center">
     <img src="./Frontend/public/cover.png" width="100%" title="cover">
 </p>
-<p
+<!-- <p
     align="center"
     style="font-size: 2.5rem; 
     font-weight: bold;
     color: #0B0B0B;" 
 >
     ACEES FASHION WEBSITE
-</p>
+</p> -->
 <p
     align="center"
     style="font-size: 1.4rem; color: #0B0B0B; width: 50%; margin: auto; margin-bottom: 2rem;" 
@@ -26,9 +26,9 @@
    <li> <a 
     style=" font-size:1.2rem;text-decoration: underline;"
      href="#demo">Demo</a> </li>
-   <li><a 
+<!--    <li><a 
     style=" font-size:1.2rem;text-decoration: underline;"
-     href="#screenshot">Screenshots</a> </li>
+     href="#screenshot">Screenshots</a> </li> -->
    <li><a 
     style=" font-size:1.2rem;text-decoration: underline;"
      href="#features">Features</a> </li>
@@ -50,7 +50,7 @@ https://github.com/Pr3c10us/Asis/assets/96595416/38c24d5e-c8b9-4f4a-8a74-b30c74f
 <p
 style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
 >
-Shop Page
+Store Page
 </p>
 
 https://github.com/Pr3c10us/Asis/assets/96595416/aed822f5-cbc0-4f6e-9988-6a5cab56afe3
@@ -81,9 +81,11 @@ style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
 Checkout Page
 </p>
 
-
-
 https://github.com/Pr3c10us/Asis/assets/96595416/cc57afd3-195e-461c-af04-583da3341d73
 
-
-
+# FEATURES
+<li>Easy to use cart system.</li>
+<li>Simplified and secure checkout with stripe.</li>
+<li>Order tracking.</li>
+<li>Compatibility across devices (desktop, tablet, mobile).</li>
+<li>Intuitive pagination and filters for products.</li>
