@@ -88,4 +88,19 @@ https://github.com/Pr3c10us/Asis/assets/96595416/cc57afd3-195e-461c-af04-583da33
 <li>Simplified and secure checkout with stripe.</li>
 <li>Order tracking.</li>
 <li>Compatibility across devices (desktop, tablet, mobile).</li>
-<li>Intuitive pagination and filters for products.</li>
+<li style="margin-bottom:2rem">Intuitive pagination and filters for products.</li>
+
+# CONTACT
+<p
+style="font-size: 1.2rem;margin:0;padding:0;font-weight:500;text-decoration: underline; color: #0B0B0B;"
+>
+UI/UX Designer
+</p>
+<p
+style="font-size: 1.2rem;margin:0;padding:0;font-weight:500; color: #0B0B0B;"
+>
+Samuel Alake
+</p>
+<li>twitter: g4titan_</li>
+<li>linkedin: https://www.linkedin.com/in/samuel-alake-91694b238?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app</li>
+<li>mail: samylake@outlook.com </li>
