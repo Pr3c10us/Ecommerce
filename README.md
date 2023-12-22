@@ -38,5 +38,9 @@
 </p>
 
 # DEMO
-[![Watch the Video]](https://drive.google.com/file/d/1wRAnDYqcH1vS4bvSuGOxq2zIrBcbzpxJ/view?usp=drive_link)
 
+<p
+style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
+>
+Home Page
+</p>
