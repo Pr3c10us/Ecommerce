@@ -44,3 +44,46 @@ style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
 >
 Home Page
 </p>
+
+https://github.com/Pr3c10us/Asis/assets/96595416/38c24d5e-c8b9-4f4a-8a74-b30c74fa7c46
+
+<p
+style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
+>
+Shop Page
+</p>
+
+https://github.com/Pr3c10us/Asis/assets/96595416/aed822f5-cbc0-4f6e-9988-6a5cab56afe3
+
+<p
+style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
+>
+Product Page
+</p>
+
+https://github.com/Pr3c10us/Asis/assets/96595416/b67041bf-6fb4-47f1-a6d6-e6e64dd0f6e4
+
+<p
+style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
+>
+Cart Page
+</p>
+
+
+
+https://github.com/Pr3c10us/Asis/assets/96595416/0274c2f9-0b21-4d65-8f38-04d74f2c79c6
+
+
+
+<p
+style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
+>
+Checkout Page
+</p>
+
+
+
+https://github.com/Pr3c10us/Asis/assets/96595416/cc57afd3-195e-461c-af04-583da3341d73
+
+
+
