@@ -98,5 +98,5 @@ https://github.com/Pr3c10us/Asis/assets/96595416/cc57afd3-195e-461c-af04-583da33
 
 <li>Name: Samuel Alake</li>
 <li>twitter: g4titan_</li>
-<li>linkedin: https://www.linkedin.com/in/samuel-alake-91694b238?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app</li>
+<li>linkedin: https://www.linkedin.com/in/samuel-alake-91694b238</li>
 <li>mail: samylake@outlook.com </li>
