@@ -46,7 +46,10 @@ style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
 Home Page
 </p>
 
-https://github.com/Pr3c10us/Asis/assets/96595416/38c24d5e-c8b9-4f4a-8a74-b30c74fa7c46
+
+
+https://github.com/Pr3c10us/Asis/assets/96595416/598d4d30-297d-44d1-b5c4-ade43690a0dc
+
 
 <p
 style="font-size: 1.5rem; color: #0B0B0B; margin-bottom: 2rem;"
@@ -92,16 +95,9 @@ https://github.com/Pr3c10us/Asis/assets/96595416/cc57afd3-195e-461c-af04-583da33
 <li style="margin-bottom:2rem">Intuitive pagination and filters for products.</li>
 
 # CONTACT
-<p
-style="font-size: 1.2rem;margin:0;padding:0;font-weight:500;text-decoration: underline; color: #0B0B0B;"
->
-UI/UX Designer
-</p>
-<p
-style="font-size: 1.2rem;margin:0;padding:0;font-weight:500; color: #0B0B0B;"
->
-Samuel Alake
-</p>
+### UI DESIGNER
+
+<li>Name: Samuel Alake</li>
 <li>twitter: g4titan_</li>
-<li>linkedin: https://www.linkedin.com/in/samuel-alake-91694b238?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app</li>
+<li>linkedin: https://www.linkedin.com/in/samuel-alake-91694b238</li>
 <li>mail: samylake@outlook.com </li>
