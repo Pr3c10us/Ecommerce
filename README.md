@@ -11,7 +11,8 @@
 </p> -->
 <p
     align="center"
-    style="font-size: 1.4rem; color: #0B0B0B; width: 50%; margin: auto; margin-bottom: 2rem;" 
+    width="50%"
+    style="font-size: 1.4rem; color: #0B0B0B; margin: auto; margin-bottom: 2rem;" 
 >
     Welcome to Acees, a fashion e-commerce site designed to provide you with an effortless and enjoyable shopping experience.
 </p>
