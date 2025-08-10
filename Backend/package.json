@@ -7,7 +7,7 @@
         "start": "pm2 start app.js && pm2 save",
         "restart": "pm2 restart app.js && pm2 save",
         "dev": "nodemon app.js",
-        "stop": "pm2 delete all && pm2 save" 
+        "stop": "pm2 delete all && pm2 save"
     },
     "author": "",
     "license": "ISC",
@@ -38,6 +38,7 @@
         "muller": "^1.1.0",
         "multer": "^1.4.5-lts.1",
         "node-persist": "^3.1.0",
+        "paystack-sdk": "^2.5.26",
         "pm2": "^4.2.3",
         "razorpay": "^0.0.0",
         "readline-sync": "^1.4.10",

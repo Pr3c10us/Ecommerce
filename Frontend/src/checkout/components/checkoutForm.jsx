@@ -247,9 +247,9 @@ export default function CheckoutForm({
             {isLoading ? (
               <ButtonLoader />
             ) : (
-              `Pay ${Intl.NumberFormat("en-US", {
+              `Pay ${Intl.NumberFormat("en-NG", {
                 style: "currency",
-                currency: "USD",
+                currency: "NGN",
               }).format(total)}
           now`
             )}

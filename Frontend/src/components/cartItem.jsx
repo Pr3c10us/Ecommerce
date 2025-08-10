@@ -94,11 +94,11 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
                 </p>
               </Link>
               <p className="mt-2 text-[0.7rem] font-semibold text-black sm:text-xs">
-                {Intl.NumberFormat("en-US", {
+                {Intl.NumberFormat("en-NG", {
                   style: "currency",
-                  currency: "USD",
+                  currency: "NGN",
                 }).format(data.totalPrice)}{" "}
-                USD{" "}
+                NGN{" "}
               </p>
             </div>
             {/* remove item from cart */}

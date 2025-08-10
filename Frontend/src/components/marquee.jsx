@@ -44,5 +44,5 @@ export default Marquee;
   transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
   className="text-center "
 >
-  ACEES
+  BLAK RATT
 </motion.h1>; */}

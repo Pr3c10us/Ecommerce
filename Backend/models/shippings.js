@@ -10,7 +10,7 @@ const shippingSchema = new mongoose.Schema({
     },
     currency: {
         type: String,
-        default: "USD",
+        default: "NGN",
         enum: ["USD", "EUR", "NGN"],
     },
     description: {

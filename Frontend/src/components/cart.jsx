@@ -214,11 +214,11 @@ const Cart = ({ setHideCart }) => {
               <div className="mt-4 flex items-center justify-between  text-sm font-bold">
                 <p>Total</p>
                 <p>
-                  {Intl.NumberFormat("en-US", {
+                  {Intl.NumberFormat("en-NG", {
                     style: "currency",
-                    currency: "USD",
+                    currency: "NGN",
                   }).format(cartData.totalPrice)}{" "}
-                  USD
+                  NGN
                 </p>
               </div>
               <div className="mt-3 flex items-center justify-between  pb-4 text-[13px]/[20px] font-medium">

@@ -1,6 +1,6 @@
 import React from "react";
 // importing icons
-import header_logo from "../assets/icons/homeLogo.svg";
+import header_logo from "../assets/icons/vite.svg";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import guestIcon from "../assets/icons/guest.svg";
@@ -41,7 +41,7 @@ const Header = ({ setHideCart, cartLength }) => {
         className="flex w-14 items-end justify-center border-b-2 border-b-asisDark pb-1 sm:w-28"
       >
         {" "}
-        <img src="/spade.svg" alt="spade logo" className="w-4 sm:w-6" />
+        <img src="/vite.svg" alt="spade logo" className="w-4 sm:w-8" />
       </Link>
       <Link to="/store" className="flex items-center mb-1 gap-1">
         <GiShop className="h-6 w-6 sm:w-5 sm:h-5" />{" "}

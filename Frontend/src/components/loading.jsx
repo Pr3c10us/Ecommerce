@@ -26,7 +26,7 @@ const Loading = () => {
       <Curve />
       <img
         src="/whiteSpade.svg"
-        className="absolute left-1/2 top-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/4 lg:w-1/5"
+        className="absolute left-1/2 top-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/3 lg:w-1/4"
       />
       <motion.h1
         initial={{ y: 100 }}
@@ -38,7 +38,7 @@ const Loading = () => {
         transition={{ duration: 1,delay:0.5, ease: [0.76, 0, 0.24, 1] }}
         className="text-center font-cinzel text-[30vw] leading-none text-white mix-blend-difference sm:text-[20vw] lg:text-[15vw]"
       >
-        ACEES
+        BLAK RATT
       </motion.h1>
     </motion.div>
   );

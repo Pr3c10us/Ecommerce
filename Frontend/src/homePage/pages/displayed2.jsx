@@ -93,7 +93,7 @@ const Displayed = ({ product, setNavType, bodyRef }) => {
               transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
               className="text-center font-cinzel text-[30vw] leading-none text-white sm:text-[20vw] lg:text-[15vw] mix-blend-difference"
             >
-              ACEES
+              BLAK RATT
             </motion.h1>
           </motion.div>
         )}

@@ -30,7 +30,7 @@ const addHomeProduct = async (req, res) => {
             .toString(36)
             .substring(7)}.${fileExtension}`;
 
-        const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
@@ -50,7 +50,7 @@ const addHomeProduct = async (req, res) => {
             .toString(36)
             .substring(7)}.${fileExtension}`;
 
-        const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
@@ -134,7 +134,7 @@ const deleteHomeProduct = async (req, res) => {
     }
 
     // Delete images from azure blob storage
-    const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+    const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
     const imagePromises = product.images.map(async (imageName) => {
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
@@ -147,7 +147,7 @@ const deleteHomeProduct = async (req, res) => {
 
     // Delete video from azure blob storage
     if (product.video) {
-        const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(
@@ -183,7 +183,7 @@ const replaceVideo = async (req, res) => {
 
     // Delete video from azure blob storage
     if (product.video) {
-        const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(
@@ -200,7 +200,7 @@ const replaceVideo = async (req, res) => {
         .toString(36)
         .substring(7)}.${fileExtension}`;
 
-    const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+    const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
@@ -242,7 +242,7 @@ const deleteProductImage = async (req, res) => {
         }
         try {
             // Delete image from azure blob storage
-            const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+            const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
             const containerClient =
                 blobServiceClient.getContainerClient(containerName);
             const blockBlobClient =
@@ -299,7 +299,7 @@ const addProductImage = async (req, res) => {
             .toString(36)
             .substring(7)}.${fileExtension}`;
 
-        const containerName = process.env.ASIS_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);

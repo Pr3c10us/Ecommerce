@@ -229,11 +229,11 @@ const Product_detail = ({ data }) => {
                   ) : (
                     <p>
                       Add to cart-{" "}
-                      {Intl.NumberFormat("en-US", {
+                      {Intl.NumberFormat("en-NG", {
                         style: "currency",
-                        currency: "USD",
+                        currency: "NGN",
                       }).format(data.price * quantity)}{" "}
-                      USD
+                      NGN
                     </p>
                   )}
                 </button>

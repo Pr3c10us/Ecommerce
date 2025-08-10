@@ -2,13 +2,13 @@ const router = require("express").Router();
 const express = require("express");
 
 
-const { stripeWebhook, flutterwaveWebhook } = require("../controller/webhooks");
+const { stripeWebhook, paystackWebhook } = require("../controller/webhooks");
 
 router.post(
-    "/stripe",
-    express.raw({ type: "application/json" }),
-    stripeWebhook
+  "/stripe",
+  express.raw({ type: "application/json" }),
+  stripeWebhook
 );
-router.post("/flutterwave", flutterwaveWebhook);
+router.post("/paystack", express.raw({ type: "application/json" }) , paystackWebhook);
 
 module.exports = router;

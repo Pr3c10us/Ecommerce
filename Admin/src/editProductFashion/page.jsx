@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/homeLogo.svg";
+import Logo from "../assets/vite.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate, useLocation } from "react-router-dom";

@@ -25,7 +25,7 @@ const addProduct = async (req, res) => {
                 .substring(7)}.${fileExtension}`;
 
             const containerName =
-                process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+                process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
             const containerClient =
                 blobServiceClient.getContainerClient(containerName);
             const blockBlobClient =
@@ -46,7 +46,7 @@ const addProduct = async (req, res) => {
                 .substring(7)}.${fileExtension}`;
 
             const containerName =
-                process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+                process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
             const containerClient =
                 blobServiceClient.getContainerClient(containerName);
             const blockBlobClient =
@@ -122,7 +122,7 @@ const deleteProduct = async (req, res) => {
     }
 
     // Delete images from azure blob storage
-    const containerName = process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+    const containerName = process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
     const largeImagePromises = product.largeImage.map(async (imageName) => {
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
@@ -167,7 +167,7 @@ const changeLargeImage = async (req, res) => {
     }
 
     // Delete images from azure blob storage
-    const containerName = process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+    const containerName = process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
     const largeImagePromises = product.largeImage.map(async (imageName) => {
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
@@ -185,7 +185,7 @@ const changeLargeImage = async (req, res) => {
             .toString(36)
             .substring(7)}.${fileExtension}`;
 
-        const containerName = process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
@@ -224,7 +224,7 @@ const changeSmallImage = async (req, res) => {
     }
 
     // Delete images from azure blob storage
-    const containerName = process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+    const containerName = process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
     const smallImagePromises = product.smallImage.map(async (imageName) => {
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
@@ -242,7 +242,7 @@ const changeSmallImage = async (req, res) => {
             .toString(36)
             .substring(7)}.${fileExtension}`;
 
-        const containerName = process.env.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME;
+        const containerName = process.env.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME;
         const containerClient =
             blobServiceClient.getContainerClient(containerName);
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);

@@ -28,8 +28,8 @@ jobs:
                   echo "PORT=${{ secrets.PORT }}" >> Backend/.env
                   echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" >> Backend/.env
                   echo "AZURE_STORAGE_ACCOUNT_NAME=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" >> Backend/.env
-                  echo "ASIS_IMAGE_CONTAINER_NAME=${{ secrets.ASIS_IMAGE_CONTAINER_NAME }}" >> Backend/.env
-                  echo "ASIS_DASHBOARD_IMAGE_CONTAINER_NAME=${{ secrets.ASIS_DASHBOARD_IMAGE_CONTAINER_NAME }}" >> Backend/.env
+                  echo "BLAK_RATT_IMAGE_CONTAINER_NAME=${{ secrets.BLAK_RATT_IMAGE_CONTAINER_NAME }}" >> Backend/.env
+                  echo "BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME=${{ secrets.BLAK_RATT_DASHBOARD_IMAGE_CONTAINER_NAME }}" >> Backend/.env
                   echo "AZURE_IMAGE_URL=${{ secrets.AZURE_IMAGE_URL }}" >> Backend/.env
                   echo "STRIPE_SECRETE_KEY=${{ secrets.STRIPE_SECRETE_KEY }}" >> Backend/.env
                   echo "STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> Backend/.env

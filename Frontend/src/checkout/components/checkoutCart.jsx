@@ -203,9 +203,9 @@ const CheckoutCart = () => {
             <div className="mt-4 flex items-center justify-between  text-sm font-semibold">
               <p>SubTotal</p>
               <p>
-                {Intl.NumberFormat("en-US", {
+                {Intl.NumberFormat("en-NG", {
                   style: "currency",
-                  currency: "USD",
+                  currency: "NGN",
                 }).format(cartData.totalPrice)}{" "}
                 NGN
               </p>
@@ -215,18 +215,18 @@ const CheckoutCart = () => {
               <p>
                 {!orderDetails.shipping
                   ? "Calculated at Shipping"
-                  : `${Intl.NumberFormat("en-US", {
+                  : `${Intl.NumberFormat("en-NG", {
                       style: "currency",
-                      currency: "USD",
+                      currency: "NGN",
                     }).format(shippingFee)}`}{" "}
               </p>
             </div>
             <div className="flex items-center justify-between border-t-2 border-t-asisDark py-4  text-sm font-bold">
               <p>SubTotal</p>
               <p>
-                {Intl.NumberFormat("en-US", {
+                {Intl.NumberFormat("en-NG", {
                   style: "currency",
-                  currency: "USD",
+                  currency: "NGN",
                 }).format(cartData.totalPrice + (shippingFee || 0))}{" "}
                 NGN
               </p>

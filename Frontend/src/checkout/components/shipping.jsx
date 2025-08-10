@@ -5,6 +5,7 @@ import axios from "axios";
 import VowelItalicizer from "../../components/vowelItalicizer";
 import { toast } from "react-hot-toast";
 import Loading from "./loading";
+import { redirect } from "react-router-dom";
 
 const Shipping = ({ setActiveStep }) => {
   const orderDetails = useSelector((state) => state.asis.order);
@@ -28,7 +29,7 @@ const Shipping = ({ setActiveStep }) => {
 
   const dispatch = useDispatch();
 
-  const handleAddShippingDetails = () => {
+  const handleAddShippingDetails = async () => {
     setIsLoading(true);
     if (!selectedShipping) {
       toast.error("Select a shipping method", {
@@ -46,10 +47,30 @@ const Shipping = ({ setActiveStep }) => {
       return;
     }
     dispatch(setOrder({ shipping: selectedShipping }));
-    setActiveStep(3);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // const orderDetails = useSelector((state) => state.asis.order);
+    const apiUrl = `${import.meta.env.VITE_BACKEND_URL}orders/stripe`;
+    try {
+      let { data } = await axios.post(apiUrl, orderDetails);
+      window.location.href = data.paymentUrl;
+      // redirect(data.paymentUrl);
+      // const { clientSecret, _id, totalPrice } = data.order;
+      // setClientSecret(clientSecret);
+      // setOrderId(_id);
+      // setTotal(totalPrice);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
+
+    // setActiveStep(3);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2000);
   };
 
   const handleFetchShippingDetails = async () => {
@@ -139,14 +160,11 @@ const Shipping = ({ setActiveStep }) => {
                 selectedShipping === shippingDetail._id && "text-asisDark"
               }`}
             >
-              {Intl.NumberFormat(
-                shippingDetail.currency == "USD" ? "en-US" : "en-NG",
-                {
-                  style: "currency",
-                  currency: shippingDetail.currency,
-                },
-              ).format(shippingDetail.fee)}{" "}
-              {shippingDetail.currency}
+              {Intl.NumberFormat("en-NG", {
+                style: "currency",
+                currency: "NGN",
+              }).format(shippingDetail.fee)}{" "}
+              {"NGN"}
             </p>
           </div>
         ))}
@@ -184,11 +202,11 @@ const Shipping = ({ setActiveStep }) => {
           }`}
         >
           Go to Payment -{" "}
-          {Intl.NumberFormat("en-US", {
+          {Intl.NumberFormat("en-NG", {
             style: "currency",
-            currency: "USD",
+            currency: "NGN",
           }).format(cartData.totalPrice + selectedShippingPrice)}{" "}
-          USD
+          NGN
         </button>
       </section>
     </div>

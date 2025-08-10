@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/homeLogo.svg";
+import Logo from "../assets/vite.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -172,7 +172,7 @@ const ShippingFashion = () => {
           </section>
           <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
             <label className="basis-[20%] capitalize" htmlFor="durationInDays">
-              shipping fee [$]
+              shipping fee [₦]
             </label>
             <div className="flex w-full flex-col text-asisDark ">
               <input

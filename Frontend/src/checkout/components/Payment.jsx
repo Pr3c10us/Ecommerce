@@ -8,6 +8,7 @@ import Loading from "./loading";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./checkoutForm";
+import { redirect } from "react-router-dom";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -66,6 +67,7 @@ const Payment = ({ setActiveStep }) => {
     try {
       await getShippingMethods();
       let { data } = await axios.post(apiUrl, orderDetails);
+      redirect(data.paymentUrl)
       const { clientSecret, _id, totalPrice } = data.order;
       setClientSecret(clientSecret);
       setOrderId(_id);

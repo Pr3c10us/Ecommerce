@@ -74,7 +74,7 @@ const Page = () => {
       ) : (
         <main className="flex flex-col items-center py-[10.4vh]">
           <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:pl-20 md:text-[6vw]">
-            Acees Store
+            BLAK RATT
           </h1>
           <Filter
             category={category}
@@ -109,7 +109,7 @@ const Page = () => {
                             product.images[1] || product.images[0]
                           }`}
                           alt={product.name}
-                          className="absolute h-full w-full bg-black object-cover object-top group-hover:block md:hidden"
+                          className="absolute hidden h-full w-full object-contain object-center group-hover:block md:hidden"
                         />
                       </div>
 
@@ -119,9 +119,9 @@ const Page = () => {
                         </h3>
                         <p>{product?.gender}</p>
                         <p>
-                          {Intl.NumberFormat("en-US", {
+                          {Intl.NumberFormat("en-NG", {
                             style: "currency",
-                            currency: "USD",
+                            currency: "NGN",
                           }).format(product?.price)}{" "}
                         </p>
                       </div>

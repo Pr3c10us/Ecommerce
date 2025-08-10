@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import homeLogo from "../assets/icons/homeLogo.svg";
+import homeLogo from "../assets/icons/vite.svg";
 import Loading from "../components/loading";
 import VowelItalicizer from "../components/vowelItalicizer";
 import Carousel from "../components/carousel";

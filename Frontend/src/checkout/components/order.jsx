@@ -14,7 +14,7 @@ const Order = () => {
       <section className="relative h-full">
         {activeStep === 1 && <Contact setActiveStep={setActiveStep} />}
         {activeStep === 2 && <Shipping setActiveStep={setActiveStep} />}
-        {activeStep === 3 && <Payment setActiveStep={setActiveStep} />}
+        {/*{activeStep === 3 && <Payment setActiveStep={setActiveStep} />}*/}
       </section>
     </div>
   );

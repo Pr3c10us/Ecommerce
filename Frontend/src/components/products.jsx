@@ -25,11 +25,11 @@ const Products = ({ name, price, collaborations, images }) => {
         <p className="text-sm font-bold">{name}</p>
         <div className="flex gap-4">{renderCollaborations()}</div>
         <p className="text-sm font-semibold text-asisDark">
-          {Intl.NumberFormat("en-US", {
+          {Intl.NumberFormat("en-NG", {
             style: "currency",
-            currency: "USD",
+            currency: "NGN",
           }).format(price)}{" "}
-          usd
+          NGN
         </p>
       </div>
     </div>

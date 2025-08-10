@@ -4,7 +4,7 @@ const OrderNav = ({ activeStep, setActiveStep }) => {
   const steps = [
     { id: "contact", name: "Contact", status: 1 },
     { id: "shipping", name: "Shipping", status: 2 },
-    { id: "payment", name: "Payment", status: 3 },
+    // { id: "payment", name: "Payment", status: 3 },
   ];
   return (
     <nav className="relative flex w-full py-4 md:py-8">
@@ -35,11 +35,18 @@ const OrderNav = ({ activeStep, setActiveStep }) => {
         </div> */}
       <div className="absolute bottom-0 h-0.5 w-full bg-[#B0B0B0]">
         <div
-          className={`absolute h-full w-1/3 bg-asisDark transition-all duration-200 ${
+          className={`absolute h-full w-1/2 bg-asisDark transition-all duration-200 ${
             activeStep == 2 && "translate-x-full"
           } ${activeStep == 3 && "translate-x-[200%]"}`}
         ></div>
       </div>
+      {/*<div className="absolute bottom-0 h-0.5 w-full bg-[#B0B0B0]">*/}
+      {/*  <div*/}
+      {/*    className={`absolute h-full w-1/3 bg-asisDark transition-all duration-200 ${*/}
+      {/*      activeStep == 2 && "translate-x-full"*/}
+      {/*    } ${activeStep == 3 && "translate-x-[200%]"}`}*/}
+      {/*  ></div>*/}
+      {/*</div>*/}
       {/* <div
         onClick={() => {
           if (activeStep < 3) setActiveStep(activeStep + 1);
