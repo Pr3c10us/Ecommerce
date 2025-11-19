@@ -21,9 +21,20 @@ const connectToMongodb = require("./mongoDb");
 
 // CORS MIDDLEWARE
 // Set up cors options and middleware
+// const corsOptions = {
+//     origin: [process.env.CLIENT_ORIGIN_1, process.env.CLIENT_ORIGIN_2],
+//     credentials: true,
+// };
 const corsOptions = {
-    origin: [process.env.CLIENT_ORIGIN_1, process.env.CLIENT_ORIGIN_2],
-    credentials: true,
+  origin: [process.env.CLIENT_ORIGIN_1, process.env.CLIENT_ORIGIN_2],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'ngrok-skip-browser-warning' // Important for ngrok
+  ],
 };
 app.use(cors(corsOptions));
 

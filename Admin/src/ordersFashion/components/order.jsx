@@ -140,7 +140,7 @@ const Order = ({ orders }) => {
               return (
                 <div className="grid gap-2 md:grid-cols-2" key={index}>
                   <p className="">Shipping Method: {item.name}</p>
-                  <p className="">Price [$]: {item.fee}</p>
+                  <p className="">Price [₦]: {item.fee}</p>
                 </div>
               );
             })}

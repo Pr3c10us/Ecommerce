@@ -10,6 +10,9 @@ import MeasurementsDisplay from "./components/measurementsDisplay";
 import AddImages from "./components/addImages";
 import Loading from "../loading";
 import { FaTrash } from "react-icons/fa";
+import CountInStockDisplay from "../addProductFashion/components/countInStockDisplay.jsx";
+import CountInStock from "../addProductFashion/components/countInStock";
+// import CountInStockDisplay from "../components/countInStockDisplay";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -40,7 +43,9 @@ const EditProduct = () => {
   const [selectedGender, setSelectedGender] = React.useState(
     productDetails?.gender?.toLowerCase(),
   );
-  const [measurements, setMeasurements] = React.useState([]);
+  // const [measurements, setMeasurements] = React.useState([]);
+  const [countInStock, setCountInStock] = React.useState([]);
+
   React.useEffect(() => {
     console.log(location.pathname.split("/")[2]);
     const getProductDetails = async () => {
@@ -51,7 +56,8 @@ const EditProduct = () => {
         }`,
       );
       setProductDetails((prev) => ({ ...prev, ...res.data }));
-      setMeasurements(res.data.measurements);
+      // setMeasurements(res.data.measurements);
+      setCountInStock(res.data.countInStock);
       setImages(res.data.images);
       setSelectedCategory(res.data.category);
       setSelectedGender(res.data.gender);
@@ -60,7 +66,7 @@ const EditProduct = () => {
       formik.setFieldValue("price", res.data.price);
       formik.setFieldValue("description", res.data.description);
       formik.setFieldValue("brief", res.data.brief);
-      formik.setFieldValue("urlForSizeChart", res.data.urlForSizeChart);
+      // formik.setFieldValue("urlForSizeChart", res.data.urlForSizeChart);
       setTimeout(() => {
         setLoading(false);
       }, 2000);
@@ -75,12 +81,17 @@ const EditProduct = () => {
       price: productDetails.price,
       description: productDetails.description,
       brief: productDetails.brief,
-      urlForSizeChart: productDetails.urlForSizeChart,
+      // urlForSizeChart: productDetails.urlForSizeChart,
     },
 
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      if (measurements.length === 0) {
+      // if (measurements.length === 0) {
+      //   toast.error("Please add atleast one size");
+      //   setSubmitting(false);
+      //   return;
+      // }
+      if (countInStock.length === 0) {
         toast.error("Please add atleast one size");
         setSubmitting(false);
         return;
@@ -90,11 +101,12 @@ const EditProduct = () => {
         price: values.price,
         description: values.description,
         brief: values.brief,
-        urlForSizeChart: values.urlForSizeChart,
+        // urlForSizeChart: values.urlForSizeChart,
         comingSoon: comingSoon,
         category: selectedCategory,
         gender: selectedGender,
-        measurements: measurements,
+        // measurements: measurements,
+        countInStock: countInStock,
       };
 
       axios
@@ -109,17 +121,18 @@ const EditProduct = () => {
           // navigate("/products");
           console.log(res.data);
           setProductDetails((prev) => ({ ...prev, ...res.data.product }));
-          setMeasurements(res.data.product.measurements);
+          // setMeasurements(res.data.product.measurements);
+          setCountInStock(res.data.product.countInStock);
           setImages(res.data.product.images);
           setSelectedCategory(res.data.product.category);
           formik.setFieldValue("name", res.data.product.name);
           formik.setFieldValue("price", res.data.product.price);
           formik.setFieldValue("description", res.data.product.description);
           formik.setFieldValue("brief", res.data.product.brief);
-          formik.setFieldValue(
-            "urlForSizeChart",
-            res.data.product.urlForSizeChart,
-          );
+          // formik.setFieldValue(
+          //   "urlForSizeChart",
+          //   res.data.product.urlForSizeChart,
+          // );
           setSubmitting(false);
         })
         .catch((err) => {
@@ -134,12 +147,12 @@ const EditProduct = () => {
 
       description: Yup.string().required("description is Required"),
       brief: Yup.string().required("brief is Required"),
-      urlForSizeChart: Yup.string()
-        .required("url For SizeChart is Required")
-        .matches(
-          /^(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]$/i,
-          "Invalid url",
-        ),
+      // urlForSizeChart: Yup.string()
+      //   .required("url For SizeChart is Required")
+      //   .matches(
+      //     /^(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]$/i,
+      //     "Invalid url",
+      //   ),
     }),
   });
 
@@ -270,7 +283,7 @@ const EditProduct = () => {
         </section>
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
-            product Price [$]
+            product Price [₦]
           </label>
           <div className="flex w-full flex-col text-asisDark ">
             <input
@@ -332,42 +345,57 @@ const EditProduct = () => {
             ))}
           </div>
         </section>
+        {/*<section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">*/}
+        {/*  <label className="basis-[20%] capitalize" htmlFor="brief">*/}
+        {/*    Measurements*/}
+        {/*  </label>*/}
+        {/*  <section className="flex w-full flex-col gap-y-4 text-asisDark">*/}
+        {/*    <Measurements*/}
+        {/*      measurements={measurements}*/}
+        {/*      setMeasurements={setMeasurements}*/}
+        {/*    />*/}
+        {/*    <MeasurementsDisplay*/}
+        {/*      measurements={measurements}*/}
+        {/*      setMeasurements={setMeasurements}*/}
+        {/*    />*/}
+        {/*  </section>*/}
+        {/*</section>*/}
+        {/*<section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">*/}
+        {/*  <label className="basis-[20%] capitalize" htmlFor="brief">*/}
+        {/*    Size Chart Link*/}
+        {/*  </label>*/}
+        {/*  <div className="flex w-full flex-col text-asisDark ">*/}
+        {/*    <input*/}
+        {/*      type="text"*/}
+        {/*      id="urlForSizeChart"*/}
+        {/*      name="urlForSizeChart"*/}
+        {/*      {...formik.getFieldProps("urlForSizeChart")}*/}
+        {/*      className=" w-full border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"*/}
+        {/*    />*/}
+        {/*    <div className="h-2">*/}
+        {/*      {formik.touched.urlForSizeChart &&*/}
+        {/*      formik.errors.urlForSizeChart ? (*/}
+        {/*        <p className="text-xs capitalize text-red-500">*/}
+        {/*          {formik.errors.urlForSizeChart}*/}
+        {/*        </p>*/}
+        {/*      ) : null}*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*</section>*/}
         <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
           <label className="basis-[20%] capitalize" htmlFor="brief">
-            Measurements
+            Count in Stock
           </label>
           <section className="flex w-full flex-col gap-y-4 text-asisDark">
-            <Measurements
-              measurements={measurements}
-              setMeasurements={setMeasurements}
+            <CountInStock
+              countInStock={countInStock}
+              setCountInStock={setCountInStock}
             />
-            <MeasurementsDisplay
-              measurements={measurements}
-              setMeasurements={setMeasurements}
+            <CountInStockDisplay
+              countInStock={countInStock}
+              setCountInStock={setCountInStock}
             />
           </section>
-        </section>
-        <section className="flex flex-col gap-x-12 gap-y-2 md:flex-row ">
-          <label className="basis-[20%] capitalize" htmlFor="brief">
-            Size Chart Link
-          </label>
-          <div className="flex w-full flex-col text-asisDark ">
-            <input
-              type="text"
-              id="urlForSizeChart"
-              name="urlForSizeChart"
-              {...formik.getFieldProps("urlForSizeChart")}
-              className=" w-full border-2 border-asisDark/30 bg-transparent px-3 py-3 text-sm text-asisDark md:w-2/3 lg:w-2/5"
-            />
-            <div className="h-2">
-              {formik.touched.urlForSizeChart &&
-              formik.errors.urlForSizeChart ? (
-                <p className="text-xs capitalize text-red-500">
-                  {formik.errors.urlForSizeChart}
-                </p>
-              ) : null}
-            </div>
-          </div>
         </section>
         <section className="flex w-full items-end justify-end gap-4">
           <button

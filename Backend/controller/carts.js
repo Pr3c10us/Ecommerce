@@ -3,91 +3,192 @@ const Cart = require("../models/carts.js");
 const Product = require("../models/products.js");
 const mongoose = require("mongoose");
 
+// const editCart = async (req, res) => {
+//     const { productId, measurements, quantity, id } = req.body;
+//     if (!productId || measurements.length <= 0 || !quantity) {
+//         throw new BadRequestError("Please fill all the fields");
+//     }
+//
+//     if (!mongoose.isValidObjectId(productId)) {
+//         throw new BadRequestError("Product Id is not valid");
+//     }
+//
+//     const product = await Product.findById(productId);
+//     if (!product) {
+//         throw new BadRequestError("Product doesn't exist");
+//     }
+//
+//     const cartId = req.cart;
+//
+//     if (!cartId) {
+//         const cart = new Cart({
+//             products: [
+//                 {
+//                     product,
+//                     measurements,
+//                     quantity,
+//                     price: product.price,
+//                     totalPrice: product.price * quantity,
+//                 },
+//             ],
+//             totalPrice: product.price * quantity,
+//         });
+//         await cart.save();
+//         return res
+//             .status(201)
+//             .cookie("cart", cart._id, {
+//                 expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+//                 httpOnly: true,
+//                 signed: true,
+//             })
+//             .json({
+//                 msg: "Product added to cart",
+//                 cart: cart,
+//             });
+//     } else {
+//         const cart = await Cart.findById(cartId).populate(
+//             "products.product",
+//             "name price images"
+//         );
+//         console.log(id);
+//
+//         if (id ) {
+//             if (!mongoose.isValidObjectId(id)) {
+//                 throw new BadRequestError("Product Id is not valid");
+//             }
+//             const productExist = cart.products.find(
+//                 (item) => item._id.toString() === id.toString()
+//             );
+//
+//             if (!productExist) {
+//                 throw new BadRequestError("Product doesn't exist in cart");
+//             } else {
+//                 productExist.quantity = quantity;
+//                 productExist.totalPrice = product.price * quantity;
+//             }
+//         } else {
+//             cart.products.push({
+//                 product,
+//                 measurements,
+//                 quantity,
+//                 price: product.price,
+//                 totalPrice: product.price * quantity,
+//             }); // cart.totalPrice += product.price * quantity;
+//         }
+//
+//
+//
+//         cart.totalPrice = cart.products.reduce(
+//             (acc, item) => acc + item.totalPrice,
+//             0
+//         );
+//         await cart.save();
+//         return res.status(201).json({
+//             msg: "Product added to cart",
+//             cart: cart,
+//         });
+//     }
+// };
+
 const editCart = async (req, res) => {
-    const { productId, measurements, quantity, id } = req.body;
-    if (!productId || measurements.length <= 0 || !quantity) {
-        throw new BadRequestError("Please fill all the fields");
-    }
+  const { productId, size, quantity } = req.body;
+  if (!productId || !size || !quantity) {
+    throw new BadRequestError("Please fill all the fields");
+  }
 
-    if (!mongoose.isValidObjectId(productId)) {
-        throw new BadRequestError("Product Id is not valid");
-    }
+  if (!mongoose.isValidObjectId(productId)) {
+    throw new BadRequestError("Product Id is not valid");
+  }
 
-    const product = await Product.findById(productId);
-    if (!product) {
-        throw new BadRequestError("Product doesn't exist");
-    }
+  const product = await Product.findById(productId);
+  if (!product) {
+    throw new BadRequestError("Product doesn't exist");
+  }
 
-    const cartId = req.cart;
+  // check if size with quantity is available
+  const sizeExist = product.countInStock.find(
+    (item) => item.size === size && item.quantity >= quantity
+  );
+  if (!sizeExist) {
+    throw new BadRequestError(
+      `Stock size ${size} is less than ${quantity}`
+    );
+  }
 
-    if (!cartId) {
-        const cart = new Cart({
-            products: [
-                {
-                    product,
-                    measurements,
-                    quantity,
-                    price: product.price,
-                    totalPrice: product.price * quantity,
-                },
-            ],
-            totalPrice: product.price * quantity,
-        });
-        await cart.save();
-        return res
-            .status(201)
-            .cookie("cart", cart._id, {
-                expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-                httpOnly: true,
-                signed: true,
-            })
-            .json({
-                msg: "Product added to cart",
-                cart: cart,
-            });
+  const cartId = req.cart;
+
+  if (!cartId) {
+    const cart = new Cart({
+      products: [
+        {
+          product,
+          size,
+          quantity,
+          price: product.price,
+          totalPrice: product.price * quantity,
+        },
+      ],
+      totalPrice: product.price * quantity,
+    });
+    await cart.save();
+    return res
+      .status(201)
+      .cookie("cart", cart._id, {
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+        httpOnly: true,
+        signed: true,
+      })
+      .json({
+        msg: "Product added to cart",
+        cart: cart,
+      });
+  } else {
+    const cart = await Cart.findById(cartId).populate(
+      "products.product",
+      "name price images"
+    );
+    const productExist = cart.products.find(
+      (item) =>
+        item.product._id.toString() === product._id.toString() &&
+        item.size === size
+    );
+
+    // if (productExist) res.send("true");
+    // if (!productExist) res.send("false");
+    // console.log(productExist);
+    // return
+    if (productExist) {
+      // if (productExist.quantity + quantity > sizeExist.quantity) {
+      //     throw new BadRequestError(
+      //         `quantity of size ${size} in stock is less than ${quantity}`
+      //     );
+      // }
+      // productExist.quantity += quantity;
+      // productExist.totalPrice += product.price * quantity;
+      productExist.quantity = quantity;
+      productExist.totalPrice = product.price * quantity;
+      // cart.totalPrice += product.price * quantity;
     } else {
-        const cart = await Cart.findById(cartId).populate(
-            "products.product",
-            "name price images"
-        );
-        console.log(id);
-
-        if (id ) {
-            if (!mongoose.isValidObjectId(id)) {
-                throw new BadRequestError("Product Id is not valid");
-            }
-            const productExist = cart.products.find(
-                (item) => item._id.toString() === id.toString()
-            );
-
-            if (!productExist) {
-                throw new BadRequestError("Product doesn't exist in cart");
-            } else {
-                productExist.quantity = quantity;
-                productExist.totalPrice = product.price * quantity;
-            }
-        } else {
-            cart.products.push({
-                product,
-                measurements,
-                quantity,
-                price: product.price,
-                totalPrice: product.price * quantity,
-            }); // cart.totalPrice += product.price * quantity;
-        }
-
-        
-
-        cart.totalPrice = cart.products.reduce(
-            (acc, item) => acc + item.totalPrice,
-            0
-        );
-        await cart.save();
-        return res.status(201).json({
-            msg: "Product added to cart",
-            cart: cart,
-        });
+      cart.products.push({
+        product,
+        size,
+        quantity,
+        price: product.price,
+        totalPrice: product.price * quantity,
+      });
+      // cart.totalPrice += product.price * quantity;
     }
+
+    cart.totalPrice = cart.products.reduce(
+      (acc, item) => acc + item.totalPrice,
+      0
+    );
+    await cart.save();
+    return res.status(201).json({
+      msg: "Product added to cart",
+      cart: cart,
+    });
+  }
 };
 
 const getCart = async (req, res) => {

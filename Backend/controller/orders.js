@@ -6,6 +6,7 @@ const Customer = require("../models/customer");
 const Order = require("../models/orders");
 const Shipping = require("../models/shippings");
 const { Paystack } = require("paystack-sdk");
+const Product = require("../models/products");
 const stripe = require("stripe")(process.env.STRIPE_SECRETE_KEY);
 
 const createOrderStripe = async (req, res) => {
@@ -14,17 +15,35 @@ const createOrderStripe = async (req, res) => {
     throw new BadRequestError("No item in cart");
   }
 
-  const cart = await Cart.findById(cartId).populate(
-    "products.product",
-    "name price images"
-  );
+  const cart = await Cart.findById(cartId).populate("products.product");
+
+  for await (const item of cart.products) {
+    const product = await Product.findById(item.product.id);
+    if (!product) {
+      throw new BadRequestError("Product doesn't exist");
+    }
+    console.log({ product });
+
+    const sizeExist = product.countInStock.find(
+      (ii) => ii.size === item.size && ii.quantity >= item.quantity
+    );
+    if (!sizeExist) {
+      throw new BadRequestError(`Stock size ${size} is less than ${quantity}`);
+    }
+  }
+
   const products = cart.products.map((item) => {
     return {
+      // product: item.product,
+      // name: item.product.name,
+      // measurements: item.measurements,
+      // quantity: item.quantity,
+      // price: item.price,
       product: item.product,
       name: item.product.name,
-      measurements: item.measurements,
+      size: item.size,
       quantity: item.quantity,
-      price: item.price
+      price: item.price,
     };
   });
 
@@ -63,8 +82,8 @@ const createOrderStripe = async (req, res) => {
     {
       shipping: shippingDetails._id,
       name: shippingDetails.name,
-      fee: shippingDetails.fee
-    }
+      fee: shippingDetails.fee,
+    },
   ];
   req.body.totalPrice = cart.totalPrice + shippingDetails.fee;
 
@@ -79,7 +98,7 @@ const createOrderStripe = async (req, res) => {
   let paystackClient = new Paystack(process.env.PAYSTACK_SECRETE_KEY);
   const transactionInitializer = {
     amount: (req.body.totalPrice * 100).toString(),
-    email: req.body.email
+    email: req.body.email,
   };
 
   const response = await paystackClient.transaction
@@ -100,12 +119,12 @@ const createOrderStripe = async (req, res) => {
   res
     .status(201)
     .cookie("cart", "", {
-      expires: new Date(Date.now() + 1000)
+      expires: new Date(Date.now() + 1000),
     })
     .json({
       msg: "Order created",
       paymentUrl: response.data.authorization_url,
-      order
+      order,
     });
 };
 
@@ -276,5 +295,5 @@ module.exports = {
   getOrder,
   getOrderByClientSecrete,
   updateOrder,
-  deleteOrder
+  deleteOrder,
 };

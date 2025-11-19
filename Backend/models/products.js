@@ -56,20 +56,31 @@ const productSchema = new mongoose.Schema(
                 ref: "SpecialCategory",
             },
         ],
-        measurements: [
-            {
-                name: {
-                    type: String,
-                },
-                unit: {
-                    type: String,
-                    default: "inches",
-                },
-            },
-        ],
-        urlForSizeChart: {
+        // measurements: [
+        //     {
+        //         name: {
+        //             type: String,
+        //         },
+        //         unit: {
+        //             type: String,
+        //             default: "inches",
+        //         },
+        //     },
+        // ],
+        // urlForSizeChart: {
+        //     type: String,
+        // },
+      countInStock: [
+        {
+          size: {
             type: String,
+          },
+          quantity: {
+            type: Number,
+            default: 0,
+          },
         },
+      ],
     },
     {
         timestamps: true,
