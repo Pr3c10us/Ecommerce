@@ -64,14 +64,14 @@ jobs:
 
             - name: Build Admin Docker Image
               run: |
-                  docker build -t ${{ env.DOCKER_ADMIN_IMAGE }}:${{ github.sha }} \
+                  docker build --no-cache -t ${{ env.DOCKER_ADMIN_IMAGE }}:${{ github.sha }} \
                     --build-arg VITE_BACKEND_URL=${{ secrets.VITE_ADMIN_BACKEND_URL }} \
                     --build-arg VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }} \
                     ./Admin
 
             - name: Build Frontend Docker Image
               run: |
-                  docker build -t ${{ env.DOCKER_FRONTEND_IMAGE }}:${{ github.sha }} \
+                  docker build --no-cache -t ${{ env.DOCKER_FRONTEND_IMAGE }}:${{ github.sha }} \
                     --build-arg VITE_BACKEND_URL=${{ secrets.VITE_FRONTEND_BACKEND_URL }} \
                     --build-arg VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }} \
                     ./Frontend
