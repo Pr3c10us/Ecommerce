@@ -16,11 +16,11 @@ RUN npm ci
 COPY . .
 
 # Build arguments for environment variables (passed at build time)
-ARG VITE_API_URL
+ARG VITE_BACKEND_URL
 ARG VITE_BLOB_URL
 
 # Set environment variables for build
-ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 ENV VITE_BLOB_URL=$VITE_BLOB_URL
 
 # Build the application

@@ -2,7 +2,7 @@ import React from "react";
 import OrderNav from "./orderNav";
 import Contact from "./contact";
 import Shipping from "./shipping";
-import Payment from "./Payment";
+// import Payment from "./Payment";
 // import Loading from "./loading";
 
 const Order = () => {
