@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.env
+.env.*
+*.log
+.git
+.gitignore
+README.md
+.prettierrc
+dist
+*.md
