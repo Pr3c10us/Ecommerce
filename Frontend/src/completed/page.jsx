@@ -215,6 +215,51 @@ const OrderComplete = () => {
                     </span>
                   </div>
                 </div>
+
+                {/* Purchased Items Section */}
+                {orderInfo.products && orderInfo.products.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    className="mt-8"
+                  >
+                    <h3 className="mb-4 font-['Playfair_Display'] text-lg font-semibold text-gray-800">
+                      <VowelItalicizer text="Your Items" />
+                    </h3>
+                    <div className="space-y-3 rounded-xl border border-gray-200 bg-gray-50/50 p-4">
+                      {orderInfo.products.map((item, index) => (
+                        <motion.div
+                          key={item._id || index}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
+                          className="flex items-center justify-between border-b border-gray-200 pb-3 last:border-b-0 last:pb-0"
+                        >
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">{item.name}</p>
+                            <p className="text-sm text-gray-500">
+                              {item.size && <span>Size: {item.size}</span>}
+                              {item.size && item.quantity && <span className="mx-2">•</span>}
+                              {item.quantity && <span>Qty: {item.quantity}</span>}
+                            </p>
+                          </div>
+                          <p className="font-mono text-sm font-semibold text-gray-900">
+                            ₦{item.price?.toLocaleString()}
+                          </p>
+                        </motion.div>
+                      ))}
+                      {/* Total */}
+                      <div className="mt-4 flex items-center justify-between border-t-2 border-gray-300 pt-4">
+                        <p className="font-semibold text-gray-800">Total</p>
+                        <p className="font-mono text-lg font-bold text-gray-900">
+                          ₦{orderInfo.totalPrice?.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
                     to="/store"
