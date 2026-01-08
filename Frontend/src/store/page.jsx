@@ -19,9 +19,8 @@ const Page = () => {
   const navigate = useNavigate();
 
   // API URL
-  const apiUrl = `${
-    import.meta.env.VITE_BACKEND_URL
-  }products?&category=${category}&sort=${sort}&gender=${gender}`;
+  const apiUrl = `${import.meta.env.VITE_BACKEND_URL
+    }products?&category=${category}&sort=${sort}&gender=${gender}`;
 
   const fetchData = async () => {
     try {
@@ -73,8 +72,8 @@ const Page = () => {
         </motion.div>
       ) : (
         <main className="flex flex-col items-center py-[10.4vh]">
-          <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:pl-20 md:text-[6vw]">
-            BLAK RATT
+          <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:text-[6vw]">
+            BLAKRATT
           </h1>
           <Filter
             category={category}
@@ -86,7 +85,7 @@ const Page = () => {
           />
           {data?.products?.length >= 1 ? (
             <>
-              <section className="grid w-full gap-y-20 px-4 sm:grid-cols-2 md:px-0 2xl:grid-cols-3">
+              <section className="grid w-full gap-y-20 px-4 sm:grid-cols-2 md:px-0 lg:grid-cols-3">
                 {data?.products?.map((product, index) => {
                   return (
                     <Link
@@ -98,18 +97,16 @@ const Page = () => {
                         className="group relative aspect-[8/10] w-full"
                       >
                         <img
-                          src={`${import.meta.env.VITE_BLOB_URL}${
-                            product.images[0]
-                          }`}
+                          src={`${import.meta.env.VITE_BLOB_URL}${product.images[0]
+                            }`}
                           alt={product.name}
-                          className=" absolute hidden h-full w-full object-contain object-center group-hover:hidden md:block"
+                          className=" absolute hidden h-full w-full object-cover object-center group-hover:hidden md:block"
                         />
                         <img
-                          src={`${import.meta.env.VITE_BLOB_URL}${
-                            product.images[1] || product.images[0]
-                          }`}
+                          src={`${import.meta.env.VITE_BLOB_URL}${product.images[1] || product.images[0]
+                            }`}
                           alt={product.name}
-                          className="absolute hidden h-full w-full object-contain object-center group-hover:block md:hidden"
+                          className="absolute hidden h-full w-full object-cover object-center group-hover:block md:hidden"
                         />
                       </div>
 

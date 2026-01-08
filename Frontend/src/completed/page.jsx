@@ -59,111 +59,169 @@ const OrderComplete = () => {
   return (
     <AnimatePresence>
       {isLoading ? (
-        <motion.div key="loading">
+        <motion.div
+          key="loading"
+        // exit={{ opacity: 0 }}
+        // className="flex h-screen w-full items-center justify-center bg-white"
+        >
           <Loading />
         </motion.div>
       ) : (
-        <main className="my-10 grid w-full flex-col-reverse gap-12 md:flex-row lg:grid-cols-2 lg:gap-0">
-          <section className="flex w-full px-4 py-5 lg:items-center lg:justify-center">
-            <div className="w-full max-w-xl space-y-4 object-cover object-center lg:h-[50rem] lg:w-[36rem] lg:max-w-none">
-              <img
-                className="w-full border border-asisDark object-cover"
-                src={`${import.meta.env.VITE_BLOB_URL}${
-                  products[0]?.images[0]
-                }`}
-                alt="thankyouImg"
-              />
-              <h2 className="text-2xl font-bold uppercase">
-                {products[0]?.name}
-              </h2>
-              <p className="text-xs font-medium">{products[0]?.brief}</p>
-              <Link
-                className="mr-auto flex w-auto max-w-xs items-center justify-center gap-x-2 border-2 border-asisDark px-2 py-1 text-sm font-medium md:px-4 md:py-2 md:text-base"
-                to={`/product/${products[0]?._id}`}
+        <main className="min-h-screen w-full px-4 py-12 font-['Inter'] text-[#1A1A1A] md:py-32 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20"
+          >
+            {/* Left Column: Success Message & Details */}
+            <div className="flex flex-col justify-center space-y-8">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="flex items-center space-x-4"
               >
-                View Product
-                <img src={arrow} alt="arrow" className="w-4" />
-              </Link>
-            </div>
-          </section>
-          <section className="flex flex-col overflow-auto  lg:py-16">
-            <div>
-              <div className="flex max-w-xl flex-col gap-y-8 px-4 py-5">
-                <h1 className="flex  w-full flex-col gap-y-4 text-5xl font-semibold uppercase md:text-5xl lg:text-6xl xl:text-7xl">
-                  <span>Thank you</span>
-                  <span className="flex w-full justify-end ">For your</span>
-                  <span className="pl-8">Order</span>
-                </h1>
-                <h2>Check email for update on order</h2>
-                <p className="flex w-full flex-col gap-y-4 text-left text-xs font-semibold uppercase">
-                  <span className="flex flex-col gap-2 leading-6 sm:flex-row sm:items-center">
-                    YOUR ORDER ID:{" "}
-                    <span className="text-base  font-bold underline">
-                      {orderInfo._id}
-                    </span>{" "}
-                  </span>
-                  <span className="flex flex-col gap-2 leading-6 sm:flex-row sm:items-center">
-                    YOUR ORDER PAYMENT STATUS IS:{" "}
-                    <span
-                      className={`text-base font-bold ${
-                        orderInfo.paymentStatus == "successful" &&
-                        "text-green-500"
-                      } 
-                   ${
-                     orderInfo.paymentStatus == "processing" &&
-                     "text-orange-500"
-                   }
-                  ${
-                    (orderInfo.paymentStatus == "failed" ||
-                      orderInfo.paymentStatus == "canceled") &&
-                    "text-red-500"
-                  }`}
-                    >
-                      {orderInfo.paymentStatus}
-                      {orderInfo.paymentStatus == "processing" && ". . ."}
-                    </span>{" "}
-                  </span>
-                  <span className="flex flex-col gap-2 leading-6 sm:flex-row sm:items-center">
-                    YOUR ORDER STATUS IS:{" "}
-                    <span className="text-base font-bold tracking-wider ">
-                      {" "}
-                      {orderInfo.status == "pending"
-                        ? "Placed"
-                        : orderInfo.status}
-                    </span>{" "}
-                  </span>
-                  <Link
-                    className="ml-auto flex w-auto max-w-xs items-center justify-center gap-x-2 border-b-2 border-b-asisDark px-1 py-0.5 text-sm font-medium capitalize italic"
-                    to={`/store`}
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
+                  <motion.svg
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="h-8 w-8"
                   >
-                    Continue Shopping
-                    <img src={arrow} alt="arrow" className="w-4 rotate-45" />
-                  </Link>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 12.75l6 6 9.135-9.135"
+                    />
+                  </motion.svg>
+                </div>
+                <div>
+                  <h3 className="font-['Playfair_Display'] text-lg text-gray-500">
+                    Payment Successful
+                  </h3>
+                  <p className="text-sm font-medium text-gray-400">
+                    {new Date().toLocaleDateString(undefined, {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+              </motion.div>
+
+              <div className="space-y-4">
+                <h1 className="font-['Playfair_Display'] text-5xl font-bold leading-tight text-black sm:text-6xl md:text-7xl">
+                  Thank You
+                  <br />
+                  <span className="italic text-gray-400">for your order.</span>
+                </h1>
+                <p className="max-w-md text-lg text-gray-600">
+                  Your order has been placed and is being processed. You will
+                  receive an email confirmation shortly.{" "}
+                  <span className="font-semibold text-gray-500">
+                    (Please check your spam folder if you don't see it).
+                  </span>
                 </p>
               </div>
-              {/* <div>
-              <h1 className="text-4xl font-semibold uppercase">
-                / <VowelItalicizer text={"your products"} />{" "}
-              </h1>
-              <div className="grid grid-cols-3 gap-4">
-                {orderInfo.products.map((data) => {
-                  return (
-                    <div key={data._id}>
-                      <Link to={`/product/${data._id}`}>
-                        <Products
-                          name={data.name}
-                          price={data.price}
-                          collaborations={data.collaborations}
-                          images={data.images}
+
+              <div className="">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <div className="space-y-1">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                      Order ID
+                    </p>
+                    <p className="font-mono text-base font-bold">
+                      {orderInfo._id}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                      Status
+                    </p>
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium md:px-3 md:py-1 md:text-sm ${orderInfo.paymentStatus === "successful"
+                        ? "bg-green-100 text-green-800"
+                        : orderInfo.paymentStatus === "processing"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : "bg-red-100 text-red-800"
+                        }`}
+                    >
+                      {orderInfo.paymentStatus === "processing"
+                        ? "Processing..."
+                        : orderInfo.paymentStatus}
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    to="/store"
+                    className="group flex items-center justify-center gap-2 rounded-full border border-black bg-black px-8 py-3 text-sm font-bold text-white transition-all hover:bg-gray-800"
+                  >
+                    Continue Shopping
+                    <motion.img
+                      src={arrow}
+                      alt="arrow"
+                      className="w-4 invert filter"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 1.5,
+                        repeatDelay: 1,
+                      }}
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Product Showcase */}
+            <div className="relative flex items-center justify-center">
+              {products[0] && (
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="relative w-full max-w-md"
+                >
+                  <div className="absolute -inset-4 rotate-2 rounded-[2rem] bg-gradient-to-tr from-gray-100 to-gray-200 opacity-70 blur-2xl" />
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-white shadow-2xl">
+                    <img
+                      src={`${import.meta.env.VITE_BLOB_URL}${products[0].images[0]
+                        }`}
+                      alt={products[0].name}
+                      className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-8 text-white">
+                      <p className="mb-2 font-['Playfair_Display'] text-sm italic opacity-90">
+                        Featured Collection
+                      </p>
+                      <h3 className="text-2xl font-bold uppercase tracking-wide">
+                        {products[0].name}
+                      </h3>
+                      <Link
+                        to={`/product/${products[0]._id}`}
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-medium hover:underline"
+                      >
+                        View Product
+                        <img
+                          src={arrow}
+                          alt="arrow"
+                          className="w-4 invert filter"
                         />
                       </Link>
                     </div>
-                  );
-                })}
-              </div>
-            </div> */}
+                  </div>
+                </motion.div>
+              )}
             </div>
-          </section>
+          </motion.div>
         </main>
       )}
     </AnimatePresence>

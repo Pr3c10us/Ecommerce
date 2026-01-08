@@ -86,6 +86,7 @@ const createOrderStripe = async (req, res) => {
     },
   ];
   req.body.totalPrice = cart.totalPrice + shippingDetails.fee;
+  const order = await Order.create(req.body);
 
   // const paymentIntent = await stripe.paymentIntents.create({
   //     amount: req.body.totalPrice * 100,
@@ -99,6 +100,7 @@ const createOrderStripe = async (req, res) => {
   const transactionInitializer = {
     amount: (req.body.totalPrice * 100).toString(),
     email: req.body.email,
+    callback_url: `${process.env.CLIENT_ORIGIN_1}/complete?reference=${order._id}`
   };
 
   const response = await paystackClient.transaction
@@ -112,7 +114,9 @@ const createOrderStripe = async (req, res) => {
   }
   req.body.clientSecret = response.data.reference;
 
-  const order = await Order.create(req.body);
+  // const o = await Order.findById(order._id);
+  order.clientSecret = response.data.reference
+  await order.save()
 
   await Cart.findByIdAndDelete(cart._id);
 
@@ -181,9 +185,10 @@ const getOrder = async (req, res) => {
 const getOrderByClientSecrete = async (req, res) => {
   const { clientSecret } = req.body;
 
-  const order = await Order.findOne({ clientSecret }).select(
-    "-customer -createdAt -updatedAt -__v -clientSecret"
-  );
+  const order = await Order.findOne({
+    $or: [{ _id: clientSecret }, { clientSecret }]
+  }).select("-customer -createdAt -updatedAt -__v -clientSecret");
+
   console.log(order);
 
   if (!order) {

@@ -10,12 +10,12 @@ import ThankYouPageDarkIcon from "../../assets/thankYouPageDarkIcon.svg";
 const Nav = () => {
   const location = useLocation();
   const pages = [
-    {
-      name: "homepage",
-      href: "/homepage",
-      icon: ProductsPageIcon,
-      darkIcon: ProductsPageDarkIcon,
-    },
+    // {
+    //   name: "homepage",
+    //   href: "/homepage",
+    //   icon: ProductsPageIcon,
+    //   darkIcon: ProductsPageDarkIcon,
+    // },
     ,
     {
       name: "Products",
@@ -47,13 +47,12 @@ const Nav = () => {
       {pages.map((page) => {
         return (
           <Link
-          key={page.name}
+            key={page.name}
             to={page.href}
-            className={`flex w-full items-center justify-center gap-2 rounded py-2 capitalize ${
-              location.pathname.includes(page.href)
-                ? "bg-asisDark text-white"
-                : "border border-asisDark text-asisDark"
-            } `}
+            className={`flex w-full items-center justify-center gap-2 rounded py-2 capitalize ${location.pathname.includes(page.href)
+              ? "bg-asisDark text-white"
+              : "border border-asisDark text-asisDark"
+              } `}
           >
             {location.pathname.includes(page.href) ? (
               <img src={page.icon} alt={page.name} className="h-4 sm:h-auto" />

@@ -1,10 +1,10 @@
 import React from "react";
-import { Outlet,useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Products = () => {
   const location = useLocation();
   return (
-    <main className="space-y-6 pt-7">
+    <main className="flex flex-col gap-y-6 pt-7">
       {location.pathname === "/products" && (
         <h1 className="font-semibold">Products</h1>
       )}

@@ -2,10 +2,172 @@ const Order = require("../models/orders");
 const Product = require("../models/products");
 const stripe = require("stripe")(process.env.STRIPE_SECRETE_KEY);
 const crypto = require("node:crypto");
+const { EmailClient } = require("@azure/communication-email");
+
+const emailClient = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
+
+const generateOrderEmailHTML = (order) => {
+  const productRows = order.products
+    .map(
+      (item) => `
+      <tr>
+        <td style="padding: 20px 0; border-bottom: 2px solid #000000;">
+          <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 800; color: #000000; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 4px;">${item.name}</div>
+          <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em;">SIZE: ${item.size || "OS"} // QTY: ${item.quantity}</div>
+        </td>
+        <td style="padding: 20px 0; border-bottom: 2px solid #000000; text-align: right; vertical-align: top;">
+          <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 14px; font-weight: 600; color: #000000;">₦${item.price.toFixed(2)}</div>
+        </td>
+      </tr>
+    `
+    )
+    .join("");
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>BLAKRATT | ACQUISITION CONFIRMED</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #FFFFFF; -webkit-font-smoothing: antialiased;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #FFFFFF;">
+        <tr>
+          <td align="center" style="padding: 60px 20px;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 540px; text-align: left; border: 4px solid #000000; padding: 40px;">
+              
+              <tr>
+                <td style="padding-bottom: 60px;">
+                  <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -0.05em; color: #000000; text-transform: uppercase;">
+                    BLAKRATT<span style="color: #FF0000;">.</span>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-bottom: 40px;">
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 12px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px;">// STATUS: SECURED</div>
+                  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 42px; line-height: 1.0; font-weight: 800; letter-spacing: -0.04em; color: #000000; margin: 0; text-transform: uppercase;">
+                    THE PIECES <br>ARE YOURS.
+                  </h1>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-bottom: 48px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000;">
+                    <tr>
+                      <td style="padding: 15px 20px;">
+                        <span style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em;">Order Ref:</span>
+                        <span style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; font-weight: 600; color: #FFFFFF; margin-left: 8px;">#${order._id}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th align="left" style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; padding-bottom: 8px;">Archive Item</th>
+                        <th align="right" style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; padding-bottom: 8px;">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${productRows}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 24px; padding-bottom: 60px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; color: #000000; text-transform: uppercase;">Total Acquisition</td>
+                      <td align="right" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 800; color: #000000;">₦${order.totalPrice.toFixed(2)}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="border-top: 2px solid #000000; padding-top: 30px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="50%" style="vertical-align: top; padding-right: 20px;">
+                        <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #000000; margin-bottom: 12px;">[ DESTINATION ]</div>
+                        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; color: #000000; text-transform: uppercase; font-weight: 500;">
+                          ${order.firstName} ${order.lastName}<br>
+                          ${order.address}<br>
+                          ${order.city}, ${order.state} ${order.zip}
+                        </div>
+                      </td>
+                      <td width="50%" style="vertical-align: top;">
+                        <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #000000; margin-bottom: 12px;">[ METHOD ]</div>
+                        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; color: #000000; text-transform: uppercase; font-weight: 500;">
+                          Standard Dispatch<br>
+                          Tracking to follow
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 60px; text-align: center;">
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 9px; color: #999999; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.8;">
+                    This is an automated transmission from BLAKRATT.<br>
+                    &copy; ${new Date().getFullYear()} ALL RIGHTS RESERVED. ARCHIVE NO. ${Math.floor(Math.random() * 100000)}
+                  </div>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+};
+
+// Send order confirmation email using Azure Communication Services
+const sendOrderConfirmationEmail = async (order) => {
+  const emailMessage = {
+    senderAddress: process.env.AZURE_SENDER_ADDRESS,
+    content: {
+      subject: `Order Confirmation - #${order._id}`,
+      html: generateOrderEmailHTML(order),
+      plainText: `Hi ${order.firstName}, Thank you for your order! Your Order ID is: ${order._id}. Total: ₦${order.totalPrice.toFixed(2)}`,
+    },
+    recipients: {
+      to: [
+        {
+          address: order.email,
+          displayName: `${order.firstName} ${order.lastName}`,
+        },
+      ],
+    },
+  };
+
+  try {
+    const poller = await emailClient.beginSend(emailMessage);
+    const result = await poller.pollUntilDone();
+    console.log("Email sent successfully. Message ID:", result.id);
+    return result;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
+};
 
 const stripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
-  // console.log({ h: req.headers, b: req.body });
 
   let event;
   try {
@@ -40,28 +202,18 @@ const stripeWebhook = async (req, res) => {
       break;
     case "payment_intent.succeeded":
       order.paymentStatus = "successful";
-      // // get all the items in the order and subract quantity from the database
-      // order.products.forEach(async (product) => {
-      //     const { product: productId, size, quantity } = product;
-      //     const productInDb = await Product.findById(productId);
-      //     productInDb.countInStock = productInDb.countInStock.map(
-      //         (item) => {
-      //             if (item.size === size) {
-      //                 item.quantity -= quantity;
-      //             }
-      //             return item;
-      //         }
-      //     );
-      //     await productInDb.save();
-      // });
-      break;
-    // ... handle other event types
+      await order.save();
+      try {
+        await sendOrderConfirmationEmail(order);
+      } catch (emailError) {
+        console.error("Failed to send confirmation email:", emailError);
+      }
+      return res.status(200).send();
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
 
   await order.save();
-
   res.status(200).send();
 };
 
@@ -70,9 +222,11 @@ const paystackWebhook = async (req, res) => {
     .createHmac("sha512", process.env.PAYSTACK_SECRETE_KEY)
     .update(JSON.stringify(req.body))
     .digest("hex");
+
   if (hash !== req.headers["x-paystack-signature"]) {
     return res.status(200).send();
   }
+
   if (req.body.event === "charge.success") {
     const { reference } = req.body.data;
     try {
@@ -82,6 +236,12 @@ const paystackWebhook = async (req, res) => {
       }
       order.paymentStatus = "successful";
       await order.save();
+
+      try {
+        await sendOrderConfirmationEmail(order);
+      } catch (emailError) {
+        console.error("Failed to send confirmation email:", emailError);
+      }
     } catch (error) {
       console.log(error);
       return res.status(400).send();
