@@ -249,8 +249,19 @@ const OrderComplete = () => {
                           </p>
                         </motion.div>
                       ))}
+                      {/* Shipping */}
+                      {orderInfo.shipping && orderInfo.shipping.length > 0 && (
+                        <div className="mt-3 flex items-center justify-between">
+                          <p className="text-sm text-gray-600">
+                            Shipping ({orderInfo.shipping[0]?.name})
+                          </p>
+                          <p className="font-mono text-sm text-gray-600">
+                            ₦{orderInfo.shipping[0]?.fee?.toLocaleString()}
+                          </p>
+                        </div>
+                      )}
                       {/* Total */}
-                      <div className="mt-4 flex items-center justify-between border-t-2 border-gray-300 pt-4">
+                      <div className="mt-3 flex items-center justify-between border-t border-gray-200 pt-3">
                         <p className="font-semibold text-gray-800">Total</p>
                         <p className="font-mono text-lg font-bold text-gray-900">
                           ₦{orderInfo.totalPrice?.toLocaleString()}
