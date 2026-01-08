@@ -143,19 +143,21 @@ const OrderComplete = () => {
                   </div>
                   <div className="space-y-1">
                     <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                      Status
+                      Order Status
                     </p>
                     <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium md:px-3 md:py-1 md:text-sm ${orderInfo.paymentStatus === "successful"
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium md:px-3 md:py-1 md:text-sm ${orderInfo.status === "delivered"
                         ? "bg-green-100 text-green-800"
-                        : orderInfo.paymentStatus === "processing"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
+                        : orderInfo.status === "shipped"
+                          ? "bg-blue-100 text-blue-800"
+                          : orderInfo.status === "processing"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : orderInfo.status === "pending"
+                              ? "bg-orange-100 text-orange-800"
+                              : "bg-red-100 text-red-800"
                         }`}
                     >
-                      {orderInfo.paymentStatus === "processing"
-                        ? "Processing..."
-                        : orderInfo.paymentStatus}
+                      {orderInfo.status.charAt(0).toUpperCase() + orderInfo.status.slice(1)}
                     </span>
                   </div>
                 </div>
