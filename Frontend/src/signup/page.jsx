@@ -6,6 +6,7 @@ import Input from "./components/inputs";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import VowelItalicizer from "../components/vowelItalicizer";
 const Page = () => {
   const navigate = useNavigate();
   const formik = useFormik({
@@ -69,9 +70,9 @@ const Page = () => {
         onSubmit={formik.handleSubmit}
       >
         <header className="flex w-full flex-col justify-center text-center">
-          <h1 className="text-2xl font-medium capitalize">Sign up</h1>
+          <h1 className="text-2xl font-medium capitalize"><VowelItalicizer text="Sign up" /></h1>
           <p className="ml-2 text-asisDark">
-            Create an Asis account to get extra benefits. . . 
+            Create an Asis account to get extra benefits. . .
           </p>
         </header>
         <section className="grid w-full max-w-2xl gap-x-5 gap-y-4 px-4 md:grid-cols-2">

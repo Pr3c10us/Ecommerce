@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GiTireIronCross } from "react-icons/gi";
 import { menuSlide } from "./anim";
 import Curve from "./curve";
+import VowelItalicizer from "../../components/vowelItalicizer";
 
 const Filter = ({
   category,
@@ -83,7 +84,7 @@ const Filter = ({
             className="fixed right-0 top-0 z-10 h-screen w-screen space-y-8 sm:space-y-10 bg-asisDark px-5 py-5 sm:py-10 text-white sm:w-1/2 lg:w-1/3"
           >
             <div className="flex justify-between font-playfair text-4xl sm:text-[5vw] lg:text-[3vw]">
-              <h2>Filters</h2>
+              <h2><VowelItalicizer text="Filters" /></h2>
               <button
                 onClick={() => {
                   setHideFilter(true);
@@ -95,7 +96,7 @@ const Filter = ({
             </div>
 
             <div className="flex flex-col gap-2 sm:gap-5">
-              <h3 className="text-lg">Sort By:</h3>
+              <h3 className="text-lg"><VowelItalicizer text="Sort By:" /></h3>
               <div className="flex flex-col gap-2">
                 {sortArray.map((sortKey, index) => (
                   <button
@@ -107,11 +108,10 @@ const Filter = ({
                     className="flex items-center gap-4 font-extralight capitalize"
                   >
                     <div
-                      className={`h-6 w-6 rounded-full ${
-                        sort === sortKey.keyWord
+                      className={`h-6 w-6 rounded-full ${sort === sortKey.keyWord
                           ? "bg-white "
                           : "border-2 border-white "
-                      }`}
+                        }`}
                     />
                     {sortKey.displayText}
                   </button>
@@ -119,7 +119,7 @@ const Filter = ({
               </div>
             </div>
             <div className="flex flex-col gap-2 sm:gap-5">
-              <h3 className="text-lg">Category:</h3>
+              <h3 className="text-lg"><VowelItalicizer text="Category:" /></h3>
               <div className="flex flex-wrap gap-2">
                 {categoryArray.map((catKey, index) => (
                   <button
@@ -128,11 +128,10 @@ const Filter = ({
                       setCategory(catKey.keyWord);
                       setHideFilter(true);
                     }}
-                    className={`flex items-center gap-4 rounded-full px-4 py-1.5 capitalize ${
-                      category == catKey.keyWord
+                    className={`flex items-center gap-4 rounded-full px-4 py-1.5 capitalize ${category == catKey.keyWord
                         ? "bg-white text-asisDark"
                         : "border-2"
-                    }`}
+                      }`}
                   >
                     {catKey.displayText}
                   </button>
@@ -140,7 +139,7 @@ const Filter = ({
               </div>
             </div>
             <div className="flex flex-col gap-2 sm:gap-5">
-              <h3 className="text-lg">Gender:</h3>
+              <h3 className="text-lg"><VowelItalicizer text="Gender:" /></h3>
               <div className="flex flex-wrap gap-2">
                 {genderArray.map((genderKey, index) => (
                   <button
@@ -149,11 +148,10 @@ const Filter = ({
                       setGender(genderKey.keyWord);
                       setHideFilter(true);
                     }}
-                    className={`flex items-center gap-4 rounded-full px-4 py-1.5 capitalize ${
-                      gender == genderKey.keyWord
+                    className={`flex items-center gap-4 rounded-full px-4 py-1.5 capitalize ${gender == genderKey.keyWord
                         ? "bg-white text-asisDark"
                         : "border-2"
-                    }`}
+                      }`}
                   >
                     {genderKey.displayText}
                   </button>

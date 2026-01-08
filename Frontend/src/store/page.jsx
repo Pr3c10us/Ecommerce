@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import backToTop from "../assets/icons/back_to_top.svg";
 import ShopProducts from "./component/shop_products";
 import Loading from "../components/loading";
+import VowelItalicizer from "../components/vowelItalicizer";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FrameOne from "./frames/frameOne";
@@ -73,7 +74,7 @@ const Page = () => {
       ) : (
         <main className="flex flex-col items-center py-[10.4vh]">
           <h1 className="mb-10 w-full text-center font-playfair text-[10vw] uppercase leading-none md:mb-20 md:text-[6vw]">
-            BLAKRATT
+            <VowelItalicizer text="BLAKRATT" />
           </h1>
           <Filter
             category={category}
@@ -112,7 +113,7 @@ const Page = () => {
 
                       <div className="text-center font-playfair capitalize">
                         <h3 className="text-lg font-bold uppercase">
-                          {product?.name}
+                          <VowelItalicizer text={product?.name} />
                         </h3>
                         <p>{product?.gender}</p>
                         <p>
@@ -130,7 +131,7 @@ const Page = () => {
           ) : (
             <section className="flex w-full flex-col">
               <h1 className="w-full text-center font-playfair text-[8vw]">
-                No Matches Found
+                <VowelItalicizer text="No Matches Found" />
               </h1>
               <p className="w-full text-center font-playfair">
                 Please try another filter

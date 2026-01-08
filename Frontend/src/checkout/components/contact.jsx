@@ -31,7 +31,7 @@ const Contact = ({ setActiveStep }) => {
       city,
       state,
       zip,
-      country,
+      country: "Nigeria",
     },
     onSubmit: (values) => {
       dispatch(setOrder(values));
@@ -53,7 +53,7 @@ const Contact = ({ setActiveStep }) => {
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-8 py-8">
       <h2 className="text-lg font-semibold uppercase md:text-2xl">
-        Contact Information
+        <VowelItalicizer text="Contact Information" />
       </h2>
       <section className="grid gap-x-4 gap-y-4 md:grid-cols-2">
         <ContactInput
@@ -86,7 +86,7 @@ const Contact = ({ setActiveStep }) => {
         />
       </section>
       <h2 className="text-lg font-semibold uppercase md:text-2xl">
-        Shipping Address
+        <VowelItalicizer text="Shipping Address" />
       </h2>
       <section className="grid gap-x-4 gap-y-4 md:grid-cols-2">
         <ContactInput
@@ -110,13 +110,15 @@ const Contact = ({ setActiveStep }) => {
           name="state"
           placeholder="STATE *"
         />
-        <ContactInput
-          touched={formik.touched.country}
-          errors={formik.errors.country}
-          fieldProps={formik.getFieldProps("country")}
-          name="country"
-          placeholder="COUNTRY *"
-        />
+        <div>
+          <input
+            type="text"
+            value="NIGERIA"
+            disabled
+            className="w-full border border-asisDark bg-transparent px-4 py-2.5 cursor-not-allowed opacity-70"
+          />
+          <div className="h-1.5"></div>
+        </div>
         <ContactInput
           touched={formik.touched.zip}
           errors={formik.errors.zip}

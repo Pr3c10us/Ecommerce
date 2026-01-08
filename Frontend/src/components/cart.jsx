@@ -186,7 +186,7 @@ const Cart = ({ setHideCart }) => {
                     rt */}
                   / <VowelItalicizer text="your cart" />
                 </p>
-                <p className="absolute -top-2 left-[9.5rem] text-base font-medium text-black md:left-[14rem]">
+                <p className="absolute top-0 left-[10rem] text-base font-medium text-black md:left-[15rem]">
                   ({cartData?.products?.length})
                 </p>
               </div>

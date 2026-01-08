@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { setCart } from "../../redux/asis";
 import { FaPen } from "react-icons/fa6";
+import VowelItalicizer from "./vowelItalicizer";
 
 const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
   const [quantity, setQuantity] = React.useState(data.quantity);
@@ -80,8 +81,8 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
           <div className="flex items-start justify-between border-b-2 border-b-asisDark/30 pb-2">
             <div>
               <Link to={`/product/${data.product._id}`}>
-                <p className="text-xs font-bold text-asisDark sm:text-sm">
-                  {data.product.name}
+                <p className="text-xs font-bold font-playfair text-asisDark sm:text-sm">
+                  <VowelItalicizer text={data.product.name} />
                 </p>
               </Link>
               <p className="mt-2 text-[0.7rem] font-semibold text-black sm:text-xs">
@@ -121,11 +122,10 @@ const CartItem = ({ data, index, removeItemFromCart, handleGetCart }) => {
                   if (quantity === data.quantity) return;
                   handleAddQuantity();
                 }}
-                className={`flex h-full w-16 cursor-pointer items-center justify-center bg-asisDark py-2 text-center text-xs text-white ${
-                  quantity === data.quantity
-                    ? "hidden cursor-default opacity-50 peer-focus:flex"
-                    : "flex"
-                }`}
+                className={`flex h-full w-16 cursor-pointer items-center justify-center bg-asisDark py-2 text-center text-xs text-white ${quantity === data.quantity
+                  ? "hidden cursor-default opacity-50 peer-focus:flex"
+                  : "flex"
+                  }`}
               >
                 {" "}
                 {/* <FaPen className="h-4 w-4" /> */}

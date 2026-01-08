@@ -21,9 +21,8 @@ const CheckoutCart = () => {
 
   const handleFetchShippingDetails = async () => {
     try {
-      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}shippings/${
-        orderDetails.shipping
-      }`;
+      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}shippings/${orderDetails.shipping
+        }`;
       let { data } = await axios.get(apiUrl);
       setShippingFee(data.fee);
     } catch (error) {
@@ -179,7 +178,7 @@ const CheckoutCart = () => {
                     rt */}
                 / <VowelItalicizer text="your cart" />
               </p>
-              <p className="absolute -top-2 left-[13.5rem] text-base font-medium text-black">
+              <p className="absolute top-0 left-[15rem] text-base font-medium text-black">
                 ({cartData?.products?.length})
               </p>
             </div>
@@ -216,9 +215,9 @@ const CheckoutCart = () => {
                 {!orderDetails.shipping
                   ? "Calculated at Shipping"
                   : `${Intl.NumberFormat("en-NG", {
-                      style: "currency",
-                      currency: "NGN",
-                    }).format(shippingFee)}`}{" "}
+                    style: "currency",
+                    currency: "NGN",
+                  }).format(shippingFee)}`}{" "}
               </p>
             </div>
             <div className="flex items-center justify-between border-t-2 border-t-asisDark py-4  text-sm font-bold">

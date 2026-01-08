@@ -121,7 +121,7 @@ const Shipping = ({ setActiveStep }) => {
     <div className="flex w-full  flex-col gap-y-12 py-8">
       <h2 className="text-2xl font-semibold uppercase">
         {/* / <VowelItalicizer text={"Shipping method"} /> */}
-        Shipping method
+        <VowelItalicizer text="Shipping method" />
       </h2>
       <section className="flex flex-col gap-8">
         {data.map((shippingDetail) => (
@@ -136,29 +136,25 @@ const Shipping = ({ setActiveStep }) => {
           >
             <div className=" flex h-5 w-5 items-center justify-center rounded-full border-2 border-asisDark">
               <div
-                className={`h-3 w-3 rounded-full ${
-                  selectedShipping === shippingDetail._id && "bg-asisDark"
-                }`}
+                className={`h-3 w-3 rounded-full ${selectedShipping === shippingDetail._id && "bg-asisDark"
+                  }`}
               ></div>
             </div>
             <h3
-              className={`flex-1 capitalize ${
-                selectedShipping === shippingDetail._id && "text-asisDark"
-              }`}
+              className={`flex-1 capitalize ${selectedShipping === shippingDetail._id && "text-asisDark"
+                }`}
             >
-              {shippingDetail.name}
+              <VowelItalicizer text={shippingDetail.name} />
             </h3>
             <p
-              className={`flex-1 text-sm ${
-                selectedShipping === shippingDetail._id && "text-asisDark"
-              }`}
+              className={`flex-1 text-sm ${selectedShipping === shippingDetail._id && "text-asisDark"
+                }`}
             >
               {shippingDetail.durationInDays} DAYS
             </p>
             <p
-              className={`flex-1 text-right text-sm ${
-                selectedShipping === shippingDetail._id && "text-asisDark"
-              }`}
+              className={`flex-1 text-right text-sm ${selectedShipping === shippingDetail._id && "text-asisDark"
+                }`}
             >
               {Intl.NumberFormat("en-NG", {
                 style: "currency",
@@ -171,7 +167,7 @@ const Shipping = ({ setActiveStep }) => {
       </section>
       <section className="border-2 border-asisDark px-2 py-4 text-xs sm:px-8">
         <div className="mb-2 flex items-start justify-between">
-          <h2 className="">Contact Information: </h2>
+          <h2 className=""><VowelItalicizer text="Contact Information:" /></h2>
           <p className=" text-right font-semibold ">
             {` `}
             {firstName},{lastName},{email},<br className="block sm:hidden"></br>
@@ -179,7 +175,7 @@ const Shipping = ({ setActiveStep }) => {
           </p>
         </div>
         <div className="mb-2 flex items-start justify-between">
-          <h2 className="">Shipping Address: </h2>
+          <h2 className=""><VowelItalicizer text="Shipping Address:" /></h2>
           <p className=" text-right font-semibold">
             {` `}
             {address},{city},<br></br>
@@ -197,9 +193,8 @@ const Shipping = ({ setActiveStep }) => {
         <button
           disabled={isLoading}
           onClick={handleAddShippingDetails}
-          className={`w-8/12 rounded-md bg-asisDark py-3 text-xs  font-bold text-white sm:w-9/12 sm:text-base ${
-            selectedShipping ? "" : "opacity-50 "
-          }`}
+          className={`w-8/12 rounded-md bg-asisDark py-3 text-xs  font-bold text-white sm:w-9/12 sm:text-base ${selectedShipping ? "" : "opacity-50 "
+            }`}
         >
           Go to Payment -{" "}
           {Intl.NumberFormat("en-NG", {

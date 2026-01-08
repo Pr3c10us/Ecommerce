@@ -23,6 +23,35 @@ const generateOrderEmailHTML = (order) => {
     )
     .join("");
 
+  // Calculate subtotal (products only)
+  const subtotal = order.products.reduce((sum, item) => sum + item.price, 0);
+
+  // Calculate total shipping fee
+  const shippingTotal = order.shipping && order.shipping.length > 0
+    ? order.shipping.reduce((sum, s) => sum + (s.fee || 0), 0)
+    : 0;
+
+  // Get shipping method name(s)
+  const shippingMethodName = order.shipping && order.shipping.length > 0
+    ? order.shipping.map(s => s.name).join(", ")
+    : "Standard Dispatch";
+
+  // Generate shipping rows for the receipt
+  const shippingRows = order.shipping && order.shipping.length > 0
+    ? order.shipping.map(
+        (s) => `
+        <tr>
+          <td style="padding: 12px 0; border-bottom: 1px dashed #CCCCCC;">
+            <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 600; color: #666666; text-transform: uppercase; letter-spacing: -0.01em;">${s.name || 'Shipping'}</div>
+          </td>
+          <td style="padding: 12px 0; border-bottom: 1px dashed #CCCCCC; text-align: right; vertical-align: top;">
+            <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 13px; font-weight: 500; color: #666666;">₦${(s.fee || 0).toFixed(2)}</div>
+          </td>
+        </tr>
+      `
+      ).join("")
+    : "";
+
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -83,12 +112,32 @@ const generateOrderEmailHTML = (order) => {
                 </td>
               </tr>
 
+              <!-- Shipping Details Section -->
+              <tr>
+                <td style="padding-top: 8px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      ${shippingRows}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- Totals Breakdown Section -->
               <tr>
                 <td style="padding-top: 24px; padding-bottom: 60px;">
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; color: #000000; text-transform: uppercase;">Total Acquisition</td>
-                      <td align="right" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 800; color: #000000;">₦${order.totalPrice.toFixed(2)}</td>
+                      <td style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 12px; font-weight: 500; color: #666666; text-transform: uppercase; padding-bottom: 8px;">Subtotal</td>
+                      <td align="right" style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 14px; font-weight: 500; color: #666666; padding-bottom: 8px;">₦${subtotal.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 12px; font-weight: 500; color: #666666; text-transform: uppercase; padding-bottom: 16px;">Shipping</td>
+                      <td align="right" style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 14px; font-weight: 500; color: #666666; padding-bottom: 16px;">₦${shippingTotal.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; color: #000000; text-transform: uppercase; border-top: 2px solid #000000; padding-top: 16px;">Total Acquisition</td>
+                      <td align="right" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 800; color: #000000; border-top: 2px solid #000000; padding-top: 16px;">₦${order.totalPrice.toFixed(2)}</td>
                     </tr>
                   </table>
                 </td>
@@ -109,12 +158,23 @@ const generateOrderEmailHTML = (order) => {
                       <td width="50%" style="vertical-align: top;">
                         <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #000000; margin-bottom: 12px;">[ METHOD ]</div>
                         <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; color: #000000; text-transform: uppercase; font-weight: 500;">
-                          Standard Dispatch<br>
+                          ${shippingMethodName}<br>
                           Tracking to follow
                         </div>
                       </td>
                     </tr>
                   </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 40px; text-align: center;">
+                  <a href="${process.env.CLIENT_ORIGIN_1}/complete?reference=${order._id}" style="display: inline-block; background-color: #000000; color: #FFFFFF; font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; padding: 18px 40px; border: 2px solid #000000; transition: all 0.2s ease;">
+                    TRACK YOUR ORDER →
+                  </a>
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 12px;">
+                    Monitor your order status in real-time
+                  </div>
                 </td>
               </tr>
 

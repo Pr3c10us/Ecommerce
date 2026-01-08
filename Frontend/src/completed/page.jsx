@@ -103,7 +103,7 @@ const OrderComplete = () => {
                 </div>
                 <div>
                   <h3 className="font-['Playfair_Display'] text-lg text-gray-500">
-                    Payment Successful
+                    <VowelItalicizer text="Payment Successful" />
                   </h3>
                   <p className="text-sm font-medium text-gray-400">
                     {new Date().toLocaleDateString(undefined, {
@@ -118,9 +118,9 @@ const OrderComplete = () => {
 
               <div className="space-y-4">
                 <h1 className="font-['Playfair_Display'] text-5xl font-bold leading-tight text-black sm:text-6xl md:text-7xl">
-                  Thank You
+                  <VowelItalicizer text="Thank You" />
                   <br />
-                  <span className="italic text-gray-400">for your order.</span>
+                  <span className="italic text-gray-400"><VowelItalicizer text="for your order." /></span>
                 </h1>
                 <p className="max-w-md text-lg text-gray-600">
                   Your order has been placed and is being processed. You will
@@ -203,7 +203,7 @@ const OrderComplete = () => {
                         Featured Collection
                       </p>
                       <h3 className="text-2xl font-bold uppercase tracking-wide">
-                        {products[0].name}
+                        <VowelItalicizer text={products[0].name} />
                       </h3>
                       <Link
                         to={`/product/${products[0]._id}`}

@@ -7,6 +7,7 @@ import { setCart } from "../../../redux/asis";
 import AddToCartLoading from "./addToCartLoading";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { HiArrowLongRight } from "react-icons/hi2";
+import VowelItalicizer from "../../components/vowelItalicizer";
 
 const Product_detail = ({ data }) => {
   // States
@@ -114,11 +115,10 @@ const Product_detail = ({ data }) => {
                 <div
                   key={index}
                   onClick={() => setSelectedImage(img)}
-                  className={`flex h-20 w-24 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat ${
-                    img === selectedImage
-                      ? `bg-[url('./assets/images/frames.png')]`
-                      : ""
-                  }`}
+                  className={`flex h-20 w-24 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat ${img === selectedImage
+                    ? `bg-[url('./assets/images/frames.png')]`
+                    : ""
+                    }`}
                 >
                   <img
                     src={`${import.meta.env.VITE_BLOB_URL}${img}`}
@@ -142,13 +142,13 @@ const Product_detail = ({ data }) => {
           {/* Product information */}
           {!data.comingSoon && (
             <section className="w-full flex-1 space-y-6 py-4 lg:px-4">
-              <p className=" text-3xl font-medium uppercase text-asisDark">
-                {data.name}
+              <p className=" text-3xl font-medium uppercase text-asisDark font-playfair">
+                <VowelItalicizer text={data.name} />
               </p>
               {/* Quantity */}
               <section className="flex flex-col gap-2">
                 {" "}
-                <h2 className="font-semibold">Quantity</h2>
+                <h2 className="font-semibold font-playfair"><VowelItalicizer text="QUANTITY" /></h2>
                 <div className="flex items-center">
                   <div
                     onClick={() => {
@@ -175,17 +175,16 @@ const Product_detail = ({ data }) => {
               </section>
               {/* Sizes */}
               <section className="flex flex-col gap-2">
-                <h2 className="font-semibold">SIZE</h2>
+                <h2 className="font-semibold font-playfair"><VowelItalicizer text="SIZE" /></h2>
                 <div className="flex flex-wrap gap-x-5 gap-y-3">
                   {data.countInStock?.map((sizeData, index) => (
                     <div
                       key={index}
                       onClick={() => setSelectedSize(sizeData.size)}
-                      className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${
-                        selectedSize === sizeData.size
-                          ? " border-asisDark text-asisDark"
-                          : " border-[#C4C4C4] text-[#C4C4C4]"
-                      }`}
+                      className={`flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-xs font-medium uppercase ${selectedSize === sizeData.size
+                        ? " border-asisDark text-asisDark"
+                        : " border-[#C4C4C4] text-[#C4C4C4]"
+                        }`}
                     >
                       {sizeData.size}
                     </div>
@@ -196,16 +195,15 @@ const Product_detail = ({ data }) => {
               {/* Additional details */}
               <section className="">
                 {/* Description */}
-                <p className="text-sm font-medium text-asisDark">
-                  {data.brief}
+                <p className="font-bold text-asisDark font-playfair">
+                  <VowelItalicizer text={data.brief} />
                 </p>
                 {/* Add to cart */}
                 <button
-                  className={`relative my-4 flex max-h-12 w-full justify-center rounded  py-4 text-center text-xs font-semibold uppercase ${
-                    selectedSize
-                      ? "bg-asisDark text-[#FFFFFF]"
-                      : "bg-asisDark/70 text-[#C4C4C4]"
-                  }`}
+                  className={`relative my-4 flex max-h-12 w-full justify-center rounded  py-4 text-center text-xs font-semibold uppercase ${selectedSize
+                    ? "bg-asisDark text-[#FFFFFF]"
+                    : "bg-asisDark/70 text-[#C4C4C4]"
+                    }`}
                   disabled={isAddingToCart}
                   onClick={() => {
                     handleAddToCart();
@@ -228,20 +226,18 @@ const Product_detail = ({ data }) => {
                   className="border-y border-asisDark text-sm uppercase text-asisDark "
                 >
                   <article className="border-b1 flex cursor-pointer items-center justify-between border-asisDark py-2 font-semibold">
-                    <p>product details</p>
+                    <p className="font-playfair">product details</p>
                     <img
-                      className={`transition-all duration-300 ${
-                        showDescription ? "rotate-180 transform" : ""
-                      }`}
+                      className={`transition-all duration-300 ${showDescription ? "rotate-180 transform" : ""
+                        }`}
                       src={down}
                       alt="down"
                     />
                   </article>
                 </section>
                 <div
-                  className={`grid text-sm text-asisDark/80 transition-all duration-300 ${
-                    showDescription ? "grid-rows-[1fr] py-2" : "grid-rows-[0fr]"
-                  } `}
+                  className={`grid text-asisDark/80 transition-all duration-300 ${showDescription ? "grid-rows-[1fr] py-2" : "grid-rows-[0fr]"
+                    } `}
                 >
                   <p className="overflow-hidden">{data.description}</p>
                 </div>
@@ -257,8 +253,8 @@ const Product_detail = ({ data }) => {
                 <HiArrowLongRight /> Coming soon
               </div> */}
               <div className="flex items-center gap-4 text-3xl font-bold">
-                <h1>This Product would be</h1>
-                <h2 className="bg-asisDark w-64 text-white p-2">Launching Soon.</h2>
+                <h1><VowelItalicizer text="This Product would be" /></h1>
+                <h2 className="bg-asisDark w-64 text-white p-2"><VowelItalicizer text="Launching Soon." /></h2>
               </div>
             </section>
           )}

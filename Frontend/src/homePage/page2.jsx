@@ -40,7 +40,7 @@ const Page = () => {
       </div>
       <article className="flex h-full w-full max-w-5xl flex-1 flex-col md:gap-4">
         <h1 className="px-10 text-center text-2xl font-normal uppercase md:text-left md:text-4xl md:font-semibold">
-          Our newest products
+          <VowelItalicizer text="Our newest products" />
         </h1>
         <div className="flex flex-1 items-stretch gap-8 px-4">
           <div className="relative aspect-square basis-[100%] px-2 py-6 md:basis-[30%] md:px-6">
@@ -52,16 +52,15 @@ const Page = () => {
                     style={{ left: `${index * 100}%` }}
                   >
                     <h2 className="text-center text-2xl font-normal md:text-left md:text-base md:font-semibold">
-                      {product.name}
+                      <VowelItalicizer text={product.name} />
                     </h2>
                     <div className="relative flex h-80 w-full items-center overflow-hidden p-4 md:h-auto md:p-0">
                       <div className="md:hidden">
                         <FancyBorder />
                       </div>
                       <img
-                        src={`${import.meta.env.VITE_BLOB_URL}${
-                          product.images[1] || product.images[0]
-                        }`}
+                        src={`${import.meta.env.VITE_BLOB_URL}${product.images[1] || product.images[0]
+                          }`}
                         alt={product.name}
                         className="h-full w-full object-cover object-top"
                       />
@@ -86,9 +85,8 @@ const Page = () => {
                 {data.map((product) => {
                   return (
                     <img
-                      src={`${import.meta.env.VITE_BLOB_URL}${
-                        product.images[0]
-                      }`}
+                      src={`${import.meta.env.VITE_BLOB_URL}${product.images[0]
+                        }`}
                       alt={product.name}
                       className="aspect-[9/16] h-full object-cover object-center "
                     />

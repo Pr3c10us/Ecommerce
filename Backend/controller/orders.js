@@ -8,6 +8,217 @@ const Shipping = require("../models/shippings");
 const { Paystack } = require("paystack-sdk");
 const Product = require("../models/products");
 const stripe = require("stripe")(process.env.STRIPE_SECRETE_KEY);
+const { EmailClient } = require("@azure/communication-email");
+
+const emailClient = new EmailClient(process.env.AZURE_COMMUNICATION_CONNECTION_STRING);
+
+// Status display configuration
+const getStatusConfig = (status) => {
+  const configs = {
+    pending: {
+      headline: "ORDER RECEIVED",
+      subheadline: "We're preparing your items.",
+      statusLabel: "PENDING",
+      statusColor: "#FF9500"
+    },
+    processing: {
+      headline: "ORDER PROCESSING",
+      subheadline: "Your items are being prepared for dispatch.",
+      statusLabel: "PROCESSING",
+      statusColor: "#007AFF"
+    },
+    shipped: {
+      headline: "ORDER SHIPPED",
+      subheadline: "Your items are on their way to you.",
+      statusLabel: "SHIPPED",
+      statusColor: "#34C759"
+    },
+    delivered: {
+      headline: "ORDER DELIVERED",
+      subheadline: "Your items have arrived at their destination.",
+      statusLabel: "DELIVERED",
+      statusColor: "#00C853"
+    },
+    cancelled: {
+      headline: "ORDER CANCELLED",
+      subheadline: "Your order has been cancelled.",
+      statusLabel: "CANCELLED",
+      statusColor: "#FF3B30"
+    }
+  };
+  return configs[status] || configs.pending;
+};
+
+const generateStatusUpdateEmailHTML = (order) => {
+  const statusConfig = getStatusConfig(order.status);
+  
+  const productRows = order.products
+    .map(
+      (item) => `
+      <tr>
+        <td style="padding: 16px 0; border-bottom: 1px solid #E5E5E5;">
+          <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 4px;">${item.name}</div>
+          <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em;">SIZE: ${item.size || "OS"} // QTY: ${item.quantity}</div>
+        </td>
+        <td style="padding: 16px 0; border-bottom: 1px solid #E5E5E5; text-align: right; vertical-align: top;">
+          <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 13px; font-weight: 600; color: #000000;">₦${item.price.toFixed(2)}</div>
+        </td>
+      </tr>
+    `
+    )
+    .join("");
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>BLAKRATT | ORDER STATUS UPDATE</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #FFFFFF; -webkit-font-smoothing: antialiased;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #FFFFFF;">
+        <tr>
+          <td align="center" style="padding: 60px 20px;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 540px; text-align: left; border: 4px solid #000000; padding: 40px;">
+              
+              <tr>
+                <td style="padding-bottom: 50px;">
+                  <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -0.05em; color: #000000; text-transform: uppercase;">
+                    BLAKRATT<span style="color: #FF0000;">.</span>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-bottom: 30px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: ${statusConfig.statusColor};">
+                    <tr>
+                      <td style="padding: 12px 20px;">
+                        <span style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.15em;">STATUS: ${statusConfig.statusLabel}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-bottom: 35px;">
+                  <h1 style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 36px; line-height: 1.1; font-weight: 800; letter-spacing: -0.04em; color: #000000; margin: 0; text-transform: uppercase;">
+                    ${statusConfig.headline}
+                  </h1>
+                  <p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #666666; margin: 12px 0 0 0; line-height: 1.5;">
+                    ${statusConfig.subheadline}
+                  </p>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-bottom: 30px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000;">
+                    <tr>
+                      <td style="padding: 15px 20px;">
+                        <span style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em;">Order Ref:</span>
+                        <span style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 11px; font-weight: 600; color: #FFFFFF; margin-left: 8px;">#${order._id}</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; padding-bottom: 8px;">[ ORDER ITEMS ]</div>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      ${productRows}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 24px; padding-bottom: 40px;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; color: #000000; text-transform: uppercase; border-top: 2px solid #000000; padding-top: 16px;">Total</td>
+                      <td align="right" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 800; color: #000000; border-top: 2px solid #000000; padding-top: 16px;">₦${order.totalPrice.toFixed(2)}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="border-top: 2px solid #000000; padding-top: 25px;">
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #000000; margin-bottom: 12px;">[ SHIPPING TO ]</div>
+                  <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.6; color: #000000; text-transform: uppercase; font-weight: 500;">
+                    ${order.firstName} ${order.lastName}<br>
+                    ${order.address}<br>
+                    ${order.city}, ${order.state} ${order.zip}
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 35px; text-align: center;">
+                  <a href="${process.env.CLIENT_ORIGIN_1}/complete?reference=${order._id}" style="display: inline-block; background-color: #000000; color: #FFFFFF; font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; padding: 18px 40px; border: 2px solid #000000;">
+                    VIEW ORDER STATUS →
+                  </a>
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 12px;">
+                    Track your order in real-time
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding-top: 50px; text-align: center;">
+                  <div style="font-family: 'SF Mono', 'Menlo', 'Courier', monospace; font-size: 9px; color: #999999; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.8;">
+                    This is an automated transmission from BLAKRATT.<br>
+                    &copy; ${new Date().getFullYear()} ALL RIGHTS RESERVED.
+                  </div>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+};
+
+// Send order status update email using Azure Communication Services
+const sendOrderStatusUpdateEmail = async (order) => {
+  const statusConfig = getStatusConfig(order.status);
+  
+  const emailMessage = {
+    senderAddress: process.env.AZURE_SENDER_ADDRESS,
+    content: {
+      subject: `Order Update: ${statusConfig.statusLabel} - #${order._id}`,
+      html: generateStatusUpdateEmailHTML(order),
+      plainText: `Hi ${order.firstName}, Your order #${order._id} status has been updated to: ${statusConfig.statusLabel}. ${statusConfig.subheadline}`,
+    },
+    recipients: {
+      to: [
+        {
+          address: order.email,
+          displayName: `${order.firstName} ${order.lastName}`,
+        },
+      ],
+    },
+  };
+
+  try {
+    const poller = await emailClient.beginSend(emailMessage);
+    const result = await poller.pollUntilDone();
+    console.log("Status update email sent successfully. Message ID:", result.id);
+    return result;
+  } catch (error) {
+    console.error("Error sending status update email:", error);
+    throw error;
+  }
+};
 
 const createOrderStripe = async (req, res) => {
   const cartId = req.cart;
@@ -264,9 +475,20 @@ const updateOrder = async (req, res) => {
     throw new BadRequestError("Order is already cancelled");
   }
 
+  const previousStatus = order.status;
   order.status = status;
 
   await order.save();
+
+  // Send status update email if status has changed
+  if (previousStatus !== status) {
+    try {
+      await sendOrderStatusUpdateEmail(order);
+    } catch (emailError) {
+      console.error("Failed to send status update email:", emailError);
+      // Don't throw error - order update should still succeed even if email fails
+    }
+  }
 
   res.status(200).json({ msg: "Order updated", order });
 };
