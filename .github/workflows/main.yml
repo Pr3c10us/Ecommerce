@@ -65,27 +65,25 @@ jobs:
             - name: Debug - Check Secrets Are Set
               run: |
                   echo "Checking if secrets are set (showing first 10 chars only for security)..."
-                  echo "VITE_ADMIN_BACKEND_URL: ${VITE_ADMIN_BACKEND_URL:0:10}..."
-                  echo "VITE_FRONTEND_BACKEND_URL: ${VITE_FRONTEND_BACKEND_URL:0:10}..."
+                  echo "VITE_BACKEND_URL: ${VITE_BACKEND_URL:0:10}..."
                   echo "VITE_BLOB_URL: ${VITE_BLOB_URL:0:10}..."
               env:
-                  VITE_ADMIN_BACKEND_URL: ${{ secrets.VITE_ADMIN_BACKEND_URL }}
-                  VITE_FRONTEND_BACKEND_URL: ${{ secrets.VITE_FRONTEND_BACKEND_URL }}
+                  VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
                   VITE_BLOB_URL: ${{ secrets.VITE_BLOB_URL }}
 
             - name: Build Admin Docker Image
               run: |
-                  echo "Building Admin with VITE_BACKEND_URL=${{ secrets.VITE_ADMIN_BACKEND_URL }}"
+                  echo "Building Admin with VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
                   docker build --no-cache -t ${{ env.DOCKER_ADMIN_IMAGE }}:${{ github.sha }} \
-                    --build-arg VITE_BACKEND_URL=${{ secrets.VITE_ADMIN_BACKEND_URL }} \
+                    --build-arg VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }} \
                     --build-arg VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }} \
                     ./Admin
 
             - name: Build Frontend Docker Image
               run: |
-                  echo "Building Frontend with VITE_BACKEND_URL=${{ secrets.VITE_FRONTEND_BACKEND_URL }}"
+                  echo "Building Frontend with VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
                   docker build --no-cache -t ${{ env.DOCKER_FRONTEND_IMAGE }}:${{ github.sha }} \
-                    --build-arg VITE_BACKEND_URL=${{ secrets.VITE_FRONTEND_BACKEND_URL }} \
+                    --build-arg VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }} \
                     --build-arg VITE_BLOB_URL=${{ secrets.VITE_BLOB_URL }} \
                     ./Frontend
 
