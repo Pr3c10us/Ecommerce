@@ -82,7 +82,7 @@ const Order = ({ orders }) => {
             </h2>
             <div className="grid gap-2 md:grid-cols-2">
               <p className="">Order ID: {order._id}</p>
-              <p className="">Client Secret: {order.clientSecret}</p>
+              <p className="">Payment Refernce: {order.clientSecret}</p>
             </div>
           </div>
           <div className="grid flex-col gap-2 lg:md:grid-cols-2">
