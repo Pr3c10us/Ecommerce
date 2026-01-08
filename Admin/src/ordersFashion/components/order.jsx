@@ -76,6 +76,15 @@ const Order = ({ orders }) => {
     <section className="flex flex-col gap-8 font-medium">
       {orders.map((order) => (
         <section className="rounded-d hadow-xl flex flex-col gap-6 border-b-2 border-asisDark/50 py-8 md:px-8 ">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-lg font-semibold uppercase underline">
+              Order Reference
+            </h2>
+            <div className="grid gap-2 md:grid-cols-2">
+              <p className="">Order ID: {order._id}</p>
+              <p className="">Client Secret: {order.clientSecret}</p>
+            </div>
+          </div>
           <div className="grid flex-col gap-2 lg:md:grid-cols-2">
             <h2 className="text-lg font-semibold uppercase underline lg:col-span-2">
               Products Bought
@@ -87,9 +96,8 @@ const Order = ({ orders }) => {
               >
                 {item.product?.images[0] ? (
                   <img
-                    src={`${import.meta.env.VITE_BLOB_URL}${
-                      item.product?.images[0]
-                    }`}
+                    src={`${import.meta.env.VITE_BLOB_URL}${item.product?.images[0]
+                      }`}
                     alt={item.name}
                     className="w-full sm:w-24"
                   />
@@ -154,15 +162,13 @@ const Order = ({ orders }) => {
               <p className="">
                 Payment Status:{" "}
                 <span
-                  className={`text-lg font-bold uppercase ${
-                    order.paymentStatus == "successful" && "text-green-500"
-                  } 
+                  className={`text-lg font-bold uppercase ${order.paymentStatus == "successful" && "text-green-500"
+                    } 
                    ${order.paymentStatus == "processing" && "text-orange-500"}
-                  ${
-                    (order.paymentStatus == "failed" ||
+                  ${(order.paymentStatus == "failed" ||
                       order.paymentStatus == "canceled") &&
                     "text-red-500"
-                  }`}
+                    }`}
                 >
                   {order.paymentStatus}
                 </span>
