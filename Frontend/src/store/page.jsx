@@ -100,7 +100,7 @@ const Page = () => {
                           src={`${import.meta.env.VITE_BLOB_URL}${product.images[0]
                             }`}
                           alt={product.name}
-                          className=" absolute hidden h-full w-full object-cover object-center group-hover:hidden md:block"
+                          className=" absolute h-full w-full object-cover object-center group-hover:hidden"
                         />
                         <img
                           src={`${import.meta.env.VITE_BLOB_URL}${product.images[1] || product.images[0]

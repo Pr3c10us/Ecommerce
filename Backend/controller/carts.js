@@ -230,9 +230,10 @@ const removeItem = async (req, res) => {
     if (!cart) {
         throw new BadRequestError("Cart doesn't exist");
     }
-
+    console.log({id, str: id.toString(),prod: cart.products});
+    
     const productExist = cart.products.find(
-        (item) => item._id.toString() === id.toString()
+        (item) => item.product.toString() === id.toString()
     );
 
     if (!productExist) {
@@ -240,7 +241,7 @@ const removeItem = async (req, res) => {
     }
 
     cart.products = cart.products.filter(
-        (item) => item._id.toString() !== id.toString()
+        (item) => item.product.toString() !== id.toString()
     );
 
     cart.totalPrice = cart.products.reduce(
